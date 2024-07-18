@@ -11,6 +11,9 @@
     "format:check": {
       "outputs": []
     },
+    "format:run": {
+      "outputs": []
+    },
     "dev": {
       "dependsOn": [
         "^dev",

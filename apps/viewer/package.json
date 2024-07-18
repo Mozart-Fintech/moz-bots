@@ -8,6 +8,7 @@
     "start": "dotenv -e ./.env -e ../../.env -- next start",
     "lint": "dotenv -e ./.env -e ../../.env -- next lint",
     "format:check": "prettier --check ./src --ignore-path ../../.prettierignore",
+    "format:run": "prettier -w ./src --ignore-path ../../.prettierignore",
     "test": "dotenv -e ./.env -e ../../.env -- pnpm playwright test",
     "test:report": "pnpm playwright show-report",
     "test:ui": "dotenv -e ./.env -e ../../.env -- pnpm playwright test --ui"

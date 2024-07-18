@@ -26,6 +26,7 @@
     "locales:pull": "tolgee pull && prettier --write ./apps/builder/src/i18n",
     "create-new-block": "cd packages/forge/cli && pnpm start",
     "format:check": "turbo run format:check",
+    "format:run": "turbo run format:run",
     "patch-embed-libs": "bun scripts/patch-embed-libs.ts"
   },
   "devDependencies": {
