@@ -8,8 +8,8 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { isEmpty } from '@typebot.io/lib'
-import { ZemanticAiBlock } from '@typebot.io/schemas'
+import { isEmpty } from '@mozbot.io/lib'
+import { ZemanticAiBlock } from '@mozbot.io/schemas'
 import { ProjectsDropdown } from './ProjectsDropdown'
 import { SearchResponseItem } from './SearchResponseItem'
 import { TableList } from '@/components/TableList'

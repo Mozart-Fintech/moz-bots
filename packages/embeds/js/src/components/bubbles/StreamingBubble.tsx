@@ -2,7 +2,7 @@ import { streamingMessage } from '@/utils/streamingMessageSignal'
 import { For, createEffect, createSignal } from 'solid-js'
 import { marked } from 'marked'
 import domPurify from 'dompurify'
-import { isNotEmpty } from '@typebot.io/lib'
+import { isNotEmpty } from '@mozbot.io/lib'
 import { persist } from '@/utils/persist'
 import { BotContext } from '@/types'
 
@@ -13,7 +13,7 @@ type Props = {
 
 export const StreamingBubble = (props: Props) => {
   const [content, setContent] = persist(createSignal<string[]>([]), {
-    key: `typebot-streaming-message-${props.streamingMessageId}`,
+    key: `mozbot-streaming-message-${props.streamingMessageId}`,
     storage: props.context.storage,
   })
 
@@ -61,9 +61,9 @@ export const StreamingBubble = (props: Props) => {
   })
 
   return (
-    <div class="flex flex-col animate-fade-in typebot-streaming-container">
+    <div class="flex flex-col animate-fade-in mozbot-streaming-container">
       <div class="flex w-full items-center">
-        <div class="flex relative items-start typebot-host-bubble max-w-full">
+        <div class="flex relative items-start mozbot-host-bubble max-w-full">
           <div
             class="flex items-center absolute px-4 py-2 bubble-typing "
             style={{

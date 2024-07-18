@@ -3,7 +3,7 @@ export enum LogicBlockType {
   CONDITION = 'Condition',
   REDIRECT = 'Redirect',
   SCRIPT = 'Code',
-  TYPEBOT_LINK = 'Typebot link',
+  MOZBOT_LINK = 'Mozbot link',
   WAIT = 'Wait',
   JUMP = 'Jump',
   AB_TEST = 'AB test',

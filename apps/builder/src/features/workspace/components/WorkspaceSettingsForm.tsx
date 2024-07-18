@@ -76,7 +76,7 @@ export const WorkspaceSettingsForm = ({ onClose }: { onClose: () => void }) => {
               </InputRightElement>
             </InputGroup>
             <FormHelperText>
-              Used when interacting with the Typebot API.
+              Used when interacting with the Mozbot API.
             </FormHelperText>
           </FormControl>
         </>

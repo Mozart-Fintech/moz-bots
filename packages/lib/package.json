@@ -1,5 +1,5 @@
 {
-  "name": "@typebot.io/lib",
+  "name": "@mozbot.io/lib",
   "version": "1.0.0",
   "license": "AGPL-3.0-or-later",
   "private": true,
@@ -8,9 +8,9 @@
   "devDependencies": {
     "@paralleldrive/cuid2": "2.2.1",
     "@playwright/test": "1.45.2",
-    "@typebot.io/env": "workspace:*",
-    "@typebot.io/prisma": "workspace:*",
-    "@typebot.io/tsconfig": "workspace:*",
+    "@mozbot.io/env": "workspace:*",
+    "@mozbot.io/prisma": "workspace:*",
+    "@mozbot.io/tsconfig": "workspace:*",
     "@types/escape-html": "^1.0.4",
     "@types/nodemailer": "6.4.14",
     "@types/validator": "13.11.9",

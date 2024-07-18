@@ -1,6 +1,6 @@
-import { isNotDefined } from '@typebot.io/lib'
-import { NumberInputBlock, Variable } from '@typebot.io/schemas'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
+import { isNotDefined } from '@mozbot.io/lib'
+import { NumberInputBlock, Variable } from '@mozbot.io/schemas'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
 
 export const validateNumber = (
   inputValue: string,

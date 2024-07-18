@@ -14,38 +14,38 @@ import {
   LockedIcon,
   MoreVerticalIcon,
 } from '@/components/icons'
-import { Settings } from '@typebot.io/schemas'
+import { Settings } from '@mozbot.io/schemas'
 import React from 'react'
 import { GeneralSettingsForm } from './GeneralSettingsForm'
 import { MetadataForm } from './MetadataForm'
 import { TypingEmulationForm } from './TypingEmulationForm'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { SecurityForm } from './SecurityForm'
 
 export const SettingsSideMenu = () => {
-  const { typebot, updateTypebot } = useTypebot()
+  const { mozbot, updateMozbot } = useMozbot()
 
   const updateTypingEmulation = (
     typingEmulation: Settings['typingEmulation']
   ) =>
-    typebot &&
-    updateTypebot({
-      updates: { settings: { ...typebot.settings, typingEmulation } },
+    mozbot &&
+    updateMozbot({
+      updates: { settings: { ...mozbot.settings, typingEmulation } },
     })
 
   const updateSecurity = (security: Settings['security']) =>
-    typebot &&
-    updateTypebot({
-      updates: { settings: { ...typebot.settings, security } },
+    mozbot &&
+    updateMozbot({
+      updates: { settings: { ...mozbot.settings, security } },
     })
 
   const handleGeneralSettingsChange = (general: Settings['general']) =>
-    typebot &&
-    updateTypebot({ updates: { settings: { ...typebot.settings, general } } })
+    mozbot &&
+    updateMozbot({ updates: { settings: { ...mozbot.settings, general } } })
 
   const handleMetadataChange = (metadata: Settings['metadata']) =>
-    typebot &&
-    updateTypebot({ updates: { settings: { ...typebot.settings, metadata } } })
+    mozbot &&
+    updateMozbot({ updates: { settings: { ...mozbot.settings, metadata } } })
 
   return (
     <Stack
@@ -71,9 +71,9 @@ export const SettingsSideMenu = () => {
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel pb={4} px="6">
-            {typebot && (
+            {mozbot && (
               <GeneralSettingsForm
-                generalSettings={typebot.settings.general}
+                generalSettings={mozbot.settings.general}
                 onGeneralSettingsChange={handleGeneralSettingsChange}
               />
             )}
@@ -88,9 +88,9 @@ export const SettingsSideMenu = () => {
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel pb={4} px="6">
-            {typebot && (
+            {mozbot && (
               <TypingEmulationForm
-                typingEmulation={typebot.settings.typingEmulation}
+                typingEmulation={mozbot.settings.typingEmulation}
                 onUpdate={updateTypingEmulation}
               />
             )}
@@ -105,9 +105,9 @@ export const SettingsSideMenu = () => {
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel pb={4} px="6">
-            {typebot && (
+            {mozbot && (
               <SecurityForm
-                security={typebot.settings.security}
+                security={mozbot.settings.security}
                 onUpdate={updateSecurity}
               />
             )}
@@ -122,12 +122,12 @@ export const SettingsSideMenu = () => {
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel pb={4} px="6">
-            {typebot && (
+            {mozbot && (
               <MetadataForm
-                workspaceId={typebot.workspaceId}
-                typebotId={typebot.id}
-                typebotName={typebot.name}
-                metadata={typebot.settings.metadata}
+                workspaceId={mozbot.workspaceId}
+                mozbotId={mozbot.id}
+                mozbotName={mozbot.name}
+                metadata={mozbot.settings.metadata}
                 onMetadataChange={handleMetadataChange}
               />
             )}

@@ -4,12 +4,12 @@ import {
   VariableStore,
   createAction,
   option,
-} from '@typebot.io/forge'
-import { isDefined, isEmpty, isNotEmpty } from '@typebot.io/lib'
+} from '@mozbot.io/forge'
+import { isDefined, isEmpty, isNotEmpty } from '@mozbot.io/lib'
 import { auth } from '../auth'
 import { ClientOptions, OpenAI } from 'openai'
 import { baseOptions } from '../baseOptions'
-import { executeFunction } from '@typebot.io/variables/executeFunction'
+import { executeFunction } from '@mozbot.io/variables/executeFunction'
 import { readDataStream } from 'ai'
 import { deprecatedAskAssistantOptions } from '../deprecated'
 import { AssistantStream } from '../helpers/AssistantStream'

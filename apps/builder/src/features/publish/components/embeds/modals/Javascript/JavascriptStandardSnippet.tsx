@@ -3,9 +3,9 @@ import prettier from 'prettier/standalone'
 import {
   parseApiHostValue,
   parseInitStandardCode,
-  typebotImportCode,
+  mozbotImportCode,
 } from '../../snippetParsers'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { CodeEditor } from '@/components/inputs/CodeEditor'
 
 type Props = {
@@ -17,10 +17,10 @@ export const JavascriptStandardSnippet = ({
   widthLabel,
   heightLabel,
 }: Props) => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
 
   const snippet = prettier.format(
-    `${parseStandardHeadCode(typebot?.publicId, typebot?.customDomain)}
+    `${parseStandardHeadCode(mozbot?.publicId, mozbot?.customDomain)}
       ${parseStandardElementCode(widthLabel, heightLabel)}`,
     {
       parser: 'html',
@@ -36,21 +36,21 @@ export const parseStandardHeadCode = (
   customDomain?: string | null
 ) =>
   prettier.format(
-    `<script type="module">${typebotImportCode};
+    `<script type="module">${mozbotImportCode};
 
 ${parseInitStandardCode({
-  typebot: publicId ?? '',
+  mozbot: publicId ?? '',
   apiHost: parseApiHostValue(customDomain),
 })}</script>`,
     { parser: 'html', plugins: [parserHtml] }
   )
 
 export const parseStandardElementCode = (width?: string, height?: string) => {
-  if (!width && !height) return '<typebot-standard></typebot-standard>'
+  if (!width && !height) return '<mozbot-standard></mozbot-standard>'
   return prettier.format(
-    `<typebot-standard style="${width ? `width: ${width}; ` : ''}${
+    `<mozbot-standard style="${width ? `width: ${width}; ` : ''}${
       height ? `height: ${height}; ` : ''
-    }"></typebot-standard>`,
+    }"></mozbot-standard>`,
     { parser: 'html', plugins: [parserHtml] }
   )
 }

@@ -1,26 +1,26 @@
 version: '3.9'
 services:
-  typebot-db:
+  mozbot-db:
     image: postgres:13
     restart: always
     volumes:
-      - ${PWD}/.typebot-build/database:/var/lib/postgresql/data
+      - ${PWD}/.mozbot-build/database:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=typebot
-      - POSTGRES_PASSWORD=typebot
-  typebot-builder:
+      - POSTGRES_DB=mozbot
+      - POSTGRES_PASSWORD=mozbot
+  mozbot-builder:
     build:
       context: .
       args:
         - SCOPE=builder
     depends_on:
-      - typebot-db
+      - mozbot-db
     ports:
       - '8080:3000'
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     env_file: .env
-  typebot-viewer:
+  mozbot-viewer:
     build:
       context: .
       args:

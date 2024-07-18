@@ -4,8 +4,8 @@ import {
   forbidden,
   initMiddleware,
   methodNotAllowed,
-} from '@typebot.io/lib/api'
-import { decrypt } from '@typebot.io/lib/api/encryption/decrypt'
+} from '@mozbot.io/lib/api'
+import { decrypt } from '@mozbot.io/lib/api/encryption/decrypt'
 import Stripe from 'stripe'
 
 import Cors from 'cors'
@@ -13,10 +13,10 @@ import {
   PaymentInputBlock,
   StripeCredentials,
   Variable,
-} from '@typebot.io/schemas'
-import prisma from '@typebot.io/lib/prisma'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
-import { defaultPaymentInputOptions } from '@typebot.io/schemas/features/blocks/inputs/payment/constants'
+} from '@mozbot.io/schemas'
+import prisma from '@mozbot.io/lib/prisma'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
+import { defaultPaymentInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/payment/constants'
 
 const cors = initMiddleware(Cors())
 

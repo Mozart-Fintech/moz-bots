@@ -1,32 +1,32 @@
 import {
   InputBlock,
-  PublicTypebot,
+  PublicMozbot,
   ResultHeaderCell,
   Block,
-  Typebot,
-  TypebotLinkBlock,
+  Mozbot,
+  MozbotLinkBlock,
   Variable,
-} from '@typebot.io/schemas'
-import { byId, isNotDefined } from '@typebot.io/lib'
-import { isInputBlock } from '@typebot.io/schemas/helpers'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
-import { parseResultHeader } from '@typebot.io/results/parseResultHeader'
+} from '@mozbot.io/schemas'
+import { byId, isNotDefined } from '@mozbot.io/lib'
+import { isInputBlock } from '@mozbot.io/schemas/helpers'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
+import { parseResultHeader } from '@mozbot.io/results/parseResultHeader'
 
 export const parseSampleResult =
   (
-    typebot: Pick<Typebot | PublicTypebot, 'groups' | 'variables' | 'edges'>,
-    linkedTypebots: (Typebot | PublicTypebot)[],
+    mozbot: Pick<Mozbot | PublicMozbot, 'groups' | 'variables' | 'edges'>,
+    linkedMozbots: (Mozbot | PublicMozbot)[],
     userEmail?: string
   ) =>
   async (
     currentGroupId: string,
     variables: Variable[]
   ): Promise<Record<string, string | boolean | undefined>> => {
-    const header = parseResultHeader(typebot, linkedTypebots)
+    const header = parseResultHeader(mozbot, linkedMozbots)
     const linkedInputBlocks = await extractLinkedInputBlocks(
-      typebot,
-      linkedTypebots
+      mozbot,
+      linkedMozbots
     )(currentGroupId)
 
     return {
@@ -38,32 +38,32 @@ export const parseSampleResult =
 
 const extractLinkedInputBlocks =
   (
-    typebot: Pick<Typebot | PublicTypebot, 'groups' | 'variables' | 'edges'>,
-    linkedTypebots: (Typebot | PublicTypebot)[]
+    mozbot: Pick<Mozbot | PublicMozbot, 'groups' | 'variables' | 'edges'>,
+    linkedMozbots: (Mozbot | PublicMozbot)[]
   ) =>
   async (
     currentGroupId?: string,
     direction: 'backward' | 'forward' = 'backward'
   ): Promise<InputBlock[]> => {
-    const previousLinkedTypebotBlocks = walkEdgesAndExtract(
+    const previousLinkedMozbotBlocks = walkEdgesAndExtract(
       'linkedBot',
       direction,
-      typebot
+      mozbot
     )({
       groupId: currentGroupId,
-    }) as TypebotLinkBlock[]
+    }) as MozbotLinkBlock[]
 
     const linkedBotInputs =
-      previousLinkedTypebotBlocks.length > 0
+      previousLinkedMozbotBlocks.length > 0
         ? await Promise.all(
-            previousLinkedTypebotBlocks.map((linkedBot) => {
-              const linkedTypebot = linkedTypebots.find((t) =>
-                'typebotId' in t
-                  ? t.typebotId === linkedBot.options?.typebotId
-                  : t.id === linkedBot.options?.typebotId
+            previousLinkedMozbotBlocks.map((linkedBot) => {
+              const linkedMozbot = linkedMozbots.find((t) =>
+                'mozbotId' in t
+                  ? t.mozbotId === linkedBot.options?.mozbotId
+                  : t.id === linkedBot.options?.mozbotId
               )
-              if (!linkedTypebot) return []
-              return extractLinkedInputBlocks(linkedTypebot, linkedTypebots)(
+              if (!linkedMozbot) return []
+              return extractLinkedInputBlocks(linkedMozbot, linkedMozbots)(
                 linkedBot.options?.groupId,
                 'forward'
               )
@@ -75,7 +75,7 @@ const extractLinkedInputBlocks =
       walkEdgesAndExtract(
         'input',
         direction,
-        typebot
+        mozbot
       )({
         groupId: currentGroupId,
       }) as InputBlock[]
@@ -154,38 +154,38 @@ const walkEdgesAndExtract =
   (
     type: 'input' | 'linkedBot',
     direction: 'backward' | 'forward',
-    typebot: Pick<Typebot | PublicTypebot, 'groups' | 'variables' | 'edges'>
+    mozbot: Pick<Mozbot | PublicMozbot, 'groups' | 'variables' | 'edges'>
   ) =>
   ({ groupId }: { groupId?: string }): Block[] => {
     const currentGroupId =
       groupId ??
-      (typebot.groups.find((b) => b.blocks[0].type === 'start')?.id as string)
+      (mozbot.groups.find((b) => b.blocks[0].type === 'start')?.id as string)
     const blocksInGroup = extractBlocksInGroup(
       type,
-      typebot
+      mozbot
     )({
       groupId: currentGroupId,
     })
     const otherGroupIds = getGroupIdsLinkedToGroup(
-      typebot,
+      mozbot,
       direction
     )(currentGroupId)
     return blocksInGroup.concat(
       otherGroupIds.flatMap((groupId) =>
-        extractBlocksInGroup(type, typebot)({ groupId })
+        extractBlocksInGroup(type, mozbot)({ groupId })
       )
     )
   }
 
 const getGroupIdsLinkedToGroup =
   (
-    typebot: Pick<Typebot | PublicTypebot, 'groups' | 'variables' | 'edges'>,
+    mozbot: Pick<Mozbot | PublicMozbot, 'groups' | 'variables' | 'edges'>,
     direction: 'backward' | 'forward',
     visitedGroupIds: string[] = []
   ) =>
   (groupId: string): string[] => {
-    const linkedGroupIds = typebot.edges.reduce<string[]>((groupIds, edge) => {
-      const fromGroupId = typebot.groups.find((g) =>
+    const linkedGroupIds = mozbot.edges.reduce<string[]>((groupIds, edge) => {
+      const fromGroupId = mozbot.groups.find((g) =>
         g.blocks.some(
           (b) => 'blockId' in edge.from && b.id === edge.from.blockId
         )
@@ -212,7 +212,7 @@ const getGroupIdsLinkedToGroup =
     }, [])
     return linkedGroupIds.concat(
       linkedGroupIds.flatMap(
-        getGroupIdsLinkedToGroup(typebot, direction, visitedGroupIds)
+        getGroupIdsLinkedToGroup(mozbot, direction, visitedGroupIds)
       )
     )
   }
@@ -220,16 +220,16 @@ const getGroupIdsLinkedToGroup =
 const extractBlocksInGroup =
   (
     type: 'input' | 'linkedBot',
-    typebot: Pick<Typebot | PublicTypebot, 'groups' | 'variables' | 'edges'>
+    mozbot: Pick<Mozbot | PublicMozbot, 'groups' | 'variables' | 'edges'>
   ) =>
   ({ groupId, blockId }: { groupId: string; blockId?: string }) => {
-    const currentGroup = typebot.groups.find(byId(groupId))
+    const currentGroup = mozbot.groups.find(byId(groupId))
     if (!currentGroup) return []
     const blocks: Block[] = []
     for (const block of currentGroup.blocks) {
       if (block.id === blockId) break
       if (type === 'input' && isInputBlock(block)) blocks.push(block)
-      if (type === 'linkedBot' && block.type === LogicBlockType.TYPEBOT_LINK)
+      if (type === 'linkedBot' && block.type === LogicBlockType.MOZBOT_LINK)
         blocks.push(block)
     }
     return blocks

@@ -15,7 +15,7 @@ import {
   Image,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { Theme, ThemeTemplate } from '@typebot.io/schemas'
+import { Theme, ThemeTemplate } from '@mozbot.io/schemas'
 import { useState } from 'react'
 import { DefaultAvatar } from './DefaultAvatar'
 import {
@@ -26,7 +26,7 @@ import {
   defaultHostAvatarIsEnabled,
   defaultBackgroundColor,
   defaultHostBubblesBackgroundColor,
-} from '@typebot.io/schemas/features/typebot/theme/constants'
+} from '@mozbot.io/schemas/features/mozbot/theme/constants'
 import { useTranslate } from '@tolgee/react'
 
 export const ThemeTemplateCard = ({

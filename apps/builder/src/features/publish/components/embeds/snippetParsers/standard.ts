@@ -1,15 +1,15 @@
-import { BotProps } from '@typebot.io/nextjs'
+import { BotProps } from '@mozbot.io/nextjs'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import { parseBotProps } from './shared'
 
 export const parseInitStandardCode = ({
-  typebot,
+  mozbot,
   apiHost,
-}: Pick<BotProps, 'typebot' | 'apiHost'>) => {
-  const botProps = parseBotProps({ typebot, apiHost })
+}: Pick<BotProps, 'mozbot' | 'apiHost'>) => {
+  const botProps = parseBotProps({ mozbot, apiHost })
 
-  return prettier.format(`Typebot.initStandard({${botProps}});`, {
+  return prettier.format(`Mozbot.initStandard({${botProps}});`, {
     parser: 'babel',
     plugins: [parserBabel],
   })

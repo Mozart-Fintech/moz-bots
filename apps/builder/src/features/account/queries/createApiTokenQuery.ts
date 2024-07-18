@@ -1,4 +1,4 @@
-import { sendRequest } from '@typebot.io/lib'
+import { sendRequest } from '@mozbot.io/lib'
 import { ApiTokenFromServer } from '../types'
 
 export const createApiTokenQuery = (

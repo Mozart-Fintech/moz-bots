@@ -1,26 +1,26 @@
 import test, { expect } from '@playwright/test'
-import { createTypebots } from '@typebot.io/playwright/databaseActions'
-import { parseDefaultGroupWithBlock } from '@typebot.io/playwright/databaseHelpers'
+import { createMozbots } from '@mozbot.io/playwright/databaseActions'
+import { parseDefaultGroupWithBlock } from '@mozbot.io/playwright/databaseHelpers'
 import { createId } from '@paralleldrive/cuid2'
 import { getTestAsset } from '@/test/utils/playwright'
-import { proWorkspaceId } from '@typebot.io/playwright/databaseSetup'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
+import { proWorkspaceId } from '@mozbot.io/playwright/databaseSetup'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
 
 const audioSampleUrl =
   'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
 
 test('should work as expected', async ({ page }) => {
-  const typebotId = createId()
-  await createTypebots([
+  const mozbotId = createId()
+  await createMozbots([
     {
-      id: typebotId,
+      id: mozbotId,
       ...parseDefaultGroupWithBlock({
         type: BubbleBlockType.AUDIO,
       }),
     },
   ])
 
-  await page.goto(`/typebots/${typebotId}/edit`)
+  await page.goto(`/mozbots/${mozbotId}/edit`)
   await page.getByText('Click to edit...').click()
   await page
     .getByPlaceholder('Paste the audio file link...')
@@ -31,7 +31,7 @@ test('should work as expected', async ({ page }) => {
   await expect(page.locator('audio')).toHaveAttribute(
     'src',
     RegExp(
-      `/public/workspaces/${proWorkspaceId}/typebots/${typebotId}/blocks`,
+      `/public/workspaces/${proWorkspaceId}/mozbots/${mozbotId}/blocks`,
       'gm'
     )
   )
@@ -39,7 +39,7 @@ test('should work as expected', async ({ page }) => {
   await expect(page.locator('audio')).toHaveAttribute(
     'src',
     RegExp(
-      `/public/workspaces/${proWorkspaceId}/typebots/${typebotId}/blocks`,
+      `/public/workspaces/${proWorkspaceId}/mozbots/${mozbotId}/blocks`,
       'gm'
     )
   )

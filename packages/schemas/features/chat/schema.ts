@@ -14,7 +14,7 @@ import {
   urlInputSchema,
 } from '../blocks'
 import { logSchema } from '../result'
-import { settingsSchema, themeSchema } from '../typebot'
+import { settingsSchema, themeSchema } from '../mozbot'
 import {
   imageBubbleContentSchema,
   videoBubbleContentSchema,
@@ -23,11 +23,11 @@ import {
 } from '../blocks/bubbles'
 import { sessionStateSchema } from './sessionState'
 import { dynamicThemeSchema } from './shared'
-import { preprocessTypebot } from '../typebot/helpers/preprocessTypebot'
-import { typebotV5Schema, typebotV6Schema } from '../typebot/typebot'
+import { preprocessMozbot } from '../mozbot/helpers/preprocessMozbot'
+import { mozbotV5Schema, mozbotV6Schema } from '../mozbot/mozbot'
 import { BubbleBlockType } from '../blocks/bubbles/constants'
 import { clientSideActionSchema } from './clientSideAction'
-import { ChatSession as ChatSessionFromPrisma } from '@typebot.io/prisma'
+import { ChatSession as ChatSessionFromPrisma } from '@mozbot.io/prisma'
 
 export const messageSchema = z.preprocess(
   (val) => (typeof val === 'string' ? { type: 'text', text: val } : val),
@@ -161,7 +161,7 @@ export const chatMessageSchema = z
   )
 export type ChatMessage = z.infer<typeof chatMessageSchema>
 
-const startTypebotPick = {
+const startMozbotPick = {
   version: true,
   id: true,
   groups: true,
@@ -171,20 +171,20 @@ const startTypebotPick = {
   settings: true,
   theme: true,
 } as const
-export const startTypebotSchema = z.preprocess(
-  preprocessTypebot,
+export const startMozbotSchema = z.preprocess(
+  preprocessMozbot,
   z.discriminatedUnion('version', [
-    typebotV5Schema._def.schema.pick(startTypebotPick).openapi({
-      title: 'Typebot V5',
-      ref: 'typebotV5',
+    mozbotV5Schema._def.schema.pick(startMozbotPick).openapi({
+      title: 'Mozbot V5',
+      ref: 'mozbotV5',
     }),
-    typebotV6Schema.pick(startTypebotPick).openapi({
-      title: 'Typebot V6',
-      ref: 'typebotV6',
+    mozbotV6Schema.pick(startMozbotPick).openapi({
+      title: 'Mozbot V6',
+      ref: 'mozbotV6',
     }),
   ])
 )
-export type StartTypebot = z.infer<typeof startTypebotSchema>
+export type StartMozbot = z.infer<typeof startMozbotSchema>
 
 export const chatLogSchema = logSchema
   .pick({
@@ -252,10 +252,10 @@ export const startFromSchema = z.discriminatedUnion('type', [
 export type StartFrom = z.infer<typeof startFromSchema>
 
 export const startPreviewChatInputSchema = z.object({
-  typebotId: z
+  mozbotId: z
     .string()
     .describe(
-      "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+      "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
     ),
   isStreamEnabled: z.boolean().optional().default(false),
   message: messageSchema.optional(),
@@ -266,10 +266,10 @@ export const startPreviewChatInputSchema = z.object({
       'If set to `true`, it will only register the session and not start the bot. This is used for 3rd party chat platforms as it can require a session to be registered before sending the first message.'
     )
     .default(false),
-  typebot: startTypebotSchema
+  mozbot: startMozbotSchema
     .optional()
     .describe(
-      'If set, it will override the typebot that is used to start the chat.'
+      'If set, it will override the mozbot that is used to start the chat.'
     ),
   startFrom: startFromSchema.optional(),
   prefilledVariables: z
@@ -297,7 +297,7 @@ export type StartPreviewChatInput = z.infer<typeof startPreviewChatInputSchema>
 export const runtimeOptionsSchema = paymentInputRuntimeOptionsSchema.optional()
 export type RuntimeOptions = z.infer<typeof runtimeOptionsSchema>
 
-const typebotInChatReplyPick = {
+const mozbotInChatReplyPick = {
   version: true,
   id: true,
   groups: true,
@@ -306,11 +306,11 @@ const typebotInChatReplyPick = {
   settings: true,
   theme: true,
 } as const
-export const typebotInChatReply = z.preprocess(
-  preprocessTypebot,
+export const mozbotInChatReply = z.preprocess(
+  preprocessMozbot,
   z.discriminatedUnion('version', [
-    typebotV5Schema._def.schema.pick(typebotInChatReplyPick),
-    typebotV6Schema.pick(typebotInChatReplyPick),
+    mozbotV5Schema._def.schema.pick(mozbotInChatReplyPick),
+    mozbotV6Schema.pick(mozbotInChatReplyPick),
   ])
 )
 
@@ -361,7 +361,7 @@ const chatResponseBaseSchema = z.object({
   dynamicTheme: dynamicThemeSchema
     .optional()
     .describe(
-      'If the typebot contains dynamic avatars, dynamicTheme returns the new avatar URLs whenever their variables are updated.'
+      'If the mozbot contains dynamic avatars, dynamicTheme returns the new avatar URLs whenever their variables are updated.'
     ),
   progress: z
     .number()
@@ -377,7 +377,7 @@ export const startChatResponseSchema = z
       .string()
       .describe('To save and use for /continueChat requests.'),
     resultId: z.string().optional(),
-    typebot: z.object({
+    mozbot: z.object({
       id: z.string(),
       theme: themeSchema,
       settings: settingsSchema,

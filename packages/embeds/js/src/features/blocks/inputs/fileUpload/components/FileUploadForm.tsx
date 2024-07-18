@@ -1,13 +1,13 @@
 import { SendButton } from '@/components/SendButton'
 import { BotContext, InputSubmitContent } from '@/types'
-import { FileInputBlock } from '@typebot.io/schemas'
+import { FileInputBlock } from '@mozbot.io/schemas'
 import { createSignal, Match, Show, Switch, For } from 'solid-js'
 import { Button } from '@/components/Button'
 import { Spinner } from '@/components/Spinner'
 import { uploadFiles } from '../helpers/uploadFiles'
 import { guessApiHost } from '@/utils/guessApiHost'
-import { defaultFileInputOptions } from '@typebot.io/schemas/features/blocks/inputs/file/constants'
-import { isDefined } from '@typebot.io/lib'
+import { defaultFileInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/file/constants'
+import { isDefined } from '@mozbot.io/lib'
 import { SelectedFile } from './SelectedFile'
 import { sanitizeNewFile } from '../helpers/sanitizeSelectedFiles'
 import { toaster } from '@/utils/toaster'
@@ -155,7 +155,7 @@ export const FileUploadForm = (props: Props) => {
       <label
         for="dropzone-file"
         class={
-          'typebot-upload-input py-6 flex flex-col justify-center items-center w-full bg-gray-50 border-2 border-gray-300 border-dashed cursor-pointer hover:bg-gray-100 px-8 ' +
+          'mozbot-upload-input py-6 flex flex-col justify-center items-center w-full bg-gray-50 border-2 border-gray-300 border-dashed cursor-pointer hover:bg-gray-100 px-8 ' +
           (isDraggingOver() ? 'dragging-over' : '')
         }
         onDragOver={handleDragOver}

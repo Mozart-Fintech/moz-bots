@@ -6,14 +6,14 @@ import {
   useMemo,
   useState,
 } from 'react'
-import { byId } from '@typebot.io/lib'
-import { WorkspaceRole } from '@typebot.io/prisma'
+import { byId } from '@mozbot.io/lib'
+import { WorkspaceRole } from '@mozbot.io/prisma'
 import { useRouter } from 'next/router'
 import { trpc } from '@/lib/trpc'
-import { Workspace } from '@typebot.io/schemas'
+import { Workspace } from '@mozbot.io/schemas'
 import { useToast } from '@/hooks/useToast'
 import { useUser } from '../account/hooks/useUser'
-import { useTypebot } from '../editor/providers/TypebotProvider'
+import { useMozbot } from '../editor/providers/MozbotProvider'
 import { setWorkspaceIdInLocalStorage } from './helpers/setWorkspaceIdInLocalStorage'
 import { parseNewName } from './helpers/parseNewName'
 
@@ -42,12 +42,12 @@ const workspaceContext = createContext<{
 }>({})
 
 type WorkspaceContextProps = {
-  typebotId?: string
+  mozbotId?: string
   children: ReactNode
 }
 
 export const WorkspaceProvider = ({
-  typebotId,
+  mozbotId,
   children,
 }: WorkspaceContextProps) => {
   const { pathname, query, push, isReady: isRouterReady, replace } = useRouter()
@@ -55,7 +55,7 @@ export const WorkspaceProvider = ({
   const userId = user?.id
   const [workspaceId, setWorkspaceId] = useState<string | undefined>()
 
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
 
   const trpcContext = trpc.useContext()
 
@@ -119,11 +119,11 @@ export const WorkspaceProvider = ({
       !workspaces ||
       workspaces.length === 0 ||
       workspaceId ||
-      (typebotId && !typebot?.workspaceId)
+      (mozbotId && !mozbot?.workspaceId)
     )
       return
     const lastWorspaceId =
-      typebot?.workspaceId ??
+      mozbot?.workspaceId ??
       query.workspaceId?.toString() ??
       localStorage.getItem('workspaceId')
 
@@ -140,8 +140,8 @@ export const WorkspaceProvider = ({
     members,
     pathname,
     query.workspaceId,
-    typebot?.workspaceId,
-    typebotId,
+    mozbot?.workspaceId,
+    mozbotId,
     userId,
     workspaceId,
     workspaces,
@@ -163,7 +163,7 @@ export const WorkspaceProvider = ({
   const switchWorkspace = (workspaceId: string) => {
     setWorkspaceIdInLocalStorage(workspaceId)
     setWorkspaceId(workspaceId)
-    replace('/typebots')
+    replace('/mozbots')
   }
 
   const createWorkspace = async (userFullName?: string) => {

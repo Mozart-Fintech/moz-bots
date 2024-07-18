@@ -1,34 +1,34 @@
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { useUser } from '@/features/account/hooks/useUser'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import React, { useEffect, useState } from 'react'
-import { Bubble, BubbleProps } from '@typebot.io/nextjs'
+import { Bubble, BubbleProps } from '@mozbot.io/nextjs'
 import { planToReadable } from '@/features/billing/helpers/planToReadable'
-import { Plan } from '@typebot.io/prisma'
+import { Plan } from '@mozbot.io/prisma'
 
-export const SupportBubble = (props: Omit<BubbleProps, 'typebot'>) => {
-  const { typebot } = useTypebot()
+export const SupportBubble = (props: Omit<BubbleProps, 'mozbot'>) => {
+  const { mozbot } = useMozbot()
   const { user } = useUser()
   const { workspace } = useWorkspace()
 
-  const [lastViewedTypebotId, setLastViewedTypebotId] = useState(typebot?.id)
+  const [lastViewedmozbotId, setLastViewedmozbotId] = useState(mozbot?.id)
 
   useEffect(() => {
-    if (!typebot?.id) return
-    if (lastViewedTypebotId === typebot?.id) return
-    setLastViewedTypebotId(typebot?.id)
-  }, [lastViewedTypebotId, typebot?.id])
+    if (!mozbot?.id) return
+    if (lastViewedmozbotId === mozbot?.id) return
+    setLastViewedmozbotId(mozbot?.id)
+  }, [lastViewedmozbotId, mozbot?.id])
 
   if (!workspace?.plan || workspace.plan === Plan.FREE) return null
 
   return (
     <Bubble
-      typebot="typebot-support"
+      mozbot="mozbot-support"
       prefilledVariables={{
         'User ID': user?.id,
         'First name': user?.name?.split(' ')[0] ?? undefined,
         Email: user?.email ?? undefined,
-        'Typebot ID': lastViewedTypebotId,
+        'Mozbot ID': lastViewedmozbotId,
         'Avatar URL': user?.image ?? undefined,
         Plan: planToReadable(workspace?.plan),
       }}

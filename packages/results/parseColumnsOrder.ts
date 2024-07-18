@@ -1,4 +1,4 @@
-import { ResultHeaderCell } from '@typebot.io/schemas'
+import { ResultHeaderCell } from '@mozbot.io/schemas'
 
 export const parseColumnsOrder = (
   existingOrder: string[] | undefined,

@@ -2,12 +2,12 @@ import {
   SessionState,
   GoogleSheetsUpdateRowOptions,
   ChatLog,
-} from '@typebot.io/schemas'
+} from '@mozbot.io/schemas'
 import { parseNewCellValuesObject } from './helpers/parseNewCellValuesObject'
 import { getAuthenticatedGoogleDoc } from './helpers/getAuthenticatedGoogleDoc'
 import { ExecuteIntegrationResponse } from '../../../types'
 import { matchFilter } from './helpers/matchFilter'
-import { deepParseVariables } from '@typebot.io/variables/deepParseVariables'
+import { deepParseVariables } from '@mozbot.io/variables/deepParseVariables'
 
 export const updateRow = async (
   state: SessionState,
@@ -16,7 +16,7 @@ export const updateRow = async (
     options,
   }: { outgoingEdgeId?: string; options: GoogleSheetsUpdateRowOptions }
 ): Promise<ExecuteIntegrationResponse> => {
-  const { variables } = state.typebotsQueue[0].typebot
+  const { variables } = state.mozbotsQueue[0].mozbot
   const { sheetId, filter, ...parsedOptions } = deepParseVariables(variables, {
     removeEmptyStrings: true,
   })(options)

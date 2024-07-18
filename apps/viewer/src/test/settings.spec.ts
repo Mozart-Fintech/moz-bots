@@ -1,19 +1,19 @@
 import test, { expect } from '@playwright/test'
 import { createId } from '@paralleldrive/cuid2'
 import {
-  createTypebots,
-  updateTypebot,
-} from '@typebot.io/playwright/databaseActions'
-import { parseDefaultGroupWithBlock } from '@typebot.io/playwright/databaseHelpers'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { Settings } from '@typebot.io/schemas'
-import { defaultTextInputOptions } from '@typebot.io/schemas/features/blocks/inputs/text/constants'
+  createMozbots,
+  updateMozbot,
+} from '@mozbot.io/playwright/databaseActions'
+import { parseDefaultGroupWithBlock } from '@mozbot.io/playwright/databaseHelpers'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { Settings } from '@mozbot.io/schemas'
+import { defaultTextInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/text/constants'
 
 test('Result should be overwritten on page refresh', async ({ page }) => {
-  const typebotId = createId()
-  await createTypebots([
+  const mozbotId = createId()
+  await createMozbots([
     {
-      id: typebotId,
+      id: mozbotId,
       settings: {
         general: {
           rememberUser: {
@@ -29,7 +29,7 @@ test('Result should be overwritten on page refresh', async ({ page }) => {
   ])
 
   const [, response] = await Promise.all([
-    page.goto(`/${typebotId}-public`),
+    page.goto(`/${mozbotId}-public`),
     page.waitForResponse(/startChat/),
   ])
   const { resultId } = await response.json()
@@ -46,17 +46,17 @@ test('Result should be overwritten on page refresh', async ({ page }) => {
 
 test.describe('Create result on page refresh enabled', () => {
   test('should work', async ({ page }) => {
-    const typebotId = createId()
-    await createTypebots([
+    const mozbotId = createId()
+    await createMozbots([
       {
-        id: typebotId,
+        id: mozbotId,
         ...parseDefaultGroupWithBlock({
           type: InputBlockType.TEXT,
         }),
       },
     ])
     const [, response] = await Promise.all([
-      page.goto(`/${typebotId}-public`),
+      page.goto(`/${mozbotId}-public`),
       page.waitForResponse(/startChat/),
     ])
     const { resultId } = await response.json()
@@ -73,48 +73,48 @@ test.describe('Create result on page refresh enabled', () => {
 })
 
 test('Hide query params', async ({ page }) => {
-  const typebotId = createId()
-  await createTypebots([
+  const mozbotId = createId()
+  await createMozbots([
     {
-      id: typebotId,
+      id: mozbotId,
       ...parseDefaultGroupWithBlock({
         type: InputBlockType.TEXT,
       }),
     },
   ])
-  await page.goto(`/${typebotId}-public?Name=John`)
+  await page.goto(`/${mozbotId}-public?Name=John`)
   await page.waitForTimeout(1000)
-  expect(page.url()).toEqual(`http://localhost:3001/${typebotId}-public`)
-  await updateTypebot({
-    id: typebotId,
+  expect(page.url()).toEqual(`http://localhost:3001/${mozbotId}-public`)
+  await updateMozbot({
+    id: mozbotId,
     settings: {
       general: { isHideQueryParamsEnabled: false },
     },
   })
-  await page.goto(`/${typebotId}-public?Name=John`)
+  await page.goto(`/${mozbotId}-public?Name=John`)
   await page.waitForTimeout(1000)
   expect(page.url()).toEqual(
-    `http://localhost:3001/${typebotId}-public?Name=John`
+    `http://localhost:3001/${mozbotId}-public?Name=John`
   )
 })
 
 test('Show close message', async ({ page }) => {
-  const typebotId = createId()
-  await createTypebots([
+  const mozbotId = createId()
+  await createMozbots([
     {
-      id: typebotId,
+      id: mozbotId,
       ...parseDefaultGroupWithBlock({
         type: InputBlockType.TEXT,
       }),
       isClosed: true,
     },
   ])
-  await page.goto(`/${typebotId}-public`)
+  await page.goto(`/${mozbotId}-public`)
   await expect(page.locator('text=This bot is now closed')).toBeVisible()
 })
 
 test('Should correctly parse metadata', async ({ page }) => {
-  const typebotId = createId()
+  const mozbotId = createId()
   const customMetadata: Settings['metadata'] = {
     description: 'My custom description',
     title: 'Custom title',
@@ -122,9 +122,9 @@ test('Should correctly parse metadata', async ({ page }) => {
     imageUrl: 'https://www.baptistearno.com/images/site-preview.png',
     customHeadCode: '<meta name="author" content="John Doe">',
   }
-  await createTypebots([
+  await createMozbots([
     {
-      id: typebotId,
+      id: mozbotId,
       settings: {
         metadata: customMetadata,
       },
@@ -133,7 +133,7 @@ test('Should correctly parse metadata', async ({ page }) => {
       }),
     },
   ])
-  await page.goto(`/${typebotId}-public`)
+  await page.goto(`/${mozbotId}-public`)
   expect(
     await page.evaluate(`document.querySelector('title').textContent`)
   ).toBe(customMetadata.title)

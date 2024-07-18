@@ -1,4 +1,4 @@
-import { sendMagicLinkEmail } from '@typebot.io/emails'
+import { sendMagicLinkEmail } from '@mozbot.io/emails'
 
 type Props = {
   identifier: string

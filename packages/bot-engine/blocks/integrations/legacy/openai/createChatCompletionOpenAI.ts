@@ -2,26 +2,26 @@ import {
   Block,
   Credentials,
   SessionState,
-  TypebotInSession,
-} from '@typebot.io/schemas'
+  MozbotInSession,
+} from '@mozbot.io/schemas'
 import {
   ChatCompletionOpenAIOptions,
   OpenAICredentials,
-} from '@typebot.io/schemas/features/blocks/integrations/openai'
-import { byId, isEmpty } from '@typebot.io/lib'
-import { decrypt } from '@typebot.io/lib/api/encryption/decrypt'
+} from '@mozbot.io/schemas/features/blocks/integrations/openai'
+import { byId, isEmpty } from '@mozbot.io/lib'
+import { decrypt } from '@mozbot.io/lib/api/encryption/decrypt'
 import { resumeChatCompletion } from './resumeChatCompletion'
 import { parseChatCompletionMessages } from './parseChatCompletionMessages'
 import { executeChatCompletionOpenAIRequest } from './executeChatCompletionOpenAIRequest'
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { ExecuteIntegrationResponse } from '../../../../types'
-import { parseVariableNumber } from '@typebot.io/variables/parseVariableNumber'
-import { updateVariablesInSession } from '@typebot.io/variables/updateVariablesInSession'
+import { parseVariableNumber } from '@mozbot.io/variables/parseVariableNumber'
+import { updateVariablesInSession } from '@mozbot.io/variables/updateVariablesInSession'
 import {
   chatCompletionMessageRoles,
   defaultOpenAIOptions,
-} from '@typebot.io/schemas/features/blocks/integrations/openai/constants'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
+} from '@mozbot.io/schemas/features/blocks/integrations/openai/constants'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
 
 export const createChatCompletionOpenAI = async (
   state: SessionState,
@@ -61,10 +61,10 @@ export const createChatCompletionOpenAI = async (
     credentials.iv
   )) as OpenAICredentials['data']
 
-  const { typebot } = newSessionState.typebotsQueue[0]
+  const { mozbot } = newSessionState.mozbotsQueue[0]
 
   const { variablesTransformedToList, messages } = parseChatCompletionMessages(
-    typebot.variables
+    mozbot.variables
   )(options.messages)
   if (variablesTransformedToList.length > 0)
     newSessionState = updateVariablesInSession({
@@ -73,11 +73,11 @@ export const createChatCompletionOpenAI = async (
       currentBlockId: undefined,
     }).updatedState
 
-  const temperature = parseVariableNumber(typebot.variables)(
+  const temperature = parseVariableNumber(mozbot.variables)(
     options.advancedSettings?.temperature
   )
 
-  const assistantMessageVariableName = typebot.variables.find(
+  const assistantMessageVariableName = mozbot.variables.find(
     (variable) =>
       options.responseMapping?.find(
         (m) => m.valueToExtract === 'Message content'
@@ -87,7 +87,7 @@ export const createChatCompletionOpenAI = async (
   if (
     newSessionState.isStreamEnabled &&
     !newSessionState.whatsApp &&
-    isNextBubbleMessageWithAssistantMessage(typebot)(
+    isNextBubbleMessageWithAssistantMessage(mozbot)(
       blockId,
       assistantMessageVariableName
     )
@@ -141,10 +141,10 @@ export const createChatCompletionOpenAI = async (
 }
 
 const isNextBubbleMessageWithAssistantMessage =
-  (typebot: TypebotInSession) =>
+  (mozbot: MozbotInSession) =>
   (blockId: string, assistantVariableName?: string): boolean => {
     if (!assistantVariableName) return false
-    const nextBlock = getNextBlock(typebot)(blockId)
+    const nextBlock = getNextBlock(mozbot)(blockId)
     if (!nextBlock) return false
     return (
       nextBlock.type === BubbleBlockType.TEXT &&
@@ -155,9 +155,9 @@ const isNextBubbleMessageWithAssistantMessage =
   }
 
 const getNextBlock =
-  (typebot: TypebotInSession) =>
+  (mozbot: MozbotInSession) =>
   (blockId: string): Block | undefined => {
-    const group = typebot.groups.find((group) =>
+    const group = mozbot.groups.find((group) =>
       group.blocks.find(byId(blockId))
     )
     if (!group) return
@@ -166,9 +166,9 @@ const getNextBlock =
     if (nextBlockInGroup) return nextBlockInGroup
     const outgoingEdgeId = group.blocks.at(blockIndex)?.outgoingEdgeId
     if (!outgoingEdgeId) return
-    const outgoingEdge = typebot.edges.find(byId(outgoingEdgeId))
+    const outgoingEdge = mozbot.edges.find(byId(outgoingEdgeId))
     if (!outgoingEdge) return
-    const connectedGroup = typebot.groups.find(byId(outgoingEdge?.to.groupId))
+    const connectedGroup = mozbot.groups.find(byId(outgoingEdge?.to.groupId))
     if (!connectedGroup) return
     return outgoingEdge.to.blockId
       ? connectedGroup.blocks.find(

@@ -15,8 +15,8 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { ZodObjectLayout } from '../zodLayouts/ZodObjectLayout'
-import { ForgedBlockDefinition } from '@typebot.io/forge-repository/types'
-import { CredentialsWithoutLegacy } from '@typebot.io/schemas'
+import { ForgedBlockDefinition } from '@mozbot.io/forge-repository/types'
+import { CredentialsWithoutLegacy } from '@mozbot.io/schemas'
 
 type Props = {
   blockDef: ForgedBlockDefinition

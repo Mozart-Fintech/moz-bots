@@ -1,7 +1,7 @@
-import { option } from '@typebot.io/forge'
-import { z } from '@typebot.io/forge/zod'
+import { option } from '@mozbot.io/forge'
+import { z } from '@mozbot.io/forge/zod'
 import { baseOptions } from '../baseOptions'
-import { toolsSchema } from '@typebot.io/ai/schemas'
+import { toolsSchema } from '@mozbot.io/ai/schemas'
 
 const nativeMessageContentSchema = {
   content: option.string.layout({

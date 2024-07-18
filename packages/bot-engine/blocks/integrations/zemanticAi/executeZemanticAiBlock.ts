@@ -1,16 +1,16 @@
-import { SessionState } from '@typebot.io/schemas'
+import { SessionState } from '@mozbot.io/schemas'
 import {
   ZemanticAiBlock,
   ZemanticAiCredentials,
   ZemanticAiResponse,
-} from '@typebot.io/schemas/features/blocks/integrations/zemanticAi'
+} from '@mozbot.io/schemas/features/blocks/integrations/zemanticAi'
 import ky from 'ky'
-import { decrypt } from '@typebot.io/lib/api/encryption/decrypt'
-import { byId, isDefined, isEmpty } from '@typebot.io/lib'
+import { decrypt } from '@mozbot.io/lib/api/encryption/decrypt'
+import { byId, isDefined, isEmpty } from '@mozbot.io/lib'
 import { ExecuteIntegrationResponse } from '../../../types'
-import { updateVariablesInSession } from '@typebot.io/variables/updateVariablesInSession'
+import { updateVariablesInSession } from '@mozbot.io/variables/updateVariablesInSession'
 import { getCredentials } from '../../../queries/getCredentials'
-import { parseAnswers } from '@typebot.io/results/parseAnswers'
+import { parseAnswers } from '@mozbot.io/results/parseAnswers'
 
 const URL = 'https://api.zemantic.ai/v1/search-documents'
 
@@ -44,10 +44,10 @@ export const executeZemanticAiBlock = async (
     credentials.iv
   )) as ZemanticAiCredentials['data']
 
-  const { typebot, answers } = newSessionState.typebotsQueue[0]
+  const { mozbot, answers } = newSessionState.mozbotsQueue[0]
 
   const templateVars = parseAnswers({
-    variables: typebot.variables,
+    variables: mozbot.variables,
     answers: answers,
   })
 
@@ -82,7 +82,7 @@ export const executeZemanticAiBlock = async (
       .json()
 
     for (const r of block.options.responseMapping || []) {
-      const variable = typebot.variables.find(byId(r.variableId))
+      const variable = mozbot.variables.find(byId(r.variableId))
       let newVariables = []
       switch (r.valueToExtract) {
         case 'Summary':

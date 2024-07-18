@@ -2,16 +2,16 @@ import { publicProcedure } from '@/helpers/server/trpc'
 import {
   sendMessageInputSchema,
   chatReplySchema,
-} from '@typebot.io/schemas/features/chat/legacy/schema'
+} from '@mozbot.io/schemas/features/chat/legacy/schema'
 import { TRPCError } from '@trpc/server'
-import { getSession } from '@typebot.io/bot-engine/queries/getSession'
-import { startSession } from '@typebot.io/bot-engine/startSession'
-import { saveStateToDatabase } from '@typebot.io/bot-engine/saveStateToDatabase'
-import { restartSession } from '@typebot.io/bot-engine/queries/restartSession'
-import { continueBotFlow } from '@typebot.io/bot-engine/continueBotFlow'
-import { parseDynamicTheme } from '@typebot.io/bot-engine/parseDynamicTheme'
-import { isDefined } from '@typebot.io/lib/utils'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
+import { getSession } from '@mozbot.io/bot-engine/queries/getSession'
+import { startSession } from '@mozbot.io/bot-engine/startSession'
+import { saveStateToDatabase } from '@mozbot.io/bot-engine/saveStateToDatabase'
+import { restartSession } from '@mozbot.io/bot-engine/queries/restartSession'
+import { continueBotFlow } from '@mozbot.io/bot-engine/continueBotFlow'
+import { parseDynamicTheme } from '@mozbot.io/bot-engine/parseDynamicTheme'
+import { isDefined } from '@mozbot.io/lib/utils'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
 
 export const sendMessageV1 = publicProcedure
   .meta({
@@ -20,7 +20,7 @@ export const sendMessageV1 = publicProcedure
       path: '/v1/sendMessage',
       summary: 'Send a message',
       description:
-        'To initiate a chat, do not provide a `sessionId` nor a `message`.\n\nContinue the conversation by providing the `sessionId` and the `message` that should answer the previous question.\n\nSet the `isPreview` option to `true` to chat with the non-published version of the typebot.',
+        'To initiate a chat, do not provide a `sessionId` nor a `message`.\n\nContinue the conversation by providing the `sessionId` and the `message` that should answer the previous question.\n\nSet the `isPreview` option to `true` to chat with the non-published version of the mozbot.',
       tags: ['Deprecated'],
       deprecated: true,
     },
@@ -52,7 +52,7 @@ export const sendMessageV1 = publicProcedure
             message: 'Missing startParams',
           })
         const {
-          typebot,
+          mozbot,
           messages,
           input,
           resultId,
@@ -65,7 +65,7 @@ export const sendMessageV1 = publicProcedure
         } = await startSession({
           version: 1,
           startParams:
-            startParams.isPreview || typeof startParams.typebot !== 'string'
+            startParams.isPreview || typeof startParams.mozbot !== 'string'
               ? {
                   type: 'preview',
                   isOnlyRegistering: startParams.isOnlyRegistering ?? false,
@@ -83,14 +83,14 @@ export const sendMessageV1 = publicProcedure
                           eventId: startParams.startEventId,
                         }
                       : undefined,
-                  typebotId:
-                    typeof startParams.typebot === 'string'
-                      ? startParams.typebot
-                      : startParams.typebot.id,
-                  typebot:
-                    typeof startParams.typebot === 'string'
+                  mozbotId:
+                    typeof startParams.mozbot === 'string'
+                      ? startParams.mozbot
+                      : startParams.mozbot.id,
+                  mozbot:
+                    typeof startParams.mozbot === 'string'
                       ? undefined
-                      : startParams.typebot,
+                      : startParams.mozbot,
                   message: message
                     ? { type: 'text', text: message }
                     : undefined,
@@ -101,7 +101,7 @@ export const sendMessageV1 = publicProcedure
                   type: 'live',
                   isOnlyRegistering: startParams.isOnlyRegistering ?? false,
                   isStreamEnabled: startParams.isStreamEnabled ?? false,
-                  publicId: startParams.typebot,
+                  publicId: startParams.mozbot,
                   prefilledVariables: startParams.prefilledVariables,
                   resultId: startParams.resultId,
                   message: message
@@ -111,7 +111,7 @@ export const sendMessageV1 = publicProcedure
                 },
         })
 
-        if (startParams.isPreview || typeof startParams.typebot !== 'string') {
+        if (startParams.isPreview || typeof startParams.mozbot !== 'string') {
           if (
             newSessionState.allowedOrigins &&
             newSessionState.allowedOrigins.length > 0
@@ -151,11 +151,11 @@ export const sendMessageV1 = publicProcedure
 
         return {
           sessionId: session.id,
-          typebot: typebot
+          mozbot: mozbot
             ? {
-                id: typebot.id,
-                theme: typebot.theme,
-                settings: typebot.settings,
+                id: mozbot.id,
+                theme: mozbot.theme,
+                settings: mozbot.settings,
               }
             : undefined,
           messages,

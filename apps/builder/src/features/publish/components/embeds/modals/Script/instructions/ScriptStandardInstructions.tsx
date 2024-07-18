@@ -1,5 +1,5 @@
 import { CodeEditor } from '@/components/inputs/CodeEditor'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { Stack, Code, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import { StandardSettings } from '../../../settings/StandardSettings'
@@ -8,11 +8,11 @@ import { parseStandardElementCode } from '../../Javascript/JavascriptStandardSni
 import {
   parseApiHostValue,
   parseInlineScript,
-  typebotImportCode,
+  mozbotImportCode,
 } from '../../../snippetParsers/shared'
 
 export const ScriptStandardInstructions = () => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const [inputValues, setInputValues] = useState<{
     heightLabel: string
     widthLabel?: string
@@ -26,11 +26,11 @@ export const ScriptStandardInstructions = () => {
     inputValues.heightLabel
   )
 
-  const scriptSnippet = parseInlineScript(`${typebotImportCode}
+  const scriptSnippet = parseInlineScript(`${mozbotImportCode}
   
 ${parseInitStandardCode({
-  typebot: typebot?.publicId ?? '',
-  apiHost: parseApiHostValue(typebot?.customDomain),
+  mozbot: mozbot?.publicId ?? '',
+  apiHost: parseApiHostValue(mozbot?.customDomain),
 })}`)
 
   return (
@@ -39,11 +39,11 @@ ${parseInitStandardCode({
         onUpdateWindowSettings={(settings) => setInputValues({ ...settings })}
       />
       <Text>
-        Make sure you have this <Code>typebot-standard</Code> element in your{' '}
+        Make sure you have this <Code>mozbot-standard</Code> element in your{' '}
         <Code>{'<body>'}</Code>:
       </Text>
       <CodeEditor isReadOnly value={standardElementSnippet} lang="html" />
-      <Text>Then, run this script to initialize the typebot:</Text>
+      <Text>Then, run this script to initialize the mozbot:</Text>
       <CodeEditor isReadOnly value={scriptSnippet} lang="javascript" />
     </Stack>
   )

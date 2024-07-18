@@ -1,5 +1,5 @@
 {
-  "extends": "@typebot.io/tsconfig/base.json",
+  "extends": "@mozbot.io/tsconfig/base.json",
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

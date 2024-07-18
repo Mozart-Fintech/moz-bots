@@ -1,7 +1,7 @@
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { z } from 'zod'
-import { subscriptionSchema } from '@typebot.io/schemas/features/billing/subscription'
-import { getSubscription as getSubscriptionHandler } from '@typebot.io/billing/api/getSubscription'
+import { subscriptionSchema } from '@mozbot.io/schemas/features/billing/subscription'
+import { getSubscription as getSubscriptionHandler } from '@mozbot.io/billing/api/getSubscription'
 
 export const getSubscription = authenticatedProcedure
   .meta({

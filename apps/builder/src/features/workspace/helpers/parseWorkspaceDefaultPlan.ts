@@ -1,5 +1,5 @@
-import { env } from '@typebot.io/env'
-import { Plan } from '@typebot.io/prisma'
+import { env } from '@mozbot.io/env'
+import { Plan } from '@mozbot.io/prisma'
 
 export const parseWorkspaceDefaultPlan = (userEmail: string) => {
   if (env.ADMIN_EMAIL?.some((email) => email === userEmail))

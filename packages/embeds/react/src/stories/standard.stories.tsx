@@ -1,11 +1,11 @@
 import { Standard } from '..'
-import { leadGenerationTypebot } from './assets/leadGenerationTypebot'
+import { leadGenerationMozbot } from './assets/leadGenerationMozbot'
 
 export const Default = () => {
   return (
     <div style={{ height: '500px' }}>
       <Standard
-        typebot={leadGenerationTypebot}
+        mozbot={leadGenerationMozbot}
         apiHost="http://localhost:3001"
         isPreview
       />
@@ -18,7 +18,7 @@ export const StartWhenIntoView = () => {
     <>
       <div style={{ height: '300vh' }} />
       <Standard
-        typebot={leadGenerationTypebot}
+        mozbot={leadGenerationMozbot}
         apiHost="http://localhost:3001"
         isPreview
         style={{ height: '300px' }}

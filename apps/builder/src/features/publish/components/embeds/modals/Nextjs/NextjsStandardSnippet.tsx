@@ -1,5 +1,5 @@
 import { CodeEditor } from '@/components/inputs/CodeEditor'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import { parseReactBotProps } from '../../snippetParsers'
@@ -7,13 +7,13 @@ import { parseReactBotProps } from '../../snippetParsers'
 type Props = { widthLabel?: string; heightLabel: string }
 
 export const NextjsStandardSnippet = ({ widthLabel, heightLabel }: Props) => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const snippet = prettier.format(
-    `import { Standard } from "@typebot.io/nextjs";
+    `import { Standard } from "@mozbot.io/nextjs";
 
       const App = () => {
         return <Standard ${parseReactBotProps({
-          typebot: typebot?.publicId ?? '',
+          mozbot: mozbot?.publicId ?? '',
         })} style={{width: "${widthLabel}", height: "${heightLabel}"}} />
       }`,
     {

@@ -1,4 +1,4 @@
-import { DashboardFolder } from '@typebot.io/prisma'
+import { DashboardFolder } from '@mozbot.io/prisma'
 import {
   Button,
   Editable,
@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react'
 import { FolderIcon, MoreVerticalIcon } from '@/components/icons'
 import { ConfirmModal } from '@/components/ConfirmModal'
-import { useTypebotDnd } from '../TypebotDndProvider'
+import { useMozbotDnd } from '../MozbotDndProvider'
 import { useRouter } from 'next/router'
 import React, { memo, useMemo } from 'react'
 import { useToast } from '@/hooks/useToast'
@@ -41,11 +41,11 @@ const FolderButton = ({
 }: Props) => {
   const { t } = useTranslate()
   const router = useRouter()
-  const { draggedTypebot, setMouseOverFolderId, mouseOverFolderId } =
-    useTypebotDnd()
-  const isTypebotOver = useMemo(
-    () => draggedTypebot && mouseOverFolderId === folder.id,
-    [draggedTypebot, folder.id, mouseOverFolderId]
+  const { draggedMozbot, setMouseOverFolderId, mouseOverFolderId } =
+    useMozbotDnd()
+  const isMozbotOver = useMemo(
+    () => draggedMozbot && mouseOverFolderId === folder.id,
+    [draggedMozbot, folder.id, mouseOverFolderId]
   )
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { showToast } = useToast()
@@ -76,7 +76,7 @@ const FolderButton = ({
   }
 
   const handleClick = () => {
-    router.push(`/typebots/folders/${folder.id}`)
+    router.push(`/mozbots/folders/${folder.id}`)
   }
 
   const handleMouseEnter = () => setMouseOverFolderId(folder.id)
@@ -90,8 +90,8 @@ const FolderButton = ({
       pos="relative"
       cursor="pointer"
       variant="outline"
-      colorScheme={isTypebotOver || draggedTypebot ? 'blue' : 'gray'}
-      borderWidth={isTypebotOver ? '2px' : '1px'}
+      colorScheme={isMozbotOver || draggedMozbot ? 'blue' : 'gray'}
+      borderWidth={isMozbotOver ? '2px' : '1px'}
       transition={'border-width 0.1s ease'}
       justifyContent="center"
       onClick={handleClick}

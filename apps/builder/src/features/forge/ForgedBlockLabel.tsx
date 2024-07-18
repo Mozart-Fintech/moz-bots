@@ -1,4 +1,4 @@
-import { ForgedBlock } from '@typebot.io/forge-repository/types'
+import { ForgedBlock } from '@mozbot.io/forge-repository/types'
 import { useForgedBlock } from './hooks/useForgedBlock'
 import { Text, TextProps } from '@chakra-ui/react'
 

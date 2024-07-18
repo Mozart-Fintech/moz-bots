@@ -5,24 +5,24 @@ import { createId } from '@paralleldrive/cuid2'
 import { readFileSync } from 'fs'
 import { parse } from 'papaparse'
 import {
-  importTypebotInDatabase,
+  importMozbotInDatabase,
   injectFakeResults,
-} from '@typebot.io/playwright/databaseActions'
+} from '@mozbot.io/playwright/databaseActions'
 
-const typebotId = createId()
+const mozbotId = createId()
 
 test.beforeEach(async () => {
-  await importTypebotInDatabase(
-    getTestAsset('typebots/results/submissionHeader.json'),
+  await importMozbotInDatabase(
+    getTestAsset('mozbots/results/submissionHeader.json'),
     {
-      id: typebotId,
+      id: mozbotId,
     }
   )
-  await injectFakeResults({ typebotId, count: 200, isChronological: true })
+  await injectFakeResults({ mozbotId, count: 200, isChronological: true })
 })
 
 test('table features should work', async ({ page }) => {
-  await page.goto(`/typebots/${typebotId}/results`)
+  await page.goto(`/mozbots/${mozbotId}/results`)
 
   await test.step('Check header format', async () => {
     await expect(page.locator('text=Submitted at')).toBeVisible()
@@ -185,7 +185,7 @@ const scrollToBottom = (page: Page) =>
 const saveAndReload = async (page: Page) => {
   await page.click('text="Theme"')
   await page.waitForTimeout(2000)
-  await page.goto(`/typebots/${typebotId}/results`)
+  await page.goto(`/mozbots/${mozbotId}/results`)
 }
 
 const getNthCheckbox = (page: Page, n: number) =>

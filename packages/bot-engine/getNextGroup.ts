@@ -1,7 +1,7 @@
-import { byId, isDefined, isNotDefined } from '@typebot.io/lib'
-import { Group, SessionState, VariableWithValue } from '@typebot.io/schemas'
+import { byId, isDefined, isNotDefined } from '@mozbot.io/lib'
+import { Group, SessionState, VariableWithValue } from '@mozbot.io/schemas'
 import { upsertResult } from './queries/upsertResult'
-import { VisitedEdge } from '@typebot.io/prisma'
+import { VisitedEdge } from '@mozbot.io/prisma'
 
 export type NextGroup = {
   group?: Group
@@ -18,62 +18,62 @@ export const getNextGroup = async ({
   edgeId?: string
   isOffDefaultPath: boolean
 }): Promise<NextGroup> => {
-  const nextEdge = state.typebotsQueue[0].typebot.edges.find(byId(edgeId))
+  const nextEdge = state.mozbotsQueue[0].mozbot.edges.find(byId(edgeId))
   if (!nextEdge) {
-    if (state.typebotsQueue.length > 1) {
-      const nextEdgeId = state.typebotsQueue[0].edgeIdToTriggerWhenDone
-      const isMergingWithParent = state.typebotsQueue[0].isMergingWithParent
-      const currentResultId = state.typebotsQueue[0].resultId
+    if (state.mozbotsQueue.length > 1) {
+      const nextEdgeId = state.mozbotsQueue[0].edgeIdToTriggerWhenDone
+      const isMergingWithParent = state.mozbotsQueue[0].isMergingWithParent
+      const currentResultId = state.mozbotsQueue[0].resultId
       if (!isMergingWithParent && currentResultId)
         await upsertResult({
           resultId: currentResultId,
-          typebot: state.typebotsQueue[0].typebot,
+          mozbot: state.mozbotsQueue[0].mozbot,
           isCompleted: true,
-          hasStarted: state.typebotsQueue[0].answers.length > 0,
+          hasStarted: state.mozbotsQueue[0].answers.length > 0,
         })
       let newSessionState = {
         ...state,
-        typebotsQueue: [
+        mozbotsQueue: [
           {
-            ...state.typebotsQueue[1],
-            typebot: isMergingWithParent
+            ...state.mozbotsQueue[1],
+            mozbot: isMergingWithParent
               ? {
-                  ...state.typebotsQueue[1].typebot,
-                  variables: state.typebotsQueue[1].typebot.variables
+                  ...state.mozbotsQueue[1].mozbot,
+                  variables: state.mozbotsQueue[1].mozbot.variables
                     .map((variable) => ({
                       ...variable,
                       value:
-                        state.typebotsQueue[0].typebot.variables.find(
+                        state.mozbotsQueue[0].mozbot.variables.find(
                           (v) => v.name === variable.name
                         )?.value ?? variable.value,
                     }))
                     .concat(
-                      state.typebotsQueue[0].typebot.variables.filter(
+                      state.mozbotsQueue[0].mozbot.variables.filter(
                         (variable) =>
                           isDefined(variable.value) &&
                           isNotDefined(
-                            state.typebotsQueue[1].typebot.variables.find(
+                            state.mozbotsQueue[1].mozbot.variables.find(
                               (v) => v.name === variable.name
                             )
                           )
                       ) as VariableWithValue[]
                     ),
                 }
-              : state.typebotsQueue[1].typebot,
+              : state.mozbotsQueue[1].mozbot,
             answers: isMergingWithParent
               ? [
-                  ...state.typebotsQueue[1].answers.filter(
+                  ...state.mozbotsQueue[1].answers.filter(
                     (incomingAnswer) =>
-                      !state.typebotsQueue[0].answers.find(
+                      !state.mozbotsQueue[0].answers.find(
                         (currentAnswer) =>
                           currentAnswer.key === incomingAnswer.key
                       )
                   ),
-                  ...state.typebotsQueue[0].answers,
+                  ...state.mozbotsQueue[0].answers,
                 ]
-              : state.typebotsQueue[1].answers,
+              : state.mozbotsQueue[1].answers,
           },
-          ...state.typebotsQueue.slice(2),
+          ...state.mozbotsQueue.slice(2),
         ],
       } satisfies SessionState
       if (state.progressMetadata)
@@ -81,7 +81,7 @@ export const getNextGroup = async ({
           ...state.progressMetadata,
           totalAnswers:
             state.progressMetadata.totalAnswers +
-            state.typebotsQueue[0].answers.length,
+            state.mozbotsQueue[0].answers.length,
         }
       const nextGroup = await getNextGroup({
         state: newSessionState,
@@ -102,7 +102,7 @@ export const getNextGroup = async ({
       newSessionState: state,
     }
   }
-  const nextGroup = state.typebotsQueue[0].typebot.groups.find(
+  const nextGroup = state.mozbotsQueue[0].mozbot.groups.find(
     byId(nextEdge.to.groupId)
   )
   if (!nextGroup)
@@ -115,7 +115,7 @@ export const getNextGroup = async ({
   const currentVisitedEdgeIndex = isOffDefaultPath
     ? (state.currentVisitedEdgeIndex ?? -1) + 1
     : state.currentVisitedEdgeIndex
-  const resultId = state.typebotsQueue[0].resultId
+  const resultId = state.mozbotsQueue[0].resultId
   return {
     group: {
       ...nextGroup,

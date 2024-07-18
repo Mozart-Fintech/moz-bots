@@ -1,5 +1,5 @@
 import { FormLabel, HStack, Stack } from '@chakra-ui/react'
-import { ChatTheme, GeneralTheme } from '@typebot.io/schemas'
+import { ChatTheme, GeneralTheme } from '@mozbot.io/schemas'
 import React from 'react'
 import {
   defaultBlur,
@@ -10,11 +10,11 @@ import {
   defaultLightTextColor,
   defaultOpacity,
   defaultRoundness,
-} from '@typebot.io/schemas/features/typebot/theme/constants'
+} from '@mozbot.io/schemas/features/mozbot/theme/constants'
 import { ContainerThemeForm } from './ContainerThemeForm'
 import { NumberInput } from '@/components/inputs'
 import { DropdownList } from '@/components/DropdownList'
-import { isChatContainerLight } from '@typebot.io/theme/isChatContainerLight'
+import { isChatContainerLight } from '@mozbot.io/theme/isChatContainerLight'
 
 type Props = {
   generalBackground: GeneralTheme['background']

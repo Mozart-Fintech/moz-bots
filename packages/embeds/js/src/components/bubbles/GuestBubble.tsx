@@ -3,7 +3,7 @@ import { Avatar } from '../avatars/Avatar'
 import { isMobile } from '@/utils/isMobileSignal'
 import { Answer } from '@/types'
 import { Modal } from '../Modal'
-import { isNotEmpty } from '@typebot.io/lib'
+import { isNotEmpty } from '@mozbot.io/lib'
 import { FilePreview } from '@/features/blocks/inputs/fileUpload/components/FilePreview'
 import clsx from 'clsx'
 
@@ -46,7 +46,7 @@ export const GuestBubble = (props: Props) => {
                   src={attachment.url}
                   alt={`Attached image ${idx() + 1}`}
                   class={clsx(
-                    'typebot-guest-bubble-image-attachment cursor-pointer',
+                    'mozbot-guest-bubble-image-attachment cursor-pointer',
                     props.message.attachments!.filter((attachment) =>
                       attachment.type.startsWith('image')
                     ).length > 1 && 'max-w-[90%]'
@@ -78,7 +78,7 @@ export const GuestBubble = (props: Props) => {
           </div>
         </Show>
         <div
-          class="p-[1px] whitespace-pre-wrap max-w-full typebot-guest-bubble flex flex-col"
+          class="p-[1px] whitespace-pre-wrap max-w-full mozbot-guest-bubble flex flex-col"
           data-testid="guest-bubble"
         >
           <Show when={isNotEmpty(props.message.text)}>

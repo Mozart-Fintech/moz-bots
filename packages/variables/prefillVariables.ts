@@ -1,4 +1,4 @@
-import { safeStringify } from '@typebot.io/lib/safeStringify'
+import { safeStringify } from '@mozbot.io/lib/safeStringify'
 import { Variable } from './types'
 
 export const prefillVariables = (

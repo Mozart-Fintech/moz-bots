@@ -1,4 +1,4 @@
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 
 const algorithm = 'AES-GCM'
 const secretKey = env.ENCRYPTION_SECRET

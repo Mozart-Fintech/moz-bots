@@ -1,2 +1,2 @@
-export * from './components/TypebotViewer'
+export * from './components/MozbotViewer'
 export { parseVariables } from '@/features/variables'

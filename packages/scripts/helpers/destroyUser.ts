@@ -1,5 +1,5 @@
 import { isCancel, text, confirm } from '@clack/prompts'
-import { Plan, PrismaClient } from '@typebot.io/prisma'
+import { Plan, PrismaClient } from '@mozbot.io/prisma'
 import { writeFileSync } from 'fs'
 
 export const destroyUser = async (userEmail?: string) => {
@@ -22,7 +22,7 @@ export const destroyUser = async (userEmail?: string) => {
     },
     include: {
       members: { select: { user: { select: { email: true } }, role: true } },
-      typebots: {
+      mozbots: {
         select: {
           results: {
             select: { id: true },
@@ -61,11 +61,11 @@ export const destroyUser = async (userEmail?: string) => {
   }
 
   for (const workspace of workspaces) {
-    const hasResults = workspace.typebots.some((t) => t.results.length > 0)
+    const hasResults = workspace.mozbots.some((t) => t.results.length > 0)
     if (hasResults) {
       console.log(
         `Workspace ${workspace.name} has results. Deleting results first...`,
-        workspace.typebots.filter((t) => t.results.length > 0)
+        workspace.mozbots.filter((t) => t.results.length > 0)
       )
       console.log(JSON.stringify({ members: workspace.members }, null, 2))
       const proceed = await confirm({ message: 'Proceed?' })
@@ -74,10 +74,10 @@ export const destroyUser = async (userEmail?: string) => {
         return
       }
     }
-    for (const typebot of workspace.typebots.filter(
+    for (const mozbot of workspace.mozbots.filter(
       (t) => t.results.length > 0
     )) {
-      for (const result of typebot.results) {
+      for (const result of mozbot.results) {
         await prisma.result.deleteMany({ where: { id: result.id } })
       }
     }

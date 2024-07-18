@@ -1,13 +1,13 @@
-import { AsyncVariableStore, VariableStore } from '@typebot.io/forge/types'
+import { AsyncVariableStore, VariableStore } from '@mozbot.io/forge/types'
 import { ChatCompletionOptions } from './parseChatCompletionOptions'
 import { APICallError, streamText, ToolCallPart, ToolResultPart } from 'ai'
 import { createOpenAI } from '@ai-sdk/openai'
 import { maxToolCalls } from '../constants'
 import { isModelCompatibleWithVision } from '../helpers/isModelCompatibleWithVision'
-import { parseChatCompletionMessages } from '@typebot.io/ai/parseChatCompletionMessages'
-import { parseTools } from '@typebot.io/ai/parseTools'
-import { pumpStreamUntilDone } from '@typebot.io/ai/pumpStreamUntilDone'
-import { appendToolResultsToMessages } from '@typebot.io/ai/appendToolResultsToMessages'
+import { parseChatCompletionMessages } from '@mozbot.io/ai/parseChatCompletionMessages'
+import { parseTools } from '@mozbot.io/ai/parseTools'
+import { pumpStreamUntilDone } from '@mozbot.io/ai/pumpStreamUntilDone'
+import { appendToolResultsToMessages } from '@mozbot.io/ai/appendToolResultsToMessages'
 
 type Props = {
   credentials: { apiKey?: string }

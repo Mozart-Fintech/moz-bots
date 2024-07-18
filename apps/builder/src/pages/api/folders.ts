@@ -1,11 +1,11 @@
-import { DashboardFolder, WorkspaceRole } from '@typebot.io/prisma'
-import prisma from '@typebot.io/lib/prisma'
+import { DashboardFolder, WorkspaceRole } from '@mozbot.io/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 import {
   badRequest,
   methodNotAllowed,
   notAuthenticated,
-} from '@typebot.io/lib/api'
+} from '@mozbot.io/lib/api'
 import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser'
 
 // TODO: Delete as it has been migrated to TRPC endpoints

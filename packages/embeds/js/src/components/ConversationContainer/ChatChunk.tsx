@@ -1,16 +1,16 @@
 import { Answer, BotContext, ChatChunk as ChatChunkType } from '@/types'
 import { isMobile } from '@/utils/isMobileSignal'
-import { ContinueChatResponse, Settings, Theme } from '@typebot.io/schemas'
+import { ContinueChatResponse, Settings, Theme } from '@mozbot.io/schemas'
 import { createSignal, For, onMount, Show } from 'solid-js'
 import { HostBubble } from '../bubbles/HostBubble'
 import { InputChatBlock } from '../InputChatBlock'
 import { AvatarSideContainer } from './AvatarSideContainer'
 import { StreamingBubble } from '../bubbles/StreamingBubble'
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
 import {
   defaultGuestAvatarIsEnabled,
   defaultHostAvatarIsEnabled,
-} from '@typebot.io/schemas/features/typebot/theme/constants'
+} from '@mozbot.io/schemas/features/mozbot/theme/constants'
 
 type Props = Pick<ContinueChatResponse, 'messages' | 'input'> & {
   theme: Theme
@@ -72,7 +72,7 @@ export const ChatChunk = (props: Props) => {
   }
 
   return (
-    <div class="flex flex-col w-full min-w-0 gap-2 typebot-chat-chunk">
+    <div class="flex flex-col w-full min-w-0 gap-2 mozbot-chat-chunk">
       <Show when={props.messages.length > 0}>
         <div class={'flex' + (isMobile() ? ' gap-1' : ' gap-2')}>
           <Show

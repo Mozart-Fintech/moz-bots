@@ -1,6 +1,6 @@
 import { trackPixelEvent } from '@/lib/pixel'
-import { isEmpty } from '@typebot.io/lib/utils'
-import type { PixelBlock } from '@typebot.io/schemas'
+import { isEmpty } from '@mozbot.io/lib/utils'
+import type { PixelBlock } from '@mozbot.io/schemas'
 
 export const executePixel = async (options: PixelBlock['options']) => {
   if (isEmpty(options?.pixelId)) return

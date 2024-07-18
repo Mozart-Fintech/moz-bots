@@ -1,5 +1,5 @@
-import { createAction, option } from '@typebot.io/forge'
-import { isDefined, isEmpty } from '@typebot.io/lib'
+import { createAction, option } from '@mozbot.io/forge'
+import { isDefined, isEmpty } from '@mozbot.io/lib'
 import ky, { HTTPError } from 'ky'
 import { apiBaseUrl } from '../constants'
 import { auth } from '../auth'

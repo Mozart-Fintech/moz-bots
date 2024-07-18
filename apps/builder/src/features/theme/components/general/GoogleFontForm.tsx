@@ -1,7 +1,7 @@
 import { Select } from '@/components/inputs/Select'
-import { env } from '@typebot.io/env'
-import { GoogleFont } from '@typebot.io/schemas'
-import { defaultFontFamily } from '@typebot.io/schemas/features/typebot/theme/constants'
+import { env } from '@mozbot.io/env'
+import { GoogleFont } from '@mozbot.io/schemas'
+import { defaultFontFamily } from '@mozbot.io/schemas/features/mozbot/theme/constants'
 import { useState, useEffect } from 'react'
 
 type Props = {

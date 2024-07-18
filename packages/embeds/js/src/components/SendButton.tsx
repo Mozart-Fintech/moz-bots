@@ -3,7 +3,7 @@ import { splitProps, Switch, Match } from 'solid-js'
 import { JSX } from 'solid-js/jsx-runtime'
 import { SendIcon } from './icons'
 import { Button } from './Button'
-import { isEmpty } from '@typebot.io/lib'
+import { isEmpty } from '@mozbot.io/lib'
 import clsx from 'clsx'
 
 type SendButtonProps = {

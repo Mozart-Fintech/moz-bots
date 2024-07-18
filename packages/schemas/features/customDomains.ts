@@ -1,4 +1,4 @@
-import { CustomDomain as CustomDomainInDb } from '@typebot.io/prisma'
+import { CustomDomain as CustomDomainInDb } from '@mozbot.io/prisma'
 import { z } from '../zod'
 import { extendZodWithOpenApi } from 'zod-openapi'
 

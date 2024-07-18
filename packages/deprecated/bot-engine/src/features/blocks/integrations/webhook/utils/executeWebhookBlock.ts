@@ -6,9 +6,9 @@ import {
   MakeComBlock,
   PabblyConnectBlock,
   VariableWithUnknowValue,
-} from '@typebot.io/schemas'
+} from '@mozbot.io/schemas'
 import { stringify } from 'qs'
-import { sendRequest, byId } from '@typebot.io/lib'
+import { sendRequest, byId } from '@mozbot.io/lib'
 
 export const executeWebhook = async (
   block: HttpRequestBlock | ZapierBlock | MakeComBlock | PabblyConnectBlock,
@@ -17,22 +17,22 @@ export const executeWebhook = async (
     variables,
     updateVariableValue,
     updateVariables,
-    typebotId,
+    mozbotId,
     apiHost,
     resultValues,
     onNewLog,
     resultId,
-    parentTypebotIds,
+    parentmozbotIds,
   }: IntegrationState
 ) => {
   const params = stringify({ resultId })
   const { data, error } = await sendRequest({
-    url: `${apiHost}/api/typebots/${typebotId}/blocks/${blockId}/executeWebhook?${params}`,
+    url: `${apiHost}/api/mozbots/${mozbotId}/blocks/${blockId}/executeWebhook?${params}`,
     method: 'POST',
     body: {
       variables,
       resultValues,
-      parentTypebotIds,
+      parentmozbotIds,
     },
   })
   const statusCode = (

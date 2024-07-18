@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { stringify } from 'qs'
 import React from 'react'
 import { useTranslate } from '@tolgee/react'
-import { useTypebotDnd } from '../TypebotDndProvider'
+import { useMozbotDnd } from '../MozbotDndProvider'
 
 export const CreateBotButton = ({
   folderId,
@@ -12,11 +12,11 @@ export const CreateBotButton = ({
 }: { folderId?: string } & ButtonProps) => {
   const { t } = useTranslate()
   const router = useRouter()
-  const { draggedTypebot } = useTypebotDnd()
+  const { draggedMozbot } = useMozbotDnd()
 
   const handleClick = () =>
     router.push(
-      `/typebots/create?${stringify({
+      `/mozbots/create?${stringify({
         folderId,
       })}`
     )
@@ -28,7 +28,7 @@ export const CreateBotButton = ({
       paddingX={6}
       whiteSpace={'normal'}
       colorScheme="blue"
-      opacity={draggedTypebot ? 0.3 : 1}
+      opacity={draggedMozbot ? 0.3 : 1}
       {...props}
     >
       <VStack spacing="6">
@@ -40,7 +40,7 @@ export const CreateBotButton = ({
           textAlign="center"
           mt="6"
         >
-          {t('folders.createTypebotButton.label')}
+          {t('folders.createMozbotButton.label')}
         </Text>
       </VStack>
     </Button>

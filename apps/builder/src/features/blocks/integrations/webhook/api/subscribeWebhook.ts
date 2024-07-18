@@ -1,17 +1,17 @@
-import prisma from '@typebot.io/lib/prisma'
-import { canWriteTypebots } from '@/helpers/databaseRules'
+import prisma from '@mozbot.io/lib/prisma'
+import { canWriteMozbots } from '@/helpers/databaseRules'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
-import { Block, HttpRequestBlock, parseGroups } from '@typebot.io/schemas'
-import { byId } from '@typebot.io/lib'
-import { isWebhookBlock } from '@typebot.io/schemas/helpers'
+import { Block, HttpRequestBlock, parseGroups } from '@mozbot.io/schemas'
+import { byId } from '@mozbot.io/lib'
+import { isWebhookBlock } from '@mozbot.io/schemas/helpers'
 import { z } from 'zod'
 
 export const subscribeWebhook = authenticatedProcedure
   .meta({
     openapi: {
       method: 'POST',
-      path: '/v1/typebots/{typebotId}/webhookBlocks/{blockId}/subscribe',
+      path: '/v1/mozbots/{mozbotId}/webhookBlocks/{blockId}/subscribe',
       protect: true,
       summary: 'Subscribe to webhook block',
       tags: ['Webhook'],
@@ -19,7 +19,7 @@ export const subscribeWebhook = authenticatedProcedure
   })
   .input(
     z.object({
-      typebotId: z.string(),
+      mozbotId: z.string(),
       blockId: z.string(),
       url: z.string(),
     })
@@ -30,20 +30,20 @@ export const subscribeWebhook = authenticatedProcedure
       url: z.string().nullable(),
     })
   )
-  .query(async ({ input: { typebotId, blockId, url }, ctx: { user } }) => {
-    const typebot = await prisma.typebot.findFirst({
-      where: canWriteTypebots(typebotId, user),
+  .query(async ({ input: { mozbotId, blockId, url }, ctx: { user } }) => {
+    const mozbot = await prisma.mozbot.findFirst({
+      where: canWriteMozbots(mozbotId, user),
       select: {
         version: true,
         groups: true,
       },
     })
 
-    if (!typebot)
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Typebot not found' })
+    if (!mozbot)
+      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
 
-    const groups = parseGroups(typebot.groups, {
-      typebotVersion: typebot.version,
+    const groups = parseGroups(mozbot.groups, {
+      mozbotVersion: mozbot.version,
     })
 
     const webhookBlock = groups
@@ -56,7 +56,7 @@ export const subscribeWebhook = authenticatedProcedure
         message: 'Webhook block not found',
       })
 
-    if (webhookBlock.options?.webhook || typebot.version === '6') {
+    if (webhookBlock.options?.webhook || mozbot.version === '6') {
       const updatedGroups = groups.map((group) =>
         group.blocks.some((b) => b.id === webhookBlock.id)
           ? {
@@ -78,8 +78,8 @@ export const subscribeWebhook = authenticatedProcedure
             }
           : group
       )
-      await prisma.typebot.updateMany({
-        where: { id: typebotId },
+      await prisma.mozbot.updateMany({
+        where: { id: mozbotId },
         data: {
           groups: updatedGroups,
         },

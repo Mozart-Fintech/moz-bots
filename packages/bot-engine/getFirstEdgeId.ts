@@ -1,15 +1,15 @@
 import { TRPCError } from '@trpc/server'
-import { TypebotInSession } from '@typebot.io/schemas'
+import { MozbotInSession } from '@mozbot.io/schemas'
 
 export const getFirstEdgeId = ({
-  typebot,
+  mozbot,
   startEventId,
 }: {
-  typebot: Pick<TypebotInSession, 'events' | 'groups' | 'version'>
+  mozbot: Pick<MozbotInSession, 'events' | 'groups' | 'version'>
   startEventId: string | undefined
 }) => {
   if (startEventId) {
-    const event = typebot.events?.find((e) => e.id === startEventId)
+    const event = mozbot.events?.find((e) => e.id === startEventId)
     if (!event)
       throw new TRPCError({
         code: 'BAD_REQUEST',
@@ -17,6 +17,6 @@ export const getFirstEdgeId = ({
       })
     return event.outgoingEdgeId
   }
-  if (typebot.version === '6') return typebot.events?.[0].outgoingEdgeId
-  return typebot.groups.at(0)?.blocks.at(0)?.outgoingEdgeId
+  if (mozbot.version === '6') return mozbot.events?.[0].outgoingEdgeId
+  return mozbot.groups.at(0)?.blocks.at(0)?.outgoingEdgeId
 }

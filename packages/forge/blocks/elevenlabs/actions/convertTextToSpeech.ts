@@ -1,10 +1,10 @@
-import { createAction, option } from '@typebot.io/forge'
+import { createAction, option } from '@mozbot.io/forge'
 import { auth } from '../auth'
 import { baseUrl } from '../constants'
 import { ModelsResponse, VoicesResponse } from '../type'
 import got, { HTTPError } from 'ky'
-import { uploadFileToBucket } from '@typebot.io/lib/s3/uploadFileToBucket'
-import { createId } from '@typebot.io/lib/createId'
+import { uploadFileToBucket } from '@mozbot.io/lib/s3/uploadFileToBucket'
+import { createId } from '@mozbot.io/lib/createId'
 
 export const convertTextToSpeech = createAction({
   name: 'Convert text to speech',

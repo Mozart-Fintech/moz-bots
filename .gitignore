@@ -32,12 +32,12 @@ dump.tar
 __env.js
 __ENV.js
 
-typebotsToFix.json
+mozbotsToFix.json
 **/scripts/logs
 
 snapshots
 
 .env
-.typebot-build
+.mozbot-build
 
 .tolgee

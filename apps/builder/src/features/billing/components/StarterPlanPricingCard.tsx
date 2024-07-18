@@ -7,11 +7,11 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { Plan } from '@typebot.io/prisma'
+import { Plan } from '@mozbot.io/prisma'
 import { FeaturesList } from './FeaturesList'
 import { MoreInfoTooltip } from '@/components/MoreInfoTooltip'
-import { formatPrice } from '@typebot.io/billing/helpers/formatPrice'
-import { prices } from '@typebot.io/billing/constants'
+import { formatPrice } from '@mozbot.io/billing/helpers/formatPrice'
+import { prices } from '@mozbot.io/billing/constants'
 import { T, useTranslate } from '@tolgee/react'
 
 type Props = {

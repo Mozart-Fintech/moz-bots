@@ -1,15 +1,15 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
-import { resultWithAnswersSchema } from '@typebot.io/schemas'
+import { resultWithAnswersSchema } from '@mozbot.io/schemas'
 import { z } from 'zod'
-import { isReadTypebotForbidden } from '@/features/typebot/helpers/isReadTypebotForbidden'
+import { isReadMozbotForbidden } from '@/features/mozbot/helpers/isReadMozbotForbidden'
 
 export const getResult = authenticatedProcedure
   .meta({
     openapi: {
       method: 'GET',
-      path: '/v1/typebots/{typebotId}/results/{resultId}',
+      path: '/v1/mozbots/{mozbotId}/results/{resultId}',
       protect: true,
       summary: 'Get result by id',
       tags: ['Results'],
@@ -17,10 +17,10 @@ export const getResult = authenticatedProcedure
   })
   .input(
     z.object({
-      typebotId: z
+      mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
         ),
       resultId: z
         .string()
@@ -35,9 +35,9 @@ export const getResult = authenticatedProcedure
     })
   )
   .query(async ({ input, ctx: { user } }) => {
-    const typebot = await prisma.typebot.findUnique({
+    const mozbot = await prisma.mozbot.findUnique({
       where: {
-        id: input.typebotId,
+        id: input.mozbotId,
       },
       select: {
         id: true,
@@ -61,12 +61,12 @@ export const getResult = authenticatedProcedure
         },
       },
     })
-    if (!typebot || (await isReadTypebotForbidden(typebot, user)))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Typebot not found' })
+    if (!mozbot || (await isReadMozbotForbidden(mozbot, user)))
+      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
     const results = await prisma.result.findMany({
       where: {
         id: input.resultId,
-        typebotId: typebot.id,
+        mozbotId: mozbot.id,
       },
       orderBy: {
         createdAt: 'desc',

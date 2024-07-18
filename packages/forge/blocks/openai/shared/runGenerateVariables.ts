@@ -1,12 +1,12 @@
-import { LogsStore, VariableStore } from '@typebot.io/forge/types'
+import { LogsStore, VariableStore } from '@mozbot.io/forge/types'
 import {
   GenerateVariablesOptions,
   toolParametersSchema,
 } from './parseGenerateVariablesOptions'
 import { generateObject, LanguageModel } from 'ai'
-import { Variable } from '@typebot.io/variables/types'
-import { z } from '@typebot.io/forge/zod'
-import { isNotEmpty } from '@typebot.io/lib/utils'
+import { Variable } from '@mozbot.io/variables/types'
+import { z } from '@mozbot.io/forge/zod'
+import { isNotEmpty } from '@mozbot.io/lib/utils'
 
 type Props = {
   model: LanguageModel

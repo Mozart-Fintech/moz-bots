@@ -4,28 +4,26 @@ import {
   Group,
   Variable,
   InputBlock,
-  Typebot,
-} from '@typebot.io/schemas'
-import { isInputBlock } from '@typebot.io/schemas/helpers'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { byId, isNotEmpty } from '@typebot.io/lib/utils'
+  Mozbot,
+} from '@mozbot.io/schemas'
+import { isInputBlock } from '@mozbot.io/schemas/helpers'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { byId, isNotEmpty } from '@mozbot.io/lib/utils'
 
 export const parseResultHeader = (
-  typebot: Pick<Typebot, 'groups' | 'variables'>,
-  linkedTypebots: Pick<Typebot, 'groups' | 'variables'>[] | undefined,
+  mozbot: Pick<Mozbot, 'groups' | 'variables'>,
+  linkedMozbots: Pick<Mozbot, 'groups' | 'variables'>[] | undefined,
   results?: ResultWithAnswers[]
 ): ResultHeaderCell[] => {
   const parsedGroups = [
-    ...typebot.groups,
-    ...(linkedTypebots ?? []).flatMap(
-      (linkedTypebot) => linkedTypebot.groups as Group[]
+    ...mozbot.groups,
+    ...(linkedMozbots ?? []).flatMap(
+      (linkedMozbot) => linkedMozbot.groups as Group[]
     ),
   ]
   const parsedVariables = [
-    ...typebot.variables,
-    ...(linkedTypebots ?? []).flatMap(
-      (linkedTypebot) => linkedTypebot.variables
-    ),
+    ...mozbot.variables,
+    ...(linkedMozbots ?? []).flatMap((linkedMozbot) => linkedMozbot.variables),
   ]
   const inputsResultHeader = parseInputsResultHeader({
     groups: parsedGroups,

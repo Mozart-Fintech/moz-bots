@@ -1,26 +1,26 @@
 import { Seo } from '@/components/Seo'
-import { TypebotHeader } from '@/features/editor/components/TypebotHeader'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { MozbotHeader } from '@/features/editor/components/MozbotHeader'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { Flex } from '@chakra-ui/react'
-import { Standard } from '@typebot.io/nextjs'
+import { Standard } from '@mozbot.io/nextjs'
 import { ThemeSideMenu } from './ThemeSideMenu'
-import { TypebotNotFoundPage } from '@/features/editor/components/TypebotNotFoundPage'
+import { MozbotNotFoundPage } from '@/features/editor/components/MozbotNotFoundPage'
 import { headerHeight } from '@/features/editor/constants'
 
 export const ThemePage = () => {
-  const { typebot, is404 } = useTypebot()
+  const { mozbot, is404 } = useMozbot()
 
-  if (is404) return <TypebotNotFoundPage />
+  if (is404) return <MozbotNotFoundPage />
   return (
     <Flex overflow="hidden" h="100vh" flexDir="column">
-      <Seo title={typebot?.name ? `${typebot.name} | Theme` : 'Theme'} />
-      <TypebotHeader />
+      <Seo title={mozbot?.name ? `${mozbot.name} | Theme` : 'Theme'} />
+      <MozbotHeader />
       <Flex w="full" height={`calc(100vh - ${headerHeight}px)`}>
         <ThemeSideMenu />
         <Flex flex="1">
-          {typebot && (
+          {mozbot && (
             <Standard
-              typebot={typebot}
+              mozbot={mozbot}
               style={{
                 width: '100%',
                 height: '100%',

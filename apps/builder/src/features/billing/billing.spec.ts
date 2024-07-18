@@ -5,17 +5,17 @@ import {
 } from '@/test/utils/databaseActions'
 import test, { expect } from '@playwright/test'
 import { createId } from '@paralleldrive/cuid2'
-import { Plan } from '@typebot.io/prisma'
+import { Plan } from '@mozbot.io/prisma'
 import {
-  createTypebots,
+  createMozbots,
   createWorkspaces,
   deleteWorkspaces,
   injectFakeResults,
-} from '@typebot.io/playwright/databaseActions'
-import { env } from '@typebot.io/env'
+} from '@mozbot.io/playwright/databaseActions'
+import { env } from '@mozbot.io/env'
 
 const usageWorkspaceId = createId()
-const usageTypebotId = createId()
+const usagemozbotId = createId()
 const planChangeWorkspaceId = createId()
 const enterpriseWorkspaceId = createId()
 
@@ -35,7 +35,7 @@ test.beforeAll(async () => {
       name: 'Enterprise Workspace',
     },
   ])
-  await createTypebots([{ id: usageTypebotId, workspaceId: usageWorkspaceId }])
+  await createMozbots([{ id: usagemozbotId, workspaceId: usageWorkspaceId }])
 })
 
 test.afterAll(async () => {
@@ -47,7 +47,7 @@ test.afterAll(async () => {
 })
 
 test('should display valid usage', async ({ page }) => {
-  await page.goto('/typebots')
+  await page.goto('/mozbots')
   await page.click('text=Settings & Members')
   await page.click('text=Billing & Usage')
   await expect(page.locator('text="/ 10,000"')).toBeVisible()
@@ -84,7 +84,7 @@ test('should display valid usage', async ({ page }) => {
 
   await injectFakeResults({
     count: 10,
-    typebotId: usageTypebotId,
+    mozbotId: usagemozbotId,
   })
   await page.click('text=Free workspace')
   await page.click('text="Usage Workspace"')
@@ -98,7 +98,7 @@ test('should display valid usage', async ({ page }) => {
   )
 
   await injectFakeResults({
-    typebotId: usageTypebotId,
+    mozbotId: usagemozbotId,
     count: 1090,
   })
   await page.click('text="Settings"')
@@ -111,7 +111,7 @@ test('should display valid usage', async ({ page }) => {
 test('plan changes should work', async ({ page }) => {
   test.setTimeout(80000)
   // Upgrade to STARTER
-  await page.goto('/typebots')
+  await page.goto('/mozbots')
   await page.click('text=Pro workspace')
   await page.click('text=Plan Change Workspace')
   await page.click('text=Settings & Members')
@@ -138,7 +138,7 @@ test('plan changes should work', async ({ page }) => {
   )
 
   // Update plan with additional quotas
-  await page.goto('/typebots')
+  await page.goto('/mozbots')
   await page.click('text=Settings & Members')
   await page.click('text=Billing & Usage')
   await expect(page.locator('text="/ 2,000"')).toBeVisible()
@@ -166,7 +166,7 @@ test('plan changes should work', async ({ page }) => {
   await cancelSubscription(stripeId)
 
   // Cancel subscription
-  await page.goto('/typebots')
+  await page.goto('/mozbots')
   await page.click('text=Settings & Members')
   await page.click('text=Billing & Usage')
   await expect(
@@ -176,7 +176,7 @@ test('plan changes should work', async ({ page }) => {
 })
 
 test('should display invoices', async ({ page }) => {
-  await page.goto('/typebots')
+  await page.goto('/mozbots')
   await page.click('text=Settings & Members')
   await page.click('text=Billing & Usage')
   await expect(page.locator('text="Invoices"')).toBeHidden()
@@ -193,7 +193,7 @@ test('should display invoices', async ({ page }) => {
 })
 
 test('custom plans should work', async ({ page }) => {
-  await page.goto('/typebots')
+  await page.goto('/mozbots')
   await page.click('text=Pro workspace')
   await page.click('text=Enterprise Workspace')
   await page.click('text=Settings & Members')
@@ -212,7 +212,7 @@ test('custom plans should work', async ({ page }) => {
     description: 'Description of the deal',
   })
 
-  await page.goto('/typebots?claimCustomPlan=true')
+  await page.goto('/mozbots?claimCustomPlan=true')
 
   await expect(page.getByRole('list').getByText('$239.00')).toBeVisible()
   await expect(page.getByText('Subscribe to Acme custom plan')).toBeVisible()

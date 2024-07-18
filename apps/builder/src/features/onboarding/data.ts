@@ -1,5 +1,5 @@
-import { Block } from '@typebot.io/schemas'
-import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integrations/constants'
+import { Block } from '@mozbot.io/schemas'
+import { IntegrationBlockType } from '@mozbot.io/schemas/features/blocks/integrations/constants'
 
 type Feature = 'editor' | Block['type']
 

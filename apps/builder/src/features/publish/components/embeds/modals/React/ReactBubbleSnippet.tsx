@@ -1,6 +1,6 @@
 import { CodeEditor } from '@/components/inputs/CodeEditor'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
-import { BubbleProps } from '@typebot.io/nextjs'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
+import { BubbleProps } from '@mozbot.io/nextjs'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import { parseReactBubbleProps } from '../../snippetParsers'
@@ -9,14 +9,14 @@ export const ReactBubbleSnippet = ({
   theme,
   previewMessage,
 }: Pick<BubbleProps, 'theme' | 'previewMessage'>) => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
 
   const snippet = prettier.format(
-    `import { Bubble } from "@typebot.io/react";
+    `import { Bubble } from "@mozbot.io/react";
 
       const App = () => {
         return <Bubble ${parseReactBubbleProps({
-          typebot: typebot?.publicId ?? '',
+          mozbot: mozbot?.publicId ?? '',
           theme,
           previewMessage,
         })}/>

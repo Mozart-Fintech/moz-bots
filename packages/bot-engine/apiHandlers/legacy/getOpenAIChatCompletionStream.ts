@@ -1,14 +1,14 @@
-import { decryptV2 } from '@typebot.io/lib/api/encryption/decryptV2'
-import { isNotEmpty } from '@typebot.io/lib/utils'
+import { decryptV2 } from '@mozbot.io/lib/api/encryption/decryptV2'
+import { isNotEmpty } from '@mozbot.io/lib/utils'
 import {
   ChatCompletionOpenAIOptions,
   OpenAICredentials,
-} from '@typebot.io/schemas/features/blocks/integrations/openai'
-import { SessionState } from '@typebot.io/schemas/features/chat/sessionState'
+} from '@mozbot.io/schemas/features/blocks/integrations/openai'
+import { SessionState } from '@mozbot.io/schemas/features/chat/sessionState'
 import { OpenAIStream } from 'ai'
-import { parseVariableNumber } from '@typebot.io/variables/parseVariableNumber'
+import { parseVariableNumber } from '@mozbot.io/variables/parseVariableNumber'
 import { ClientOptions, OpenAI } from 'openai'
-import { defaultOpenAIOptions } from '@typebot.io/schemas/features/blocks/integrations/openai/constants'
+import { defaultOpenAIOptions } from '@mozbot.io/schemas/features/blocks/integrations/openai/constants'
 import { getCredentials } from '../../queries/getCredentials'
 
 export const getOpenAIChatCompletionStream = async (
@@ -27,8 +27,8 @@ export const getOpenAIChatCompletionStream = async (
     credentials.iv
   )) as OpenAICredentials['data']
 
-  const { typebot } = state.typebotsQueue[0]
-  const temperature = parseVariableNumber(typebot.variables)(
+  const { mozbot } = state.mozbotsQueue[0]
+  const temperature = parseVariableNumber(mozbot.variables)(
     options.advancedSettings?.temperature
   )
 

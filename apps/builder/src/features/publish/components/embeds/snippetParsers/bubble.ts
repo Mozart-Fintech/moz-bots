@@ -1,4 +1,4 @@
-import { BubbleProps } from '@typebot.io/nextjs'
+import { BubbleProps } from '@mozbot.io/nextjs'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import {
@@ -104,15 +104,15 @@ const parseBubbleProps = ({
 }
 
 export const parseInitBubbleCode = ({
-  typebot,
+  mozbot,
   apiHost,
   previewMessage,
   theme,
 }: BubbleProps) => {
-  const botProps = parseBotProps({ typebot, apiHost })
+  const botProps = parseBotProps({ mozbot, apiHost })
   const bubbleProps = parseBubbleProps({ previewMessage, theme })
 
-  return prettier.format(`Typebot.initBubble({${botProps}${bubbleProps}});`, {
+  return prettier.format(`Mozbot.initBubble({${botProps}${bubbleProps}});`, {
     parser: 'babel',
     plugins: [parserBabel],
   })
@@ -145,12 +145,12 @@ const parseReactPreviewMessage = (
 }
 
 export const parseReactBubbleProps = ({
-  typebot,
+  mozbot,
   apiHost,
   previewMessage,
   theme,
 }: BubbleProps) => {
-  const botProps = parseReactBotProps({ typebot, apiHost })
+  const botProps = parseReactBotProps({ mozbot, apiHost })
   const previewMessageProp = parseReactPreviewMessage(previewMessage)
   const themeProp = parseReactBubbleTheme(theme)
 

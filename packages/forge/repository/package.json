@@ -1,23 +1,23 @@
 {
-  "name": "@typebot.io/forge-repository",
+  "name": "@mozbot.io/forge-repository",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
   "author": "Baptiste Arnaud",
   "license": "AGPL-3.0-or-later",
   "devDependencies": {
-    "@typebot.io/forge": "workspace:*",
-    "@typebot.io/openai-block": "workspace:*",
-    "@typebot.io/zemantic-ai-block": "workspace:*",
-    "@typebot.io/cal-com-block": "workspace:*",
-    "@typebot.io/chat-node-block": "workspace:*",
-    "@typebot.io/qrcode-block": "workspace:*",
-    "@typebot.io/dify-ai-block": "workspace:*",
-    "@typebot.io/mistral-block": "workspace:*",
-    "@typebot.io/elevenlabs-block": "workspace:*",
-    "@typebot.io/anthropic-block": "workspace:*",
-    "@typebot.io/together-ai-block": "workspace:*",
-    "@typebot.io/open-router-block": "workspace:*",
-    "@typebot.io/nocodb-block": "workspace:*"
+    "@mozbot.io/forge": "workspace:*",
+    "@mozbot.io/openai-block": "workspace:*",
+    "@mozbot.io/zemantic-ai-block": "workspace:*",
+    "@mozbot.io/cal-com-block": "workspace:*",
+    "@mozbot.io/chat-node-block": "workspace:*",
+    "@mozbot.io/qrcode-block": "workspace:*",
+    "@mozbot.io/dify-ai-block": "workspace:*",
+    "@mozbot.io/mistral-block": "workspace:*",
+    "@mozbot.io/elevenlabs-block": "workspace:*",
+    "@mozbot.io/anthropic-block": "workspace:*",
+    "@mozbot.io/together-ai-block": "workspace:*",
+    "@mozbot.io/open-router-block": "workspace:*",
+    "@mozbot.io/nocodb-block": "workspace:*"
   }
 }

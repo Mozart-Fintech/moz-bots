@@ -9,7 +9,7 @@ import {
   SlideFade,
   Flex,
 } from '@chakra-ui/react'
-import { Block, BlockOptions, BlockWithOptions } from '@typebot.io/schemas'
+import { Block, BlockOptions, BlockWithOptions } from '@mozbot.io/schemas'
 import { useRef, useState } from 'react'
 import { WaitSettings } from '@/features/blocks/logic/wait/components/WaitSettings'
 import { ScriptSettings } from '@/features/blocks/logic/script/components/ScriptSettings'
@@ -27,7 +27,7 @@ import { HttpRequestSettings } from '@/features/blocks/integrations/webhook/comp
 import { ZapierSettings } from '@/features/blocks/integrations/zapier/components/ZapierSettings'
 import { RedirectSettings } from '@/features/blocks/logic/redirect/components/RedirectSettings'
 import { SetVariableSettings } from '@/features/blocks/logic/setVariable/components/SetVariableSettings'
-import { TypebotLinkForm } from '@/features/blocks/logic/typebotLink/components/TypebotLinkForm'
+import { MozbotLinkForm } from '@/features/blocks/logic/mozbotLink/components/MozbotLinkForm'
 import { NumberInputSettings } from '@/features/blocks/inputs/number/components/NumberInputSettings'
 import { EmailInputSettings } from '@/features/blocks/inputs/emailInput/components/EmailInputSettings'
 import { UrlInputSettings } from '@/features/blocks/inputs/url/components/UrlInputSettings'
@@ -40,9 +40,9 @@ import { PictureChoiceSettings } from '@/features/blocks/inputs/pictureChoice/co
 import { SettingsHoverBar } from './SettingsHoverBar'
 import { PixelSettings } from '@/features/blocks/integrations/pixel/components/PixelSettings'
 import { ZemanticAiSettings } from '@/features/blocks/integrations/zemanticAi/ZemanticAiSettings'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integrations/constants'
-import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { IntegrationBlockType } from '@mozbot.io/schemas/features/blocks/integrations/constants'
+import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
 import { ForgedBlockSettings } from '../../../../forge/components/ForgedBlockSettings'
 import { OpenAISettings } from '@/features/blocks/integrations/openai/components/OpenAISettings'
 import { useForgedBlock } from '@/features/forge/hooks/useForgedBlock'
@@ -246,9 +246,9 @@ export const BlockSettings = ({
         />
       )
     }
-    case LogicBlockType.TYPEBOT_LINK: {
+    case LogicBlockType.MOZBOT_LINK: {
       return (
-        <TypebotLinkForm
+        <MozbotLinkForm
           options={block.options}
           onOptionsChange={updateOptions}
         />

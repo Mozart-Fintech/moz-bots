@@ -1,28 +1,28 @@
-import { isDefined, byId } from '@typebot.io/lib'
+import { isDefined, byId } from '@mozbot.io/lib'
 import {
   getBlockById,
   blockHasItems,
   isInputBlock,
-} from '@typebot.io/schemas/helpers'
-import { Block, SessionState } from '@typebot.io/schemas'
+} from '@mozbot.io/schemas/helpers'
+import { Block, SessionState } from '@mozbot.io/schemas'
 
 type Props = {
-  typebotsQueue: SessionState['typebotsQueue']
+  mozbotsQueue: SessionState['mozbotsQueue']
   progressMetadata: NonNullable<SessionState['progressMetadata']>
   currentInputBlockId: string | undefined
 }
 
 export const computeCurrentProgress = ({
-  typebotsQueue,
+  mozbotsQueue,
   progressMetadata,
   currentInputBlockId,
 }: Props) => {
   if (!currentInputBlockId) return
   const paths = computePossibleNextInputBlocks({
-    typebotsQueue: typebotsQueue,
+    mozbotsQueue: mozbotsQueue,
     blockId: currentInputBlockId,
     visitedBlocks: {
-      [typebotsQueue[0].typebot.id]: [],
+      [mozbotsQueue[0].mozbot.id]: [],
     },
     currentPath: [],
   })
@@ -36,25 +36,25 @@ export const computeCurrentProgress = ({
 
 const computePossibleNextInputBlocks = ({
   currentPath,
-  typebotsQueue,
+  mozbotsQueue,
   blockId,
   visitedBlocks,
 }: {
   currentPath: string[]
-  typebotsQueue: SessionState['typebotsQueue']
+  mozbotsQueue: SessionState['mozbotsQueue']
   blockId: string
   visitedBlocks: {
     [key: string]: string[]
   }
 }): string[][] => {
-  if (visitedBlocks[typebotsQueue[0].typebot.id].includes(blockId)) return []
-  visitedBlocks[typebotsQueue[0].typebot.id].push(blockId)
+  if (visitedBlocks[mozbotsQueue[0].mozbot.id].includes(blockId)) return []
+  visitedBlocks[mozbotsQueue[0].mozbot.id].push(blockId)
 
   const possibleNextInputBlocks: string[][] = []
 
   const { block, group, blockIndex } = getBlockById(
     blockId,
-    typebotsQueue[0].typebot.groups
+    mozbotsQueue[0].mozbot.groups
   )
 
   if (isInputBlock(block)) currentPath.push(block.id)
@@ -62,18 +62,18 @@ const computePossibleNextInputBlocks = ({
   const outgoingEdgeIds = getBlockOutgoingEdgeIds(block)
 
   for (const outgoingEdgeId of outgoingEdgeIds) {
-    const to = typebotsQueue[0].typebot.edges.find(
+    const to = mozbotsQueue[0].mozbot.edges.find(
       (e) => e.id === outgoingEdgeId
     )?.to
     if (!to) continue
     const blockId =
       to.blockId ??
-      typebotsQueue[0].typebot.groups.find((g) => g.id === to.groupId)
-        ?.blocks[0].id
+      mozbotsQueue[0].mozbot.groups.find((g) => g.id === to.groupId)?.blocks[0]
+        .id
     if (!blockId) continue
     possibleNextInputBlocks.push(
       ...computePossibleNextInputBlocks({
-        typebotsQueue,
+        mozbotsQueue,
         blockId,
         visitedBlocks,
         currentPath,
@@ -84,7 +84,7 @@ const computePossibleNextInputBlocks = ({
   for (const block of group.blocks.slice(blockIndex + 1)) {
     possibleNextInputBlocks.push(
       ...computePossibleNextInputBlocks({
-        typebotsQueue,
+        mozbotsQueue,
         blockId: block.id,
         visitedBlocks,
         currentPath,
@@ -95,22 +95,22 @@ const computePossibleNextInputBlocks = ({
   if (outgoingEdgeIds.length > 0 || group.blocks.length !== blockIndex + 1)
     return possibleNextInputBlocks
 
-  if (typebotsQueue.length > 1) {
-    const nextEdgeId = typebotsQueue[0].edgeIdToTriggerWhenDone
-    const to = typebotsQueue[1].typebot.edges.find(byId(nextEdgeId))?.to
+  if (mozbotsQueue.length > 1) {
+    const nextEdgeId = mozbotsQueue[0].edgeIdToTriggerWhenDone
+    const to = mozbotsQueue[1].mozbot.edges.find(byId(nextEdgeId))?.to
     if (!to) return possibleNextInputBlocks
     const blockId =
       to.blockId ??
-      typebotsQueue[0].typebot.groups.find((g) => g.id === to.groupId)
-        ?.blocks[0].id
+      mozbotsQueue[0].mozbot.groups.find((g) => g.id === to.groupId)?.blocks[0]
+        .id
     if (blockId) {
       possibleNextInputBlocks.push(
         ...computePossibleNextInputBlocks({
-          typebotsQueue: typebotsQueue.slice(1),
+          mozbotsQueue: mozbotsQueue.slice(1),
           blockId,
           visitedBlocks: {
             ...visitedBlocks,
-            [typebotsQueue[1].typebot.id]: [],
+            [mozbotsQueue[1].mozbot.id]: [],
           },
           currentPath,
         })

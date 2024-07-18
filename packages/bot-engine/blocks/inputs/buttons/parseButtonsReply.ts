@@ -1,4 +1,4 @@
-import { ChoiceInputBlock, SessionState } from '@typebot.io/schemas'
+import { ChoiceInputBlock, SessionState } from '@mozbot.io/schemas'
 import { injectVariableValuesInButtonsInputBlock } from './injectVariableValuesInButtonsInputBlock'
 import { ParsedReply } from '../../../types'
 

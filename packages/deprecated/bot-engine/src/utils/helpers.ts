@@ -1,4 +1,4 @@
-import { Log } from '@typebot.io/prisma'
+import { Log } from '@mozbot.io/prisma'
 
 export const sanitizeUrl = (url: string): string =>
   url.startsWith('http') ||

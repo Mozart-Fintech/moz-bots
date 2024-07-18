@@ -1,14 +1,14 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
-import { smtpCredentialsSchema } from '@typebot.io/schemas/features/blocks/integrations/sendEmail'
-import { encrypt } from '@typebot.io/lib/api/encryption/encrypt'
+import { smtpCredentialsSchema } from '@mozbot.io/schemas/features/blocks/integrations/sendEmail'
+import { encrypt } from '@mozbot.io/lib/api/encryption/encrypt'
 import { z } from 'zod'
-import { whatsAppCredentialsSchema } from '@typebot.io/schemas/features/whatsapp'
+import { whatsAppCredentialsSchema } from '@mozbot.io/schemas/features/whatsapp'
 import {
   googleSheetsCredentialsSchema,
   stripeCredentialsSchema,
-} from '@typebot.io/schemas'
+} from '@mozbot.io/schemas'
 import { isWriteWorkspaceForbidden } from '@/features/workspace/helpers/isWriteWorkspaceForbidden'
 import { forgedCredentialsSchemas } from '../../../../../../packages/forge/repository/credentials'
 

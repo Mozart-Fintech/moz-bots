@@ -1,18 +1,18 @@
-import { byId } from '@typebot.io/lib'
-import { PublicTypebotV6 } from '@typebot.io/schemas'
-import { TotalAnswers } from '@typebot.io/schemas/features/analytics'
+import { byId } from '@mozbot.io/lib'
+import { PublicMozbotV6 } from '@mozbot.io/schemas'
+import { TotalAnswers } from '@mozbot.io/schemas/features/analytics'
 
 export const getTotalAnswersAtBlock = (
   currentBlockId: string,
   {
-    publishedTypebot,
+    publishedMozbot,
     totalAnswers,
   }: {
-    publishedTypebot: PublicTypebotV6
+    publishedMozbot: PublicMozbotV6
     totalAnswers: TotalAnswers[]
   }
 ): number => {
-  const block = publishedTypebot.groups
+  const block = publishedMozbot.groups
     .flatMap((g) => g.blocks)
     .find(byId(currentBlockId))
   if (!block) throw new Error(`Block ${currentBlockId} not found`)

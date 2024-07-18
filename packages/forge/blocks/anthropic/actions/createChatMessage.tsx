@@ -1,4 +1,4 @@
-import { createAction, option } from '@typebot.io/forge'
+import { createAction, option } from '@mozbot.io/forge'
 import { auth } from '../auth'
 import {
   anthropicLegacyModels,
@@ -7,13 +7,13 @@ import {
   defaultAnthropicOptions,
   maxToolRoundtrips,
 } from '../constants'
-import { isDefined } from '@typebot.io/lib'
+import { isDefined } from '@mozbot.io/lib'
 import { createAnthropic } from '@ai-sdk/anthropic'
 import { generateText } from 'ai'
 import { runChatCompletionStream } from '../helpers/runChatCompletionStream'
-import { toolsSchema } from '@typebot.io/ai/schemas'
-import { parseTools } from '@typebot.io/ai/parseTools'
-import { parseChatCompletionMessages } from '@typebot.io/ai/parseChatCompletionMessages'
+import { toolsSchema } from '@mozbot.io/ai/schemas'
+import { parseTools } from '@mozbot.io/ai/parseTools'
+import { parseChatCompletionMessages } from '@mozbot.io/ai/parseChatCompletionMessages'
 import { isModelCompatibleWithVision } from '../helpers/isModelCompatibleWithVision'
 
 const nativeMessageContentSchema = {

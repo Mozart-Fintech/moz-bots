@@ -1,9 +1,9 @@
-import { VariableStore } from '@typebot.io/forge'
-import { z } from '@typebot.io/forge/zod'
-import { executeFunction } from '@typebot.io/variables/executeFunction'
-import { Variable } from '@typebot.io/variables/types'
+import { VariableStore } from '@mozbot.io/forge'
+import { z } from '@mozbot.io/forge/zod'
+import { executeFunction } from '@mozbot.io/variables/executeFunction'
+import { Variable } from '@mozbot.io/variables/types'
 import { CoreTool } from 'ai'
-import { isNotEmpty } from '@typebot.io/lib'
+import { isNotEmpty } from '@mozbot.io/lib'
 import { Tools } from './schemas'
 
 export const parseTools = ({

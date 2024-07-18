@@ -1,7 +1,7 @@
-import { PrismaClient } from '@typebot.io/prisma'
+import { PrismaClient } from '@mozbot.io/prisma'
 import { promptAndSetEnvironment } from './utils'
-import { archiveResults } from '@typebot.io/results/archiveResults'
-import { Typebot } from '@typebot.io/schemas'
+import { archiveResults } from '@mozbot.io/results/archiveResults'
+import { Mozbot } from '@mozbot.io/schemas'
 
 const prisma = new PrismaClient()
 
@@ -15,18 +15,18 @@ export const cleanDatabase = async () => {
   const isFirstOfMonth = new Date().getDate() === 1
   if (isFirstOfMonth) {
     await deleteArchivedResults()
-    await deleteArchivedTypebots()
+    await deleteArchivedMozbots()
     await resetBillingProps()
   }
   console.log('Database cleaned!')
 }
 
-const deleteArchivedTypebots = async () => {
+const deleteArchivedMozbots = async () => {
   const lastDayTwoMonthsAgo = new Date()
   lastDayTwoMonthsAgo.setMonth(lastDayTwoMonthsAgo.getMonth() - 1)
   lastDayTwoMonthsAgo.setDate(0)
 
-  const typebots = await prisma.typebot.findMany({
+  const mozbots = await prisma.mozbot.findMany({
     where: {
       updatedAt: {
         lte: lastDayTwoMonthsAgo,
@@ -36,16 +36,16 @@ const deleteArchivedTypebots = async () => {
     select: { id: true },
   })
 
-  console.log(`Deleting ${typebots.length} archived typebots...`)
+  console.log(`Deleting ${mozbots.length} archived mozbots...`)
 
   const chunkSize = 1000
-  for (let i = 0; i < typebots.length; i += chunkSize) {
-    const chunk = typebots.slice(i, i + chunkSize)
-    await deleteResultsFromArchivedTypebotsIfAny(chunk)
-    await prisma.typebot.deleteMany({
+  for (let i = 0; i < mozbots.length; i += chunkSize) {
+    const chunk = mozbots.slice(i, i + chunkSize)
+    await deleteResultsFromArchivedMozbotsIfAny(chunk)
+    await prisma.mozbot.deleteMany({
       where: {
         id: {
-          in: chunk.map((typebot) => typebot.id),
+          in: chunk.map((mozbot) => mozbot.id),
         },
       },
     })
@@ -191,14 +191,14 @@ const resetBillingProps = async () => {
   console.log(`Resetted ${count} workspaces.`)
 }
 
-const deleteResultsFromArchivedTypebotsIfAny = async (
-  typebotIds: { id: string }[]
+const deleteResultsFromArchivedMozbotsIfAny = async (
+  mozbotIds: { id: string }[]
 ) => {
-  console.log('Checking for archived typebots with non-archived results...')
-  const archivedTypebotsWithResults = (await prisma.typebot.findMany({
+  console.log('Checking for archived mozbots with non-archived results...')
+  const archivedMozbotsWithResults = (await prisma.mozbot.findMany({
     where: {
       id: {
-        in: typebotIds.map((typebot) => typebot.id),
+        in: mozbotIds.map((mozbot) => mozbot.id),
       },
       isArchived: true,
       results: {
@@ -209,16 +209,16 @@ const deleteResultsFromArchivedTypebotsIfAny = async (
       id: true,
       groups: true,
     },
-  })) as Pick<Typebot, 'groups' | 'id'>[]
-  if (archivedTypebotsWithResults.length === 0) return
+  })) as Pick<Mozbot, 'groups' | 'id'>[]
+  if (archivedMozbotsWithResults.length === 0) return
   console.log(
-    `Found ${archivedTypebotsWithResults.length} archived typebots with non-archived results.`
+    `Found ${archivedMozbotsWithResults.length} archived mozbots with non-archived results.`
   )
-  for (const archivedTypebot of archivedTypebotsWithResults) {
+  for (const archivedMozbot of archivedMozbotsWithResults) {
     await archiveResults(prisma)({
-      typebot: archivedTypebot,
+      mozbot: archivedMozbot,
       resultsFilter: {
-        typebotId: archivedTypebot.id,
+        mozbotId: archivedMozbot.id,
       },
     })
   }

@@ -1,16 +1,16 @@
 set statement_timeout to 300000;
 
 -- AlterTable
-UPDATE "PublicTypebot" SET "variables" = '[]' WHERE "variables" IS NULL; 
-ALTER TABLE "PublicTypebot" ALTER COLUMN "variables" SET NOT NULL;
+UPDATE "PublicMozbot" SET "variables" = '[]' WHERE "variables" IS NULL; 
+ALTER TABLE "PublicMozbot" ALTER COLUMN "variables" SET NOT NULL;
 
 -- AlterTable
 UPDATE "Result" SET "variables" = '[]' WHERE "variables" IS NULL; 
 ALTER TABLE "Result" ALTER COLUMN "variables" SET NOT NULL;
 
 -- AlterTable
-UPDATE "Typebot" SET "variables" = '[]' WHERE "variables" IS NULL; 
-ALTER TABLE "Typebot" ALTER COLUMN "variables" SET NOT NULL;
+UPDATE "Mozbot" SET "variables" = '[]' WHERE "variables" IS NULL; 
+ALTER TABLE "Mozbot" ALTER COLUMN "variables" SET NOT NULL;
 
 -- AlterTable
 UPDATE "User" SET "onboardingCategories" = '[]' WHERE "onboardingCategories" IS NULL; 

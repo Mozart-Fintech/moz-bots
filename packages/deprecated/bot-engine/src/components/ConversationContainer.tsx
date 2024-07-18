@@ -4,14 +4,14 @@ import { useAnswers } from '../providers/AnswersProvider'
 import {
   Group,
   Edge,
-  PublicTypebot,
+  PublicMozbot,
   Theme,
   VariableWithValue,
-} from '@typebot.io/schemas'
-import { byId, isDefined, isNotDefined } from '@typebot.io/lib'
-import { isInputBlock } from '@typebot.io/schemas/helpers'
+} from '@mozbot.io/schemas'
+import { byId, isDefined, isNotDefined } from '@mozbot.io/lib'
+import { isInputBlock } from '@mozbot.io/schemas/helpers'
 import { animateScroll as scroll } from 'react-scroll'
-import { LinkedTypebot, useTypebot } from '@/providers/TypebotProvider'
+import { LinkedMozbot, useMozbot } from '@/providers/MozbotProvider'
 import { setCssVariablesValue } from '@/features/theme'
 import { ChatProvider } from '@/providers/ChatProvider'
 
@@ -30,11 +30,11 @@ export const ConversationContainer = ({
   onCompleted,
 }: Props) => {
   const {
-    typebot,
+    mozbot,
     updateVariableValue,
     linkedBotQueue,
-    popEdgeIdFromLinkedTypebotQueue,
-  } = useTypebot()
+    popEdgeIdFromLinkedMozbotQueue,
+  } = useMozbot()
   const [displayedGroups, setDisplayedGroups] = useState<
     { group: Group; startBlockIndex: number }[]
   >([])
@@ -45,16 +45,16 @@ export const ConversationContainer = ({
 
   const displayNextGroup = ({
     edgeId,
-    updatedTypebot,
+    updatedMozbot,
     groupId,
   }: {
     edgeId?: string
     groupId?: string
-    updatedTypebot?: PublicTypebot | LinkedTypebot
+    updatedMozbot?: PublicMozbot | LinkedMozbot
   }) => {
-    const currentTypebot = updatedTypebot ?? typebot
+    const currentMozbot = updatedMozbot ?? mozbot
     if (groupId) {
-      const nextGroup = currentTypebot.groups.find(byId(groupId))
+      const nextGroup = currentMozbot.groups.find(byId(groupId))
       if (!nextGroup) return
       onNewGroupVisible({
         id: 'edgeId',
@@ -66,16 +66,16 @@ export const ConversationContainer = ({
         { group: nextGroup, startBlockIndex: 0 },
       ])
     }
-    const nextEdge = currentTypebot.edges.find(byId(edgeId))
+    const nextEdge = currentMozbot.edges.find(byId(edgeId))
     if (!nextEdge) {
       if (linkedBotQueue.length > 0) {
         const nextEdgeId = linkedBotQueue[0].edgeId
-        popEdgeIdFromLinkedTypebotQueue()
+        popEdgeIdFromLinkedMozbotQueue()
         displayNextGroup({ edgeId: nextEdgeId })
       }
       return onCompleted()
     }
-    const nextGroup = currentTypebot.groups.find(byId(nextEdge.to.groupId))
+    const nextGroup = currentMozbot.groups.find(byId(nextEdge.to.groupId))
     if (!nextGroup) return onCompleted()
     const startBlockIndex = nextEdge.to.blockId
       ? nextGroup.blocks.findIndex(byId(nextEdge.to.blockId))
@@ -100,7 +100,7 @@ export const ConversationContainer = ({
       updateVariables(prefilledVariables)
     }
     setHasStarted(true)
-    const startEdge = typebot.groups[0].blocks[0].outgoingEdgeId
+    const startEdge = mozbot.groups[0].blocks[0].outgoingEdgeId
     if (!startEdge && !startGroupId) return
     displayNextGroup({
       edgeId: startGroupId ? undefined : startEdge,
@@ -114,7 +114,7 @@ export const ConversationContainer = ({
   }) => {
     const prefilledVariables: VariableWithValue[] = []
     Object.keys(predefinedVariables).forEach((key) => {
-      const matchingVariable = typebot.variables.find(
+      const matchingVariable = mozbot.variables.find(
         (v) => v.name.toLowerCase() === key.toLowerCase()
       )
       if (!predefinedVariables || isNotDefined(matchingVariable)) return
@@ -144,7 +144,7 @@ export const ConversationContainer = ({
   return (
     <div
       ref={scrollableContainer}
-      className="overflow-y-scroll w-full lg:w-3/4 min-h-full rounded lg:px-5 px-3 pt-10 relative scrollable-container typebot-chat-view"
+      className="overflow-y-scroll w-full lg:w-3/4 min-h-full rounded lg:px-5 px-3 pt-10 relative scrollable-container mozbot-chat-view"
     >
       <ChatProvider onScroll={autoScrollToBottom}>
         {displayedGroups.map((displayedGroup, idx) => {

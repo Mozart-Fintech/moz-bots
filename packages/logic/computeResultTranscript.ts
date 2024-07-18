@@ -4,23 +4,23 @@ import {
   Edge,
   Group,
   InputBlock,
-  TypebotInSession,
+  MozbotInSession,
   Variable,
-} from '@typebot.io/schemas'
-import { SetVariableHistoryItem } from '@typebot.io/schemas/features/result'
-import { isBubbleBlock, isInputBlock } from '@typebot.io/schemas/helpers'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
-import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
-import { createId } from '@typebot.io/lib/createId'
+} from '@mozbot.io/schemas'
+import { SetVariableHistoryItem } from '@mozbot.io/schemas/features/result'
+import { isBubbleBlock, isInputBlock } from '@mozbot.io/schemas/helpers'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
+import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
+import { createId } from '@mozbot.io/lib/createId'
 import { executeCondition } from './executeCondition'
 import {
   parseBubbleBlock,
   BubbleBlockWithDefinedContent,
 } from '../bot-engine/parseBubbleBlock'
-import { defaultChoiceInputOptions } from '@typebot.io/schemas/features/blocks/inputs/choice/constants'
-import { defaultPictureChoiceOptions } from '@typebot.io/schemas/features/blocks/inputs/pictureChoice/constants'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
+import { defaultChoiceInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/choice/constants'
+import { defaultPictureChoiceOptions } from '@mozbot.io/schemas/features/blocks/inputs/pictureChoice/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
 
 type TranscriptMessage =
   | {
@@ -48,13 +48,13 @@ export const parseTranscriptMessageText = (
 }
 
 export const computeResultTranscript = ({
-  typebot,
+  mozbot,
   answers,
   setVariableHistory,
   visitedEdges,
   stopAtBlockId,
 }: {
-  typebot: TypebotInSession
+  mozbot: MozbotInSession
   answers: Pick<Answer, 'blockId' | 'content' | 'attachedFileUrls'>[]
   setVariableHistory: Pick<
     SetVariableHistoryItem,
@@ -63,14 +63,14 @@ export const computeResultTranscript = ({
   visitedEdges: string[]
   stopAtBlockId?: string
 }): TranscriptMessage[] => {
-  const firstEdgeId = getFirstEdgeId(typebot)
+  const firstEdgeId = getFirstEdgeId(mozbot)
   if (!firstEdgeId) return []
-  const firstEdge = typebot.edges.find((edge) => edge.id === firstEdgeId)
+  const firstEdge = mozbot.edges.find((edge) => edge.id === firstEdgeId)
   if (!firstEdge) return []
-  const firstGroup = getNextGroup(typebot, firstEdgeId)
+  const firstGroup = getNextGroup(mozbot, firstEdgeId)
   if (!firstGroup) return []
   return executeGroup({
-    typebotsQueue: [{ typebot }],
+    mozbotsQueue: [{ mozbot }],
     nextGroup: firstGroup,
     currentTranscript: [],
     answers,
@@ -80,18 +80,18 @@ export const computeResultTranscript = ({
   })
 }
 
-const getFirstEdgeId = (typebot: TypebotInSession) => {
-  if (typebot.version === '6') return typebot.events?.[0].outgoingEdgeId
-  return typebot.groups.at(0)?.blocks.at(0)?.outgoingEdgeId
+const getFirstEdgeId = (mozbot: MozbotInSession) => {
+  if (mozbot.version === '6') return mozbot.events?.[0].outgoingEdgeId
+  return mozbot.groups.at(0)?.blocks.at(0)?.outgoingEdgeId
 }
 
 const getNextGroup = (
-  typebot: TypebotInSession,
+  mozbot: MozbotInSession,
   edgeId: string
 ): { group: Group; blockIndex?: number } | undefined => {
-  const edge = typebot.edges.find((edge) => edge.id === edgeId)
+  const edge = mozbot.edges.find((edge) => edge.id === edgeId)
   if (!edge) return
-  const group = typebot.groups.find((group) => group.id === edge.to.groupId)
+  const group = mozbot.groups.find((group) => group.id === edge.to.groupId)
   if (!group) return
   const blockIndex = edge.to.blockId
     ? group.blocks.findIndex((block) => block.id === edge.to.blockId)
@@ -101,7 +101,7 @@ const getNextGroup = (
 
 const executeGroup = ({
   currentTranscript,
-  typebotsQueue,
+  mozbotsQueue,
   answers,
   nextGroup,
   setVariableHistory,
@@ -115,8 +115,8 @@ const executeGroup = ({
         blockIndex?: number | undefined
       }
     | undefined
-  typebotsQueue: {
-    typebot: TypebotInSession
+  mozbotsQueue: {
+    mozbot: MozbotInSession
     resumeEdgeId?: string
   }[]
   answers: Pick<Answer, 'blockId' | 'content' | 'attachedFileUrls'>[]
@@ -133,9 +133,9 @@ const executeGroup = ({
   )) {
     if (stopAtBlockId && block.id === stopAtBlockId) return currentTranscript
     if (setVariableHistory.at(0)?.blockId === block.id)
-      typebotsQueue[0].typebot.variables = applySetVariable(
+      mozbotsQueue[0].mozbot.variables = applySetVariable(
         setVariableHistory.shift(),
-        typebotsQueue[0].typebot
+        mozbotsQueue[0].mozbot
       )
     let nextEdgeId = block.outgoingEdgeId
     if (isBubbleBlock(block)) {
@@ -144,8 +144,8 @@ const executeGroup = ({
         block as BubbleBlockWithDefinedContent,
         {
           version: 2,
-          variables: typebotsQueue[0].typebot.variables,
-          typebotVersion: typebotsQueue[0].typebot.version,
+          variables: mozbotsQueue[0].mozbot.variables,
+          mozbotVersion: mozbotsQueue[0].mozbot.version,
           textBubbleContentFormat: 'markdown',
         }
       )
@@ -156,12 +156,12 @@ const executeGroup = ({
       const answer = answers.shift()
       if (!answer) break
       if (block.options?.variableId) {
-        const replyVariable = typebotsQueue[0].typebot.variables.find(
+        const replyVariable = mozbotsQueue[0].mozbot.variables.find(
           (variable) => variable.id === block.options?.variableId
         )
         if (replyVariable) {
-          typebotsQueue[0].typebot.variables =
-            typebotsQueue[0].typebot.variables.map((v) =>
+          mozbotsQueue[0].mozbot.variables =
+            mozbotsQueue[0].mozbot.variables.map((v) =>
               v.id === replyVariable.id ? { ...v, value: answer.content } : v
             )
         }
@@ -173,13 +173,13 @@ const executeGroup = ({
         answer.attachedFileUrls &&
         answer.attachedFileUrls?.length > 0
       ) {
-        const variable = typebotsQueue[0].typebot.variables.find(
+        const variable = mozbotsQueue[0].mozbot.variables.find(
           (variable) =>
             variable.id === block.options?.attachments?.saveVariableId
         )
         if (variable) {
-          typebotsQueue[0].typebot.variables =
-            typebotsQueue[0].typebot.variables.map((v) =>
+          mozbotsQueue[0].mozbot.variables =
+            mozbotsQueue[0].mozbot.variables.map((v) =>
               v.id === variable.id
                 ? {
                     ...v,
@@ -204,7 +204,7 @@ const executeGroup = ({
       const outgoingEdge = getOutgoingEdgeId({
         block,
         answer: answer.content,
-        variables: typebotsQueue[0].typebot.variables,
+        variables: mozbotsQueue[0].mozbot.variables,
       })
       if (outgoingEdge.isOffDefaultPath) visitedEdges.shift()
       nextEdgeId = outgoingEdge.edgeId
@@ -213,7 +213,7 @@ const executeGroup = ({
         (item) =>
           item.content &&
           executeCondition({
-            variables: typebotsQueue[0].typebot.variables,
+            variables: mozbotsQueue[0].mozbot.variables,
             condition: item.content,
           })
       )
@@ -225,7 +225,7 @@ const executeGroup = ({
       nextEdgeId = visitedEdges.shift() ?? nextEdgeId
     } else if (block.type === LogicBlockType.JUMP) {
       if (!block.options?.groupId) continue
-      const groupToJumpTo = typebotsQueue[0].typebot.groups.find(
+      const groupToJumpTo = mozbotsQueue[0].mozbot.groups.find(
         (group) => group.id === block.options?.groupId
       )
       const blockToJumpTo =
@@ -239,19 +239,19 @@ const executeGroup = ({
         from: { blockId: '', groupId: '' },
         to: { groupId: block.options.groupId, blockId: blockToJumpTo.id },
       }
-      typebotsQueue[0].typebot.edges.push(portalEdge)
+      mozbotsQueue[0].mozbot.edges.push(portalEdge)
       visitedEdges.shift()
       nextEdgeId = portalEdge.id
-    } else if (block.type === LogicBlockType.TYPEBOT_LINK) {
-      const isLinkingSameTypebot =
+    } else if (block.type === LogicBlockType.MOZBOT_LINK) {
+      const isLinkingSameMozbot =
         block.options &&
-        (block.options.typebotId === 'current' ||
-          block.options.typebotId === typebotsQueue[0].typebot.id)
+        (block.options.mozbotId === 'current' ||
+          block.options.mozbotId === mozbotsQueue[0].mozbot.id)
 
-      const linkedGroup = typebotsQueue[0].typebot.groups.find(
+      const linkedGroup = mozbotsQueue[0].mozbot.groups.find(
         (g) => g.id === block.options?.groupId
       )
-      if (!isLinkingSameTypebot || !linkedGroup) continue
+      if (!isLinkingSameMozbot || !linkedGroup) continue
       let resumeEdge: Edge | undefined
       if (!block.outgoingEdgeId) {
         const currentBlockIndex = nextGroup.group.blocks.findIndex(
@@ -274,18 +274,18 @@ const executeGroup = ({
           }
       }
       return executeGroup({
-        typebotsQueue: [
+        mozbotsQueue: [
           {
-            typebot: typebotsQueue[0].typebot,
+            mozbot: mozbotsQueue[0].mozbot,
             resumeEdgeId: resumeEdge ? resumeEdge.id : block.outgoingEdgeId,
           },
           {
-            typebot: resumeEdge
+            mozbot: resumeEdge
               ? {
-                  ...typebotsQueue[0].typebot,
-                  edges: typebotsQueue[0].typebot.edges.concat([resumeEdge]),
+                  ...mozbotsQueue[0].mozbot,
+                  edges: mozbotsQueue[0].mozbot.edges.concat([resumeEdge]),
                 }
-              : typebotsQueue[0].typebot,
+              : mozbotsQueue[0].mozbot,
           },
         ],
         answers,
@@ -299,10 +299,10 @@ const executeGroup = ({
       })
     }
     if (nextEdgeId) {
-      const nextGroup = getNextGroup(typebotsQueue[0].typebot, nextEdgeId)
+      const nextGroup = getNextGroup(mozbotsQueue[0].mozbot, nextEdgeId)
       if (nextGroup) {
         return executeGroup({
-          typebotsQueue,
+          mozbotsQueue,
           answers,
           setVariableHistory,
           currentTranscript,
@@ -313,15 +313,15 @@ const executeGroup = ({
       }
     }
   }
-  if (typebotsQueue.length > 1 && typebotsQueue[0].resumeEdgeId) {
+  if (mozbotsQueue.length > 1 && mozbotsQueue[0].resumeEdgeId) {
     return executeGroup({
-      typebotsQueue: typebotsQueue.slice(1),
+      mozbotsQueue: mozbotsQueue.slice(1),
       answers,
       setVariableHistory,
       currentTranscript,
       nextGroup: getNextGroup(
-        typebotsQueue[1].typebot,
-        typebotsQueue[0].resumeEdgeId
+        mozbotsQueue[1].mozbot,
+        mozbotsQueue[0].resumeEdgeId
       ),
       visitedEdges: visitedEdges.slice(1),
       stopAtBlockId,
@@ -334,14 +334,14 @@ const applySetVariable = (
   setVariable:
     | Pick<SetVariableHistoryItem, 'blockId' | 'variableId' | 'value'>
     | undefined,
-  typebot: TypebotInSession
+  mozbot: MozbotInSession
 ): Variable[] => {
-  if (!setVariable) return typebot.variables
-  const variable = typebot.variables.find(
+  if (!setVariable) return mozbot.variables
+  const variable = mozbot.variables.find(
     (variable) => variable.id === setVariable.variableId
   )
-  if (!variable) return typebot.variables
-  return typebot.variables.map((v) =>
+  if (!variable) return mozbot.variables
+  return mozbot.variables.map((v) =>
     v.id === variable.id ? { ...v, value: setVariable.value } : v
   )
 }

@@ -1,5 +1,5 @@
 import { T } from '@tolgee/react'
-import { CollaborationType } from '@typebot.io/prisma'
+import { CollaborationType } from '@mozbot.io/prisma'
 
 type Props = { type: CollaborationType }
 export const ReadableCollaborationType = ({ type }: Props) => {

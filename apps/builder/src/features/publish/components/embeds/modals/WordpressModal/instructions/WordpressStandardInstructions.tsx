@@ -12,7 +12,7 @@ import {
 import { useState } from 'react'
 import { StandardSettings } from '../../../settings/StandardSettings'
 import { isCloudProdInstance } from '@/helpers/isCloudProdInstance'
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 import packageJson from '../../../../../../../../../../packages/embeds/js/package.json'
 
 type Props = {
@@ -35,11 +35,11 @@ export const WordpressStandardInstructions = ({ publicId }: Props) => {
       <ListItem>
         Install{' '}
         <Link
-          href="https://wordpress.org/plugins/typebot/"
+          href="https://wordpress.org/plugins/mozbot/"
           isExternal
           color={useColorModeValue('blue.500', 'blue.300')}
         >
-          the official Typebot WordPress plugin
+          the official Mozbot WordPress plugin
           <ExternalLinkIcon mx="2px" />
         </Link>
       </ListItem>
@@ -76,7 +76,7 @@ const parseWordpressShortcode = ({
   height?: string
   publicId: string
 }) => {
-  return `[typebot typebot="${publicId}"${
+  return `[mozbot mozbot="${publicId}"${
     isCloudProdInstance()
       ? ''
       : ` host="${env.NEXT_PUBLIC_VIEWER_URL[0]}" lib_version="${packageJson.version}"`

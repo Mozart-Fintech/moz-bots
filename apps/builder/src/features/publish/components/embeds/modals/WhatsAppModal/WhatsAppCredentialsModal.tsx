@@ -39,8 +39,8 @@ import {
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react'
-import { env } from '@typebot.io/env'
-import { isEmpty, isNotEmpty } from '@typebot.io/lib/utils'
+import { env } from '@mozbot.io/env'
+import { isEmpty, isNotEmpty } from '@mozbot.io/lib/utils'
 import React, { useState } from 'react'
 import { createId } from '@paralleldrive/cuid2'
 
@@ -203,7 +203,7 @@ export const WhatsAppCreateModalContent = ({
         if (message === 'taken') {
           setIsVerifying(false)
           showToast({
-            description: 'Phone number is already registered on Typebot',
+            description: 'Phone number is already registered on Mozbot',
           })
           return false
         }
@@ -321,7 +321,7 @@ const Requirements = () => (
     <Text>
       Make sure you have{' '}
       <TextLink
-        href="https://docs.typebot.io/deploy/whatsapp/create-meta-app"
+        href="https://docs.mozbot.io/deploy/whatsapp/create-meta-app"
         isExternal
       >
         created a WhatsApp Meta app

@@ -3,16 +3,16 @@ import { SendButton } from '@/components/SendButton'
 import { CommandData } from '@/features/commands'
 import { Answer, BotContext, InputSubmitContent } from '@/types'
 import { isMobile } from '@/utils/isMobileSignal'
-import type { TextInputBlock } from '@typebot.io/schemas'
+import type { TextInputBlock } from '@mozbot.io/schemas'
 import { For, Show, createSignal, onCleanup, onMount } from 'solid-js'
-import { defaultTextInputOptions } from '@typebot.io/schemas/features/blocks/inputs/text/constants'
+import { defaultTextInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/text/constants'
 import clsx from 'clsx'
 import { TextInputAddFileButton } from '@/components/TextInputAddFileButton'
 import { SelectedFile } from '../../fileUpload/components/SelectedFile'
 import { sanitizeNewFile } from '../../fileUpload/helpers/sanitizeSelectedFiles'
-import { getRuntimeVariable } from '@typebot.io/env/getRuntimeVariable'
+import { getRuntimeVariable } from '@mozbot.io/env/getRuntimeVariable'
 import { toaster } from '@/utils/toaster'
-import { isDefined } from '@typebot.io/lib'
+import { isDefined } from '@mozbot.io/lib'
 import { uploadFiles } from '../../fileUpload/helpers/uploadFiles'
 import { guessApiHost } from '@/utils/guessApiHost'
 
@@ -87,7 +87,7 @@ export const TextInput = (props: Props) => {
 
   const processIncomingEvent = (event: MessageEvent<CommandData>) => {
     const { data } = event
-    if (!data.isFromTypebot) return
+    if (!data.isFromMozbot) return
     if (data.command === 'setInputValue') setInputValue(data.value)
   }
 
@@ -140,7 +140,7 @@ export const TextInput = (props: Props) => {
   return (
     <div
       class={clsx(
-        'typebot-input-form flex w-full gap-2 items-end',
+        'mozbot-input-form flex w-full gap-2 items-end',
         props.block.options?.isLong ? 'max-w-full' : 'max-w-[350px]'
       )}
       onKeyDown={submitWhenEnter}
@@ -150,7 +150,7 @@ export const TextInput = (props: Props) => {
     >
       <div
         class={clsx(
-          'typebot-input flex-col w-full',
+          'mozbot-input flex-col w-full',
           isDraggingOver() && 'filter brightness-95'
         )}
       >

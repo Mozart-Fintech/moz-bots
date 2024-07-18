@@ -1,17 +1,17 @@
 import { ExecuteLogicResponse } from '../../../types'
-import { ScriptBlock, SessionState, Variable } from '@typebot.io/schemas'
-import { extractVariablesFromText } from '@typebot.io/variables/extractVariablesFromText'
-import { parseGuessedValueType } from '@typebot.io/variables/parseGuessedValueType'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
-import { defaultScriptOptions } from '@typebot.io/schemas/features/blocks/logic/script/constants'
-import { executeFunction } from '@typebot.io/variables/executeFunction'
-import { updateVariablesInSession } from '@typebot.io/variables/updateVariablesInSession'
+import { ScriptBlock, SessionState, Variable } from '@mozbot.io/schemas'
+import { extractVariablesFromText } from '@mozbot.io/variables/extractVariablesFromText'
+import { parseGuessedValueType } from '@mozbot.io/variables/parseGuessedValueType'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
+import { defaultScriptOptions } from '@mozbot.io/schemas/features/blocks/logic/script/constants'
+import { executeFunction } from '@mozbot.io/variables/executeFunction'
+import { updateVariablesInSession } from '@mozbot.io/variables/updateVariablesInSession'
 
 export const executeScript = async (
   state: SessionState,
   block: ScriptBlock
 ): Promise<ExecuteLogicResponse> => {
-  const { variables } = state.typebotsQueue[0].typebot
+  const { variables } = state.mozbotsQueue[0].mozbot
   if (!block.options?.content || state.whatsApp)
     return { outgoingEdgeId: block.outgoingEdgeId }
 

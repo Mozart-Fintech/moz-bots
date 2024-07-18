@@ -1,5 +1,5 @@
 {
-  "name": "@typebot.io/scripts",
+  "name": "@mozbot.io/scripts",
   "version": "1.0.0",
   "main": "index.js",
   "license": "AGPL-3.0-or-later",
@@ -11,7 +11,7 @@
     "db:restore": "tsx restoreDatabase.ts",
     "db:setCustomPlan": "tsx setCustomPlan.ts",
     "db:bulkUpdate": "tsx bulkUpdate.ts",
-    "db:fixTypebots": "tsx fixTypebots.ts",
+    "db:fixMozbots": "tsx fixMozbots.ts",
     "checkAndReportChatsUsage": "tsx checkAndReportChatsUsage.ts",
     "inspectUser": "tsx inspectUser.ts",
     "checkSubscriptionsStatus": "tsx checkSubscriptionsStatus.ts",
@@ -21,9 +21,9 @@
     "getUsage": "tsx getUsage.ts",
     "suspendWorkspace": "tsx suspendWorkspace.ts",
     "destroyUser": "tsx destroyUser.ts",
-    "updateTypebot": "tsx updateTypebot.ts",
+    "updateMozbot": "tsx updateMozbot.ts",
     "updateWorkspace": "tsx updateWorkspace.ts",
-    "inspectTypebot": "tsx inspectTypebot.ts",
+    "inspectMozbot": "tsx inspectMozbot.ts",
     "inspectWorkspace": "tsx inspectWorkspace.ts",
     "getCoupon": "tsx getCoupon.ts",
     "redeemCoupon": "tsx redeemCoupon.ts",
@@ -33,10 +33,10 @@
     "deleteChatSession": "tsx deleteChatSession.ts"
   },
   "devDependencies": {
-    "@typebot.io/emails": "workspace:*",
-    "@typebot.io/lib": "workspace:*",
-    "@typebot.io/prisma": "workspace:*",
-    "@typebot.io/schemas": "workspace:*",
+    "@mozbot.io/emails": "workspace:*",
+    "@mozbot.io/lib": "workspace:*",
+    "@mozbot.io/prisma": "workspace:*",
+    "@mozbot.io/schemas": "workspace:*",
     "@types/cli-progress": "^3.11.5",
     "@types/node": "20.4.2",
     "@types/papaparse": "5.3.7",
@@ -54,8 +54,8 @@
     "@paralleldrive/cuid2": "2.2.1",
     "cli-progress": "^3.12.0",
     "papaparse": "5.4.1",
-    "@typebot.io/results": "workspace:*",
-    "@typebot.io/billing": "workspace:*",
-    "@typebot.io/telemetry": "workspace:*"
+    "@mozbot.io/results": "workspace:*",
+    "@mozbot.io/billing": "workspace:*",
+    "@mozbot.io/telemetry": "workspace:*"
   }
 }

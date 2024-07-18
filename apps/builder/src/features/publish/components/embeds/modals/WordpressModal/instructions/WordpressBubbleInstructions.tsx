@@ -1,6 +1,6 @@
 import { CodeEditor } from '@/components/inputs/CodeEditor'
 import { ExternalLinkIcon } from '@/components/icons'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import {
   OrderedList,
   ListItem,
@@ -10,7 +10,7 @@ import {
   Text,
   Code,
 } from '@chakra-ui/react'
-import { BubbleProps } from '@typebot.io/nextjs'
+import { BubbleProps } from '@mozbot.io/nextjs'
 import { useState } from 'react'
 import { BubbleSettings } from '../../../settings/BubbleSettings/BubbleSettings'
 import { parseApiHostValue, parseInitBubbleCode } from '../../../snippetParsers'
@@ -18,27 +18,27 @@ import { parseDefaultBubbleTheme } from '../../Javascript/instructions/Javascrip
 import packageJson from '../../../../../../../../../../packages/embeds/js/package.json'
 import { isCloudProdInstance } from '@/helpers/isCloudProdInstance'
 
-const typebotCloudLibraryVersion = '0.2'
+const mozbotCloudLibraryVersion = '0.2'
 
 type Props = {
   publicId: string
 }
 export const WordpressBubbleInstructions = ({ publicId }: Props) => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
 
   const [theme, setTheme] = useState<BubbleProps['theme']>(
-    parseDefaultBubbleTheme(typebot)
+    parseDefaultBubbleTheme(mozbot)
   )
   const [previewMessage, setPreviewMessage] =
     useState<BubbleProps['previewMessage']>()
 
   const initCode = parseInitBubbleCode({
-    typebot: publicId,
-    apiHost: parseApiHostValue(typebot?.customDomain),
+    mozbot: publicId,
+    apiHost: parseApiHostValue(mozbot?.customDomain),
     theme: {
       ...theme,
       chatWindow: {
-        backgroundColor: typebot?.theme.general?.background?.content ?? '#fff',
+        backgroundColor: mozbot?.theme.general?.background?.content ?? '#fff',
       },
     },
     previewMessage,
@@ -49,11 +49,11 @@ export const WordpressBubbleInstructions = ({ publicId }: Props) => {
       <ListItem>
         Install{' '}
         <Link
-          href="https://wordpress.org/plugins/typebot/"
+          href="https://wordpress.org/plugins/mozbot/"
           isExternal
           color={useColorModeValue('blue.500', 'blue.300')}
         >
-          the official Typebot WordPress plugin
+          the official Mozbot WordPress plugin
           <ExternalLinkIcon mx="2px" />
         </Link>
       </ListItem>
@@ -61,7 +61,7 @@ export const WordpressBubbleInstructions = ({ publicId }: Props) => {
         Set <Code>Library version</Code> to{' '}
         <Code>
           {isCloudProdInstance()
-            ? typebotCloudLibraryVersion
+            ? mozbotCloudLibraryVersion
             : packageJson.version}
         </Code>
       </ListItem>
@@ -70,14 +70,14 @@ export const WordpressBubbleInstructions = ({ publicId }: Props) => {
           <BubbleSettings
             previewMessage={previewMessage}
             defaultPreviewMessageAvatar={
-              typebot?.theme.chat?.hostAvatar?.url ?? ''
+              mozbot?.theme.chat?.hostAvatar?.url ?? ''
             }
             theme={theme}
             onPreviewMessageChange={setPreviewMessage}
             onThemeChange={setTheme}
           />
           <Text>
-            You can now place the following code snippet in the Typebot panel in
+            You can now place the following code snippet in the Mozbot panel in
             your WordPress admin:
           </Text>
           <CodeEditor value={initCode} lang="javascript" isReadOnly />

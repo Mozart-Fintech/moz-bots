@@ -10,7 +10,7 @@ import styles from '../../../assets/index.css'
 import { CommandData } from '../../commands'
 import { BubbleButton } from './BubbleButton'
 import { PreviewMessage, PreviewMessageProps } from './PreviewMessage'
-import { isDefined } from '@typebot.io/lib'
+import { isDefined } from '@mozbot.io/lib'
 import { BubbleParams } from '../types'
 import { Bot, BotProps } from '../../../components/Bot'
 import { getPaymentInProgressInStorage } from '@/features/blocks/inputs/payment/helpers/paymentInProgressStorage'
@@ -94,7 +94,7 @@ export const Bubble = (props: BubbleProps) => {
 
   const processIncomingEvent = (event: MessageEvent<CommandData>) => {
     const { data } = event
-    if (!data.isFromTypebot) return
+    if (!data.isFromMozbot) return
     if (data.command === 'open') openBot()
     if (data.command === 'close') closeBot()
     if (data.command === 'toggle') toggleBot()
@@ -159,7 +159,7 @@ export const Bubble = (props: BubbleProps) => {
   return (
     <Show when={isMounted()}>
       <EnvironmentProvider
-        value={document.querySelector('typebot-bubble')?.shadowRoot as Node}
+        value={document.querySelector('mozbot-bubble')?.shadowRoot as Node}
       >
         <style>{styles}</style>
         <Show when={isPreviewMessageDisplayed()}>

@@ -13,7 +13,7 @@ import {
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { highlight } from 'sugar-high'
 import { Tweet } from './Tweet'
-import { Standard } from '@typebot.io/nextjs'
+import { Standard } from '@mozbot.io/nextjs'
 import { EndCta } from '@/components/Homepage/EndCta'
 import { Table } from './Table'
 import Image from 'next/image'
@@ -79,7 +79,7 @@ export const Post = ({ metadata, mdxSource }: Props) => (
             </Alert>
           ),
           Tweet,
-          Typebot: (props) => (
+          Mozbot: (props) => (
             <Standard
               style={{
                 borderRadius: '0.375rem',

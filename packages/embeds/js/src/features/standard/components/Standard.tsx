@@ -35,7 +35,7 @@ export const Standard = (
 
   const processIncomingEvent = (event: MessageEvent<CommandData>) => {
     const { data } = event
-    if (!data.isFromTypebot) return
+    if (!data.isFromMozbot) return
   }
 
   onCleanup(() => {
@@ -44,7 +44,7 @@ export const Standard = (
 
   return (
     <EnvironmentProvider
-      value={document.querySelector('typebot-standard')?.shadowRoot as Node}
+      value={document.querySelector('mozbot-standard')?.shadowRoot as Node}
     >
       <style>
         {styles}

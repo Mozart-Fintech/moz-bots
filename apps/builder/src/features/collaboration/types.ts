@@ -1,6 +1,6 @@
-import { CollaboratorsOnTypebots } from '@typebot.io/prisma'
+import { CollaboratorsOnMozbots } from '@mozbot.io/prisma'
 
-export type Collaborator = CollaboratorsOnTypebots & {
+export type Collaborator = CollaboratorsOnMozbots & {
   user: {
     name: string | null
     image: string | null

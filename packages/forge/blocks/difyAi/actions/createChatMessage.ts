@@ -1,5 +1,5 @@
-import { createAction, option } from '@typebot.io/forge'
-import { isDefined, isEmpty, isNotEmpty } from '@typebot.io/lib'
+import { createAction, option } from '@mozbot.io/forge'
+import { isDefined, isEmpty, isNotEmpty } from '@mozbot.io/lib'
 import { auth } from '../auth'
 import { defaultBaseUrl } from '../constants'
 import { Chunk } from '../types'

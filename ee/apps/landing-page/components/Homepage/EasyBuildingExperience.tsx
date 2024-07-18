@@ -43,7 +43,7 @@ export const EasyBuildingExperience = () => {
             <Button
               as={Link}
               rightIcon={<ArrowRight />}
-              href={`https://app.typebot.io/register`}
+              href={`https://app.mozbot.io/register`}
               variant="ghost"
               data-aos="fade"
             >

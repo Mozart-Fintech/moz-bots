@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import { useTypebot } from '@/providers/TypebotProvider'
+import { useMozbot } from '@/providers/MozbotProvider'
 import { TypingBubble } from '@/components/TypingBubble'
 import { parseVariables } from '@/features/variables'
-import { AudioBubbleBlock } from '@typebot.io/schemas'
+import { AudioBubbleBlock } from '@mozbot.io/schemas'
 
 type Props = {
   url: NonNullable<AudioBubbleBlock['content']>['url']
@@ -13,10 +13,10 @@ const showAnimationDuration = 400
 const typingDuration = 500
 
 export const AudioBubble = ({ url, onTransitionEnd }: Props) => {
-  const { typebot, isLoading } = useTypebot()
+  const { mozbot, isLoading } = useMozbot()
   const audio = useRef<HTMLAudioElement | null>(null)
   const [isTyping, setIsTyping] = useState(true)
-  const [parsedUrl] = useState(parseVariables(typebot.variables)(url))
+  const [parsedUrl] = useState(parseVariables(mozbot.variables)(url))
 
   useEffect(() => {
     if (!isTyping || isLoading) return
@@ -36,7 +36,7 @@ export const AudioBubble = ({ url, onTransitionEnd }: Props) => {
   return (
     <div className="flex flex-col">
       <div className="flex mb-2 w-full lg:w-11/12 items-center">
-        <div className={'flex relative z-10 items-start typebot-host-bubble'}>
+        <div className={'flex relative z-10 items-start mozbot-host-bubble'}>
           <div
             className="flex items-center absolute px-4 py-2 rounded-lg bubble-typing z-10 "
             style={{

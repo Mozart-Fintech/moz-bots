@@ -1,6 +1,6 @@
 import { LiteBadge } from './LiteBadge'
 import { createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js'
-import { isDefined, isNotDefined, isNotEmpty } from '@typebot.io/lib'
+import { isDefined, isNotDefined, isNotEmpty } from '@mozbot.io/lib'
 import { startChatQuery } from '@/queries/startChatQuery'
 import { ConversationContainer } from './ConversationContainer'
 import { setIsMobile } from '@/utils/isMobileSignal'
@@ -20,20 +20,20 @@ import {
   InputBlock,
   StartChatResponse,
   StartFrom,
-} from '@typebot.io/schemas'
+} from '@mozbot.io/schemas'
 import { clsx } from 'clsx'
 import { HTTPError } from 'ky'
 import { injectFont } from '@/utils/injectFont'
 import { ProgressBar } from './ProgressBar'
 import { Portal } from 'solid-js/web'
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
 import { persist } from '@/utils/persist'
 import { setBotContainerHeight } from '@/utils/botContainerHeightSignal'
 import {
   defaultFontFamily,
   defaultFontType,
   defaultProgressBarPosition,
-} from '@typebot.io/schemas/features/typebot/theme/constants'
+} from '@mozbot.io/schemas/features/mozbot/theme/constants'
 import { CorsError } from '@/utils/CorsError'
 import { Toaster, Toast } from '@ark-ui/solid'
 import { CloseIcon } from './icons/CloseIcon'
@@ -41,7 +41,7 @@ import { toaster } from '@/utils/toaster'
 
 export type BotProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  typebot: string | any
+  mozbot: string | any
   isPreview?: boolean
   resultId?: string
   prefilledVariables?: Record<string, unknown>
@@ -75,14 +75,14 @@ export const Bot = (props: BotProps & { class?: string }) => {
     urlParams.forEach((value, key) => {
       prefilledVariables[key] = value
     })
-    const typebotIdFromProps =
-      typeof props.typebot === 'string' ? props.typebot : undefined
+    const mozbotIdFromProps =
+      typeof props.mozbot === 'string' ? props.mozbot : undefined
     const isPreview =
-      typeof props.typebot !== 'string' || (props.isPreview ?? false)
-    const resultIdInStorage = getExistingResultIdFromStorage(typebotIdFromProps)
+      typeof props.mozbot !== 'string' || (props.isPreview ?? false)
+    const resultIdInStorage = getExistingResultIdFromStorage(mozbotIdFromProps)
     const { data, error } = await startChatQuery({
       stripeRedirectStatus: urlParams.get('redirect_status') ?? undefined,
-      typebot: props.typebot,
+      mozbot: props.mozbot,
       apiHost: props.apiHost,
       isPreview,
       resultId: isNotEmpty(props.resultId) ? props.resultId : resultIdInStorage,
@@ -137,31 +137,31 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
     if (
       data.resultId &&
-      typebotIdFromProps &&
-      (data.typebot.settings.general?.rememberUser?.isEnabled ??
+      mozbotIdFromProps &&
+      (data.mozbot.settings.general?.rememberUser?.isEnabled ??
         defaultSettings.general.rememberUser.isEnabled)
     ) {
       if (resultIdInStorage && resultIdInStorage !== data.resultId)
-        wipeExistingChatStateInStorage(data.typebot.id)
+        wipeExistingChatStateInStorage(data.mozbot.id)
       const storage =
-        data.typebot.settings.general?.rememberUser?.storage ??
+        data.mozbot.settings.general?.rememberUser?.storage ??
         defaultSettings.general.rememberUser.storage
-      setResultInStorage(storage)(typebotIdFromProps, data.resultId)
+      setResultInStorage(storage)(mozbotIdFromProps, data.resultId)
       const initialChatInStorage = getInitialChatReplyFromStorage(
-        data.typebot.id
+        data.mozbot.id
       )
       if (initialChatInStorage) {
         setInitialChatReply(initialChatInStorage)
       } else {
         setInitialChatReply(data)
         setInitialChatReplyInStorage(data, {
-          typebotId: data.typebot.id,
+          mozbotId: data.mozbot.id,
           storage,
         })
       }
       props.onChatStatePersisted?.(true)
     } else {
-      wipeExistingChatStateInStorage(data.typebot.id)
+      wipeExistingChatStateInStorage(data.mozbot.id)
       setInitialChatReply(data)
       if (data.input?.id && props.onNewInputBlock)
         props.onNewInputBlock(data.input)
@@ -169,21 +169,21 @@ export const Bot = (props: BotProps & { class?: string }) => {
       props.onChatStatePersisted?.(false)
     }
 
-    setCustomCss(data.typebot.theme.customCss ?? '')
+    setCustomCss(data.mozbot.theme.customCss ?? '')
   }
 
   createEffect(() => {
-    if (isNotDefined(props.typebot) || isInitialized()) return
+    if (isNotDefined(props.mozbot) || isInitialized()) return
     initializeBot().then()
   })
 
   createEffect(() => {
-    if (isNotDefined(props.typebot) || typeof props.typebot === 'string') return
-    setCustomCss(props.typebot.theme.customCss ?? '')
+    if (isNotDefined(props.mozbot) || typeof props.mozbot === 'string') return
+    setCustomCss(props.mozbot.theme.customCss ?? '')
     if (
-      props.typebot.theme.general?.progressBar?.isEnabled &&
+      props.mozbot.theme.general?.progressBar?.isEnabled &&
       initialChatReply() &&
-      !initialChatReply()?.typebot.theme.general?.progressBar?.isEnabled
+      !initialChatReply()?.mozbot.theme.general?.progressBar?.isEnabled
     ) {
       setIsInitialized(false)
       initializeBot().then()
@@ -207,33 +207,33 @@ export const Bot = (props: BotProps & { class?: string }) => {
             class={props.class}
             initialChatReply={{
               ...initialChatReply,
-              typebot: {
-                ...initialChatReply.typebot,
+              mozbot: {
+                ...initialChatReply.mozbot,
                 settings:
-                  typeof props.typebot === 'string'
-                    ? initialChatReply.typebot?.settings
-                    : props.typebot?.settings,
+                  typeof props.mozbot === 'string'
+                    ? initialChatReply.mozbot?.settings
+                    : props.mozbot?.settings,
                 theme:
-                  typeof props.typebot === 'string'
-                    ? initialChatReply.typebot?.theme
-                    : props.typebot?.theme,
+                  typeof props.mozbot === 'string'
+                    ? initialChatReply.mozbot?.theme
+                    : props.mozbot?.theme,
               },
             }}
             context={{
               apiHost: props.apiHost,
               isPreview:
-                typeof props.typebot !== 'string' || (props.isPreview ?? false),
+                typeof props.mozbot !== 'string' || (props.isPreview ?? false),
               resultId: initialChatReply.resultId,
               sessionId: initialChatReply.sessionId,
-              typebot: initialChatReply.typebot,
+              mozbot: initialChatReply.mozbot,
               storage:
-                initialChatReply.typebot.settings.general?.rememberUser
+                initialChatReply.mozbot.settings.general?.rememberUser
                   ?.isEnabled &&
                 !(
-                  typeof props.typebot !== 'string' ||
+                  typeof props.mozbot !== 'string' ||
                   (props.isPreview ?? false)
                 )
-                  ? initialChatReply.typebot.settings.general?.rememberUser
+                  ? initialChatReply.mozbot.settings.general?.rememberUser
                       ?.storage ?? defaultSettings.general.rememberUser.storage
                   : undefined,
             }}
@@ -265,7 +265,7 @@ const BotContent = (props: BotContentProps) => {
     createSignal<number | undefined>(props.initialChatReply.progress),
     {
       storage: props.context.storage,
-      key: `typebot-${props.context.typebot.id}-progressValue`,
+      key: `mozbot-${props.context.mozbot.id}-progressValue`,
     }
   )
   let botContainer: HTMLDivElement | undefined
@@ -282,14 +282,14 @@ const BotContent = (props: BotContentProps) => {
 
   createEffect(() => {
     injectFont(
-      props.initialChatReply.typebot.theme.general?.font ?? {
+      props.initialChatReply.mozbot.theme.general?.font ?? {
         type: defaultFontType,
         family: defaultFontFamily,
       }
     )
     if (!botContainer) return
     setCssVariablesValue(
-      props.initialChatReply.typebot.theme,
+      props.initialChatReply.mozbot.theme,
       botContainer,
       props.context.isPreview
     )
@@ -304,20 +304,20 @@ const BotContent = (props: BotContentProps) => {
     <div
       ref={botContainer}
       class={clsx(
-        'relative flex w-full h-full text-base overflow-hidden flex-col justify-center items-center typebot-container',
+        'relative flex w-full h-full text-base overflow-hidden flex-col justify-center items-center mozbot-container',
         props.class
       )}
     >
       <Show
         when={
           isDefined(progressValue()) &&
-          props.initialChatReply.typebot.theme.general?.progressBar?.isEnabled
+          props.initialChatReply.mozbot.theme.general?.progressBar?.isEnabled
         }
       >
         <Show
           when={
             props.progressBarRef &&
-            (props.initialChatReply.typebot.theme.general?.progressBar
+            (props.initialChatReply.mozbot.theme.general?.progressBar
               ?.position ?? defaultProgressBarPosition) === 'fixed'
           }
           fallback={<ProgressBar value={progressValue() as number} />}
@@ -337,9 +337,7 @@ const BotContent = (props: BotContentProps) => {
         onProgressUpdate={setProgressValue}
       />
       <Show
-        when={
-          props.initialChatReply.typebot.settings.general?.isBrandingEnabled
-        }
+        when={props.initialChatReply.mozbot.settings.general?.isBrandingEnabled}
       >
         <LiteBadge botContainer={botContainer} />
       </Show>

@@ -1,4 +1,4 @@
-import { ThemeTemplate } from '@typebot.io/schemas'
+import { ThemeTemplate } from '@mozbot.io/schemas'
 import { dequal } from 'dequal'
 
 export const areThemesEqual = (

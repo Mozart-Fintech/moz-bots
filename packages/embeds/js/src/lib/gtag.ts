@@ -1,5 +1,5 @@
-import { isDefined, isEmpty } from '@typebot.io/lib/utils'
-import { GoogleAnalyticsBlock } from '@typebot.io/schemas'
+import { isDefined, isEmpty } from '@mozbot.io/lib/utils'
+import { GoogleAnalyticsBlock } from '@mozbot.io/schemas'
 
 declare const window: {
   gtag?: (

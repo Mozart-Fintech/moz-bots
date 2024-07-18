@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { TextInput } from '@/components/inputs'
-import { PaymentAddress } from '@typebot.io/schemas'
+import { PaymentAddress } from '@mozbot.io/schemas'
 import { useTranslate } from '@tolgee/react'
 
 type Props = {

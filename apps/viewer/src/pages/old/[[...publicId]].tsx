@@ -2,9 +2,9 @@ import { IncomingMessage } from 'http'
 import { ErrorPage } from '@/components/ErrorPage'
 import { NotFoundPage } from '@/components/NotFoundPage'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { isDefined, isNotDefined, omit } from '@typebot.io/lib'
-import { TypebotPageProps, TypebotPageV2 } from '@/components/TypebotPageV2'
-import prisma from '@typebot.io/lib/prisma'
+import { isDefined, isNotDefined, omit } from '@mozbot.io/lib'
+import { MozbotPageProps, MozbotPageV2 } from '@/components/MozbotPageV2'
+import prisma from '@mozbot.io/lib/prisma'
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -13,13 +13,13 @@ export const getServerSideProps: GetServerSideProps = async (
   const { host, forwardedHost } = getHost(context.req)
   try {
     if (!host) return { props: {} }
-    const publishedTypebot = await getTypebotFromPublicId(
+    const publishedMozbot = await getMozbotFromPublicId(
       context.query.publicId?.toString()
     )
-    const headCode = publishedTypebot?.settings.metadata?.customHeadCode
+    const headCode = publishedMozbot?.settings.metadata?.customHeadCode
     return {
       props: {
-        publishedTypebot,
+        publishedMozbot,
         url: `https://${forwardedHost ?? host}${pathname}`,
         customHeadCode:
           isDefined(headCode) && headCode !== '' ? headCode : null,
@@ -35,21 +35,21 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 }
 
-const getTypebotFromPublicId = async (
+const getMozbotFromPublicId = async (
   publicId?: string
-): Promise<TypebotPageProps['publishedTypebot'] | null> => {
-  const publishedTypebot = await prisma.publicTypebot.findFirst({
-    where: { typebot: { publicId: publicId ?? '' } },
+): Promise<MozbotPageProps['publishedMozbot'] | null> => {
+  const publishedMozbot = await prisma.publicMozbot.findFirst({
+    where: { mozbot: { publicId: publicId ?? '' } },
     include: {
-      typebot: { select: { name: true, isClosed: true, isArchived: true } },
+      mozbot: { select: { name: true, isClosed: true, isArchived: true } },
     },
   })
-  if (isNotDefined(publishedTypebot)) return null
+  if (isNotDefined(publishedMozbot)) return null
   return omit(
-    publishedTypebot,
+    publishedMozbot,
     'createdAt',
     'updatedAt'
-  ) as TypebotPageProps['publishedTypebot']
+  ) as MozbotPageProps['publishedMozbot']
 }
 
 const getHost = (
@@ -59,12 +59,12 @@ const getHost = (
   forwardedHost: req?.headers['x-forwarded-host'] as string | undefined,
 })
 
-const App = ({ publishedTypebot, ...props }: TypebotPageProps) => {
-  if (!publishedTypebot || publishedTypebot.typebot.isArchived)
+const App = ({ publishedMozbot, ...props }: MozbotPageProps) => {
+  if (!publishedMozbot || publishedMozbot.mozbot.isArchived)
     return <NotFoundPage />
-  if (publishedTypebot.typebot.isClosed)
+  if (publishedMozbot.mozbot.isClosed)
     return <ErrorPage error={new Error('This bot is now closed')} />
-  return <TypebotPageV2 publishedTypebot={publishedTypebot} {...props} />
+  return <MozbotPageV2 publishedMozbot={publishedMozbot} {...props} />
 }
 
 export default App

@@ -1,5 +1,5 @@
-import prisma from '@typebot.io/lib/prisma'
-import { SessionState } from '@typebot.io/schemas'
+import prisma from '@mozbot.io/lib/prisma'
+import { SessionState } from '@mozbot.io/schemas'
 
 type Props = {
   id?: string

@@ -1,4 +1,4 @@
-import { option, AuthDefinition } from '@typebot.io/forge'
+import { option, AuthDefinition } from '@mozbot.io/forge'
 
 export const auth = {
   type: 'encryptedCredentials',
@@ -8,7 +8,7 @@ export const auth = {
       label: 'API key',
       isRequired: true,
       helperText:
-        'You can generate an API key [here](https://go.chatnode.ai/typebot).',
+        'You can generate an API key [here](https://go.chatnode.ai/mozbot).',
       inputType: 'password',
       withVariableButton: false,
       isDebounceDisabled: true,

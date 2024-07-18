@@ -4,23 +4,23 @@ import {
   initMiddleware,
   methodNotAllowed,
   notFound,
-} from '@typebot.io/lib/api'
-import { hasValue, isDefined } from '@typebot.io/lib'
+} from '@mozbot.io/lib/api'
+import { hasValue, isDefined } from '@mozbot.io/lib'
 import { GoogleSpreadsheet, GoogleSpreadsheetRow } from 'google-spreadsheet'
 import {
   GoogleSheetsGetOptions,
   GoogleSheetsInsertRowOptions,
   GoogleSheetsUpdateRowOptions,
-} from '@typebot.io/schemas'
+} from '@mozbot.io/schemas'
 import Cors from 'cors'
 import { getAuthenticatedGoogleClient } from '@/lib/google-sheets'
-import { saveErrorLog } from '@typebot.io/bot-engine/logs/saveErrorLog'
-import { saveSuccessLog } from '@typebot.io/bot-engine/logs/saveSuccessLog'
-import { GoogleSheetsAction } from '@typebot.io/schemas/features/blocks/integrations/googleSheets/constants'
+import { saveErrorLog } from '@mozbot.io/bot-engine/logs/saveErrorLog'
+import { saveSuccessLog } from '@mozbot.io/bot-engine/logs/saveSuccessLog'
+import { GoogleSheetsAction } from '@mozbot.io/schemas/features/blocks/integrations/googleSheets/constants'
 import {
   ComparisonOperators,
   LogicalOperator,
-} from '@typebot.io/schemas/features/blocks/logic/condition/constants'
+} from '@mozbot.io/schemas/features/blocks/logic/condition/constants'
 
 const cors = initMiddleware(Cors())
 

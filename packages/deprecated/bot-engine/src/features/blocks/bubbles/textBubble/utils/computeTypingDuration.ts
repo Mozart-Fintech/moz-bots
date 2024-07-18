@@ -1,5 +1,5 @@
-import { Settings } from '@typebot.io/schemas'
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
+import { Settings } from '@mozbot.io/schemas'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
 
 type Props = {
   bubbleContent: string

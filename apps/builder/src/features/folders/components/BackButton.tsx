@@ -1,18 +1,18 @@
 import { Button } from '@chakra-ui/react'
 import { ChevronLeftIcon } from '@/components/icons'
-import { useTypebotDnd } from '../TypebotDndProvider'
+import { useMozbotDnd } from '../MozbotDndProvider'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import { useTranslate } from '@tolgee/react'
 
 export const BackButton = ({ id }: { id: string | null }) => {
   const { t } = useTranslate()
-  const { draggedTypebot, setMouseOverFolderId, mouseOverFolderId } =
-    useTypebotDnd()
+  const { draggedMozbot, setMouseOverFolderId, mouseOverFolderId } =
+    useMozbotDnd()
 
-  const isTypebotOver = useMemo(
-    () => draggedTypebot && mouseOverFolderId === id,
-    [draggedTypebot, id, mouseOverFolderId]
+  const isMozbotOver = useMemo(
+    () => draggedMozbot && mouseOverFolderId === id,
+    [draggedMozbot, id, mouseOverFolderId]
   )
 
   const handleMouseEnter = () => setMouseOverFolderId(id)
@@ -20,11 +20,11 @@ export const BackButton = ({ id }: { id: string | null }) => {
   return (
     <Button
       as={Link}
-      href={id ? `/typebots/folders/${id}` : '/typebots'}
+      href={id ? `/mozbots/folders/${id}` : '/mozbots'}
       leftIcon={<ChevronLeftIcon />}
       variant={'outline'}
-      colorScheme={isTypebotOver || draggedTypebot ? 'blue' : 'gray'}
-      borderWidth={isTypebotOver ? '2px' : '1px'}
+      colorScheme={isMozbotOver || draggedMozbot ? 'blue' : 'gray'}
+      borderWidth={isMozbotOver ? '2px' : '1px'}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

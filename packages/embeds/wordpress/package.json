@@ -1,8 +1,8 @@
 {
-  "name": "@typebot.io/wordpress",
+  "name": "@mozbot.io/wordpress",
   "version": "4.0.0",
   "main": "index.js",
-  "repository": "https://github.com/baptisteArno/typebot.io",
+  "repository": "https://github.com/baptisteArno/mozbot.io",
   "author": "baptisteArno",
   "license": "AGPL-3.0-or-later",
   "scripts": {

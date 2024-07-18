@@ -1,7 +1,7 @@
 import { createId } from '@paralleldrive/cuid2'
 import { TRPCError } from '@trpc/server'
-import { isDefined, omit, isNotEmpty } from '@typebot.io/lib'
-import { isInputBlock } from '@typebot.io/schemas/helpers'
+import { isDefined, omit, isNotEmpty } from '@mozbot.io/lib'
+import { isInputBlock } from '@mozbot.io/schemas/helpers'
 import {
   Variable,
   VariableWithValue,
@@ -9,45 +9,45 @@ import {
   GoogleAnalyticsBlock,
   PixelBlock,
   SessionState,
-  TypebotInSession,
+  MozbotInSession,
   Block,
   SetVariableHistoryItem,
-} from '@typebot.io/schemas'
+} from '@mozbot.io/schemas'
 import {
   StartChatInput,
   StartChatResponse,
   StartPreviewChatInput,
-  StartTypebot,
-  startTypebotSchema,
-} from '@typebot.io/schemas/features/chat/schema'
+  StartMozbot,
+  startMozbotSchema,
+} from '@mozbot.io/schemas/features/chat/schema'
 import parse, { NodeType } from 'node-html-parser'
 import { parseDynamicTheme } from './parseDynamicTheme'
-import { findTypebot } from './queries/findTypebot'
-import { findPublicTypebot } from './queries/findPublicTypebot'
+import { findMozbot } from './queries/findMozbot'
+import { findPublicMozbot } from './queries/findPublicMozbot'
 import { findResult } from './queries/findResult'
 import { startBotFlow } from './startBotFlow'
-import { prefillVariables } from '@typebot.io/variables/prefillVariables'
-import { deepParseVariables } from '@typebot.io/variables/deepParseVariables'
-import { injectVariablesFromExistingResult } from '@typebot.io/variables/injectVariablesFromExistingResult'
+import { prefillVariables } from '@mozbot.io/variables/prefillVariables'
+import { deepParseVariables } from '@mozbot.io/variables/deepParseVariables'
+import { injectVariablesFromExistingResult } from '@mozbot.io/variables/injectVariablesFromExistingResult'
 import { getNextGroup } from './getNextGroup'
 import { upsertResult } from './queries/upsertResult'
 import { continueBotFlow } from './continueBotFlow'
 import {
   getVariablesToParseInfoInText,
   parseVariables,
-} from '@typebot.io/variables/parseVariables'
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
-import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integrations/constants'
-import { VisitedEdge } from '@typebot.io/prisma'
-import { env } from '@typebot.io/env'
+} from '@mozbot.io/variables/parseVariables'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
+import { IntegrationBlockType } from '@mozbot.io/schemas/features/blocks/integrations/constants'
+import { VisitedEdge } from '@mozbot.io/prisma'
+import { env } from '@mozbot.io/env'
 import { getFirstEdgeId } from './getFirstEdgeId'
 import { Reply } from './types'
 import {
   defaultGuestAvatarIsEnabled,
   defaultHostAvatarIsEnabled,
-} from '@typebot.io/schemas/features/typebot/theme/constants'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
-import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
+} from '@mozbot.io/schemas/features/mozbot/theme/constants'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
+import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
 import { parseVariablesInRichText } from './parseBubbleBlock'
 
 type StartParams =
@@ -77,21 +77,21 @@ export const startSession = async ({
     resultId?: string
   }
 > => {
-  const typebot = await getTypebot(startParams)
+  const mozbot = await getMozbot(startParams)
 
   const prefilledVariables = startParams.prefilledVariables
-    ? prefillVariables(typebot.variables, startParams.prefilledVariables)
-    : typebot.variables
+    ? prefillVariables(mozbot.variables, startParams.prefilledVariables)
+    : mozbot.variables
 
   const result = await getResult({
     resultId: startParams.type === 'live' ? startParams.resultId : undefined,
     isPreview: startParams.type === 'preview',
-    typebotId: typebot.id,
+    mozbotId: mozbot.id,
     prefilledVariables,
     isRememberUserEnabled:
-      typebot.settings.general?.rememberUser?.isEnabled ??
-      (isDefined(typebot.settings.general?.isNewResultOnRefreshEnabled)
-        ? !typebot.settings.general?.isNewResultOnRefreshEnabled
+      mozbot.settings.general?.rememberUser?.isEnabled ??
+      (isDefined(mozbot.settings.general?.isNewResultOnRefreshEnabled)
+        ? !mozbot.settings.general?.isNewResultOnRefreshEnabled
         : defaultSettings.general.rememberUser.isEnabled),
   })
 
@@ -100,20 +100,20 @@ export const startSession = async ({
       ? injectVariablesFromExistingResult(prefilledVariables, result.variables)
       : prefilledVariables
 
-  const typebotInSession = convertStartTypebotToTypebotInSession(
-    typebot,
+  const mozbotInSession = convertStartMozbotToMozbotInSession(
+    mozbot,
     startVariables
   )
 
   const initialState: SessionState = {
     version: '3',
-    typebotsQueue: [
+    mozbotsQueue: [
       {
         resultId: result?.id,
-        typebot: typebotInSession,
+        mozbot: mozbotInSession,
         answers: result
           ? result.answers.map((answer) => {
-              const block = typebot.groups
+              const block = mozbot.groups
                 .flatMap<Block>((group) => group.blocks)
                 .find((block) => block.id === answer.blockId)
               if (!block || !isInputBlock(block))
@@ -126,7 +126,7 @@ export const startSession = async ({
                   ? startVariables.find(
                       (variable) => variable.id === block.options?.variableId
                     )?.name
-                  : typebot.groups.find((group) =>
+                  : mozbot.groups.find((group) =>
                       group.blocks.find(
                         (blockInGroup) => blockInGroup.id === block.id
                       )
@@ -139,34 +139,34 @@ export const startSession = async ({
           : [],
       },
     ],
-    dynamicTheme: parseDynamicThemeInState(typebot.theme),
+    dynamicTheme: parseDynamicThemeInState(mozbot.theme),
     isStreamEnabled: startParams.isStreamEnabled,
-    typingEmulation: typebot.settings.typingEmulation,
+    typingEmulation: mozbot.settings.typingEmulation,
     allowedOrigins:
       startParams.type === 'preview'
         ? undefined
-        : typebot.settings.security?.allowedOrigins,
+        : mozbot.settings.security?.allowedOrigins,
     progressMetadata: initialSessionState?.whatsApp
       ? undefined
-      : typebot.theme.general?.progressBar?.isEnabled
+      : mozbot.theme.general?.progressBar?.isEnabled
       ? { totalAnswers: 0 }
       : undefined,
     setVariableIdsForHistory:
-      extractVariableIdsUsedForTranscript(typebotInSession),
+      extractVariableIdsUsedForTranscript(mozbotInSession),
     ...initialSessionState,
   }
 
   if (startParams.isOnlyRegistering) {
     return {
       newSessionState: initialState,
-      typebot: {
-        id: typebot.id,
+      mozbot: {
+        id: mozbot.id,
         settings: deepParseVariables(
-          initialState.typebotsQueue[0].typebot.variables,
+          initialState.mozbotsQueue[0].mozbot.variables,
           { removeEmptyStrings: true }
-        )(typebot.settings),
-        theme: sanitizeAndParseTheme(typebot.theme, {
-          variables: initialState.typebotsQueue[0].typebot.variables,
+        )(mozbot.settings),
+        theme: sanitizeAndParseTheme(mozbot.theme, {
+          variables: initialState.mozbotsQueue[0].mozbot.variables,
         }),
       },
       dynamicTheme: parseDynamicTheme(initialState),
@@ -188,7 +188,7 @@ export const startSession = async ({
   // If params has message and first block is an input block, we can directly continue the bot flow
   if (startParams.message) {
     const firstEdgeId = getFirstEdgeId({
-      typebot: chatReply.newSessionState.typebotsQueue[0].typebot,
+      mozbot: chatReply.newSessionState.mozbotsQueue[0].mozbot,
       startEventId:
         startParams.type === 'preview' &&
         startParams.startFrom?.type === 'event'
@@ -203,13 +203,13 @@ export const startSession = async ({
     const newSessionState = nextGroup.newSessionState
     const firstBlock = nextGroup.group?.blocks.at(0)
     if (firstBlock && isInputBlock(firstBlock)) {
-      const resultId = newSessionState.typebotsQueue[0].resultId
+      const resultId = newSessionState.mozbotsQueue[0].resultId
       if (resultId)
         await upsertResult({
           hasStarted: true,
           isCompleted: false,
           resultId,
-          typebot: newSessionState.typebotsQueue[0].typebot,
+          mozbot: newSessionState.mozbotsQueue[0].mozbot,
         })
       chatReply = await continueBotFlow(startParams.message, {
         version,
@@ -234,7 +234,7 @@ export const startSession = async ({
 
   const clientSideActions = startFlowClientActions ?? []
 
-  const startClientSideAction = parseStartClientSideAction(typebot)
+  const startClientSideAction = parseStartClientSideAction(mozbot)
 
   const startLogs = logs ?? []
 
@@ -271,14 +271,14 @@ export const startSession = async ({
       messages,
       clientSideActions:
         clientSideActions.length > 0 ? clientSideActions : undefined,
-      typebot: {
-        id: typebot.id,
+      mozbot: {
+        id: mozbot.id,
         settings: deepParseVariables(
-          newSessionState.typebotsQueue[0].typebot.variables,
+          newSessionState.mozbotsQueue[0].mozbot.variables,
           { removeEmptyStrings: true }
-        )(typebot.settings),
-        theme: sanitizeAndParseTheme(typebot.theme, {
-          variables: initialState.typebotsQueue[0].typebot.variables,
+        )(mozbot.settings),
+        theme: sanitizeAndParseTheme(mozbot.theme, {
+          variables: initialState.mozbotsQueue[0].mozbot.variables,
         }),
       },
       dynamicTheme: parseDynamicTheme(newSessionState),
@@ -290,14 +290,14 @@ export const startSession = async ({
   return {
     newSessionState,
     resultId: result?.id,
-    typebot: {
-      id: typebot.id,
+    mozbot: {
+      id: mozbot.id,
       settings: deepParseVariables(
-        newSessionState.typebotsQueue[0].typebot.variables,
+        newSessionState.mozbotsQueue[0].mozbot.variables,
         { removeEmptyStrings: true }
-      )(typebot.settings),
-      theme: sanitizeAndParseTheme(typebot.theme, {
-        variables: initialState.typebotsQueue[0].typebot.variables,
+      )(mozbot.settings),
+      theme: sanitizeAndParseTheme(mozbot.theme, {
+        variables: initialState.mozbotsQueue[0].mozbot.variables,
       }),
     },
     messages,
@@ -311,9 +311,9 @@ export const startSession = async ({
   }
 }
 
-const getTypebot = async (startParams: StartParams): Promise<StartTypebot> => {
-  if (startParams.type === 'preview' && startParams.typebot)
-    return startParams.typebot
+const getMozbot = async (startParams: StartParams): Promise<StartMozbot> => {
+  if (startParams.type === 'preview' && startParams.mozbot)
+    return startParams.mozbot
 
   if (
     startParams.type === 'preview' &&
@@ -325,45 +325,45 @@ const getTypebot = async (startParams: StartParams): Promise<StartTypebot> => {
       message: 'You need to be authenticated to perform this action',
     })
 
-  const typebotQuery =
+  const mozbotQuery =
     startParams.type === 'preview'
-      ? await findTypebot({
-          id: startParams.typebotId,
+      ? await findMozbot({
+          id: startParams.mozbotId,
           userId: startParams.userId,
         })
-      : await findPublicTypebot({ publicId: startParams.publicId })
+      : await findPublicMozbot({ publicId: startParams.publicId })
 
-  const parsedTypebot =
-    typebotQuery && 'typebot' in typebotQuery
+  const parsedMozbot =
+    mozbotQuery && 'mozbot' in mozbotQuery
       ? {
-          id: typebotQuery.typebotId,
-          ...omit(typebotQuery.typebot, 'workspace'),
-          ...omit(typebotQuery, 'typebot', 'typebotId'),
+          id: mozbotQuery.mozbotId,
+          ...omit(mozbotQuery.mozbot, 'workspace'),
+          ...omit(mozbotQuery, 'mozbot', 'mozbotId'),
         }
-      : typebotQuery
+      : mozbotQuery
 
-  if (!parsedTypebot || parsedTypebot.isArchived)
+  if (!parsedMozbot || parsedMozbot.isArchived)
     throw new TRPCError({
       code: 'NOT_FOUND',
-      message: 'Typebot not found',
+      message: 'Mozbot not found',
     })
 
   const isQuarantinedOrSuspended =
-    typebotQuery &&
-    'typebot' in typebotQuery &&
-    (typebotQuery.typebot.workspace.isQuarantined ||
-      typebotQuery.typebot.workspace.isSuspended)
+    mozbotQuery &&
+    'mozbot' in mozbotQuery &&
+    (mozbotQuery.mozbot.workspace.isQuarantined ||
+      mozbotQuery.mozbot.workspace.isSuspended)
 
   if (
-    ('isClosed' in parsedTypebot && parsedTypebot.isClosed) ||
+    ('isClosed' in parsedMozbot && parsedMozbot.isClosed) ||
     isQuarantinedOrSuspended
   )
     throw new TRPCError({
       code: 'BAD_REQUEST',
-      message: 'Typebot is closed',
+      message: 'Mozbot is closed',
     })
 
-  return startTypebotSchema.parse(parsedTypebot)
+  return startMozbotSchema.parse(parsedMozbot)
 }
 
 const getResult = async ({
@@ -374,7 +374,7 @@ const getResult = async ({
 }: {
   resultId: string | undefined
   isPreview: boolean
-  typebotId: string
+  mozbotId: string
   prefilledVariables: Variable[]
   isRememberUserEnabled: boolean
 }) => {
@@ -427,9 +427,9 @@ const parseDynamicThemeInState = (theme: Theme) => {
 }
 
 const parseStartClientSideAction = (
-  typebot: StartTypebot
+  mozbot: StartMozbot
 ): NonNullable<StartChatResponse['clientSideActions']>[number] | undefined => {
-  const blocks = typebot.groups.flatMap<Block>((group) => group.blocks)
+  const blocks = mozbot.groups.flatMap<Block>((group) => group.blocks)
   const pixelBlocks = (
     blocks.filter(
       (block) =>
@@ -440,12 +440,12 @@ const parseStartClientSideAction = (
   ).map((pixelBlock) => pixelBlock.options?.pixelId as string)
 
   const startPropsToInject = {
-    customHeadCode: isNotEmpty(typebot.settings.metadata?.customHeadCode)
+    customHeadCode: isNotEmpty(mozbot.settings.metadata?.customHeadCode)
       ? sanitizeAndParseHeadCode(
-          typebot.settings.metadata?.customHeadCode as string
+          mozbot.settings.metadata?.customHeadCode as string
         )
       : undefined,
-    gtmId: typebot.settings.metadata?.googleTagManagerId,
+    gtmId: mozbot.settings.metadata?.googleTagManagerId,
     googleAnalyticsId: (
       blocks.find(
         (block) =>
@@ -494,37 +494,37 @@ const removeLiteBadgeCss = (code: string) => {
   return code.replace(liteBadgeCssRegex, '')
 }
 
-const convertStartTypebotToTypebotInSession = (
-  typebot: StartTypebot,
+const convertStartMozbotToMozbotInSession = (
+  mozbot: StartMozbot,
   startVariables: Variable[]
-): TypebotInSession =>
-  typebot.version === '6'
+): MozbotInSession =>
+  mozbot.version === '6'
     ? {
-        version: typebot.version,
-        id: typebot.id,
-        groups: typebot.groups,
-        edges: typebot.edges,
+        version: mozbot.version,
+        id: mozbot.id,
+        groups: mozbot.groups,
+        edges: mozbot.edges,
         variables: startVariables,
-        events: typebot.events,
+        events: mozbot.events,
       }
     : {
-        version: typebot.version,
-        id: typebot.id,
-        groups: typebot.groups,
-        edges: typebot.edges,
+        version: mozbot.version,
+        id: mozbot.id,
+        groups: mozbot.groups,
+        edges: mozbot.edges,
         variables: startVariables,
-        events: typebot.events,
+        events: mozbot.events,
       }
 
 const extractVariableIdsUsedForTranscript = (
-  typebot: TypebotInSession
+  mozbot: MozbotInSession
 ): string[] => {
   const variableIds: Set<string> = new Set()
   const parseVarParams = {
-    variables: typebot.variables,
-    takeLatestIfList: typebot.version !== '6',
+    variables: mozbot.variables,
+    takeLatestIfList: mozbot.version !== '6',
   }
-  typebot.groups.forEach((group) => {
+  mozbot.groups.forEach((group) => {
     group.blocks.forEach((block) => {
       if (block.type === BubbleBlockType.TEXT) {
         const { parsedVariableIds } = parseVariablesInRichText(

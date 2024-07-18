@@ -9,9 +9,9 @@ import {
   VariableWithValue,
   Cell,
   Variable,
-} from '@typebot.io/schemas'
-import { sendRequest, byId } from '@typebot.io/lib'
-import { GoogleSheetsAction } from '@typebot.io/schemas/features/blocks/integrations/googleSheets/constants'
+} from '@mozbot.io/schemas'
+import { sendRequest, byId } from '@mozbot.io/lib'
+import { GoogleSheetsAction } from '@mozbot.io/schemas/features/blocks/integrations/googleSheets/constants'
 
 export const executeGoogleSheetBlock = async (
   block: GoogleSheetsBlock,

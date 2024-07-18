@@ -1,5 +1,5 @@
-import { env } from '@typebot.io/env'
-import { PrismaClient } from '@typebot.io/prisma'
+import { env } from '@mozbot.io/env'
+import { PrismaClient } from '@mozbot.io/prisma'
 
 declare const global: { prisma: PrismaClient }
 let prisma: PrismaClient

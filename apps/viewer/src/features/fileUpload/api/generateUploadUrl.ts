@@ -1,18 +1,14 @@
 import { publicProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
-import { generatePresignedPostPolicy } from '@typebot.io/lib/s3/generatePresignedPostPolicy'
-import { env } from '@typebot.io/env'
-import prisma from '@typebot.io/lib/prisma'
-import { getSession } from '@typebot.io/bot-engine/queries/getSession'
-import {
-  FileInputBlock,
-  parseGroups,
-  TextInputBlock,
-} from '@typebot.io/schemas'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { getBlockById } from '@typebot.io/schemas/helpers'
-import { PublicTypebot } from '@typebot.io/prisma'
+import { generatePresignedPostPolicy } from '@mozbot.io/lib/s3/generatePresignedPostPolicy'
+import { env } from '@mozbot.io/env'
+import prisma from '@mozbot.io/lib/prisma'
+import { getSession } from '@mozbot.io/bot-engine/queries/getSession'
+import { FileInputBlock, parseGroups, TextInputBlock } from '@mozbot.io/schemas'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { getBlockById } from '@mozbot.io/schemas/helpers'
+import { PublicMozbot } from '@mozbot.io/prisma'
 
 export const generateUploadUrl = publicProcedure
   .meta({
@@ -53,20 +49,18 @@ export const generateUploadUrl = publicProcedure
         message: "Can't find session",
       })
 
-    const typebotId = session.state.typebotsQueue[0].typebot.id
+    const mozbotId = session.state.mozbotsQueue[0].mozbot.id
 
-    const isPreview = session.state.typebotsQueue[0].resultId
+    const isPreview = session.state.mozbotsQueue[0].resultId
 
-    const typebot = session.state.typebotsQueue[0].resultId
-      ? await getAndParsePublicTypebot(
-          session.state.typebotsQueue[0].typebot.id
-        )
-      : session.state.typebotsQueue[0].typebot
+    const mozbot = session.state.mozbotsQueue[0].resultId
+      ? await getAndParsePublicMozbot(session.state.mozbotsQueue[0].mozbot.id)
+      : session.state.mozbotsQueue[0].mozbot
 
-    if (!typebot?.version)
+    if (!mozbot?.version)
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: "Can't find typebot",
+        message: "Can't find mozbot",
       })
 
     if (session.state.currentBlockId === undefined)
@@ -77,8 +71,8 @@ export const generateUploadUrl = publicProcedure
 
     const { block } = getBlockById(
       session.state.currentBlockId,
-      parseGroups(typebot.groups, {
-        typebotVersion: typebot.version,
+      parseGroups(mozbot.groups, {
+        mozbotVersion: mozbot.version,
       })
     )
 
@@ -94,14 +88,14 @@ export const generateUploadUrl = publicProcedure
 
     const { visibility, maxFileSize } = parseFileUploadParams(block)
 
-    const resultId = session.state.typebotsQueue[0].resultId
+    const resultId = session.state.mozbotsQueue[0].resultId
 
     const filePath =
-      'workspaceId' in typebot && typebot.workspaceId
+      'workspaceId' in mozbot && mozbot.workspaceId
         ? `${visibility === 'Private' ? 'private' : 'public'}/workspaces/${
-            typebot.workspaceId
-          }/typebots/${typebotId}/results/${resultId}/${fileName}`
-        : `public/tmp/${typebotId}/${fileName}`
+            mozbot.workspaceId
+          }/mozbots/${mozbotId}/results/${resultId}/${fileName}`
+        : `public/tmp/${mozbotId}/${fileName}`
 
     const presignedPostPolicy = await generatePresignedPostPolicy({
       fileType,
@@ -114,32 +108,32 @@ export const generateUploadUrl = publicProcedure
       formData: presignedPostPolicy.formData,
       fileUrl:
         visibility === 'Private' && !isPreview
-          ? `${env.NEXTAUTH_URL}/api/typebots/${typebotId}/results/${resultId}/${fileName}`
+          ? `${env.NEXTAUTH_URL}/api/mozbots/${mozbotId}/results/${resultId}/${fileName}`
           : env.S3_PUBLIC_CUSTOM_DOMAIN
           ? `${env.S3_PUBLIC_CUSTOM_DOMAIN}/${filePath}`
           : `${presignedPostPolicy.postURL}/${presignedPostPolicy.formData.key}`,
     }
   })
 
-const getAndParsePublicTypebot = async (typebotId: string) => {
-  const publicTypebot = (await prisma.publicTypebot.findFirst({
+const getAndParsePublicMozbot = async (mozbotId: string) => {
+  const publicMozbot = (await prisma.publicMozbot.findFirst({
     where: {
-      typebotId,
+      mozbotId,
     },
     select: {
       version: true,
       groups: true,
-      typebot: {
+      mozbot: {
         select: {
           workspaceId: true,
         },
       },
     },
-  })) as (PublicTypebot & { typebot: { workspaceId: string } }) | null
+  })) as (PublicMozbot & { mozbot: { workspaceId: string } }) | null
 
   return {
-    ...publicTypebot,
-    workspaceId: publicTypebot?.typebot.workspaceId,
+    ...publicMozbot,
+    workspaceId: publicMozbot?.mozbot.workspaceId,
   }
 }
 

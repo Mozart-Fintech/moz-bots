@@ -25,12 +25,12 @@ const features = [
   {
     Icon: PersonAddIcon,
     title: 'Team collaboration',
-    content: 'Invite your teammates to work on your typebots with you',
+    content: 'Invite your teammates to work on your mozbots with you',
   },
   {
     Icon: ConditionIcon,
-    title: 'Link to sub typebots',
-    content: 'Reuse your typebots in different parent bots.',
+    title: 'Link to sub mozbots',
+    content: 'Reuse your mozbots in different parent bots.',
   },
   {
     Icon: CalculatorIcon,
@@ -40,13 +40,13 @@ const features = [
   {
     Icon: ShareIcon,
     title: 'Custom domain',
-    content: 'Connect your typebot to the custom URL of your choice',
+    content: 'Connect your mozbot to the custom URL of your choice',
   },
   {
     Icon: FolderIcon,
     title: 'Folder management',
     content:
-      'Organize your typebots in specific folders to keep it clean and work with multiple clients',
+      'Organize your mozbots in specific folders to keep it clean and work with multiple clients',
   },
 ]
 
@@ -70,7 +70,7 @@ export const Features = () => {
             textAlign="center"
             data-aos="fade"
           >
-            Typebot makes form building easy and comes with powerful features
+            Mozbot makes form building easy and comes with powerful features
           </Text>
         </VStack>
         <SimpleGrid columns={[1, 3]} spacing="10" pt="10" data-aos="fade">

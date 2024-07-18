@@ -4,9 +4,9 @@ import {
   badRequest,
   methodNotAllowed,
   notAuthenticated,
-} from '@typebot.io/lib/api'
-import { generatePresignedPostPolicy } from '@typebot.io/lib/s3/generatePresignedPostPolicy'
-import { env } from '@typebot.io/env'
+} from '@mozbot.io/lib/api'
+import { generatePresignedPostPolicy } from '@mozbot.io/lib/s3/generatePresignedPostPolicy'
+import { env } from '@mozbot.io/env'
 
 const handler = async (
   req: NextApiRequest,

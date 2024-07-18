@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text } from '@chakra-ui/react'
 import { WithVariableContent } from '@/features/graph/components/nodes/block/WithVariableContent'
-import { UrlInputBlock } from '@typebot.io/schemas'
-import { defaultUrlInputOptions } from '@typebot.io/schemas/features/blocks/inputs/url/constants'
+import { UrlInputBlock } from '@mozbot.io/schemas'
+import { defaultUrlInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/url/constants'
 
 type Props = {
   options: UrlInputBlock['options']

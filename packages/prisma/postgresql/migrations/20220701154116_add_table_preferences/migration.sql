@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE "Typebot" ADD COLUMN     "resultsTablePreferences" JSONB;
+ALTER TABLE "Mozbot" ADD COLUMN     "resultsTablePreferences" JSONB;

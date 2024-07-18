@@ -4,7 +4,7 @@ import { stripeCredentialsSchema } from './blocks/inputs/payment/schema'
 import { googleSheetsCredentialsSchema } from './blocks/integrations/googleSheets/schema'
 import { smtpCredentialsSchema } from './blocks/integrations/sendEmail'
 import { whatsAppCredentialsSchema } from './whatsapp'
-import { forgedCredentialsSchemas } from '@typebot.io/forge-repository/credentials'
+import { forgedCredentialsSchemas } from '@mozbot.io/forge-repository/credentials'
 
 const credentialsSchema = z.discriminatedUnion('type', [
   smtpCredentialsSchema,

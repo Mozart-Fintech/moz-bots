@@ -1,5 +1,5 @@
-import { option } from '@typebot.io/forge'
-import { z } from '@typebot.io/forge/zod'
+import { option } from '@mozbot.io/forge'
+import { z } from '@mozbot.io/forge/zod'
 import { baseOptions } from '../baseOptions'
 
 const extractInfoBaseShape = {

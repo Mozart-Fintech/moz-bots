@@ -4,28 +4,28 @@ CREATE TYPE "CollaborationType" AS ENUM ('READ', 'WRITE');
 -- CreateTable
 CREATE TABLE "Invitation" (
     "email" TEXT NOT NULL,
-    "typebotId" TEXT NOT NULL,
+    "mozbotId" TEXT NOT NULL,
     "type" "CollaborationType" NOT NULL
 );
 
 -- CreateTable
-CREATE TABLE "CollaboratorsOnTypebots" (
+CREATE TABLE "CollaboratorsOnMozbots" (
     "userId" TEXT NOT NULL,
-    "typebotId" TEXT NOT NULL,
+    "mozbotId" TEXT NOT NULL,
     "type" "CollaborationType" NOT NULL
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Invitation_email_typebotId_key" ON "Invitation"("email", "typebotId");
+CREATE UNIQUE INDEX "Invitation_email_mozbotId_key" ON "Invitation"("email", "mozbotId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "CollaboratorsOnTypebots_userId_typebotId_key" ON "CollaboratorsOnTypebots"("userId", "typebotId");
+CREATE UNIQUE INDEX "CollaboratorsOnMozbots_userId_mozbotId_key" ON "CollaboratorsOnMozbots"("userId", "mozbotId");
 
 -- AddForeignKey
-ALTER TABLE "Invitation" ADD CONSTRAINT "Invitation_typebotId_fkey" FOREIGN KEY ("typebotId") REFERENCES "Typebot"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Invitation" ADD CONSTRAINT "Invitation_mozbotId_fkey" FOREIGN KEY ("mozbotId") REFERENCES "Mozbot"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "CollaboratorsOnTypebots" ADD CONSTRAINT "CollaboratorsOnTypebots_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "CollaboratorsOnMozbots" ADD CONSTRAINT "CollaboratorsOnMozbots_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "CollaboratorsOnTypebots" ADD CONSTRAINT "CollaboratorsOnTypebots_typebotId_fkey" FOREIGN KEY ("typebotId") REFERENCES "Typebot"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "CollaboratorsOnMozbots" ADD CONSTRAINT "CollaboratorsOnMozbots_mozbotId_fkey" FOREIGN KEY ("mozbotId") REFERENCES "Mozbot"("id") ON DELETE CASCADE ON UPDATE CASCADE;

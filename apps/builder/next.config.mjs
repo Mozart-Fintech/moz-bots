@@ -1,6 +1,6 @@
 import { withSentryConfig } from '@sentry/nextjs'
 import { join, dirname } from 'path'
-import '@typebot.io/env/dist/env.mjs'
+import '@mozbot.io/env/dist/env.mjs'
 import { configureRuntimeEnv } from 'next-runtime-env/build/configure.js'
 import { fileURLToPath } from 'url'
 
@@ -38,10 +38,10 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
   transpilePackages: [
-    '@typebot.io/lib',
-    '@typebot.io/schemas',
-    '@typebot.io/emails',
-    '@typebot.io/env',
+    '@mozbot.io/lib',
+    '@mozbot.io/schemas',
+    '@mozbot.io/emails',
+    '@mozbot.io/env',
   ],
   i18n: {
     defaultLocale: 'en',

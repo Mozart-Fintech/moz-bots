@@ -4,7 +4,7 @@ import {
   Theme,
   ChatLog,
   StartChatResponse,
-} from '@typebot.io/schemas'
+} from '@mozbot.io/schemas'
 import {
   createEffect,
   createSignal,
@@ -21,7 +21,7 @@ import {
   ChatChunk as ChatChunkType,
   OutgoingLog,
 } from '@/types'
-import { isNotDefined } from '@typebot.io/lib'
+import { isNotDefined } from '@mozbot.io/lib'
 import { executeClientSideAction } from '@/utils/executeClientSideActions'
 import { LoadingChunk } from './LoadingChunk'
 import { PopupBlockedToast } from './PopupBlockedToast'
@@ -82,7 +82,7 @@ export const ConversationContainer = (props: Props) => {
       },
     ]),
     {
-      key: `typebot-${props.context.typebot.id}-chatChunks`,
+      key: `mozbot-${props.context.mozbot.id}-chatChunks`,
       storage: props.context.storage,
       onRecovered: () => {
         setTimeout(() => {
@@ -94,7 +94,7 @@ export const ConversationContainer = (props: Props) => {
   const [dynamicTheme, setDynamicTheme] = createSignal<
     ContinueChatResponse['dynamicTheme']
   >(props.initialChatReply.dynamicTheme)
-  const [theme, setTheme] = createSignal(props.initialChatReply.typebot.theme)
+  const [theme, setTheme] = createSignal(props.initialChatReply.mozbot.theme)
   const [isSending, setIsSending] = createSignal(false)
   const [blockedPopupUrl, setBlockedPopupUrl] = createSignal<string>()
   const [hasError, setHasError] = createSignal(false)
@@ -127,7 +127,7 @@ export const ConversationContainer = (props: Props) => {
 
   createEffect(() => {
     setTheme(
-      parseDynamicTheme(props.initialChatReply.typebot.theme, dynamicTheme())
+      parseDynamicTheme(props.initialChatReply.mozbot.theme, dynamicTheme())
     )
   })
 
@@ -312,7 +312,7 @@ export const ConversationContainer = (props: Props) => {
   return (
     <div
       ref={chatContainer}
-      class="flex flex-col overflow-y-auto w-full px-3 pt-10 relative scrollable-container typebot-chat-view scroll-smooth gap-2"
+      class="flex flex-col overflow-y-auto w-full px-3 pt-10 relative scrollable-container mozbot-chat-view scroll-smooth gap-2"
     >
       <For each={chatChunks()}>
         {(chatChunk, index) => (
@@ -321,7 +321,7 @@ export const ConversationContainer = (props: Props) => {
             messages={chatChunk.messages}
             input={chatChunk.input}
             theme={theme()}
-            settings={props.initialChatReply.typebot.settings}
+            settings={props.initialChatReply.mozbot.settings}
             streamingMessageId={chatChunk.streamingMessageId}
             context={props.context}
             hideAvatar={
@@ -360,7 +360,7 @@ export const ConversationContainer = (props: Props) => {
 
 const BottomSpacer = () => (
   <div
-    class="w-full flex-shrink-0 typebot-bottom-spacer"
+    class="w-full flex-shrink-0 mozbot-bottom-spacer"
     style={{ height: bottomSpacerHeight + 'px' }}
   />
 )

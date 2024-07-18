@@ -1,4 +1,4 @@
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 import ky from 'ky'
 
 type Props = {

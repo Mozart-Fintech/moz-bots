@@ -1,13 +1,13 @@
 import { TRPCError } from '@trpc/server'
-import { isDefined, isNotDefined, isNotEmpty } from '@typebot.io/lib/utils'
+import { isDefined, isNotDefined, isNotEmpty } from '@mozbot.io/lib/utils'
 import { getSession } from '../queries/getSession'
 import { continueBotFlow } from '../continueBotFlow'
 import { filterPotentiallySensitiveLogs } from '../logs/filterPotentiallySensitiveLogs'
 import { parseDynamicTheme } from '../parseDynamicTheme'
 import { saveStateToDatabase } from '../saveStateToDatabase'
 import { computeCurrentProgress } from '../computeCurrentProgress'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
-import { Message } from '@typebot.io/schemas'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
+import { Message } from '@mozbot.io/schemas'
 
 type Props = {
   origin: string | undefined
@@ -87,7 +87,7 @@ export const continueChat = async ({
       ),
     })
 
-  const isPreview = isNotDefined(session.state.typebotsQueue[0].resultId)
+  const isPreview = isNotDefined(session.state.mozbotsQueue[0].resultId)
 
   const isEnded =
     newSessionState.progressMetadata &&
@@ -107,7 +107,7 @@ export const continueChat = async ({
       ? isEnded
         ? 100
         : computeCurrentProgress({
-            typebotsQueue: newSessionState.typebotsQueue,
+            mozbotsQueue: newSessionState.mozbotsQueue,
             progressMetadata: newSessionState.progressMetadata,
             currentInputBlockId: input?.id,
           })

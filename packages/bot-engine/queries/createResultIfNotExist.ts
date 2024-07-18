@@ -1,16 +1,16 @@
-import prisma from '@typebot.io/lib/prisma'
-import { TypebotInSession } from '@typebot.io/schemas'
+import prisma from '@mozbot.io/lib/prisma'
+import { MozbotInSession } from '@mozbot.io/schemas'
 
 type Props = {
   resultId: string
-  typebot: TypebotInSession
+  mozbot: MozbotInSession
   hasStarted: boolean
   isCompleted: boolean
 }
 
 export const createResultIfNotExist = async ({
   resultId,
-  typebot,
+  mozbot,
   hasStarted,
   isCompleted,
 }: Props) => {
@@ -23,10 +23,10 @@ export const createResultIfNotExist = async ({
     data: [
       {
         id: resultId,
-        typebotId: typebot.id,
+        mozbotId: mozbot.id,
         isCompleted: isCompleted ? true : false,
         hasStarted,
-        variables: typebot.variables,
+        variables: mozbot.variables,
       },
     ],
   })

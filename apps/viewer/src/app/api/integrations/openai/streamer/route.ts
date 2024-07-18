@@ -1,21 +1,21 @@
 import { connect } from '@planetscale/database'
-import { env } from '@typebot.io/env'
-import { SessionState } from '@typebot.io/schemas'
+import { env } from '@mozbot.io/env'
+import { SessionState } from '@mozbot.io/schemas'
 import { StreamingTextResponse } from 'ai'
 import OpenAI from 'openai'
 import { NextResponse } from 'next/dist/server/web/spec-extension/response'
-import { getBlockById } from '@typebot.io/schemas/helpers'
-import { forgedBlocks } from '@typebot.io/forge-repository/definitions'
-import { decryptV2 } from '@typebot.io/lib/api/encryption/decryptV2'
+import { getBlockById } from '@mozbot.io/schemas/helpers'
+import { forgedBlocks } from '@mozbot.io/forge-repository/definitions'
+import { decryptV2 } from '@mozbot.io/lib/api/encryption/decryptV2'
 import {
   ParseVariablesOptions,
   parseVariables,
-} from '@typebot.io/variables/parseVariables'
-import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integrations/constants'
-import { getChatCompletionStream } from '@typebot.io/bot-engine/blocks/integrations/legacy/openai/getChatCompletionStream'
-import { ChatCompletionOpenAIOptions } from '@typebot.io/schemas/features/blocks/integrations/openai/schema'
-import { isForgedBlockType } from '@typebot.io/schemas/features/blocks/forged/helpers'
-import { AsyncVariableStore } from '@typebot.io/forge/types'
+} from '@mozbot.io/variables/parseVariables'
+import { IntegrationBlockType } from '@mozbot.io/schemas/features/blocks/integrations/constants'
+import { getChatCompletionStream } from '@mozbot.io/bot-engine/blocks/integrations/legacy/openai/getChatCompletionStream'
+import { ChatCompletionOpenAIOptions } from '@mozbot.io/schemas/features/blocks/integrations/openai/schema'
+import { isForgedBlockType } from '@mozbot.io/schemas/features/blocks/forged/helpers'
+import { AsyncVariableStore } from '@mozbot.io/forge/types'
 
 export const preferredRegion = 'lhr1'
 export const dynamic = 'force-dynamic'
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
 
   const { group, block } = getBlockById(
     state.currentBlockId,
-    state.typebotsQueue[0].typebot.groups
+    state.mozbotsQueue[0].mozbot.groups
   )
   if (!block || !group)
     return NextResponse.json(
@@ -141,15 +141,15 @@ export async function POST(req: Request) {
       credentials.iv
     )
     const variables: AsyncVariableStore = {
-      list: () => state.typebotsQueue[0].typebot.variables,
+      list: () => state.mozbotsQueue[0].mozbot.variables,
       get: (id: string) => {
-        const variable = state.typebotsQueue[0].typebot.variables.find(
+        const variable = state.mozbotsQueue[0].mozbot.variables.find(
           (variable) => variable.id === id
         )
         return variable?.value
       },
       parse: (text: string, params?: ParseVariablesOptions) =>
-        parseVariables(state.typebotsQueue[0].typebot.variables, params)(text),
+        parseVariables(state.mozbotsQueue[0].mozbot.variables, params)(text),
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       set: async (_1: string, _2: unknown) => {},
     }

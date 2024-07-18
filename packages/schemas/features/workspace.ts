@@ -6,7 +6,7 @@ import {
   WorkspaceRole,
   User as UserPrisma,
   WorkspaceInvitation as WorkspaceInvitationPrisma,
-} from '@typebot.io/prisma'
+} from '@mozbot.io/prisma'
 
 export const workspaceMemberSchema = z.object({
   workspaceId: z.string(),

@@ -1,10 +1,10 @@
 import { parseVariables } from '@/features/variables'
 import { LogicState } from '@/types'
-import { WaitBlock } from '@typebot.io/schemas'
+import { WaitBlock } from '@mozbot.io/schemas'
 
 export const executeWait = async (
   block: WaitBlock,
-  { typebot: { variables } }: LogicState
+  { mozbot: { variables } }: LogicState
 ) => {
   if (!block.options?.secondsToWaitFor) return block.outgoingEdgeId
   const parsedSecondsToWaitFor = parseVariables(variables)(

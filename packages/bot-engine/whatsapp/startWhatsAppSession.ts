@@ -1,23 +1,23 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import {
   ContinueChatResponse,
-  PublicTypebot,
+  PublicMozbot,
   SessionState,
   SetVariableHistoryItem,
   Settings,
-  Typebot,
-} from '@typebot.io/schemas'
+  Mozbot,
+} from '@mozbot.io/schemas'
 import {
   WhatsAppCredentials,
   defaultSessionExpiryTimeout,
-} from '@typebot.io/schemas/features/whatsapp'
-import { isNotDefined } from '@typebot.io/lib/utils'
+} from '@mozbot.io/schemas/features/whatsapp'
+import { isNotDefined } from '@mozbot.io/lib/utils'
 import { startSession } from '../startSession'
 import {
   LogicalOperator,
   ComparisonOperators,
-} from '@typebot.io/schemas/features/blocks/logic/condition/constants'
-import { VisitedEdge } from '@typebot.io/prisma'
+} from '@mozbot.io/schemas/features/blocks/logic/condition/constants'
+import { VisitedEdge } from '@mozbot.io/prisma'
 import { Reply } from '../types'
 
 type Props = {
@@ -40,59 +40,57 @@ export const startWhatsAppSession = async ({
     })
   | { error: string }
 > => {
-  const publicTypebotsWithWhatsAppEnabled =
-    (await prisma.publicTypebot.findMany({
-      where: {
-        typebot: { workspaceId, whatsAppCredentialsId: credentials.id },
-      },
-      select: {
-        settings: true,
-        typebot: {
-          select: {
-            publicId: true,
-          },
+  const publicMozbotsWithWhatsAppEnabled = (await prisma.publicMozbot.findMany({
+    where: {
+      mozbot: { workspaceId, whatsAppCredentialsId: credentials.id },
+    },
+    select: {
+      settings: true,
+      mozbot: {
+        select: {
+          publicId: true,
         },
       },
-    })) as (Pick<PublicTypebot, 'settings'> & {
-      typebot: Pick<Typebot, 'publicId'>
-    })[]
+    },
+  })) as (Pick<PublicMozbot, 'settings'> & {
+    mozbot: Pick<Mozbot, 'publicId'>
+  })[]
 
-  const botsWithWhatsAppEnabled = publicTypebotsWithWhatsAppEnabled.filter(
-    (publicTypebot) =>
-      publicTypebot.typebot.publicId &&
-      publicTypebot.settings.whatsApp?.isEnabled
+  const botsWithWhatsAppEnabled = publicMozbotsWithWhatsAppEnabled.filter(
+    (publicMozbot) =>
+      publicMozbot.mozbot.publicId && publicMozbot.settings.whatsApp?.isEnabled
   )
 
-  const publicTypebotWithMatchedCondition = botsWithWhatsAppEnabled.find(
-    (publicTypebot) =>
-      (publicTypebot.settings.whatsApp?.startCondition?.comparisons.length ??
+  const publicMozbotWithMatchedCondition = botsWithWhatsAppEnabled.find(
+    (publicMozbot) =>
+      (publicMozbot.settings.whatsApp?.startCondition?.comparisons.length ??
         0) > 0 &&
       messageMatchStartCondition(
         incomingMessage ?? { type: 'text', text: '' },
-        publicTypebot.settings.whatsApp?.startCondition
+        publicMozbot.settings.whatsApp?.startCondition
       )
   )
 
-  const publicTypebot =
-    publicTypebotWithMatchedCondition ??
+  const publicMozbot =
+    publicMozbotWithMatchedCondition ??
     botsWithWhatsAppEnabled.find(
-      (publicTypebot) => !publicTypebot.settings.whatsApp?.startCondition
+      (publicMozbot) => !publicMozbot.settings.whatsApp?.startCondition
     )
 
-  if (isNotDefined(publicTypebot))
+  if (isNotDefined(publicMozbot))
     return botsWithWhatsAppEnabled.length > 0
       ? { error: 'Message did not matched any condition' }
-      : { error: 'No public typebot with WhatsApp integration found' }
+      : { error: 'No public mozbot with WhatsApp integration found' }
 
   const sessionExpiryTimeoutHours =
-    publicTypebot.settings.whatsApp?.sessionExpiryTimeout ??
+    publicMozbot.settings.whatsApp?.sessionExpiryTimeout ??
     defaultSessionExpiryTimeout
 
   return startSession({
     version: 2,
     startParams: {
       type: 'live',
-      publicId: publicTypebot.typebot.publicId as string,
+      publicId: publicMozbot.mozbot.publicId as string,
       isOnlyRegistering: false,
       isStreamEnabled: false,
       textBubbleContentFormat: 'richText',

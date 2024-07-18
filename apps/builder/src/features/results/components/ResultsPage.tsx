@@ -1,7 +1,7 @@
 import { Seo } from '@/components/Seo'
 import { AnalyticsGraphContainer } from '@/features/analytics/components/AnalyticsGraphContainer'
-import { TypebotHeader } from '@/features/editor/components/TypebotHeader'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { MozbotHeader } from '@/features/editor/components/MozbotHeader'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { useToast } from '@/hooks/useToast'
 import {
@@ -17,7 +17,7 @@ import { useRouter } from 'next/router'
 import { useMemo, useState } from 'react'
 import { ResultsProvider } from '../ResultsProvider'
 import { ResultsTableContainer } from './ResultsTableContainer'
-import { TypebotNotFoundPage } from '@/features/editor/components/TypebotNotFoundPage'
+import { MozbotNotFoundPage } from '@/features/editor/components/MozbotNotFoundPage'
 import { trpc } from '@/lib/trpc'
 import {
   defaultTimeFilter,
@@ -29,7 +29,7 @@ const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 export const ResultsPage = () => {
   const router = useRouter()
   const { workspace } = useWorkspace()
-  const { typebot, publishedTypebot, is404 } = useTypebot()
+  const { mozbot, publishedMozbot, is404 } = useMozbot()
   const isAnalytics = useMemo(
     () => router.pathname.endsWith('analytics'),
     [router.pathname]
@@ -45,12 +45,12 @@ export const ResultsPage = () => {
 
   const { data: { stats } = {}, refetch } = trpc.analytics.getStats.useQuery(
     {
-      typebotId: publishedTypebot?.typebotId as string,
+      mozbotId: publishedMozbot?.mozbotId as string,
       timeFilter,
       timeZone,
     },
     {
-      enabled: !!publishedTypebot,
+      enabled: !!publishedMozbot,
       onError: (err) => showToast({ description: err.message }),
     }
   )
@@ -60,21 +60,21 @@ export const ResultsPage = () => {
     refetch()
   }
 
-  if (is404) return <TypebotNotFoundPage />
+  if (is404) return <MozbotNotFoundPage />
   return (
     <Flex overflow="hidden" h="100vh" flexDir="column">
       <Seo
         title={
           router.pathname.endsWith('analytics')
-            ? typebot?.name
-              ? `${typebot.name} | Analytics`
+            ? mozbot?.name
+              ? `${mozbot.name} | Analytics`
               : 'Analytics'
-            : typebot?.name
-            ? `${typebot.name} | Results`
+            : mozbot?.name
+            ? `${mozbot.name} | Results`
             : 'Results'
         }
       />
-      <TypebotHeader />
+      <MozbotHeader />
       <Flex h="full" w="full" bgColor={bgColor}>
         <Flex
           pos="absolute"
@@ -90,7 +90,7 @@ export const ResultsPage = () => {
               colorScheme={!isAnalytics ? 'blue' : 'gray'}
               variant={!isAnalytics ? 'outline' : 'ghost'}
               size="sm"
-              href={`/typebots/${typebot?.id}/results`}
+              href={`/mozbots/${mozbot?.id}/results`}
             >
               <Text>Submissions</Text>
               {(stats?.totalStarts ?? 0) > 0 && (
@@ -103,7 +103,7 @@ export const ResultsPage = () => {
               as={Link}
               colorScheme={isAnalytics ? 'blue' : 'gray'}
               variant={isAnalytics ? 'outline' : 'ghost'}
-              href={`/typebots/${typebot?.id}/results/analytics`}
+              href={`/mozbots/${mozbot?.id}/results/analytics`}
               size="sm"
             >
               Analytics
@@ -112,7 +112,7 @@ export const ResultsPage = () => {
         </Flex>
         <Flex pt={['10px', '60px']} w="full" justify="center">
           {workspace &&
-            publishedTypebot &&
+            publishedMozbot &&
             (isAnalytics ? (
               <AnalyticsGraphContainer
                 stats={stats}
@@ -122,7 +122,7 @@ export const ResultsPage = () => {
             ) : (
               <ResultsProvider
                 timeFilter={timeFilter}
-                typebotId={publishedTypebot.typebotId}
+                mozbotId={publishedMozbot.mozbotId}
                 totalResults={stats?.totalStarts ?? 0}
                 onDeleteResults={handleDeletedResults}
               >

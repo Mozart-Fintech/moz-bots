@@ -1,23 +1,23 @@
 import test, { expect, Page } from '@playwright/test'
-import { importTypebotInDatabase } from '@typebot.io/playwright/databaseActions'
+import { importMozbotInDatabase } from '@mozbot.io/playwright/databaseActions'
 import { createId } from '@paralleldrive/cuid2'
 import { getTestAsset } from '@/test/utils/playwright'
-import { apiToken } from '@typebot.io/playwright/databaseSetup'
-import { env } from '@typebot.io/env'
-import { omit } from '@typebot.io/lib/utils'
+import { apiToken } from '@mozbot.io/playwright/databaseSetup'
+import { env } from '@mozbot.io/env'
+import { omit } from '@mozbot.io/lib/utils'
 
 test.describe.configure({ mode: 'parallel' })
 
 test('editor configuration should work', async ({ page }) => {
-  const typebotId = createId()
-  await importTypebotInDatabase(
-    getTestAsset('typebots/integrations/webhook.json'),
+  const mozbotId = createId()
+  await importMozbotInDatabase(
+    getTestAsset('mozbots/integrations/webhook.json'),
     {
-      id: typebotId,
+      id: mozbotId,
     }
   )
 
-  await page.goto(`/typebots/${typebotId}/edit`)
+  await page.goto(`/mozbots/${mozbotId}/edit`)
   await page.click('text=Configure...')
   await page.fill(
     'input[placeholder="Paste URL..."]',
@@ -50,7 +50,7 @@ test('editor configuration should work', async ({ page }) => {
   await page.click('text=Headers')
   await page.waitForTimeout(200)
   await page.getByRole('button', { name: 'Add a value' }).click()
-  await page.fill('input[placeholder="e.g. Content-Type"]', 'Custom-Typebot')
+  await page.fill('input[placeholder="e.g. Content-Type"]', 'Custom-Mozbot')
   await page.fill('input[placeholder="e.g. application/json"]', '{{secret 3}}')
 
   await page.click('text=Body')
@@ -82,14 +82,14 @@ const addTestVariable = async (page: Page, name: string, value: string) => {
 }
 
 test('Webhook API endpoints should work', async ({ request }) => {
-  const typebotId = createId()
-  await importTypebotInDatabase(getTestAsset('typebots/api.json'), {
-    id: typebotId,
+  const mozbotId = createId()
+  await importMozbotInDatabase(getTestAsset('mozbots/api.json'), {
+    id: mozbotId,
   })
 
   // GET webhook blocks
   const getResponse = await request.get(
-    `/api/v1/typebots/${typebotId}/webhookBlocks`,
+    `/api/v1/mozbots/${mozbotId}/webhookBlocks`,
     {
       headers: { Authorization: `Bearer ${apiToken}` },
     }
@@ -105,7 +105,7 @@ test('Webhook API endpoints should work', async ({ request }) => {
   // Subscribe webhook
   const url = 'https://test.com'
   const subscribeResponse = await request.post(
-    `/api/v1/typebots/${typebotId}/webhookBlocks/webhookBlock/subscribe`,
+    `/api/v1/mozbots/${mozbotId}/webhookBlocks/webhookBlock/subscribe`,
     {
       headers: {
         Authorization: `Bearer ${apiToken}`,
@@ -120,7 +120,7 @@ test('Webhook API endpoints should work', async ({ request }) => {
 
   // Unsubscribe webhook
   const unsubResponse = await request.post(
-    `/api/v1/typebots/${typebotId}/webhookBlocks/webhookBlock/unsubscribe`,
+    `/api/v1/mozbots/${mozbotId}/webhookBlocks/webhookBlock/unsubscribe`,
     {
       headers: { Authorization: `Bearer ${apiToken}` },
     }
@@ -132,7 +132,7 @@ test('Webhook API endpoints should work', async ({ request }) => {
 
   // Get sample result
   const sampleResponse = await request.get(
-    `/api/v1/typebots/${typebotId}/webhookBlocks/webhookBlock/getResultExample`,
+    `/api/v1/mozbots/${mozbotId}/webhookBlocks/webhookBlock/getResultExample`,
     {
       headers: { Authorization: `Bearer ${apiToken}` },
     }

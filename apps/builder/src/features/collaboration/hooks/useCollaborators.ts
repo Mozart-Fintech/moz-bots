@@ -3,16 +3,16 @@ import useSWR from 'swr'
 import { Collaborator } from '../types'
 
 export const useCollaborators = ({
-  typebotId,
+  mozbotId,
   onError,
 }: {
-  typebotId?: string
+  mozbotId?: string
   onError: (error: Error) => void
 }) => {
   const { data, error, mutate } = useSWR<
     { collaborators: Collaborator[] },
     Error
-  >(typebotId ? `/api/typebots/${typebotId}/collaborators` : null, fetcher)
+  >(mozbotId ? `/api/mozbots/${mozbotId}/collaborators` : null, fetcher)
   if (error) onError(error)
   return {
     collaborators: data?.collaborators,

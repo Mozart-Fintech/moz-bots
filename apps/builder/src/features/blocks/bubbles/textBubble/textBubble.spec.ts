@@ -1,22 +1,22 @@
 import test, { expect } from '@playwright/test'
-import { createTypebots } from '@typebot.io/playwright/databaseActions'
-import { parseDefaultGroupWithBlock } from '@typebot.io/playwright/databaseHelpers'
+import { createMozbots } from '@mozbot.io/playwright/databaseActions'
+import { parseDefaultGroupWithBlock } from '@mozbot.io/playwright/databaseHelpers'
 import { createId } from '@paralleldrive/cuid2'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
 
 test.describe('Text bubble block', () => {
   test('rich text features should work', async ({ page }) => {
-    const typebotId = createId()
-    await createTypebots([
+    const mozbotId = createId()
+    await createMozbots([
       {
-        id: typebotId,
+        id: mozbotId,
         ...parseDefaultGroupWithBlock({
           type: BubbleBlockType.TEXT,
         }),
       },
     ])
 
-    await page.goto(`/typebots/${typebotId}/edit`)
+    await page.goto(`/mozbots/${mozbotId}/edit`)
 
     await page.getByTestId('block block2').locator('div').first().click()
     await page.click('[data-testid="bold-button"]')
@@ -61,7 +61,7 @@ test.describe('Text bubble block', () => {
       'Underlined text'
     )
     await expect(
-      page.locator('typebot-standard').locator('a[href="https://github.com"]')
+      page.locator('mozbot-standard').locator('a[href="https://github.com"]')
     ).toHaveText('My super link')
   })
 })

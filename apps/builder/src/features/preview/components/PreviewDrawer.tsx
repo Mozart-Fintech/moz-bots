@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { useEditor } from '../../editor/providers/EditorProvider'
 import { useGraph } from '@/features/graph/providers/GraphProvider'
-import { useTypebot } from '../../editor/providers/TypebotProvider'
+import { useMozbot } from '../../editor/providers/MozbotProvider'
 import React, { useState } from 'react'
 import { headerHeight } from '../../editor/constants'
 import { RuntimeMenu } from './RuntimeMenu'
@@ -21,8 +21,8 @@ import { useTranslate } from '@tolgee/react'
 
 const preferredRuntimeKey = 'preferredRuntime'
 
-const getDefaultRuntime = (typebotId?: string) => {
-  if (!typebotId) return runtimes[0]
+const getDefaultRuntime = (mozbotId?: string) => {
+  if (!mozbotId) return runtimes[0]
   const preferredRuntime = localStorage.getItem(preferredRuntimeKey)
   return (
     runtimes.find((runtime) => runtime.name === preferredRuntime) ?? runtimes[0]
@@ -30,7 +30,7 @@ const getDefaultRuntime = (typebotId?: string) => {
 }
 
 export const PreviewDrawer = () => {
-  const { typebot, save, isSavingLoading } = useTypebot()
+  const { mozbot, save, isSavingLoading } = useMozbot()
   const { t } = useTranslate()
   const { setRightPanel } = useEditor()
   const { setPreviewingBlock } = useGraph()
@@ -39,7 +39,7 @@ export const PreviewDrawer = () => {
   const [restartKey, setRestartKey] = useState(0)
   const [selectedRuntime, setSelectedRuntime] = useState<
     (typeof runtimes)[number]
-  >(getDefaultRuntime(typebot?.id))
+  >(getDefaultRuntime(mozbot?.id))
 
   const handleRestartClick = async () => {
     await save()

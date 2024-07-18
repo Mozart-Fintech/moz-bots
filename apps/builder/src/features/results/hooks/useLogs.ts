@@ -2,14 +2,14 @@ import { trpc } from '@/lib/trpc'
 import { isDefined } from '@udecode/plate-common'
 
 export const useLogs = (
-  typebotId: string,
+  mozbotId: string,
   resultId: string | null,
   onError?: (error: string) => void
 ) => {
   const { data, error } = trpc.results.getResultLogs.useQuery(
     {
       resultId: resultId ?? '',
-      typebotId,
+      mozbotId,
     },
     { enabled: isDefined(resultId) }
   )

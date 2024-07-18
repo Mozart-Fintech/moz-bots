@@ -1,5 +1,5 @@
 import { ImageUploadContent } from '@/components/ImageUploadContent'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import {
   Flex,
   Popover,
@@ -10,15 +10,15 @@ import {
   Button,
   Portal,
 } from '@chakra-ui/react'
-import { isNotEmpty } from '@typebot.io/lib'
-import { Background } from '@typebot.io/schemas'
+import { isNotEmpty } from '@mozbot.io/lib'
+import { Background } from '@mozbot.io/schemas'
 import React from 'react'
 import { ColorPicker } from '../../../../components/ColorPicker'
 import {
   BackgroundType,
   defaultBackgroundColor,
   defaultBackgroundType,
-} from '@typebot.io/schemas/features/typebot/theme/constants'
+} from '@mozbot.io/schemas/features/mozbot/theme/constants'
 import { useTranslate } from '@tolgee/react'
 
 type BackgroundContentProps = {
@@ -31,12 +31,12 @@ export const BackgroundContent = ({
   onBackgroundContentChange,
 }: BackgroundContentProps) => {
   const { t } = useTranslate()
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const handleContentChange = (content: string) =>
     onBackgroundContentChange(content)
 
   if ((background?.type ?? defaultBackgroundType) === BackgroundType.IMAGE) {
-    if (!typebot) return null
+    if (!mozbot) return null
     return (
       <Popover isLazy placement="top">
         <PopoverTrigger>
@@ -61,8 +61,8 @@ export const BackgroundContent = ({
           <PopoverContent p="4" w="500px">
             <ImageUploadContent
               uploadFileProps={{
-                workspaceId: typebot.workspaceId,
-                typebotId: typebot.id,
+                workspaceId: mozbot.workspaceId,
+                mozbotId: mozbot.id,
                 fileName: 'background',
               }}
               defaultUrl={background?.content}

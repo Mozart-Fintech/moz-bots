@@ -1,25 +1,25 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { Prisma } from '@typebot.io/prisma'
-import prisma from '@typebot.io/lib/prisma'
+import { Prisma } from '@mozbot.io/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { googleSheetsScopes } from './consent-url'
-import { badRequest, notAuthenticated } from '@typebot.io/lib/api'
+import { badRequest, notAuthenticated } from '@mozbot.io/lib/api'
 import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser'
-import { env } from '@typebot.io/env'
-import { encrypt } from '@typebot.io/lib/api/encryption/encrypt'
+import { env } from '@mozbot.io/env'
+import { encrypt } from '@mozbot.io/lib/api/encryption/encrypt'
 import { OAuth2Client } from 'google-auth-library'
-import { parseGroups } from '@typebot.io/schemas'
+import { parseGroups } from '@mozbot.io/schemas'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getAuthenticatedUser(req, res)
   if (!user) return notAuthenticated(res)
   const state = req.query.state as string | undefined
   if (!state) return badRequest(res)
-  const { typebotId, redirectUrl, blockId, workspaceId } = JSON.parse(
+  const { mozbotId, redirectUrl, blockId, workspaceId } = JSON.parse(
     Buffer.from(state, 'base64').toString()
   ) as {
     redirectUrl: string
     workspaceId: string
-    typebotId?: string
+    mozbotId?: string
     blockId?: string
   }
   if (req.method === 'GET') {
@@ -60,19 +60,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { id: credentialsId } = await prisma.credentials.create({
       data: credentials,
     })
-    if (!typebotId) return res.redirect(`${redirectUrl.split('?')[0]}`)
-    const typebot = await prisma.typebot.findFirst({
+    if (!mozbotId) return res.redirect(`${redirectUrl.split('?')[0]}`)
+    const mozbot = await prisma.mozbot.findFirst({
       where: {
-        id: typebotId,
+        id: mozbotId,
       },
       select: {
         version: true,
         groups: true,
       },
     })
-    if (!typebot) return res.status(404).send({ message: 'Typebot not found' })
-    const groups = parseGroups(typebot.groups, {
-      typebotVersion: typebot.version,
+    if (!mozbot) return res.status(404).send({ message: 'Mozbot not found' })
+    const groups = parseGroups(mozbot.groups, {
+      mozbotVersion: mozbot.version,
     }).map((group) => {
       const block = group.blocks.find((block) => block.id === blockId)
       if (!block) return group
@@ -90,9 +90,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }),
       }
     })
-    await prisma.typebot.updateMany({
+    await prisma.mozbot.updateMany({
       where: {
-        id: typebotId,
+        id: mozbotId,
       },
       data: {
         groups,

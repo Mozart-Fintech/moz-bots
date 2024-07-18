@@ -1,9 +1,9 @@
-import { isDefined } from '@typebot.io/lib'
-import { GoogleSheetsGetOptions } from '@typebot.io/schemas'
+import { isDefined } from '@mozbot.io/lib'
+import { GoogleSheetsGetOptions } from '@mozbot.io/schemas'
 import {
   LogicalOperator,
   ComparisonOperators,
-} from '@typebot.io/schemas/features/blocks/logic/condition/constants'
+} from '@mozbot.io/schemas/features/blocks/logic/condition/constants'
 import { GoogleSpreadsheetRow } from 'google-spreadsheet'
 
 export const matchFilter = (

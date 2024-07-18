@@ -1,19 +1,19 @@
-import { PrismaClient } from '@typebot.io/prisma'
+import { PrismaClient } from '@mozbot.io/prisma'
 import * as p from '@clack/prompts'
 import { promptAndSetEnvironment } from './utils'
 import cliProgress from 'cli-progress'
 import { writeFileSync } from 'fs'
 import {
   ResultWithAnswers,
-  TypebotV6,
+  MozbotV6,
   resultWithAnswersSchema,
-} from '@typebot.io/schemas'
-import { byId } from '@typebot.io/lib'
-import { parseResultHeader } from '@typebot.io/results/parseResultHeader'
-import { convertResultsToTableData } from '@typebot.io/results/convertResultsToTableData'
-import { parseBlockIdVariableIdMap } from '@typebot.io/results/parseBlockIdVariableIdMap'
-import { parseColumnsOrder } from '@typebot.io/results/parseColumnsOrder'
-import { parseUniqueKey } from '@typebot.io/lib/parseUniqueKey'
+} from '@mozbot.io/schemas'
+import { byId } from '@mozbot.io/lib'
+import { parseResultHeader } from '@mozbot.io/results/parseResultHeader'
+import { convertResultsToTableData } from '@mozbot.io/results/convertResultsToTableData'
+import { parseBlockIdVariableIdMap } from '@mozbot.io/results/parseBlockIdVariableIdMap'
+import { parseColumnsOrder } from '@mozbot.io/results/parseColumnsOrder'
+import { parseUniqueKey } from '@mozbot.io/lib/parseUniqueKey'
 import { unparse } from 'papaparse'
 import { z } from 'zod'
 
@@ -22,11 +22,11 @@ const exportResults = async () => {
 
   const prisma = new PrismaClient()
 
-  const typebotId = (await p.text({
-    message: 'Typebot ID?',
+  const mozbotId = (await p.text({
+    message: 'Mozbot ID?',
   })) as string
 
-  if (!typebotId || typeof typebotId !== 'string') {
+  if (!mozbotId || typeof mozbotId !== 'string') {
     console.log('No id provided')
     return
   }
@@ -36,20 +36,20 @@ const exportResults = async () => {
     cliProgress.Presets.shades_classic
   )
 
-  const typebot = (await prisma.typebot.findUnique({
+  const mozbot = (await prisma.mozbot.findUnique({
     where: {
-      id: typebotId,
+      id: mozbotId,
     },
-  })) as TypebotV6 | null
+  })) as MozbotV6 | null
 
-  if (!typebot) {
-    console.log('No typebot found')
+  if (!mozbot) {
+    console.log('No mozbot found')
     return
   }
 
   const totalResultsToExport = await prisma.result.count({
     where: {
-      typebotId,
+      mozbotId,
       hasStarted: true,
       isArchived: false,
     },
@@ -67,7 +67,7 @@ const exportResults = async () => {
             take: 50,
             skip,
             where: {
-              typebotId,
+              mozbotId,
               hasStarted: true,
               isArchived: false,
             },
@@ -99,19 +99,19 @@ const exportResults = async () => {
 
   writeFileSync('logs/results.json', JSON.stringify(results))
 
-  const resultHeader = parseResultHeader(typebot, [])
+  const resultHeader = parseResultHeader(mozbot, [])
 
   const dataToUnparse = convertResultsToTableData({
     results,
     headerCells: resultHeader,
-    blockIdVariableIdMap: parseBlockIdVariableIdMap(typebot?.groups),
+    blockIdVariableIdMap: parseBlockIdVariableIdMap(mozbot?.groups),
   })
 
   const headerIds = parseColumnsOrder(
-    typebot?.resultsTablePreferences?.columnsOrder,
+    mozbot?.resultsTablePreferences?.columnsOrder,
     resultHeader
   ).reduce<string[]>((currentHeaderIds, columnId) => {
-    if (typebot?.resultsTablePreferences?.columnsVisibility[columnId] === false)
+    if (mozbot?.resultsTablePreferences?.columnsVisibility[columnId] === false)
       return currentHeaderIds
     const columnLabel = resultHeader.find(
       (headerCell) => headerCell.id === columnId

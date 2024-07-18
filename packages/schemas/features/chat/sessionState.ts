@@ -1,8 +1,8 @@
 import { z } from '../../zod'
 import { answerSchema } from '../answer'
 import { resultSchema, setVariableHistoryItemSchema } from '../result'
-import { typebotInSessionStateSchema, dynamicThemeSchema } from './shared'
-import { settingsSchema } from '../typebot/settings'
+import { mozbotInSessionStateSchema, dynamicThemeSchema } from './shared'
+import { settingsSchema } from '../mozbot/settings'
 import { isInputBlock } from '../../helpers'
 
 const answerInSessionStateSchemaV2 = z.object({
@@ -27,13 +27,13 @@ const sessionStateSchemaV1 = z.object({
   version: z.undefined().openapi({
     type: 'string',
   }),
-  typebot: typebotInSessionStateSchema,
+  mozbot: mozbotInSessionStateSchema,
   dynamicTheme: dynamicThemeSchema.optional(),
-  linkedTypebots: z.object({
-    typebots: z.array(typebotInSessionStateSchema),
-    queue: z.array(z.object({ edgeId: z.string(), typebotId: z.string() })),
+  linkedMozbots: z.object({
+    mozbots: z.array(mozbotInSessionStateSchema),
+    queue: z.array(z.object({ edgeId: z.string(), mozbotId: z.string() })),
   }),
-  currentTypebotId: z.string(),
+  currentmozbotId: z.string(),
   result: resultInSessionStateSchema,
   currentBlock: z
     .object({
@@ -45,13 +45,13 @@ const sessionStateSchemaV1 = z.object({
 
 const sessionStateSchemaV2 = z.object({
   version: z.literal('2'),
-  typebotsQueue: z.array(
+  mozbotsQueue: z.array(
     z.object({
       edgeIdToTriggerWhenDone: z.string().optional(),
       isMergingWithParent: z.boolean().optional(),
       resultId: z.string().optional(),
       answers: z.array(answerInSessionStateSchemaV2),
-      typebot: typebotInSessionStateSchema,
+      mozbot: mozbotInSessionStateSchema,
     })
   ),
   dynamicTheme: dynamicThemeSchema.optional(),
@@ -127,13 +127,13 @@ const migrateFromV1ToV2 = (
   state: z.infer<typeof sessionStateSchemaV1>
 ): z.infer<typeof sessionStateSchemaV2> => ({
   version: '2',
-  typebotsQueue: [
+  mozbotsQueue: [
     {
-      typebot: state.typebot,
+      mozbot: state.mozbot,
       resultId: state.result.id,
       answers: state.result.answers.map((answer) => {
         let answerVariableId: string | undefined
-        state.typebot.groups.forEach((group) => {
+        state.mozbot.groups.forEach((group) => {
           group.blocks.forEach((block) => {
             if (isInputBlock(block) && block.id === answer.blockId) {
               answerVariableId = block.options?.variableId
@@ -143,10 +143,10 @@ const migrateFromV1ToV2 = (
         return {
           key:
             (answerVariableId
-              ? state.typebot.variables.find(
+              ? state.mozbot.variables.find(
                   (variable) => variable.id === answerVariableId
                 )?.name
-              : state.typebot.groups.find((group) =>
+              : state.mozbot.groups.find((group) =>
                   group.blocks.find((block) => block.id === answer.blockId)
                 )?.title) ?? '',
           value: answer.content,
@@ -154,18 +154,18 @@ const migrateFromV1ToV2 = (
       }),
       isMergingWithParent: true,
       edgeIdToTriggerWhenDone:
-        state.linkedTypebots.queue.length > 0
-          ? state.linkedTypebots.queue[0].edgeId
+        state.linkedMozbots.queue.length > 0
+          ? state.linkedMozbots.queue[0].edgeId
           : undefined,
     },
-    ...state.linkedTypebots.typebots.map(
-      (typebot, index) =>
+    ...state.linkedMozbots.mozbots.map(
+      (mozbot, index) =>
         ({
-          typebot,
+          mozbot,
           resultId: state.result.id,
           answers: state.result.answers.map((answer) => {
             let answerVariableId: string | undefined
-            typebot.groups.forEach((group) => {
+            mozbot.groups.forEach((group) => {
               group.blocks.forEach((block) => {
                 if (isInputBlock(block) && block.id === answer.blockId) {
                   answerVariableId = block.options?.variableId
@@ -175,18 +175,18 @@ const migrateFromV1ToV2 = (
             return {
               key:
                 (answerVariableId
-                  ? state.typebot.variables.find(
+                  ? state.mozbot.variables.find(
                       (variable) => variable.id === answerVariableId
                     )?.name
-                  : state.typebot.groups.find((group) =>
+                  : state.mozbot.groups.find((group) =>
                       group.blocks.find((block) => block.id === answer.blockId)
                     )?.title) ?? '',
               value: answer.content,
             }
           }),
-          edgeIdToTriggerWhenDone: state.linkedTypebots.queue.at(index + 1)
+          edgeIdToTriggerWhenDone: state.linkedMozbots.queue.at(index + 1)
             ?.edgeId,
-        } satisfies SessionState['typebotsQueue'][number])
+        } satisfies SessionState['mozbotsQueue'][number])
     ),
   ],
   dynamicTheme: state.dynamicTheme,

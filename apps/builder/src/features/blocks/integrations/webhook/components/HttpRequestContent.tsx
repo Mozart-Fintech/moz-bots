@@ -1,6 +1,6 @@
 import { Stack, Text } from '@chakra-ui/react'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
-import { HttpRequestBlock } from '@typebot.io/schemas'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
+import { HttpRequestBlock } from '@mozbot.io/schemas'
 import { SetVariableLabel } from '@/components/SetVariableLabel'
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const WebhookContent = ({ block: { options } }: Props) => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const webhook = options?.webhook
 
   if (!webhook?.url) return <Text color="gray.500">Configure...</Text>
@@ -23,7 +23,7 @@ export const WebhookContent = ({ block: { options } }: Props) => {
           <SetVariableLabel
             key={mapping.variableId}
             variableId={mapping.variableId as string}
-            variables={typebot?.variables}
+            variables={mozbot?.variables}
           />
         ))}
     </Stack>

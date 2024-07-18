@@ -1,7 +1,7 @@
-import { DashboardFolder } from '@typebot.io/prisma'
-import prisma from '@typebot.io/lib/prisma'
+import { DashboardFolder } from '@mozbot.io/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { methodNotAllowed, notAuthenticated } from '@typebot.io/lib/api'
+import { methodNotAllowed, notAuthenticated } from '@mozbot.io/lib/api'
 import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser'
 
 // TODO: Delete as it has been migrated to TRPC endpoints
@@ -36,7 +36,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
       data,
     })
-    return res.send({ typebots: folders })
+    return res.send({ mozbots: folders })
   }
   return methodNotAllowed(res)
 }

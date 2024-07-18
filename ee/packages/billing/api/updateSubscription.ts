@@ -1,11 +1,11 @@
 import { TRPCError } from '@trpc/server'
-import { env } from '@typebot.io/env'
-import prisma from '@typebot.io/lib/prisma'
-import { Plan } from '@typebot.io/prisma'
+import { env } from '@mozbot.io/env'
+import prisma from '@mozbot.io/lib/prisma'
+import { Plan } from '@mozbot.io/prisma'
 import Stripe from 'stripe'
-import { trackEvents } from '@typebot.io/telemetry/trackEvents'
-import { isAdminWriteWorkspaceForbidden } from '@typebot.io/db-rules/isAdminWriteWorkspaceForbidden'
-import { User } from '@typebot.io/schemas'
+import { trackEvents } from '@mozbot.io/telemetry/trackEvents'
+import { isAdminWriteWorkspaceForbidden } from '@mozbot.io/db-rules/isAdminWriteWorkspaceForbidden'
+import { User } from '@mozbot.io/schemas'
 import { createCheckoutSessionUrl } from '../helpers/createCheckoutSessionUrl'
 
 type Props = {
@@ -97,7 +97,7 @@ export const updateSubscription = async ({
     if (plan === 'STARTER') {
       const totalChatsUsed = await prisma.result.count({
         where: {
-          typebot: { workspaceId },
+          mozbot: { workspaceId },
           hasStarted: true,
           createdAt: {
             gte: new Date(subscription.current_period_start * 1000),

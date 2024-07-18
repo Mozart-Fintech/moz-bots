@@ -1,23 +1,20 @@
 import { getTestAsset } from '@/test/utils/playwright'
 import test, { expect } from '@playwright/test'
 import { createId } from '@paralleldrive/cuid2'
-import prisma from '@typebot.io/lib/prisma'
-import { importTypebotInDatabase } from '@typebot.io/playwright/databaseActions'
-import { StartChatInput, StartPreviewChatInput } from '@typebot.io/schemas'
+import prisma from '@mozbot.io/lib/prisma'
+import { importMozbotInDatabase } from '@mozbot.io/playwright/databaseActions'
+import { StartChatInput, StartPreviewChatInput } from '@mozbot.io/schemas'
 
 test.describe.configure({ mode: 'parallel' })
 
 test.beforeEach(async () => {
   try {
-    await importTypebotInDatabase(
-      getTestAsset('typebots/chat/linkedBot.json'),
-      {
-        id: 'chat-sub-bot',
-        publicId: 'chat-sub-bot-public',
-      }
-    )
-    await importTypebotInDatabase(
-      getTestAsset('typebots/chat/startingWithInput.json'),
+    await importMozbotInDatabase(getTestAsset('mozbots/chat/linkedBot.json'), {
+      id: 'chat-sub-bot',
+      publicId: 'chat-sub-bot-public',
+    })
+    await importMozbotInDatabase(
+      getTestAsset('mozbots/chat/startingWithInput.json'),
       {
         id: 'starting-with-input',
         publicId: 'starting-with-input-public',
@@ -29,10 +26,10 @@ test.beforeEach(async () => {
 })
 
 test('API chat execution should work on preview bot', async ({ request }) => {
-  const typebotId = createId()
-  const publicId = `${typebotId}-public`
-  await importTypebotInDatabase(getTestAsset('typebots/chat/main.json'), {
-    id: typebotId,
+  const mozbotId = createId()
+  const publicId = `${mozbotId}-public`
+  await importMozbotInDatabase(getTestAsset('mozbots/chat/main.json'), {
+    id: mozbotId,
     publicId,
   })
 
@@ -40,12 +37,12 @@ test('API chat execution should work on preview bot', async ({ request }) => {
 
   await test.step('Can start and continue chat', async () => {
     const { sessionId, messages, input, resultId } = await (
-      await request.post(`/api/v1/typebots/${typebotId}/preview/startChat`, {
+      await request.post(`/api/v1/mozbots/${mozbotId}/preview/startChat`, {
         data: {
           isOnlyRegistering: false,
           isStreamEnabled: false,
           textBubbleContentFormat: 'richText',
-        } satisfies Omit<StartPreviewChatInput, 'typebotId'>,
+        } satisfies Omit<StartPreviewChatInput, 'mozbotId'>,
       })
     ).json()
     chatSessionId = sessionId
@@ -94,10 +91,10 @@ test('API chat execution should work on preview bot', async ({ request }) => {
 })
 
 test('API chat execution should work on published bot', async ({ request }) => {
-  const typebotId = createId()
-  const publicId = `${typebotId}-public`
-  await importTypebotInDatabase(getTestAsset('typebots/chat/main.json'), {
-    id: typebotId,
+  const mozbotId = createId()
+  const publicId = `${mozbotId}-public`
+  await importMozbotInDatabase(getTestAsset('mozbots/chat/main.json'), {
+    id: mozbotId,
     publicId,
   })
 
@@ -105,7 +102,7 @@ test('API chat execution should work on published bot', async ({ request }) => {
 
   await test.step('Start the chat', async () => {
     const { sessionId, messages, input, resultId } = await (
-      await request.post(`/api/v1/typebots/${publicId}/startChat`, {
+      await request.post(`/api/v1/mozbots/${publicId}/startChat`, {
         data: {
           isOnlyRegistering: false,
           isStreamEnabled: false,
@@ -238,7 +235,7 @@ test('API chat execution should work on published bot', async ({ request }) => {
   await test.step('Answer Email question with valid input', async () => {
     const { messages, input } = await (
       await request.post(`/api/v1/sessions/${chatSessionId}/continueChat`, {
-        data: { message: 'typebot@email.com' },
+        data: { message: 'mozbot@email.com' },
       })
     ).json()
     expect(messages.length).toBe(0)
@@ -248,7 +245,7 @@ test('API chat execution should work on published bot', async ({ request }) => {
   await test.step('Answer URL question', async () => {
     const { messages, input } = await (
       await request.post(`/api/v1/sessions/${chatSessionId}/continueChat`, {
-        data: { message: 'https://typebot.io' },
+        data: { message: 'https://mozbot.io' },
       })
     ).json()
     expect(messages.length).toBe(0)
@@ -283,10 +280,10 @@ test('API chat execution should work on published bot', async ({ request }) => {
     ])
     expect(messages[2].content.richText.length).toBeGreaterThan(0)
   })
-  await test.step('Starting with a message when typebot starts with input should proceed', async () => {
+  await test.step('Starting with a message when mozbot starts with input should proceed', async () => {
     const response = await (
       await request.post(
-        `/api/v1/typebots/starting-with-input-public/startChat`,
+        `/api/v1/mozbots/starting-with-input-public/startChat`,
         {
           data: {
             //@ts-expect-error We want to test if message is correctly preprocessed by zod
@@ -311,12 +308,12 @@ test('API chat execution should work on published bot', async ({ request }) => {
   })
   await test.step('Markdown text bubble format should work', async () => {
     const { messages } = await (
-      await request.post(`/api/v1/typebots/${typebotId}/preview/startChat`, {
+      await request.post(`/api/v1/mozbots/${mozbotId}/preview/startChat`, {
         data: {
           isOnlyRegistering: false,
           isStreamEnabled: false,
           textBubbleContentFormat: 'markdown',
-        } satisfies Omit<StartPreviewChatInput, 'typebotId'>,
+        } satisfies Omit<StartPreviewChatInput, 'mozbotId'>,
       })
     ).json()
     expect(messages[0].content.markdown).toStrictEqual('Hi there! 👋')

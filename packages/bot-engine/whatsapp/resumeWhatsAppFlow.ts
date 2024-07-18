@@ -1,25 +1,25 @@
-import { Block, SessionState } from '@typebot.io/schemas'
+import { Block, SessionState } from '@mozbot.io/schemas'
 import {
   WhatsAppCredentials,
   WhatsAppIncomingMessage,
-} from '@typebot.io/schemas/features/whatsapp'
-import { env } from '@typebot.io/env'
+} from '@mozbot.io/schemas/features/whatsapp'
+import { env } from '@mozbot.io/env'
 import { sendChatReplyToWhatsApp } from './sendChatReplyToWhatsApp'
 import { startWhatsAppSession } from './startWhatsAppSession'
 import { getSession } from '../queries/getSession'
 import { continueBotFlow } from '../continueBotFlow'
-import { decrypt } from '@typebot.io/lib/api/encryption/decrypt'
+import { decrypt } from '@mozbot.io/lib/api/encryption/decrypt'
 import { saveStateToDatabase } from '../saveStateToDatabase'
-import prisma from '@typebot.io/lib/prisma'
-import { isDefined } from '@typebot.io/lib/utils'
+import prisma from '@mozbot.io/lib/prisma'
+import { isDefined } from '@mozbot.io/lib/utils'
 import { Reply } from '../types'
 import { setIsReplyingInChatSession } from '../queries/setIsReplyingInChatSession'
 import { removeIsReplyingInChatSession } from '../queries/removeIsReplyingInChatSession'
-import redis from '@typebot.io/lib/redis'
+import redis from '@mozbot.io/lib/redis'
 import { downloadMedia } from './downloadMedia'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { uploadFileToBucket } from '@typebot.io/lib/s3/uploadFileToBucket'
-import { getBlockById } from '@typebot.io/schemas/helpers'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { uploadFileToBucket } from '@mozbot.io/lib/s3/uploadFileToBucket'
+import { getBlockById } from '@mozbot.io/schemas/helpers'
 
 const incomingMessageDebounce = 3000
 
@@ -106,18 +106,18 @@ export const resumeWhatsAppFlow = async ({
     }
   }
 
-  const currentTypebot = session?.state.typebotsQueue[0].typebot
+  const currentMozbot = session?.state.mozbotsQueue[0].mozbot
   const { block } =
-    (currentTypebot && session?.state.currentBlockId
-      ? getBlockById(session.state.currentBlockId, currentTypebot.groups)
+    (currentMozbot && session?.state.currentBlockId
+      ? getBlockById(session.state.currentBlockId, currentMozbot.groups)
       : undefined) ?? {}
 
   const reply = await getIncomingMessageContent({
     messages: incomingMessages,
     workspaceId,
     accessToken: credentials?.systemUserAccessToken,
-    typebotId: currentTypebot?.id,
-    resultId: session?.state.typebotsQueue[0].resultId,
+    mozbotId: currentMozbot?.id,
+    resultId: session?.state.mozbotsQueue[0].resultId,
     block,
   })
 
@@ -191,14 +191,14 @@ const getIncomingMessageContent = async ({
   messages,
   workspaceId,
   accessToken,
-  typebotId,
+  mozbotId,
   resultId,
   block,
 }: {
   messages: WhatsAppIncomingMessage[]
   workspaceId?: string
   accessToken: string
-  typebotId?: string
+  mozbotId?: string
   resultId?: string
   block?: Block
 }): Promise<Reply> => {
@@ -241,7 +241,7 @@ const getIncomingMessageContent = async ({
         if (fileVisibility !== 'Public') {
           fileUrl =
             env.NEXTAUTH_URL +
-            `/api/typebots/${typebotId}/whatsapp/media/${
+            `/api/mozbots/${mozbotId}/whatsapp/media/${
               workspaceId ? `` : 'preview/'
             }${mediaId}`
         } else {
@@ -252,8 +252,8 @@ const getIncomingMessageContent = async ({
           const url = await uploadFileToBucket({
             file,
             key:
-              resultId && workspaceId && typebotId
-                ? `public/workspaces/${workspaceId}/typebots/${typebotId}/results/${resultId}/${mediaId}`
+              resultId && workspaceId && mozbotId
+                ? `public/workspaces/${workspaceId}/mozbots/${mozbotId}/results/${resultId}/${mediaId}`
                 : `tmp/whatsapp/media/${mediaId}`,
             mimeType,
           })

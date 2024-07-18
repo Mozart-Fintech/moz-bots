@@ -1,5 +1,5 @@
 import React from 'react'
-import { Settings } from '@typebot.io/schemas'
+import { Settings } from '@mozbot.io/schemas'
 import {
   FormLabel,
   Popover,
@@ -14,21 +14,21 @@ import { CodeEditor } from '@/components/inputs/CodeEditor'
 import { ImageUploadContent } from '@/components/ImageUploadContent'
 import { MoreInfoTooltip } from '@/components/MoreInfoTooltip'
 import { TextInput, Textarea } from '@/components/inputs'
-import { env } from '@typebot.io/env'
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
+import { env } from '@mozbot.io/env'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
 
 type Props = {
   workspaceId: string
-  typebotId: string
-  typebotName: string
+  mozbotId: string
+  mozbotName: string
   metadata: Settings['metadata']
   onMetadataChange: (metadata: Settings['metadata']) => void
 }
 
 export const MetadataForm = ({
   workspaceId,
-  typebotId,
-  typebotName,
+  mozbotId,
+  mozbotName,
   metadata,
   onMetadataChange,
 }: Props) => {
@@ -75,7 +75,7 @@ export const MetadataForm = ({
             <ImageUploadContent
               uploadFileProps={{
                 workspaceId,
-                typebotId,
+                mozbotId,
                 fileName: 'favIcon',
               }}
               defaultUrl={favIconUrl}
@@ -105,7 +105,7 @@ export const MetadataForm = ({
             <ImageUploadContent
               uploadFileProps={{
                 workspaceId,
-                typebotId,
+                mozbotId,
                 fileName: 'ogImage',
               }}
               defaultUrl={imageUrl}
@@ -117,7 +117,7 @@ export const MetadataForm = ({
       </Stack>
       <TextInput
         label="Title:"
-        defaultValue={metadata?.title ?? typebotName}
+        defaultValue={metadata?.title ?? mozbotName}
         onChange={handleTitleChange}
       />
       <Textarea
@@ -132,7 +132,7 @@ export const MetadataForm = ({
         placeholder="GTM-XXXXXX"
         onChange={handleGoogleTagManagerIdChange}
         label="Google Tag Manager ID:"
-        moreInfoTooltip="Do not include it if you are embedding your typebot in an existing website. GTM should be installed in the parent website instead."
+        moreInfoTooltip="Do not include it if you are embedding your mozbot in an existing website. GTM should be installed in the parent website instead."
       />
       <Stack>
         <HStack as={FormLabel} mb="0" htmlFor="head">

@@ -1,9 +1,9 @@
-import { createAction } from '@typebot.io/forge'
+import { createAction } from '@mozbot.io/forge'
 import { auth } from '../auth'
-import { isDefined } from '@typebot.io/lib'
+import { isDefined } from '@mozbot.io/lib'
 import { createAnthropic } from '@ai-sdk/anthropic'
-import { parseGenerateVariablesOptions } from '@typebot.io/openai-block/shared/parseGenerateVariablesOptions'
-import { runGenerateVariables } from '@typebot.io/openai-block/shared/runGenerateVariables'
+import { parseGenerateVariablesOptions } from '@mozbot.io/openai-block/shared/parseGenerateVariablesOptions'
+import { runGenerateVariables } from '@mozbot.io/openai-block/shared/runGenerateVariables'
 import { anthropicModels } from '../constants'
 
 export const generateVariables = createAction({

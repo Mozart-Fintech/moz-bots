@@ -1,10 +1,10 @@
 import { MenuList, MenuItem } from '@chakra-ui/react'
 import { CopyIcon, TrashIcon } from '@/components/icons'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
-import { BlockIndices, BlockV6 } from '@typebot.io/schemas'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
+import { BlockIndices, BlockV6 } from '@mozbot.io/schemas'
 import { useTranslate } from '@tolgee/react'
 import { ForgedBlockTurnIntoMenu } from '@/features/forge/components/ForgedBlockTurnIntoMenu'
-import { TurnableIntoParam } from '@typebot.io/forge'
+import { TurnableIntoParam } from '@mozbot.io/forge'
 import { ZodObject } from 'zod'
 
 type Props = {
@@ -20,7 +20,7 @@ export const BlockNodeContextMenu = ({
   onTurnIntoClick,
 }: Props) => {
   const { t } = useTranslate()
-  const { deleteBlock, duplicateBlock } = useTypebot()
+  const { deleteBlock, duplicateBlock } = useMozbot()
 
   const handleDuplicateClick = () => duplicateBlock(indices)
 

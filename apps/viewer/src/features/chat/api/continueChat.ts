@@ -2,9 +2,9 @@ import { publicProcedure } from '@/helpers/server/trpc'
 import {
   continueChatResponseSchema,
   messageSchema,
-} from '@typebot.io/schemas/features/chat/schema'
+} from '@mozbot.io/schemas/features/chat/schema'
 import { z } from 'zod'
-import { continueChat as continueChatFn } from '@typebot.io/bot-engine/apiHandlers/continueChat'
+import { continueChat as continueChatFn } from '@mozbot.io/bot-engine/apiHandlers/continueChat'
 
 export const continueChat = publicProcedure
   .meta({

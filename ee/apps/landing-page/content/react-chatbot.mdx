@@ -34,9 +34,9 @@ The chatbot's logic involves conditional rendering, hooks for state management, 
 - **Streamlined information gathering**
 - **Improved user engagement and retention**
 
-### Overview of Typebot as a No-Code Chatbot Builder
+### Overview of Mozbot as a No-Code Chatbot Builder
 
-Typebot is an open-source platform that makes it easy to create chatbots for React applications. Its key features include:
+Mozbot is an open-source platform that makes it easy to create chatbots for React applications. Its key features include:
 
 - Drag-and-drop interface for bot design
 - Visual flow builder for conversation logic
@@ -79,17 +79,17 @@ Typebot is an open-source platform that makes it easy to create chatbots for Rea
 
 **React chatbots** are versatile tools. They can significantly enhance user experience across various domains, providing immediate assistance and personalized interactions.
 
-## Method 1: Creating a Simple React Chatbot Using Typebot
+## Method 1: Creating a Simple React Chatbot Using Mozbot
 
-### Setting Up Typebot Account
+### Setting Up Mozbot Account
 
-1. Visit typebot.io and sign up for an account.
+1. Visit mozbot.io and sign up for an account.
 2. Verify your email address.
-3. Log in to the Typebot dashboard.
+3. Log in to the Mozbot dashboard.
 
-### Designing Your Chatbot using Typebot's Drag-and-Drop Interface
+### Designing Your Chatbot using Mozbot's Drag-and-Drop Interface
 
-1. Click "Create a new typebot".
+1. Click "Create a new mozbot".
 2. Choose a template or start from scratch.
 3. Add blocks to your flow:
    - Text bubbles for bot messages.
@@ -98,30 +98,30 @@ Typebot is an open-source platform that makes it easy to create chatbots for Rea
 4. Connect blocks to create conversation logic.
 5. Use conditional statements to branch conversations.
 
-### Exporting and Integrating Typebot Code in React
+### Exporting and Integrating Mozbot Code in React
 
-1. In Typebot, go to "Share" > "Web".
+1. In Mozbot, go to "Share" > "Web".
 2. Choose the "React" embed option.
 3. Copy the provided code snippet.
-4. In your React project, install **Typebot libraries**:
+4. In your React project, install **Mozbot libraries**:
 
 ```bash
-npm install @typebot.io/js @typebot.io/react
+npm install @mozbot.io/js @mozbot.io/react
 ```
 
 5. Create a new component in your React app:
 
 ```jsx
-import { Bubble } from '@typebot.io/react'
+import { Bubble } from '@mozbot.io/react'
 
 const ChatbotComponent = () => {
-  return <Bubble typebot="YOUR_TYPEBOT_ID" />
+  return <Bubble mozbot="YOUR_MOZBOT_ID" />
 }
 
 export default ChatbotComponent
 ```
 
-### Adding Typebot Chatbot to Existing React Applications
+### Adding Mozbot Chatbot to Existing React Applications
 
 1. Import the **ChatbotComponent** where needed:
 
@@ -142,7 +142,7 @@ function App() {
 
 ```jsx
 <Bubble
-  typebot="your-typebot-id"
+  mozbot="your-mozbot-id"
   theme={{ button: { backgroundColor: '#0042DA' } }}
   prefilledVariables={{
     'User Name': 'John Doe',
@@ -174,14 +174,14 @@ npm start
    - Correct message display.
    - Proper input handling.
    - Accurate conditional logic execution.
-5. Use Typebot's analytics to monitor performance.
+5. Use Mozbot's analytics to monitor performance.
 6. Iterate on your design based on user interactions and feedback.
 
-These steps show you how to quickly create and integrate a functional chatbot into your React application using **Typebot's no-code solution**.
+These steps show you how to quickly create and integrate a functional chatbot into your React application using **Mozbot's no-code solution**.
 
 <Cta />
 
-## Method 2: Creating the Frontend and Calling the Typebot API
+## Method 2: Creating the Frontend and Calling the Mozbot API
 
 We will do the same thing, except that we will build our own chat UI. It will allow us to customize as we want.
 
@@ -210,11 +210,11 @@ module.exports = {
 }
 ```
 
-### Setting Up Typebot API
+### Setting Up Mozbot API
 
-1. Create a Typebot account and design your chatbot flow.
-2. Generate an API token in Typebot settings.
-3. Note your Typebot's public ID.
+1. Create a Mozbot account and design your chatbot flow.
+2. Generate an API token in Mozbot settings.
+3. Note your Mozbot's public ID.
 
 ### Creating Chatbot Components in React using Daisy UI
 
@@ -277,14 +277,14 @@ const ChatComponent: React.FC = () => {
 export default ChatComponent
 ```
 
-### Fetching Responses from Typebot API
+### Fetching Responses from Mozbot API
 
 Implement API calls in `handleSendMessage`:
 
 ```typescript
 import axios from 'axios'
 
-const TYPEBOT_API_URL = 'https://typebot.io/api/v1/typebots'
+const MOZBOT_API_URL = 'https://mozbot.io/api/v1/mozbots'
 const PUBLIC_ID = 'your_public_id'
 const [sessionId, setSessionId] = useState<string | null>(null)
 
@@ -297,13 +297,13 @@ const handleSendMessage = async () => {
   try {
     let response
     if (!sessionId) {
-      response = await axios.post(`${TYPEBOT_API_URL}/${PUBLIC_ID}/startChat`, {
+      response = await axios.post(`${MOZBOT_API_URL}/${PUBLIC_ID}/startChat`, {
         message: inputMessage,
       })
       setSessionId(response.data.sessionId)
     } else {
       response = await axios.post(
-        `${TYPEBOT_API_URL}/${PUBLIC_ID}/continueChat`,
+        `${MOZBOT_API_URL}/${PUBLIC_ID}/continueChat`,
         {
           sessionId,
           message: inputMessage,
@@ -388,7 +388,7 @@ npm run build
    - Error scenarios.
    - Performance under load.
 
-By following these steps, you can create a custom **React chatbot frontend** that interacts with the Typebot API, providing a seamless chat experience for your users.
+By following these steps, you can create a custom **React chatbot frontend** that interacts with the Mozbot API, providing a seamless chat experience for your users.
 
 <Cta />
 
@@ -779,7 +779,7 @@ import { useDebounce } from 'use-debounce'
 const [value] = useDebounce(text, 1000)
 ```
 
-Building a **React chatbot** offers diverse approaches, from no-code solutions to full-stack implementations. This article explored three methods: using Typebot for rapid deployment, integrating Typebot's API for customization, and building a complete solution from scratch.
+Building a **React chatbot** offers diverse approaches, from no-code solutions to full-stack implementations. This article explored three methods: using Mozbot for rapid deployment, integrating Mozbot's API for customization, and building a complete solution from scratch.
 
 Each approach provides unique benefits, allowing developers to choose based on their project requirements and technical expertise.
 

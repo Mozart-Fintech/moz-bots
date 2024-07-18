@@ -9,54 +9,53 @@ import {
   Stack,
 } from '@chakra-ui/react'
 import { ChatIcon, CodeIcon, DropletIcon, TableIcon } from '@/components/icons'
-import { ChatTheme, GeneralTheme, ThemeTemplate } from '@typebot.io/schemas'
+import { ChatTheme, GeneralTheme, ThemeTemplate } from '@mozbot.io/schemas'
 import React from 'react'
 import { CustomCssSettings } from './CustomCssSettings'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { ChatThemeSettings } from './chat/ChatThemeSettings'
 import { GeneralSettings } from './general/GeneralSettings'
 import { ThemeTemplates } from './ThemeTemplates'
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
 import { useTranslate } from '@tolgee/react'
 
 export const ThemeSideMenu = () => {
   const { t } = useTranslate()
 
-  const { typebot, updateTypebot, currentUserMode } = useTypebot()
+  const { mozbot, updateMozbot, currentUserMode } = useMozbot()
 
   const updateChatTheme = (chat: ChatTheme) =>
-    typebot && updateTypebot({ updates: { theme: { ...typebot.theme, chat } } })
+    mozbot && updateMozbot({ updates: { theme: { ...mozbot.theme, chat } } })
 
   const updateGeneralTheme = (general?: GeneralTheme) =>
-    typebot &&
-    updateTypebot({ updates: { theme: { ...typebot.theme, general } } })
+    mozbot && updateMozbot({ updates: { theme: { ...mozbot.theme, general } } })
 
   const updateCustomCss = (customCss: string) =>
-    typebot &&
-    updateTypebot({ updates: { theme: { ...typebot.theme, customCss } } })
+    mozbot &&
+    updateMozbot({ updates: { theme: { ...mozbot.theme, customCss } } })
 
   const selectTemplate = (
     selectedTemplate: Partial<Pick<ThemeTemplate, 'id' | 'theme'>>
   ) => {
-    if (!typebot) return
+    if (!mozbot) return
     const { theme, id } = selectedTemplate
-    updateTypebot({
+    updateMozbot({
       updates: {
         selectedThemeTemplateId: id,
-        theme: theme ? { ...theme } : typebot.theme,
+        theme: theme ? { ...theme } : mozbot.theme,
       },
     })
   }
 
   const updateBranding = (isBrandingEnabled: boolean) =>
-    typebot &&
-    updateTypebot({
+    mozbot &&
+    updateMozbot({
       updates: {
-        settings: { ...typebot.settings, general: { isBrandingEnabled } },
+        settings: { ...mozbot.settings, general: { isBrandingEnabled } },
       },
     })
 
-  const templateId = typebot?.selectedThemeTemplateId ?? undefined
+  const templateId = mozbot?.selectedThemeTemplateId ?? undefined
 
   return (
     <Stack
@@ -84,11 +83,11 @@ export const ThemeSideMenu = () => {
               <AccordionIcon />
             </AccordionButton>
             <AccordionPanel pb={12}>
-              {typebot && (
+              {mozbot && (
                 <ThemeTemplates
                   selectedTemplateId={templateId}
-                  currentTheme={typebot.theme}
-                  workspaceId={typebot.workspaceId}
+                  currentTheme={mozbot.theme}
+                  workspaceId={mozbot.workspaceId}
                   onTemplateSelect={selectTemplate}
                 />
               )}
@@ -104,14 +103,14 @@ export const ThemeSideMenu = () => {
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel pb={4}>
-            {typebot && (
+            {mozbot && (
               <GeneralSettings
                 key={templateId}
                 isBrandingEnabled={
-                  typebot.settings.general?.isBrandingEnabled ??
+                  mozbot.settings.general?.isBrandingEnabled ??
                   defaultSettings.general.isBrandingEnabled
                 }
-                generalTheme={typebot.theme.general}
+                generalTheme={mozbot.theme.general}
                 onGeneralThemeChange={updateGeneralTheme}
                 onBrandingChange={updateBranding}
               />
@@ -127,13 +126,13 @@ export const ThemeSideMenu = () => {
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel pb={4}>
-            {typebot && (
+            {mozbot && (
               <ChatThemeSettings
                 key={templateId}
-                workspaceId={typebot.workspaceId}
-                typebotId={typebot.id}
-                chatTheme={typebot.theme.chat}
-                generalBackground={typebot.theme.general?.background}
+                workspaceId={mozbot.workspaceId}
+                mozbotId={mozbot.id}
+                chatTheme={mozbot.theme.chat}
+                generalBackground={mozbot.theme.general?.background}
                 onChatThemeChange={updateChatTheme}
               />
             )}
@@ -148,10 +147,10 @@ export const ThemeSideMenu = () => {
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel pb={4}>
-            {typebot && (
+            {mozbot && (
               <CustomCssSettings
                 key={templateId}
-                customCss={typebot.theme.customCss}
+                customCss={mozbot.theme.customCss}
                 onCustomCssChange={updateCustomCss}
               />
             )}

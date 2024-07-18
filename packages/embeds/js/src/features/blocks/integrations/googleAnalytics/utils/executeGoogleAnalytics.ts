@@ -1,5 +1,5 @@
 import { sendGaEvent } from '@/lib/gtag'
-import { GoogleAnalyticsBlock } from '@typebot.io/schemas'
+import { GoogleAnalyticsBlock } from '@mozbot.io/schemas'
 
 export const executeGoogleAnalyticsBlock = async (
   options: GoogleAnalyticsBlock['options']

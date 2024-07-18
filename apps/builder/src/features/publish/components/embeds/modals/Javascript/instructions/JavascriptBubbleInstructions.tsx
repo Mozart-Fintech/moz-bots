@@ -1,24 +1,24 @@
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { Stack, Code, Text } from '@chakra-ui/react'
-import { BubbleProps } from '@typebot.io/nextjs'
-import { Typebot } from '@typebot.io/schemas'
+import { BubbleProps } from '@mozbot.io/nextjs'
+import { Mozbot } from '@mozbot.io/schemas'
 import { useState } from 'react'
 import { BubbleSettings } from '../../../settings/BubbleSettings/BubbleSettings'
 import { JavascriptBubbleSnippet } from '../JavascriptBubbleSnippet'
-import { defaultButtonsBackgroundColor } from '@typebot.io/schemas/features/typebot/theme/constants'
+import { defaultButtonsBackgroundColor } from '@mozbot.io/schemas/features/mozbot/theme/constants'
 
-export const parseDefaultBubbleTheme = (typebot?: Typebot) => ({
+export const parseDefaultBubbleTheme = (mozbot?: Mozbot) => ({
   button: {
     backgroundColor:
-      typebot?.theme.chat?.buttons?.backgroundColor ??
+      mozbot?.theme.chat?.buttons?.backgroundColor ??
       defaultButtonsBackgroundColor,
   },
 })
 
 export const JavascriptBubbleInstructions = () => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const [theme, setTheme] = useState<BubbleProps['theme']>(
-    parseDefaultBubbleTheme(typebot)
+    parseDefaultBubbleTheme(mozbot)
   )
   const [previewMessage, setPreviewMessage] =
     useState<BubbleProps['previewMessage']>()
@@ -28,7 +28,7 @@ export const JavascriptBubbleInstructions = () => {
       <BubbleSettings
         theme={theme}
         previewMessage={previewMessage}
-        defaultPreviewMessageAvatar={typebot?.theme.chat?.hostAvatar?.url ?? ''}
+        defaultPreviewMessageAvatar={mozbot?.theme.chat?.hostAvatar?.url ?? ''}
         onThemeChange={setTheme}
         onPreviewMessageChange={setPreviewMessage}
       />

@@ -5,31 +5,31 @@ import {
   SetVariableHistoryItem,
   Variable,
   VariableWithUnknowValue,
-} from '@typebot.io/schemas'
-import { byId, isEmpty } from '@typebot.io/lib'
+} from '@mozbot.io/schemas'
+import { byId, isEmpty } from '@mozbot.io/lib'
 import { ExecuteLogicResponse } from '../../../types'
 import { parseScriptToExecuteClientSideAction } from '../script/executeScript'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
-import { updateVariablesInSession } from '@typebot.io/variables/updateVariablesInSession'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
+import { updateVariablesInSession } from '@mozbot.io/variables/updateVariablesInSession'
 import { createId } from '@paralleldrive/cuid2'
 import { utcToZonedTime, format as tzFormat } from 'date-fns-tz'
 import {
   computeResultTranscript,
   parseTranscriptMessageText,
-} from '@typebot.io/logic/computeResultTranscript'
-import prisma from '@typebot.io/lib/prisma'
+} from '@mozbot.io/logic/computeResultTranscript'
+import prisma from '@mozbot.io/lib/prisma'
 import {
   defaultSetVariableOptions,
   sessionOnlySetVariableOptions,
-} from '@typebot.io/schemas/features/blocks/logic/setVariable/constants'
-import { createCodeRunner } from '@typebot.io/variables/codeRunners'
-import { stringifyError } from '@typebot.io/lib/stringifyError'
+} from '@mozbot.io/schemas/features/blocks/logic/setVariable/constants'
+import { createCodeRunner } from '@mozbot.io/variables/codeRunners'
+import { stringifyError } from '@mozbot.io/lib/stringifyError'
 
 export const executeSetVariable = async (
   state: SessionState,
   block: SetVariableBlock
 ): Promise<ExecuteLogicResponse> => {
-  const { variables } = state.typebotsQueue[0].typebot
+  const { variables } = state.mozbotsQueue[0].mozbot
   if (!block.options?.variableId)
     return {
       outgoingEdgeId: block.outgoingEdgeId,
@@ -149,9 +149,9 @@ const getExpressionToEvaluate =
         return phoneNumber ? `"${state.whatsApp?.contact.phoneNumber}"` : null
       }
       case 'Now': {
-        const timeZone = parseVariables(
-          state.typebotsQueue[0].typebot.variables
-        )(options.timeZone)
+        const timeZone = parseVariables(state.mozbotsQueue[0].mozbot.variables)(
+          options.timeZone
+        )
         if (isEmpty(timeZone)) return 'new Date().toISOString()'
         return toISOWithTz(new Date(), timeZone)
       }
@@ -159,17 +159,17 @@ const getExpressionToEvaluate =
       case 'Today':
         return 'new Date().toISOString()'
       case 'Tomorrow': {
-        const timeZone = parseVariables(
-          state.typebotsQueue[0].typebot.variables
-        )(options.timeZone)
+        const timeZone = parseVariables(state.mozbotsQueue[0].mozbot.variables)(
+          options.timeZone
+        )
         if (isEmpty(timeZone))
           return 'new Date(Date.now() + 86400000).toISOString()'
         return toISOWithTz(new Date(Date.now() + 86400000), timeZone)
       }
       case 'Yesterday': {
-        const timeZone = parseVariables(
-          state.typebotsQueue[0].typebot.variables
-        )(options.timeZone)
+        const timeZone = parseVariables(state.mozbotsQueue[0].mozbot.variables)(
+          options.timeZone
+        )
         if (isEmpty(timeZone))
           return 'new Date(Date.now() - 86400000).toISOString()'
         return toISOWithTz(new Date(Date.now() - 86400000), timeZone)
@@ -179,7 +179,7 @@ const getExpressionToEvaluate =
       }
       case 'Result ID':
       case 'User ID': {
-        return state.typebotsQueue[0].resultId ?? `"${createId()}"`
+        return state.mozbotsQueue[0].resultId ?? `"${createId()}"`
       }
       case 'Map item with same index': {
         return `const itemIndex = ${options.mapListItemParams?.baseListVariableId}.indexOf(${options.mapListItemParams?.baseItemVariableId})
@@ -192,7 +192,7 @@ const getExpressionToEvaluate =
         return `${options.variableId} && Array.isArray(${options.variableId}) ? ${options.variableId}.slice(1) : []`
       }
       case 'Append value(s)': {
-        const item = parseVariables(state.typebotsQueue[0].typebot.variables)(
+        const item = parseVariables(state.mozbotsQueue[0].mozbot.variables)(
           options.item
         )
         return `if(\`${item}\` === '') return ${options.variableId};
@@ -216,15 +216,15 @@ const getExpressionToEvaluate =
       case 'Transcript': {
         const props = await parseTranscriptProps(state)
         if (!props) return ''
-        const typebotWithEmptyVariables = {
-          ...state.typebotsQueue[0].typebot,
-          variables: state.typebotsQueue[0].typebot.variables.map((v) => ({
+        const mozbotWithEmptyVariables = {
+          ...state.mozbotsQueue[0].mozbot,
+          variables: state.mozbotsQueue[0].mozbot.variables.map((v) => ({
             ...v,
             value: undefined,
           })),
         }
         const transcript = computeResultTranscript({
-          typebot: typebotWithEmptyVariables,
+          mozbot: mozbotWithEmptyVariables,
           stopAtBlockId: blockId,
           ...props,
         })
@@ -265,8 +265,7 @@ type ParsedTranscriptProps = {
 const parseTranscriptProps = async (
   state: SessionState
 ): Promise<ParsedTranscriptProps | undefined> => {
-  if (!state.typebotsQueue[0].resultId)
-    return parsePreviewTranscriptProps(state)
+  if (!state.mozbotsQueue[0].resultId) return parsePreviewTranscriptProps(state)
   return parseResultTranscriptProps(state)
 }
 
@@ -290,7 +289,7 @@ const parseResultTranscriptProps = async (
 ): Promise<ParsedTranscriptProps | undefined> => {
   const result = await prisma.result.findUnique({
     where: {
-      id: state.typebotsQueue[0].resultId,
+      id: state.mozbotsQueue[0].resultId,
     },
     select: {
       edges: {
@@ -347,10 +346,10 @@ const parseColateralVariableChangeIfAny = ({
 }): VariableWithUnknowValue[] => {
   if (!options || (options.type !== 'Pop' && options.type !== 'Shift'))
     return []
-  const listVariableValue = state.typebotsQueue[0].typebot.variables.find(
+  const listVariableValue = state.mozbotsQueue[0].mozbot.variables.find(
     (v) => v.id === options.variableId
   )?.value
-  const variable = state.typebotsQueue[0].typebot.variables.find(
+  const variable = state.mozbotsQueue[0].mozbot.variables.find(
     (v) => v.id === options.saveItemInVariableId
   )
   if (!variable || !listVariableValue) return []

@@ -6,18 +6,18 @@
   },
   "servers": [
     {
-      "url": "https://typebot.io/api"
+      "url": "https://mozbot.io/api"
     }
   ],
   "externalDocs": {
-    "url": "https://docs.typebot.io/api-reference"
+    "url": "https://docs.mozbot.io/api-reference"
   },
   "paths": {
     "/v1/sendMessage": {
       "post": {
         "operationId": "sendMessageV1",
         "summary": "Send a message",
-        "description": "To initiate a chat, do not provide a `sessionId` nor a `message`.\n\nContinue the conversation by providing the `sessionId` and the `message` that should answer the previous question.\n\nSet the `isPreview` option to `true` to chat with the non-published version of the typebot.",
+        "description": "To initiate a chat, do not provide a `sessionId` nor a `message`.\n\nContinue the conversation by providing the `sessionId` and the `message` that should answer the previous question.\n\nSet the `isPreview` option to `true` to chat with the non-published version of the mozbot.",
         "tags": [
           "Deprecated"
         ],
@@ -42,24 +42,24 @@
                       {
                         "type": "object",
                         "properties": {
-                          "typebot": {
+                          "mozbot": {
                             "anyOf": [
                               {
                                 "oneOf": [
                                   {
-                                    "$ref": "#/components/schemas/typebotV5"
+                                    "$ref": "#/components/schemas/mozbotV5"
                                   },
                                   {
-                                    "$ref": "#/components/schemas/typebotV6"
+                                    "$ref": "#/components/schemas/mozbotV6"
                                   }
                                 ],
                                 "discriminator": {
                                   "propertyName": "version",
                                   "mapping": {
-                                    "3": "#/components/schemas/typebotV5",
-                                    "4": "#/components/schemas/typebotV5",
-                                    "5": "#/components/schemas/typebotV5",
-                                    "6": "#/components/schemas/typebotV6"
+                                    "3": "#/components/schemas/mozbotV5",
+                                    "4": "#/components/schemas/mozbotV5",
+                                    "5": "#/components/schemas/mozbotV5",
+                                    "6": "#/components/schemas/mozbotV6"
                                   }
                                 }
                               },
@@ -67,7 +67,7 @@
                                 "type": "string"
                               }
                             ],
-                            "description": "Either a Typebot ID or a Typebot object. If you provide a Typebot object, it will be executed in preview mode. ([How can I find my typebot ID?](https://docs.typebot.io/api-reference#how-to-find-my-typebotid))."
+                            "description": "Either a Mozbot ID or a Mozbot object. If you provide a Mozbot object, it will be executed in preview mode. ([How can I find my mozbot ID?](https://docs.mozbot.io/api-reference#how-to-find-my-mozbotId))."
                           },
                           "isPreview": {
                             "type": "boolean",
@@ -80,7 +80,7 @@
                           "prefilledVariables": {
                             "type": "object",
                             "additionalProperties": {},
-                            "description": "[More info about prefilled variables.](https://docs.typebot.io/editor/variables#prefilled-variables)"
+                            "description": "[More info about prefilled variables.](https://docs.mozbot.io/editor/variables#prefilled-variables)"
                           },
                           "isStreamEnabled": {
                             "type": "boolean",
@@ -92,7 +92,7 @@
                           }
                         },
                         "required": [
-                          "typebot"
+                          "mozbot"
                         ]
                       },
                       {
@@ -422,7 +422,7 @@
                     "sessionId": {
                       "type": "string"
                     },
-                    "typebot": {
+                    "mozbot": {
                       "type": "object",
                       "properties": {
                         "id": {
@@ -527,7 +527,7 @@
       "post": {
         "operationId": "sendMessageV2",
         "summary": "Send a message",
-        "description": "To initiate a chat, do not provide a `sessionId` nor a `message`.\n\nContinue the conversation by providing the `sessionId` and the `message` that should answer the previous question.\n\nSet the `isPreview` option to `true` to chat with the non-published version of the typebot.",
+        "description": "To initiate a chat, do not provide a `sessionId` nor a `message`.\n\nContinue the conversation by providing the `sessionId` and the `message` that should answer the previous question.\n\nSet the `isPreview` option to `true` to chat with the non-published version of the mozbot.",
         "tags": [
           "Deprecated"
         ],
@@ -552,24 +552,24 @@
                       {
                         "type": "object",
                         "properties": {
-                          "typebot": {
+                          "mozbot": {
                             "anyOf": [
                               {
                                 "oneOf": [
                                   {
-                                    "$ref": "#/components/schemas/typebotV5"
+                                    "$ref": "#/components/schemas/mozbotV5"
                                   },
                                   {
-                                    "$ref": "#/components/schemas/typebotV6"
+                                    "$ref": "#/components/schemas/mozbotV6"
                                   }
                                 ],
                                 "discriminator": {
                                   "propertyName": "version",
                                   "mapping": {
-                                    "3": "#/components/schemas/typebotV5",
-                                    "4": "#/components/schemas/typebotV5",
-                                    "5": "#/components/schemas/typebotV5",
-                                    "6": "#/components/schemas/typebotV6"
+                                    "3": "#/components/schemas/mozbotV5",
+                                    "4": "#/components/schemas/mozbotV5",
+                                    "5": "#/components/schemas/mozbotV5",
+                                    "6": "#/components/schemas/mozbotV6"
                                   }
                                 }
                               },
@@ -577,7 +577,7 @@
                                 "type": "string"
                               }
                             ],
-                            "description": "Either a Typebot ID or a Typebot object. If you provide a Typebot object, it will be executed in preview mode. ([How can I find my typebot ID?](https://docs.typebot.io/api-reference#how-to-find-my-typebotid))."
+                            "description": "Either a Mozbot ID or a Mozbot object. If you provide a Mozbot object, it will be executed in preview mode. ([How can I find my mozbot ID?](https://docs.mozbot.io/api-reference#how-to-find-my-mozbotId))."
                           },
                           "isPreview": {
                             "type": "boolean",
@@ -590,7 +590,7 @@
                           "prefilledVariables": {
                             "type": "object",
                             "additionalProperties": {},
-                            "description": "[More info about prefilled variables.](https://docs.typebot.io/editor/variables#prefilled-variables)"
+                            "description": "[More info about prefilled variables.](https://docs.mozbot.io/editor/variables#prefilled-variables)"
                           },
                           "isStreamEnabled": {
                             "type": "boolean",
@@ -602,7 +602,7 @@
                           }
                         },
                         "required": [
-                          "typebot"
+                          "mozbot"
                         ]
                       },
                       {
@@ -932,7 +932,7 @@
                     "sessionId": {
                       "type": "string"
                     },
-                    "typebot": {
+                    "mozbot": {
                       "type": "object",
                       "properties": {
                         "id": {
@@ -1033,7 +1033,7 @@
         }
       }
     },
-    "/v1/typebots/{publicId}/startChat": {
+    "/v1/mozbots/{publicId}/startChat": {
       "post": {
         "operationId": "startChat",
         "summary": "Start chat",
@@ -1137,7 +1137,7 @@
                     "resultId": {
                       "type": "string"
                     },
-                    "typebot": {
+                    "mozbot": {
                       "type": "object",
                       "properties": {
                         "id": {
@@ -1411,7 +1411,7 @@
                           "type": "string"
                         }
                       },
-                      "description": "If the typebot contains dynamic avatars, dynamicTheme returns the new avatar URLs whenever their variables are updated."
+                      "description": "If the mozbot contains dynamic avatars, dynamicTheme returns the new avatar URLs whenever their variables are updated."
                     },
                     "progress": {
                       "type": "number",
@@ -1420,7 +1420,7 @@
                   },
                   "required": [
                     "sessionId",
-                    "typebot",
+                    "mozbot",
                     "messages"
                   ]
                 }
@@ -1778,7 +1778,7 @@
                           "type": "string"
                         }
                       },
-                      "description": "If the typebot contains dynamic avatars, dynamicTheme returns the new avatar URLs whenever their variables are updated."
+                      "description": "If the mozbot contains dynamic avatars, dynamicTheme returns the new avatar URLs whenever their variables are updated."
                     },
                     "progress": {
                       "type": "number",
@@ -1815,7 +1815,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/preview/startChat": {
+    "/v1/mozbots/{mozbotId}/preview/startChat": {
       "post": {
         "operationId": "startChatPreview",
         "summary": "Start preview chat",
@@ -1823,11 +1823,11 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
-            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+            "name": "mozbotId",
+            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)",
             "schema": {
               "type": "string",
-              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
             },
             "required": true
           }
@@ -1877,25 +1877,25 @@
                     "description": "If set to `true`, it will only register the session and not start the bot. This is used for 3rd party chat platforms as it can require a session to be registered before sending the first message.",
                     "default": false
                   },
-                  "typebot": {
+                  "mozbot": {
                     "oneOf": [
                       {
-                        "$ref": "#/components/schemas/typebotV5"
+                        "$ref": "#/components/schemas/mozbotV5"
                       },
                       {
-                        "$ref": "#/components/schemas/typebotV6"
+                        "$ref": "#/components/schemas/mozbotV6"
                       }
                     ],
                     "discriminator": {
                       "propertyName": "version",
                       "mapping": {
-                        "3": "#/components/schemas/typebotV5",
-                        "4": "#/components/schemas/typebotV5",
-                        "5": "#/components/schemas/typebotV5",
-                        "6": "#/components/schemas/typebotV6"
+                        "3": "#/components/schemas/mozbotV5",
+                        "4": "#/components/schemas/mozbotV5",
+                        "5": "#/components/schemas/mozbotV5",
+                        "6": "#/components/schemas/mozbotV6"
                       }
                     },
-                    "description": "If set, it will override the typebot that is used to start the chat."
+                    "description": "If set, it will override the mozbot that is used to start the chat."
                   },
                   "startFrom": {
                     "oneOf": [
@@ -1975,7 +1975,7 @@
                       "type": "string",
                       "description": "To save and use for /continueChat requests."
                     },
-                    "typebot": {
+                    "mozbot": {
                       "type": "object",
                       "properties": {
                         "id": {
@@ -2249,7 +2249,7 @@
                           "type": "string"
                         }
                       },
-                      "description": "If the typebot contains dynamic avatars, dynamicTheme returns the new avatar URLs whenever their variables are updated."
+                      "description": "If the mozbot contains dynamic avatars, dynamicTheme returns the new avatar URLs whenever their variables are updated."
                     },
                     "progress": {
                       "type": "number",
@@ -2258,7 +2258,7 @@
                   },
                   "required": [
                     "sessionId",
-                    "typebot",
+                    "mozbot",
                     "messages"
                   ]
                 }
@@ -2288,7 +2288,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/blocks/{blockId}/storage/upload-url": {
+    "/v1/mozbots/{mozbotId}/blocks/{blockId}/storage/upload-url": {
       "get": {
         "operationId": "getUploadUrl",
         "summary": "Get upload URL for a file",
@@ -2300,7 +2300,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
+            "name": "mozbotId",
             "schema": {
               "type": "string"
             },
@@ -2403,7 +2403,7 @@
                       {
                         "type": "object",
                         "properties": {
-                          "typebotId": {
+                          "mozbotId": {
                             "type": "string"
                           },
                           "blockId": {
@@ -2417,7 +2417,7 @@
                           }
                         },
                         "required": [
-                          "typebotId",
+                          "mozbotId",
                           "blockId",
                           "resultId",
                           "fileName"
@@ -2583,11 +2583,11 @@
         }
       }
     },
-    "/v1/sessions/{sessionId}/updateTypebot": {
+    "/v1/sessions/{sessionId}/updateMozbot": {
       "post": {
-        "operationId": "updateTypebotInSession",
-        "summary": "Update typebot in session",
-        "description": "Update chat session with latest typebot modifications. This is useful when you want to update the typebot in an ongoing session after making changes to it.",
+        "operationId": "updateMozbotInSession",
+        "summary": "Update mozbot in session",
+        "description": "Update chat session with latest mozbot modifications. This is useful when you want to update the mozbot in an ongoing session after making changes to it.",
         "security": [
           {
             "Authorization": []
@@ -3328,7 +3328,7 @@
       }
     },
     "schemas": {
-      "typebotV5": {
+      "mozbotV5": {
         "type": "object",
         "properties": {
           "version": {
@@ -4030,13 +4030,13 @@
                           "type": {
                             "type": "string",
                             "enum": [
-                              "Typebot link"
+                              "Mozbot link"
                             ]
                           },
                           "options": {
                             "type": "object",
                             "properties": {
-                              "typebotId": {
+                              "mozbotId": {
                                 "type": "string"
                               },
                               "groupId": {
@@ -5953,7 +5953,7 @@
           "settings",
           "theme"
         ],
-        "title": "Typebot V5"
+        "title": "Mozbot V5"
       },
       "textInput": {
         "type": "object",
@@ -7425,7 +7425,7 @@
         },
         "title": "Theme"
       },
-      "typebotV6": {
+      "mozbotV6": {
         "type": "object",
         "properties": {
           "version": {
@@ -7567,7 +7567,7 @@
           "settings",
           "theme"
         ],
-        "title": "Typebot V6"
+        "title": "Mozbot V6"
       },
       "groupV6": {
         "type": "object",
@@ -8240,13 +8240,13 @@
               "type": {
                 "type": "string",
                 "enum": [
-                  "Typebot link"
+                  "Mozbot link"
                 ]
               },
               "options": {
                 "type": "object",
                 "properties": {
-                  "typebotId": {
+                  "mozbotId": {
                     "type": "string"
                   },
                   "groupId": {

@@ -1,6 +1,6 @@
 import Cors from 'micro-cors'
 import { RequestHandler } from 'next/dist/server/next'
-import { webhookHandler } from '@typebot.io/billing/api/webhookHandler'
+import { webhookHandler } from '@mozbot.io/billing/api/webhookHandler'
 
 const cors = Cors({
   allowMethods: ['POST', 'HEAD'],

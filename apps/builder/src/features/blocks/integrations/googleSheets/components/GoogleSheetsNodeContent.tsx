@@ -1,22 +1,22 @@
 import React from 'react'
 import { Stack, Text } from '@chakra-ui/react'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { SetVariableLabel } from '@/components/SetVariableLabel'
-import { GoogleSheetsBlock } from '@typebot.io/schemas'
-import { GoogleSheetsAction } from '@typebot.io/schemas/features/blocks/integrations/googleSheets/constants'
+import { GoogleSheetsBlock } from '@mozbot.io/schemas'
+import { GoogleSheetsAction } from '@mozbot.io/schemas/features/blocks/integrations/googleSheets/constants'
 
 type Props = {
   options?: GoogleSheetsBlock['options']
 }
 
 export const GoogleSheetsNodeContent = ({ options }: Props) => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   return (
     <Stack>
       <Text color={options?.action ? 'currentcolor' : 'gray.500'} noOfLines={1}>
         {options?.action ?? 'Configure...'}
       </Text>
-      {typebot &&
+      {mozbot &&
         options?.action === GoogleSheetsAction.GET &&
         options?.cellsToExtract
           ?.map((mapping) => mapping.variableId)
@@ -24,7 +24,7 @@ export const GoogleSheetsNodeContent = ({ options }: Props) => {
             variableId ? (
               <SetVariableLabel
                 key={variableId + idx}
-                variables={typebot.variables}
+                variables={mozbot.variables}
                 variableId={variableId}
               />
             ) : null

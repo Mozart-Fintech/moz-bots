@@ -1,6 +1,6 @@
-import { User } from '@typebot.io/prisma'
+import { User } from '@mozbot.io/prisma'
 import { NextApiRequest } from 'next'
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 
 export const authenticateUser = async (
   req: NextApiRequest

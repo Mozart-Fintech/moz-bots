@@ -1,20 +1,20 @@
 import { getAuthOptions } from '@/pages/api/auth/[...nextauth]'
-import prisma from '@typebot.io/lib/prisma'
-import { trackEvents } from '@typebot.io/telemetry/trackEvents'
-import { User } from '@typebot.io/schemas'
+import prisma from '@mozbot.io/lib/prisma'
+import { trackEvents } from '@mozbot.io/telemetry/trackEvents'
+import { User } from '@mozbot.io/schemas'
 import { GetServerSidePropsContext } from 'next'
 import { getServerSession } from 'next-auth'
 
 export const trackAnalyticsPageView = async (
   context: GetServerSidePropsContext
 ) => {
-  const typebotId = context.params?.typebotId as string | undefined
-  if (!typebotId) return
-  const typebot = await prisma.typebot.findUnique({
-    where: { id: typebotId },
+  const mozbotId = context.params?.mozbotId as string | undefined
+  if (!mozbotId) return
+  const mozbot = await prisma.mozbot.findUnique({
+    where: { id: mozbotId },
     select: { workspaceId: true },
   })
-  if (!typebot) return
+  if (!mozbot) return
   const session = await getServerSession(
     context.req,
     context.res,
@@ -23,9 +23,9 @@ export const trackAnalyticsPageView = async (
   await trackEvents([
     {
       name: 'Analytics visited',
-      typebotId,
+      mozbotId,
       userId: (session?.user as User).id,
-      workspaceId: typebot.workspaceId,
+      workspaceId: mozbot.workspaceId,
     },
   ])
 }

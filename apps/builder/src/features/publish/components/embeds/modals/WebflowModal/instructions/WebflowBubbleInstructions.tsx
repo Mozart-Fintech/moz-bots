@@ -1,16 +1,16 @@
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { OrderedList, ListItem, Code, Stack, Text } from '@chakra-ui/react'
-import { BubbleProps } from '@typebot.io/nextjs'
+import { BubbleProps } from '@mozbot.io/nextjs'
 import { useState } from 'react'
 import { BubbleSettings } from '../../../settings/BubbleSettings/BubbleSettings'
 import { parseDefaultBubbleTheme } from '../../Javascript/instructions/JavascriptBubbleInstructions'
 import { JavascriptBubbleSnippet } from '../../Javascript/JavascriptBubbleSnippet'
 
 export const WebflowBubbleInstructions = () => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
 
   const [theme, setTheme] = useState<BubbleProps['theme']>(
-    parseDefaultBubbleTheme(typebot)
+    parseDefaultBubbleTheme(mozbot)
   )
   const [previewMessage, setPreviewMessage] =
     useState<BubbleProps['previewMessage']>()
@@ -25,7 +25,7 @@ export const WebflowBubbleInstructions = () => {
           <BubbleSettings
             previewMessage={previewMessage}
             defaultPreviewMessageAvatar={
-              typebot?.theme.chat?.hostAvatar?.url ?? ''
+              mozbot?.theme.chat?.hostAvatar?.url ?? ''
             }
             theme={theme}
             onPreviewMessageChange={setPreviewMessage}

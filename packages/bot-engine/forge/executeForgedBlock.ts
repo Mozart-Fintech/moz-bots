@@ -1,23 +1,23 @@
-import { VariableStore, LogsStore } from '@typebot.io/forge'
-import { forgedBlocks } from '@typebot.io/forge-repository/definitions'
-import { ForgedBlock } from '@typebot.io/forge-repository/types'
-import { decrypt } from '@typebot.io/lib/api/encryption/decrypt'
+import { VariableStore, LogsStore } from '@mozbot.io/forge'
+import { forgedBlocks } from '@mozbot.io/forge-repository/definitions'
+import { ForgedBlock } from '@mozbot.io/forge-repository/types'
+import { decrypt } from '@mozbot.io/lib/api/encryption/decrypt'
 import {
   SessionState,
   ContinueChatResponse,
   Block,
-  TypebotInSession,
+  MozbotInSession,
   SetVariableHistoryItem,
-} from '@typebot.io/schemas'
-import { deepParseVariables } from '@typebot.io/variables/deepParseVariables'
+} from '@mozbot.io/schemas'
+import { deepParseVariables } from '@mozbot.io/variables/deepParseVariables'
 import {
   ParseVariablesOptions,
   parseVariables,
-} from '@typebot.io/variables/parseVariables'
-import { updateVariablesInSession } from '@typebot.io/variables/updateVariablesInSession'
+} from '@mozbot.io/variables/parseVariables'
+import { updateVariablesInSession } from '@mozbot.io/variables/updateVariablesInSession'
 import { ExecuteIntegrationResponse } from '../types'
-import { byId } from '@typebot.io/lib'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
+import { byId } from '@mozbot.io/lib'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
 import { getCredentials } from '../queries/getCredentials'
 
 export const executeForgedBlock = async (
@@ -50,10 +50,10 @@ export const executeForgedBlock = async (
     }
   }
 
-  const typebot = state.typebotsQueue[0].typebot
+  const mozbot = state.mozbotsQueue[0].mozbot
   if (
     action?.run?.stream &&
-    isNextBubbleTextWithStreamingVar(typebot)(
+    isNextBubbleTextWithStreamingVar(mozbot)(
       block.id,
       action.run.stream.getStreamVariableId(block.options)
     ) &&
@@ -77,13 +77,13 @@ export const executeForgedBlock = async (
 
   const variables: VariableStore = {
     get: (id: string) => {
-      const variable = newSessionState.typebotsQueue[0].typebot.variables.find(
+      const variable = newSessionState.mozbotsQueue[0].mozbot.variables.find(
         (variable) => variable.id === id
       )
       return variable?.value
     },
     set: (id: string, value: unknown) => {
-      const variable = newSessionState.typebotsQueue[0].typebot.variables.find(
+      const variable = newSessionState.mozbotsQueue[0].mozbot.variables.find(
         (variable) => variable.id === id
       )
       if (!variable) return
@@ -97,10 +97,10 @@ export const executeForgedBlock = async (
     },
     parse: (text: string, params?: ParseVariablesOptions) =>
       parseVariables(
-        newSessionState.typebotsQueue[0].typebot.variables,
+        newSessionState.mozbotsQueue[0].mozbot.variables,
         params
       )(text),
-    list: () => newSessionState.typebotsQueue[0].typebot.variables,
+    list: () => newSessionState.mozbotsQueue[0].mozbot.variables,
   }
   let logs: NonNullable<ContinueChatResponse['logs']> = []
   const logsStore: LogsStore = {
@@ -120,7 +120,7 @@ export const executeForgedBlock = async (
     : undefined
 
   const parsedOptions = deepParseVariables(
-    state.typebotsQueue[0].typebot.variables,
+    state.mozbotsQueue[0].mozbot.variables,
     { removeEmptyStrings: true }
   )(block.options)
   await action?.run?.server?.({
@@ -168,13 +168,13 @@ export const executeForgedBlock = async (
 }
 
 const isNextBubbleTextWithStreamingVar =
-  (typebot: TypebotInSession) =>
+  (mozbot: MozbotInSession) =>
   (blockId: string, streamVariableId?: string): boolean => {
-    const streamVariable = typebot.variables.find(
+    const streamVariable = mozbot.variables.find(
       (variable) => variable.id === streamVariableId
     )
     if (!streamVariable) return false
-    const nextBlock = getNextBlock(typebot)(blockId)
+    const nextBlock = getNextBlock(mozbot)(blockId)
     if (!nextBlock) return false
     return (
       nextBlock.type === BubbleBlockType.TEXT &&
@@ -185,9 +185,9 @@ const isNextBubbleTextWithStreamingVar =
   }
 
 const getNextBlock =
-  (typebot: TypebotInSession) =>
+  (mozbot: MozbotInSession) =>
   (blockId: string): Block | undefined => {
-    const group = typebot.groups.find((group) =>
+    const group = mozbot.groups.find((group) =>
       group.blocks.find(byId(blockId))
     )
     if (!group) return
@@ -196,9 +196,9 @@ const getNextBlock =
     if (nextBlockInGroup) return nextBlockInGroup
     const outgoingEdgeId = group.blocks.at(blockIndex)?.outgoingEdgeId
     if (!outgoingEdgeId) return
-    const outgoingEdge = typebot.edges.find(byId(outgoingEdgeId))
+    const outgoingEdge = mozbot.edges.find(byId(outgoingEdgeId))
     if (!outgoingEdge) return
-    const connectedGroup = typebot.groups.find(byId(outgoingEdge?.to.groupId))
+    const connectedGroup = mozbot.groups.find(byId(outgoingEdge?.to.groupId))
     if (!connectedGroup) return
     return outgoingEdge.to.blockId
       ? connectedGroup.blocks.find(

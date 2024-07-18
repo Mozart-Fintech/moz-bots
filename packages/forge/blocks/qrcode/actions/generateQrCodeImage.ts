@@ -1,7 +1,7 @@
-import { createAction, option } from '@typebot.io/forge'
+import { createAction, option } from '@mozbot.io/forge'
 import { toBuffer as generateQrCodeBuffer } from 'qrcode'
-import { uploadFileToBucket } from '@typebot.io/lib/s3/uploadFileToBucket'
-import { createId } from '@typebot.io/lib/createId'
+import { uploadFileToBucket } from '@mozbot.io/lib/s3/uploadFileToBucket'
+import { createId } from '@mozbot.io/lib/createId'
 
 export const generateQrCode = createAction({
   name: 'Generate a QR Code',

@@ -1,11 +1,11 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
-import { canReadTypebots } from '@/helpers/databaseRules'
-import { totalAnswersSchema } from '@typebot.io/schemas/features/analytics'
-import { parseGroups } from '@typebot.io/schemas'
-import { isInputBlock } from '@typebot.io/schemas/helpers'
+import { canReadMozbots } from '@/helpers/databaseRules'
+import { totalAnswersSchema } from '@mozbot.io/schemas/features/analytics'
+import { parseGroups } from '@mozbot.io/schemas'
+import { isInputBlock } from '@mozbot.io/schemas/helpers'
 import { defaultTimeFilter, timeFilterValues } from '../constants'
 import {
   parseFromDateFromTimeFilter,
@@ -16,7 +16,7 @@ export const getInDepthAnalyticsData = authenticatedProcedure
   .meta({
     openapi: {
       method: 'GET',
-      path: '/v1/typebots/{typebotId}/analytics/inDepthData',
+      path: '/v1/mozbots/{mozbotId}/analytics/inDepthData',
       protect: true,
       summary:
         'List total answers in blocks and off-default paths visited edges',
@@ -25,7 +25,7 @@ export const getInDepthAnalyticsData = authenticatedProcedure
   })
   .input(
     z.object({
-      typebotId: z.string(),
+      mozbotId: z.string(),
       timeFilter: z.enum(timeFilterValues).default(defaultTimeFilter),
       timeZone: z.string().optional(),
     })
@@ -39,15 +39,15 @@ export const getInDepthAnalyticsData = authenticatedProcedure
     })
   )
   .query(
-    async ({ input: { typebotId, timeFilter, timeZone }, ctx: { user } }) => {
-      const typebot = await prisma.typebot.findFirst({
-        where: canReadTypebots(typebotId, user),
-        select: { publishedTypebot: true },
+    async ({ input: { mozbotId, timeFilter, timeZone }, ctx: { user } }) => {
+      const mozbot = await prisma.mozbot.findFirst({
+        where: canReadMozbots(mozbotId, user),
+        select: { publishedMozbot: true },
       })
-      if (!typebot?.publishedTypebot)
+      if (!mozbot?.publishedMozbot)
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Published typebot not found',
+          message: 'Published mozbot not found',
         })
 
       const fromDate = parseFromDateFromTimeFilter(timeFilter, timeZone)
@@ -57,7 +57,7 @@ export const getInDepthAnalyticsData = authenticatedProcedure
         by: ['blockId', 'resultId'],
         where: {
           result: {
-            typebotId: typebot.publishedTypebot.typebotId,
+            mozbotId: mozbot.publishedMozbot.mozbotId,
             createdAt: fromDate
               ? {
                   gte: fromDate,
@@ -66,8 +66,8 @@ export const getInDepthAnalyticsData = authenticatedProcedure
               : undefined,
           },
           blockId: {
-            in: parseGroups(typebot.publishedTypebot.groups, {
-              typebotVersion: typebot.publishedTypebot.version,
+            in: parseGroups(mozbot.publishedMozbot.groups, {
+              mozbotVersion: mozbot.publishedMozbot.version,
             }).flatMap((group) =>
               group.blocks.filter(isInputBlock).map((block) => block.id)
             ),
@@ -79,7 +79,7 @@ export const getInDepthAnalyticsData = authenticatedProcedure
         by: ['blockId', 'resultId'],
         where: {
           result: {
-            typebotId: typebot.publishedTypebot.typebotId,
+            mozbotId: mozbot.publishedMozbot.mozbotId,
             createdAt: fromDate
               ? {
                   gte: fromDate,
@@ -88,8 +88,8 @@ export const getInDepthAnalyticsData = authenticatedProcedure
               : undefined,
           },
           blockId: {
-            in: parseGroups(typebot.publishedTypebot.groups, {
-              typebotVersion: typebot.publishedTypebot.version,
+            in: parseGroups(mozbot.publishedMozbot.groups, {
+              mozbotVersion: mozbot.publishedMozbot.version,
             }).flatMap((group) =>
               group.blocks.filter(isInputBlock).map((block) => block.id)
             ),
@@ -111,7 +111,7 @@ export const getInDepthAnalyticsData = authenticatedProcedure
         by: ['edgeId'],
         where: {
           result: {
-            typebotId: typebot.publishedTypebot.typebotId,
+            mozbotId: mozbot.publishedMozbot.mozbotId,
             createdAt: fromDate
               ? {
                   gte: fromDate,

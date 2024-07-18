@@ -2,12 +2,12 @@ import { createAnthropic } from '@ai-sdk/anthropic'
 import { defaultAnthropicOptions, maxToolRoundtrips } from '../constants'
 import { APICallError, streamText, ToolCallPart, ToolResultPart } from 'ai'
 import { isModelCompatibleWithVision } from './isModelCompatibleWithVision'
-import { VariableStore } from '@typebot.io/forge'
-import { ChatCompletionOptions } from '@typebot.io/openai-block/shared/parseChatCompletionOptions'
-import { parseChatCompletionMessages } from '@typebot.io/ai/parseChatCompletionMessages'
-import { parseTools } from '@typebot.io/ai/parseTools'
-import { pumpStreamUntilDone } from '@typebot.io/ai/pumpStreamUntilDone'
-import { appendToolResultsToMessages } from '@typebot.io/ai/appendToolResultsToMessages'
+import { VariableStore } from '@mozbot.io/forge'
+import { ChatCompletionOptions } from '@mozbot.io/openai-block/shared/parseChatCompletionOptions'
+import { parseChatCompletionMessages } from '@mozbot.io/ai/parseChatCompletionMessages'
+import { parseTools } from '@mozbot.io/ai/parseTools'
+import { pumpStreamUntilDone } from '@mozbot.io/ai/pumpStreamUntilDone'
+import { appendToolResultsToMessages } from '@mozbot.io/ai/appendToolResultsToMessages'
 
 type Props = {
   credentials: { apiKey?: string }

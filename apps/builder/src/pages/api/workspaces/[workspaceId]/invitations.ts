@@ -1,15 +1,15 @@
-import { WorkspaceInvitation, WorkspaceRole } from '@typebot.io/prisma'
-import prisma from '@typebot.io/lib/prisma'
+import { WorkspaceInvitation, WorkspaceRole } from '@mozbot.io/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 import {
   forbidden,
   methodNotAllowed,
   notAuthenticated,
-} from '@typebot.io/lib/api'
+} from '@mozbot.io/lib/api'
 import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser'
-import { sendWorkspaceMemberInvitationEmail } from '@typebot.io/emails'
-import { getSeatsLimit } from '@typebot.io/billing/helpers/getSeatsLimit'
-import { env } from '@typebot.io/env'
+import { sendWorkspaceMemberInvitationEmail } from '@mozbot.io/emails'
+import { getSeatsLimit } from '@mozbot.io/billing/helpers/getSeatsLimit'
+import { env } from '@mozbot.io/env'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getAuthenticatedUser(req, res)
@@ -55,7 +55,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           to: data.email,
           workspaceName: workspace.name,
           guestEmail: data.email,
-          url: `${env.NEXTAUTH_URL}/typebots?workspaceId=${workspace.id}`,
+          url: `${env.NEXTAUTH_URL}/mozbots?workspaceId=${workspace.id}`,
           hostEmail: user.email ?? '',
         })
       return res.send({
@@ -74,7 +74,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           to: data.email,
           workspaceName: workspace.name,
           guestEmail: data.email,
-          url: `${env.NEXTAUTH_URL}/typebots?workspaceId=${workspace.id}`,
+          url: `${env.NEXTAUTH_URL}/mozbots?workspaceId=${workspace.id}`,
           hostEmail: user.email ?? '',
         })
       return res.send({ invitation })

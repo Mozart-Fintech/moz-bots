@@ -18,17 +18,17 @@ import {
   LockedIcon,
   UnlockedIcon,
 } from '@/components/icons'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { useRouter } from 'next/router'
-import { isNotDefined } from '@typebot.io/lib'
+import { isNotDefined } from '@mozbot.io/lib'
 import { ChangePlanModal } from '@/features/billing/components/ChangePlanModal'
 import { isFreePlan } from '@/features/billing/helpers/isFreePlan'
 import { T, useTranslate } from '@tolgee/react'
 import { trpc } from '@/lib/trpc'
 import { useToast } from '@/hooks/useToast'
 import { parseDefaultPublicId } from '../helpers/parseDefaultPublicId'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
 import { ConfirmModal } from '@/components/ConfirmModal'
 import { TextLink } from '@/components/TextLink'
 import { useTimeSince } from '@/hooks/useTimeSince'
@@ -51,27 +51,27 @@ export const PublishButton = ({
   } = useDisclosure()
   const {
     isPublished,
-    publishedTypebot,
-    restorePublishedTypebot,
-    typebot,
+    publishedMozbot,
+    restorePublishedMozbot,
+    mozbot,
     isSavingLoading,
-    updateTypebot,
+    updateMozbot,
     save,
-    publishedTypebotVersion,
-  } = useTypebot()
+    publishedMozbotVersion,
+  } = useMozbot()
   const timeSinceLastPublish = useTimeSince(
-    publishedTypebot?.updatedAt.toString()
+    publishedMozbot?.updatedAt.toString()
   )
   const { showToast } = useToast()
 
   const {
-    typebot: {
-      getPublishedTypebot: { refetch: refetchPublishedTypebot },
+    mozbot: {
+      getPublishedMozbot: { refetch: refetchPublishedMozbot },
     },
   } = trpc.useContext()
 
-  const { mutate: publishTypebotMutate, isLoading: isPublishing } =
-    trpc.typebot.publishTypebot.useMutation({
+  const { mutate: publishMozbotMutate, isLoading: isPublishing } =
+    trpc.mozbot.publishMozbot.useMutation({
       onError: (error) => {
         showToast({
           title: t('publish.error.label'),
@@ -84,61 +84,61 @@ export const PublishButton = ({
         }
       },
       onSuccess: () => {
-        refetchPublishedTypebot({
-          typebotId: typebot?.id as string,
+        refetchPublishedMozbot({
+          mozbotId: mozbot?.id as string,
         })
-        if (!publishedTypebot && !pathname.endsWith('share'))
-          push(`/typebots/${query.typebotId}/share`)
+        if (!publishedMozbot && !pathname.endsWith('share'))
+          push(`/mozbots/${query.mozbotId}/share`)
       },
     })
 
-  const { mutate: unpublishTypebotMutate, isLoading: isUnpublishing } =
-    trpc.typebot.unpublishTypebot.useMutation({
+  const { mutate: unpublishMozbotMutate, isLoading: isUnpublishing } =
+    trpc.mozbot.unpublishMozbot.useMutation({
       onError: (error) =>
         showToast({
-          title: t('editor.header.unpublishTypebot.error.label'),
+          title: t('editor.header.unpublishMozbot.error.label'),
           description: error.message,
         }),
       onSuccess: () => {
-        refetchPublishedTypebot()
+        refetchPublishedMozbot()
       },
     })
 
-  const hasInputFile = typebot?.groups
+  const hasInputFile = mozbot?.groups
     .flatMap((g) => g.blocks)
     .some((b) => b.type === InputBlockType.FILE)
 
   const handlePublishClick = async () => {
-    if (!typebot?.id) return
+    if (!mozbot?.id) return
     if (isFreePlan(workspace) && hasInputFile) return onOpen()
-    if (!typebot.publicId) {
-      await updateTypebot({
+    if (!mozbot.publicId) {
+      await updateMozbot({
         updates: {
-          publicId: parseDefaultPublicId(typebot.name, typebot.id),
+          publicId: parseDefaultPublicId(mozbot.name, mozbot.id),
         },
         save: true,
       })
     } else await save()
-    publishTypebotMutate({
-      typebotId: typebot.id,
+    publishMozbotMutate({
+      mozbotId: mozbot.id,
     })
   }
 
-  const unpublishTypebot = async () => {
-    if (!typebot?.id) return
-    if (typebot.isClosed)
-      await updateTypebot({ updates: { isClosed: false }, save: true })
-    unpublishTypebotMutate({
-      typebotId: typebot?.id,
+  const unpublishMozbot = async () => {
+    if (!mozbot?.id) return
+    if (mozbot.isClosed)
+      await updateMozbot({ updates: { isClosed: false }, save: true })
+    unpublishMozbotMutate({
+      mozbotId: mozbot?.id,
     })
   }
 
-  const closeTypebot = async () => {
-    await updateTypebot({ updates: { isClosed: true }, save: true })
+  const closeMozbot = async () => {
+    await updateMozbot({ updates: { isClosed: true }, save: true })
   }
 
-  const openTypebot = async () => {
-    await updateTypebot({ updates: { isClosed: false }, save: true })
+  const openMozbot = async () => {
+    await updateMozbot({ updates: { isClosed: false }, save: true })
   }
 
   return (
@@ -148,7 +148,7 @@ export const PublishButton = ({
         onClose={onClose}
         type={t('billing.limitMessage.fileInput')}
       />
-      {publishedTypebot && publishedTypebotVersion !== typebot?.version && (
+      {publishedMozbot && publishedMozbotVersion !== mozbot?.version && (
         <ConfirmModal
           isOpen={isNewEngineWarningOpen}
           onConfirm={handlePublishClick}
@@ -166,7 +166,7 @@ export const PublishButton = ({
                   params={{
                     link: (
                       <TextLink
-                        href="https://docs.typebot.io/breaking-changes#typebot-v6"
+                        href="https://docs.mozbot.io/breaking-changes#mozbot-v6"
                         isExternal
                       />
                     ),
@@ -198,31 +198,31 @@ export const PublishButton = ({
             ) : null}
           </Stack>
         }
-        isDisabled={isNotDefined(publishedTypebot) || isPublished}
+        isDisabled={isNotDefined(publishedMozbot) || isPublished}
       >
         <Button
           colorScheme="blue"
           isLoading={isPublishing || isUnpublishing}
           isDisabled={isPublished || isSavingLoading}
           onClick={() => {
-            publishedTypebot && publishedTypebotVersion !== typebot?.version
+            publishedMozbot && publishedMozbotVersion !== mozbot?.version
               ? onNewEngineWarningOpen()
               : handlePublishClick()
           }}
           borderRightRadius={
-            publishedTypebot && !isMoreMenuDisabled ? 0 : undefined
+            publishedMozbot && !isMoreMenuDisabled ? 0 : undefined
           }
           {...props}
         >
           {isPublished
-            ? typebot?.isClosed
+            ? mozbot?.isClosed
               ? t('publishButton.closed.label')
               : t('publishButton.published.label')
             : t('publishButton.label')}
         </Button>
       </Tooltip>
 
-      {!isMoreMenuDisabled && publishedTypebot && (
+      {!isMoreMenuDisabled && publishedMozbot && (
         <Menu>
           <MenuButton
             as={IconButton}
@@ -235,20 +235,20 @@ export const PublishButton = ({
           />
           <MenuList>
             {!isPublished && (
-              <MenuItem onClick={restorePublishedTypebot}>
+              <MenuItem onClick={restorePublishedMozbot}>
                 {t('publishButton.dropdown.restoreVersion.label')}
               </MenuItem>
             )}
-            {!typebot?.isClosed ? (
-              <MenuItem onClick={closeTypebot} icon={<LockedIcon />}>
+            {!mozbot?.isClosed ? (
+              <MenuItem onClick={closeMozbot} icon={<LockedIcon />}>
                 {t('publishButton.dropdown.close.label')}
               </MenuItem>
             ) : (
-              <MenuItem onClick={openTypebot} icon={<UnlockedIcon />}>
+              <MenuItem onClick={openMozbot} icon={<UnlockedIcon />}>
                 {t('publishButton.dropdown.reopen.label')}
               </MenuItem>
             )}
-            <MenuItem onClick={unpublishTypebot} icon={<CloudOffIcon />}>
+            <MenuItem onClick={unpublishMozbot} icon={<CloudOffIcon />}>
               {t('publishButton.dropdown.unpublish.label')}
             </MenuItem>
           </MenuList>

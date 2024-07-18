@@ -1,17 +1,17 @@
-import { Message, StartFrom, StartTypebot } from '@typebot.io/schemas'
+import { Message, StartFrom, StartMozbot } from '@mozbot.io/schemas'
 import { restartSession } from '../queries/restartSession'
 import { saveStateToDatabase } from '../saveStateToDatabase'
 import { startSession } from '../startSession'
 import { computeCurrentProgress } from '../computeCurrentProgress'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
 
 type Props = {
   message?: Message
   isOnlyRegistering: boolean
   isStreamEnabled: boolean
   startFrom?: StartFrom
-  typebotId: string
-  typebot?: StartTypebot
+  mozbotId: string
+  mozbot?: StartMozbot
   userId?: string
   prefilledVariables?: Record<string, unknown>
   sessionId?: string
@@ -23,15 +23,15 @@ export const startChatPreview = async ({
   isOnlyRegistering,
   isStreamEnabled,
   startFrom,
-  typebotId,
-  typebot: startTypebot,
+  mozbotId,
+  mozbot: startMozbot,
   userId,
   prefilledVariables,
   sessionId,
   textBubbleContentFormat,
 }: Props) => {
   const {
-    typebot,
+    mozbot,
     messages,
     input,
     dynamicTheme,
@@ -47,8 +47,8 @@ export const startChatPreview = async ({
       isOnlyRegistering,
       isStreamEnabled,
       startFrom,
-      typebotId,
-      typebot: startTypebot,
+      mozbotId,
+      mozbot: startMozbot,
       userId,
       prefilledVariables,
       sessionId,
@@ -87,10 +87,10 @@ export const startChatPreview = async ({
 
   return {
     sessionId: session.id,
-    typebot: {
-      id: typebot.id,
-      theme: typebot.theme,
-      settings: typebot.settings,
+    mozbot: {
+      id: mozbot.id,
+      theme: mozbot.theme,
+      settings: mozbot.settings,
     },
     messages,
     input,
@@ -101,7 +101,7 @@ export const startChatPreview = async ({
       ? isEnded
         ? 100
         : computeCurrentProgress({
-            typebotsQueue: newSessionState.typebotsQueue,
+            mozbotsQueue: newSessionState.mozbotsQueue,
             progressMetadata: newSessionState.progressMetadata,
             currentInputBlockId: input?.id,
           })

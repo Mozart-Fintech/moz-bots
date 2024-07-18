@@ -1,8 +1,8 @@
-import { BubbleBlock, InputBlock, Block } from '@typebot.io/schemas'
-import { isInputBlock, isBubbleBlock } from '@typebot.io/schemas/helpers'
-import type { TypebotPostMessageData } from 'typebot-js'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
+import { BubbleBlock, InputBlock, Block } from '@mozbot.io/schemas'
+import { isInputBlock, isBubbleBlock } from '@mozbot.io/schemas/helpers'
+import type { MozbotPostMessageData } from 'mozbot-js'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
 
 export const getLastChatBlockType = (
   blocks: Block[]
@@ -13,11 +13,11 @@ export const getLastChatBlockType = (
   return displayedBlocks.pop()?.type
 }
 
-export const sendEventToParent = (data: TypebotPostMessageData) => {
+export const sendEventToParent = (data: MozbotPostMessageData) => {
   try {
     window.top?.postMessage(
       {
-        from: 'typebot',
+        from: 'mozbot',
         ...data,
       },
       '*'

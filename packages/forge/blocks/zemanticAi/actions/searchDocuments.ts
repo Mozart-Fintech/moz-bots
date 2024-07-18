@@ -1,5 +1,5 @@
-import { createAction, option } from '@typebot.io/forge'
-import { isDefined } from '@typebot.io/lib'
+import { createAction, option } from '@mozbot.io/forge'
+import { isDefined } from '@mozbot.io/lib'
 import { ZemanticAiResponse } from '../types'
 import ky from 'ky'
 import { apiBaseUrl } from '../constants'

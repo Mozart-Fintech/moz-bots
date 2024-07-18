@@ -8,7 +8,7 @@ import {
   createEffect,
 } from 'solid-js'
 import { CommandData } from '../../commands'
-import { isDefined, isNotDefined } from '@typebot.io/lib'
+import { isDefined, isNotDefined } from '@mozbot.io/lib'
 import { PopupParams } from '../types'
 import { Bot, BotProps } from '../../../components/Bot'
 import { getPaymentInProgressInStorage } from '@/features/blocks/inputs/payment/helpers/paymentInProgressStorage'
@@ -82,7 +82,7 @@ export const Popup = (props: PopupProps) => {
 
   const processIncomingEvent = (event: MessageEvent<CommandData>) => {
     const { data } = event
-    if (!data.isFromTypebot) return
+    if (!data.isFromMozbot) return
     if (data.command === 'open') openBot()
     if (data.command === 'close') closeBot()
     if (data.command === 'toggle') toggleBot()
@@ -120,7 +120,7 @@ export const Popup = (props: PopupProps) => {
   return (
     <Show when={isBotOpened()}>
       <EnvironmentProvider
-        value={document.querySelector('typebot-popup')?.shadowRoot as Node}
+        value={document.querySelector('mozbot-popup')?.shadowRoot as Node}
       >
         <style>{styles}</style>
         <div

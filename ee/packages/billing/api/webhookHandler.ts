@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Stripe } from 'stripe'
 import { buffer } from 'micro'
-import { env } from '@typebot.io/env'
-import { Plan, WorkspaceRole } from '@typebot.io/prisma'
-import prisma from '@typebot.io/lib/prisma'
-import { trackEvents } from '@typebot.io/telemetry/trackEvents'
+import { env } from '@mozbot.io/env'
+import { Plan, WorkspaceRole } from '@mozbot.io/prisma'
+import prisma from '@mozbot.io/lib/prisma'
+import { trackEvents } from '@mozbot.io/telemetry/trackEvents'
 import { prices } from '../constants'
-import { Settings } from '@typebot.io/schemas'
-import { methodNotAllowed } from '@typebot.io/lib/api/utils'
+import { Settings } from '@mozbot.io/schemas'
+import { methodNotAllowed } from '@mozbot.io/lib/api/utils'
 
 if (!env.STRIPE_SECRET_KEY || !env.STRIPE_WEBHOOK_SECRET)
   throw new Error('STRIPE_SECRET_KEY or STRIPE_WEBHOOK_SECRET missing')
@@ -269,18 +269,18 @@ export const webhookHandler = async (
             }))
           )
 
-          const typebots = await prisma.typebot.findMany({
+          const mozbots = await prisma.mozbot.findMany({
             where: {
               workspaceId: workspace.id,
               isArchived: { not: true },
             },
-            include: { publishedTypebot: true },
+            include: { publishedMozbot: true },
           })
-          for (const typebot of typebots) {
-            const settings = typebot.settings as Settings
+          for (const mozbot of mozbots) {
+            const settings = mozbot.settings as Settings
             if (settings.general?.isBrandingEnabled) continue
-            await prisma.typebot.updateMany({
-              where: { id: typebot.id },
+            await prisma.mozbot.updateMany({
+              where: { id: mozbot.id },
               data: {
                 settings: {
                   ...settings,
@@ -297,20 +297,20 @@ export const webhookHandler = async (
                 },
               },
             })
-            const publishedTypebotSettings = typebot.publishedTypebot
+            const publishedMozbotSettings = mozbot.publishedMozbot
               ?.settings as Settings | null
             if (
-              !publishedTypebotSettings ||
-              publishedTypebotSettings?.general?.isBrandingEnabled
+              !publishedMozbotSettings ||
+              publishedMozbotSettings?.general?.isBrandingEnabled
             )
               continue
-            await prisma.publicTypebot.updateMany({
-              where: { id: typebot.id },
+            await prisma.publicMozbot.updateMany({
+              where: { id: mozbot.id },
               data: {
                 settings: {
-                  ...publishedTypebotSettings,
+                  ...publishedMozbotSettings,
                   general: {
-                    ...publishedTypebotSettings.general,
+                    ...publishedMozbotSettings.general,
                     isBrandingEnabled: true,
                   },
                 },

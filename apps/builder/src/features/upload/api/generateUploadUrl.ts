@@ -1,24 +1,24 @@
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { z } from 'zod'
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 import { TRPCError } from '@trpc/server'
-import { generatePresignedPostPolicy } from '@typebot.io/lib/s3/generatePresignedPostPolicy'
-import prisma from '@typebot.io/lib/prisma'
+import { generatePresignedPostPolicy } from '@mozbot.io/lib/s3/generatePresignedPostPolicy'
+import prisma from '@mozbot.io/lib/prisma'
 import { isWriteWorkspaceForbidden } from '@/features/workspace/helpers/isWriteWorkspaceForbidden'
-import { isWriteTypebotForbidden } from '@/features/typebot/helpers/isWriteTypebotForbidden'
+import { isWriteMozbotForbidden } from '@/features/mozbot/helpers/isWriteMozbotForbidden'
 
 const inputSchema = z.object({
   filePathProps: z
     .object({
       workspaceId: z.string(),
-      typebotId: z.string(),
+      mozbotId: z.string(),
       blockId: z.string(),
       itemId: z.string().optional(),
     })
     .or(
       z.object({
         workspaceId: z.string(),
-        typebotId: z.string(),
+        mozbotId: z.string(),
         fileName: z.string(),
       })
     )
@@ -103,7 +103,7 @@ const parseFilePath = async ({
       code: 'BAD_REQUEST',
       message: 'workspaceId is missing',
     })
-  if (!('typebotId' in input)) {
+  if (!('mozbotId' in input)) {
     const workspace = await prisma.workspace.findUnique({
       where: {
         id: input.workspaceId,
@@ -127,9 +127,9 @@ const parseFilePath = async ({
       })
     return `public/workspaces/${input.workspaceId}/${input.fileName}`
   }
-  const typebot = await prisma.typebot.findUnique({
+  const mozbot = await prisma.mozbot.findUnique({
     where: {
-      id: input.typebotId,
+      id: input.mozbotId,
     },
     select: {
       workspace: {
@@ -154,19 +154,19 @@ const parseFilePath = async ({
     },
   })
   if (
-    !typebot ||
-    (await isWriteTypebotForbidden(typebot, {
+    !mozbot ||
+    (await isWriteMozbotForbidden(mozbot, {
       id: authenticatedUserId,
     }))
   )
     throw new TRPCError({
       code: 'NOT_FOUND',
-      message: 'Typebot not found',
+      message: 'Mozbot not found',
     })
   if (!('blockId' in input)) {
-    return `public/workspaces/${input.workspaceId}/typebots/${input.typebotId}/${input.fileName}`
+    return `public/workspaces/${input.workspaceId}/mozbots/${input.mozbotId}/${input.fileName}`
   }
-  return `public/workspaces/${input.workspaceId}/typebots/${
-    input.typebotId
+  return `public/workspaces/${input.workspaceId}/mozbots/${
+    input.mozbotId
   }/blocks/${input.blockId}${input.itemId ? `/items/${input.itemId}` : ''}`
 }

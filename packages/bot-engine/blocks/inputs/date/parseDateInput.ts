@@ -1,11 +1,11 @@
 import { getPrefilledInputValue } from '../../../getPrefilledValue'
-import { DateInputBlock, SessionState, Variable } from '@typebot.io/schemas'
-import { deepParseVariables } from '@typebot.io/variables/deepParseVariables'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
+import { DateInputBlock, SessionState, Variable } from '@mozbot.io/schemas'
+import { deepParseVariables } from '@mozbot.io/variables/deepParseVariables'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
 
 export const parseDateInput =
   (state: SessionState) => (block: DateInputBlock) => {
-    const variables = state.typebotsQueue[0].typebot.variables
+    const variables = state.mozbotsQueue[0].mozbot.variables
     if (!block.options) return deepParseVariables(variables)(block)
     return {
       ...block,

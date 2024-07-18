@@ -1,14 +1,14 @@
-import { StartChatResponse } from '@typebot.io/schemas'
+import { StartChatResponse } from '@mozbot.io/schemas'
 
 export const setPaymentInProgressInStorage = (
-  state: Pick<StartChatResponse, 'typebot' | 'sessionId' | 'resultId'>
+  state: Pick<StartChatResponse, 'mozbot' | 'sessionId' | 'resultId'>
 ) => {
-  sessionStorage.setItem('typebotPaymentInProgress', JSON.stringify(state))
+  sessionStorage.setItem('mozbotPaymentInProgress', JSON.stringify(state))
 }
 
 export const getPaymentInProgressInStorage = () =>
-  sessionStorage.getItem('typebotPaymentInProgress')
+  sessionStorage.getItem('mozbotPaymentInProgress')
 
 export const removePaymentInProgressFromStorage = () => {
-  sessionStorage.removeItem('typebotPaymentInProgress')
+  sessionStorage.removeItem('mozbotPaymentInProgress')
 }

@@ -1,8 +1,8 @@
 import { authenticatedProcedure } from '@/helpers/server/trpc'
-import { Plan } from '@typebot.io/prisma'
-import { workspaceSchema } from '@typebot.io/schemas'
+import { Plan } from '@mozbot.io/prisma'
+import { workspaceSchema } from '@mozbot.io/schemas'
 import { z } from 'zod'
-import { updateSubscription as updateSubscriptionHandler } from '@typebot.io/billing/api/updateSubscription'
+import { updateSubscription as updateSubscriptionHandler } from '@mozbot.io/billing/api/updateSubscription'
 
 export const updateSubscription = authenticatedProcedure
   .meta({

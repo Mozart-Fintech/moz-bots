@@ -4,7 +4,7 @@ import {
   Message,
   SessionState,
   SetVariableHistoryItem,
-} from '@typebot.io/schemas'
+} from '@mozbot.io/schemas'
 
 export type EdgeId = string
 

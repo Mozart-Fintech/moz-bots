@@ -21,13 +21,13 @@ import { getGoogleSheetsConsentScreenUrlQuery } from '../queries/getGoogleSheets
 
 type Props = {
   isOpen: boolean
-  typebotId?: string
+  mozbotId?: string
   blockId?: string
   onClose: () => void
 }
 
 export const GoogleSheetConnectModal = ({
-  typebotId,
+  mozbotId,
   blockId,
   isOpen,
   onClose,
@@ -35,16 +35,16 @@ export const GoogleSheetConnectModal = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="lg">
       <ModalOverlay />
-      <GoogleSheetConnectModalContent typebotId={typebotId} blockId={blockId} />
+      <GoogleSheetConnectModalContent mozbotId={mozbotId} blockId={blockId} />
     </Modal>
   )
 }
 
 export const GoogleSheetConnectModalContent = ({
-  typebotId,
+  mozbotId,
   blockId,
 }: {
-  typebotId?: string
+  mozbotId?: string
   blockId?: string
 }) => {
   const { workspace } = useWorkspace()
@@ -66,7 +66,7 @@ export const GoogleSheetConnectModalContent = ({
         <AlertInfo>
           Google does not provide more granular permissions than
           &quot;read&quot; or &quot;write&quot; access. That&apos;s why it
-          states that Typebot can also delete your spreadsheets which it
+          states that Mozbot can also delete your spreadsheets which it
           won&apos;t.
         </AlertInfo>
         <Flex>
@@ -81,7 +81,7 @@ export const GoogleSheetConnectModalContent = ({
                 window.location.href,
                 workspace.id,
                 blockId,
-                typebotId
+                mozbotId
               )}
               mx="auto"
             >

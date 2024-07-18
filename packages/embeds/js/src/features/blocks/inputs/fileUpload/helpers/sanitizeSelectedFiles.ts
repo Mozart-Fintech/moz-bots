@@ -1,4 +1,4 @@
-import { getRuntimeVariable } from '@typebot.io/env/getRuntimeVariable'
+import { getRuntimeVariable } from '@mozbot.io/env/getRuntimeVariable'
 
 type Props = {
   newFile: File

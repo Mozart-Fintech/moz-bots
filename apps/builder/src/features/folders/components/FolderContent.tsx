@@ -1,4 +1,4 @@
-import { DashboardFolder, WorkspaceRole } from '@typebot.io/prisma'
+import { DashboardFolder, WorkspaceRole } from '@mozbot.io/prisma'
 import {
   Flex,
   Heading,
@@ -9,7 +9,7 @@ import {
   useEventListener,
   Wrap,
 } from '@chakra-ui/react'
-import { useTypebotDnd } from '../TypebotDndProvider'
+import { useMozbotDnd } from '../MozbotDndProvider'
 import React, { useEffect, useState } from 'react'
 import { BackButton } from './BackButton'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
@@ -17,10 +17,10 @@ import { useToast } from '@/hooks/useToast'
 import { CreateBotButton } from './CreateBotButton'
 import { CreateFolderButton } from './CreateFolderButton'
 import FolderButton, { ButtonSkeleton } from './FolderButton'
-import TypebotButton from './TypebotButton'
-import { TypebotCardOverlay } from './TypebotButtonOverlay'
-import { useTypebots } from '@/features/dashboard/hooks/useTypebots'
-import { TypebotInDashboard } from '@/features/dashboard/types'
+import MozbotButton from './MozbotButton'
+import { MozbotCardOverlay } from './MozbotButtonOverlay'
+import { useMozbots } from '@/features/dashboard/hooks/useMozbots'
+import { MozbotInDashboard } from '@/features/dashboard/types'
 import { trpc } from '@/lib/trpc'
 import { NodePosition } from '@/features/graph/providers/GraphDndProvider'
 
@@ -30,11 +30,11 @@ export const FolderContent = ({ folder }: Props) => {
   const { workspace, currentRole } = useWorkspace()
   const [isCreatingFolder, setIsCreatingFolder] = useState(false)
   const {
-    setDraggedTypebot,
-    draggedTypebot,
+    setDraggedMozbot,
+    draggedMozbot,
     mouseOverFolderId,
     setMouseOverFolderId,
-  } = useTypebotDnd()
+  } = useMozbotDnd()
   const [draggablePosition, setDraggablePosition] = useState({ x: 0, y: 0 })
   const [mousePositionInElement, setMousePositionInElement] = useState({
     x: 0,
@@ -71,20 +71,20 @@ export const FolderContent = ({ folder }: Props) => {
     },
   })
 
-  const { mutate: updateTypebot } = trpc.typebot.updateTypebot.useMutation({
+  const { mutate: updateMozbot } = trpc.mozbot.updateMozbot.useMutation({
     onError: (error) => {
       showToast({ description: error.message })
     },
     onSuccess: () => {
-      refetchTypebots()
+      refetchMozbots()
     },
   })
 
   const {
-    typebots,
-    isLoading: isTypebotLoading,
-    refetch: refetchTypebots,
-  } = useTypebots({
+    mozbots,
+    isLoading: isMozbotLoading,
+    refetch: refetchMozbots,
+  } = useMozbots({
     workspaceId: workspace?.id,
     folderId: folder === null ? 'root' : folder.id,
     onError: (error) => {
@@ -94,11 +94,11 @@ export const FolderContent = ({ folder }: Props) => {
     },
   })
 
-  const moveTypebotToFolder = async (typebotId: string, folderId: string) => {
-    if (!typebots) return
-    updateTypebot({
-      typebotId,
-      typebot: {
+  const moveMozbotToFolder = async (mozbotId: string, folderId: string) => {
+    if (!mozbots) return
+    updateMozbot({
+      mozbotId,
+      mozbot: {
         folderId: folderId === 'root' ? null : folderId,
       },
     })
@@ -115,27 +115,27 @@ export const FolderContent = ({ folder }: Props) => {
   }
 
   const handleMouseUp = async () => {
-    if (mouseOverFolderId !== undefined && draggedTypebot)
-      await moveTypebotToFolder(draggedTypebot.id, mouseOverFolderId ?? 'root')
+    if (mouseOverFolderId !== undefined && draggedMozbot)
+      await moveMozbotToFolder(draggedMozbot.id, mouseOverFolderId ?? 'root')
     setMouseOverFolderId(undefined)
-    setDraggedTypebot(undefined)
+    setDraggedMozbot(undefined)
   }
   useEventListener('mouseup', handleMouseUp)
 
-  const handleTypebotDrag =
-    (typebot: TypebotInDashboard) =>
+  const handleMozbotDrag =
+    (mozbot: MozbotInDashboard) =>
     ({ absolute, relative }: NodePosition) => {
-      if (draggedTypebot) return
+      if (draggedMozbot) return
       setMousePositionInElement(relative)
       setDraggablePosition({
         x: absolute.x - relative.x,
         y: absolute.y - relative.y,
       })
-      setDraggedTypebot(typebot)
+      setDraggedMozbot(mozbot)
     }
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (!draggedTypebot) return
+    if (!draggedMozbot) return
     const { clientX, clientY } = e
     setDraggablePosition({
       x: clientX - mousePositionInElement.x,
@@ -145,7 +145,7 @@ export const FolderContent = ({ folder }: Props) => {
   useEventListener('mousemove', handleMouseMove)
 
   useEffect(() => {
-    if (!draggablePosition || !draggedTypebot) return
+    if (!draggablePosition || !draggedMozbot) return
     const { innerHeight } = window
     const scrollSpeed = 10
     const scrollMargin = 50
@@ -164,7 +164,7 @@ export const FolderContent = ({ folder }: Props) => {
     return () => {
       clearInterval(interval)
     }
-  }, [draggablePosition, draggedTypebot, mousePositionInElement])
+  }, [draggablePosition, draggedMozbot, mousePositionInElement])
 
   return (
     <Flex w="full" flex="1" justify="center">
@@ -186,7 +186,7 @@ export const FolderContent = ({ folder }: Props) => {
             {currentRole !== WorkspaceRole.GUEST && (
               <CreateBotButton
                 folderId={folder?.id}
-                isLoading={isTypebotLoading}
+                isLoading={isMozbotLoading}
               />
             )}
             {isFolderLoading && <ButtonSkeleton />}
@@ -200,24 +200,24 @@ export const FolderContent = ({ folder }: Props) => {
                   onFolderRenamed={() => refetchFolders()}
                 />
               ))}
-            {isTypebotLoading && <ButtonSkeleton />}
-            {typebots &&
-              typebots.map((typebot) => (
-                <TypebotButton
-                  key={typebot.id}
-                  typebot={typebot}
-                  draggedTypebot={draggedTypebot}
-                  onTypebotUpdated={refetchTypebots}
-                  onDrag={handleTypebotDrag(typebot)}
+            {isMozbotLoading && <ButtonSkeleton />}
+            {mozbots &&
+              mozbots.map((mozbot) => (
+                <MozbotButton
+                  key={mozbot.id}
+                  mozbot={mozbot}
+                  draggedMozbot={draggedMozbot}
+                  onMozbotUpdated={refetchMozbots}
+                  onDrag={handleMozbotDrag(mozbot)}
                 />
               ))}
           </Wrap>
         </Stack>
       </Stack>
-      {draggedTypebot && (
+      {draggedMozbot && (
         <Portal>
-          <TypebotCardOverlay
-            typebot={draggedTypebot}
+          <MozbotCardOverlay
+            mozbot={draggedMozbot}
             onMouseUp={handleMouseUp}
             pos="fixed"
             top="0"

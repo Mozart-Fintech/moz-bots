@@ -1,23 +1,23 @@
 import test, { expect } from '@playwright/test'
-import { createTypebots } from '@typebot.io/playwright/databaseActions'
-import { parseDefaultGroupWithBlock } from '@typebot.io/playwright/databaseHelpers'
+import { createMozbots } from '@mozbot.io/playwright/databaseActions'
+import { parseDefaultGroupWithBlock } from '@mozbot.io/playwright/databaseHelpers'
 import { createId } from '@paralleldrive/cuid2'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { defaultEmailInputOptions } from '@typebot.io/schemas/features/blocks/inputs/email/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { defaultEmailInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/email/constants'
 
 test.describe('Email input block', () => {
   test('options should work', async ({ page }) => {
-    const typebotId = createId()
-    await createTypebots([
+    const mozbotId = createId()
+    await createMozbots([
       {
-        id: typebotId,
+        id: mozbotId,
         ...parseDefaultGroupWithBlock({
           type: InputBlockType.EMAIL,
         }),
       },
     ])
 
-    await page.goto(`/typebots/${typebotId}/edit`)
+    await page.goto(`/mozbots/${mozbotId}/edit`)
 
     await page.click('text=Test')
     await expect(

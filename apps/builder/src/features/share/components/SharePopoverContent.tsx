@@ -3,22 +3,22 @@ import React from 'react'
 import { SwitchWithRelatedSettings } from '@/components/SwitchWithRelatedSettings'
 import { CopyButton } from '@/components/CopyButton'
 import { CollaborationList } from '@/features/collaboration/components/CollaborationList'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { useTranslate } from '@tolgee/react'
 
 export const SharePopoverContent = () => {
   const { t } = useTranslate()
-  const { typebot, updateTypebot } = useTypebot()
+  const { mozbot, updateMozbot } = useMozbot()
 
-  const currentUrl = `${window.location.origin}/typebots/${typebot?.id}/edit`
+  const currentUrl = `${window.location.origin}/mozbots/${mozbot?.id}/edit`
 
   const updateIsPublicShareEnabled = async (isEnabled: boolean) => {
-    await updateTypebot({
+    await updateMozbot({
       updates: {
         settings: {
-          ...typebot?.settings,
+          ...mozbot?.settings,
           publicShare: {
-            ...typebot?.settings.publicShare,
+            ...mozbot?.settings.publicShare,
             isEnabled,
           },
         },
@@ -33,7 +33,7 @@ export const SharePopoverContent = () => {
       <Stack p="4" borderTopWidth={1}>
         <SwitchWithRelatedSettings
           label={t('share.button.popover.publicFlow.label')}
-          initialValue={typebot?.settings.publicShare?.isEnabled ?? false}
+          initialValue={mozbot?.settings.publicShare?.isEnabled ?? false}
           onCheckChange={updateIsPublicShareEnabled}
         >
           <Stack spacing={4}>

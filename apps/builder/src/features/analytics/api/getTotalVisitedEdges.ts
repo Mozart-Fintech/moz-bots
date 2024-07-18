@@ -1,9 +1,9 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
-import { canReadTypebots } from '@/helpers/databaseRules'
-import { totalVisitedEdgesSchema } from '@typebot.io/schemas'
+import { canReadMozbots } from '@/helpers/databaseRules'
+import { totalVisitedEdgesSchema } from '@mozbot.io/schemas'
 import { defaultTimeFilter, timeFilterValues } from '../constants'
 import {
   parseFromDateFromTimeFilter,
@@ -14,7 +14,7 @@ export const getTotalVisitedEdges = authenticatedProcedure
   .meta({
     openapi: {
       method: 'GET',
-      path: '/v1/typebots/{typebotId}/analytics/totalVisitedEdges',
+      path: '/v1/mozbots/{mozbotId}/analytics/totalVisitedEdges',
       protect: true,
       summary: 'List total edges used in results',
       tags: ['Analytics'],
@@ -22,7 +22,7 @@ export const getTotalVisitedEdges = authenticatedProcedure
   })
   .input(
     z.object({
-      typebotId: z.string(),
+      mozbotId: z.string(),
       timeFilter: z.enum(timeFilterValues).default(defaultTimeFilter),
       timeZone: z.string().optional(),
     })
@@ -33,15 +33,15 @@ export const getTotalVisitedEdges = authenticatedProcedure
     })
   )
   .query(
-    async ({ input: { typebotId, timeFilter, timeZone }, ctx: { user } }) => {
-      const typebot = await prisma.typebot.findFirst({
-        where: canReadTypebots(typebotId, user),
+    async ({ input: { mozbotId, timeFilter, timeZone }, ctx: { user } }) => {
+      const mozbot = await prisma.mozbot.findFirst({
+        where: canReadMozbots(mozbotId, user),
         select: { id: true },
       })
-      if (!typebot?.id)
+      if (!mozbot?.id)
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Published typebot not found',
+          message: 'Published mozbot not found',
         })
 
       const fromDate = parseFromDateFromTimeFilter(timeFilter, timeZone)
@@ -51,7 +51,7 @@ export const getTotalVisitedEdges = authenticatedProcedure
         by: ['edgeId'],
         where: {
           result: {
-            typebotId: typebot.id,
+            mozbotId: mozbot.id,
             createdAt: fromDate
               ? {
                   gte: fromDate,

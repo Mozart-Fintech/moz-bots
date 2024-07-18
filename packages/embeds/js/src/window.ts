@@ -15,24 +15,24 @@ import {
 export const initStandard = (props: BotProps & { id?: string }) => {
   const standardElement = props.id
     ? document.getElementById(props.id)
-    : document.querySelector('typebot-standard')
-  if (!standardElement) throw new Error('<typebot-standard> element not found.')
+    : document.querySelector('mozbot-standard')
+  if (!standardElement) throw new Error('<mozbot-standard> element not found.')
   Object.assign(standardElement, props)
 }
 
 export const initPopup = (props: PopupProps) => {
-  const popupElement = document.createElement('typebot-popup')
+  const popupElement = document.createElement('mozbot-popup')
   Object.assign(popupElement, props)
   document.body.prepend(popupElement)
 }
 
 export const initBubble = (props: BubbleProps) => {
-  const bubbleElement = document.createElement('typebot-bubble')
+  const bubbleElement = document.createElement('mozbot-bubble')
   Object.assign(bubbleElement, props)
   document.body.prepend(bubbleElement)
 }
 
-type Typebot = {
+type Mozbot = {
   initStandard: typeof initStandard
   initPopup: typeof initPopup
   initBubble: typeof initBubble
@@ -48,11 +48,11 @@ type Typebot = {
 
 declare const window:
   | {
-      Typebot: Typebot | undefined
+      Mozbot: Mozbot | undefined
     }
   | undefined
 
-export const parseTypebot = () => ({
+export const parseMozbot = () => ({
   initStandard,
   initPopup,
   initBubble,
@@ -66,7 +66,7 @@ export const parseTypebot = () => ({
   unmount,
 })
 
-export const injectTypebotInWindow = (typebot: Typebot) => {
+export const injectMozbotInWindow = (mozbot: Mozbot) => {
   if (typeof window === 'undefined') return
-  window.Typebot = { ...typebot }
+  window.Mozbot = { ...mozbot }
 }

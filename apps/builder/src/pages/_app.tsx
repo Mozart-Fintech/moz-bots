@@ -12,11 +12,11 @@ import '@/assets/styles/md.css'
 import { UserProvider } from '@/features/account/UserProvider'
 import { useRouter } from 'next/router'
 import { SupportBubble } from '@/components/SupportBubble'
-import { toTitleCase } from '@typebot.io/lib'
-import { Plan } from '@typebot.io/prisma'
+import { toTitleCase } from '@mozbot.io/lib'
+import { Plan } from '@mozbot.io/prisma'
 import { trpc } from '@/lib/trpc'
 import { NewVersionPopup } from '@/components/NewVersionPopup'
-import { TypebotProvider } from '@/features/editor/providers/TypebotProvider'
+import { MozbotProvider } from '@/features/editor/providers/MozbotProvider'
 import { WorkspaceProvider } from '@/features/workspace/WorkspaceProvider'
 import { isCloudProdInstance } from '@/helpers/isCloudProdInstance'
 import { TolgeeProvider, useTolgeeSSR } from '@tolgee/react'
@@ -55,7 +55,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       })
   }, [router.query.stripe])
 
-  const typebotId = router.query.typebotId?.toString()
+  const mozbotId = router.query.mozbotId?.toString()
 
   return (
     <TolgeeProvider tolgee={ssrTolgee}>
@@ -64,15 +64,15 @@ const App = ({ Component, pageProps }: AppProps) => {
         <Toaster />
         <SessionProvider session={pageProps.session}>
           <UserProvider>
-            <TypebotProvider typebotId={typebotId}>
-              <WorkspaceProvider typebotId={typebotId}>
+            <MozbotProvider mozbotId={mozbotId}>
+              <WorkspaceProvider mozbotId={mozbotId}>
                 <Component {...pageProps} />
                 {!router.pathname.endsWith('edit') && isCloudProdInstance() && (
                   <SupportBubble />
                 )}
                 <NewVersionPopup />
               </WorkspaceProvider>
-            </TypebotProvider>
+            </MozbotProvider>
           </UserProvider>
         </SessionProvider>
       </ChakraProvider>

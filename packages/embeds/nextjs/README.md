@@ -1,18 +1,18 @@
 ## Install
 
 ```bash
-npm install @typebot.io/js @typebot.io/nextjs
+npm install @mozbot.io/js @mozbot.io/nextjs
 ```
 
 ## Standard
 
 ```tsx
-import { Standard } from '@typebot.io/nextjs'
+import { Standard } from '@mozbot.io/nextjs'
 
 const App = () => {
   return (
     <Standard
-      typebot="lead-generation-copy-3luzm6b"
+      mozbot="lead-generation-copy-3luzm6b"
       style={{ width: '100%', height: '600px' }}
     />
   )
@@ -24,10 +24,10 @@ This code is creating a container with a 100% width (will match parent width) an
 ## Popup
 
 ```tsx
-import { Popup } from '@typebot.io/nextjs'
+import { Popup } from '@mozbot.io/nextjs'
 
 const App = () => {
-  return <Popup typebot="lead-generation-copy-3luzm6b" autoShowDelay={3000} />
+  return <Popup mozbot="lead-generation-copy-3luzm6b" autoShowDelay={3000} />
 }
 ```
 
@@ -38,19 +38,19 @@ This code will automatically trigger the popup window after 3 seconds.
 You can use these commands:
 
 ```js
-import { open } from '@typebot.io/nextjs'
+import { open } from '@mozbot.io/nextjs'
 
 open()
 ```
 
 ```js
-import { close } from '@typebot.io/nextjs'
+import { close } from '@mozbot.io/nextjs'
 
 close()
 ```
 
 ```js
-import { toggle } from '@typebot.io/nextjs'
+import { toggle } from '@mozbot.io/nextjs'
 
 toggle()
 ```
@@ -58,12 +58,12 @@ toggle()
 ## Bubble
 
 ```tsx
-import { Bubble } from '@typebot.io/nextjs'
+import { Bubble } from '@mozbot.io/nextjs'
 
 const App = () => {
   return (
     <Bubble
-      typebot="lead-generation-copy-3luzm6b"
+      mozbot="lead-generation-copy-3luzm6b"
       previewMessage={{
         message: 'I have a question for you!',
         autoShowDelay: 5000,
@@ -85,15 +85,15 @@ This code will show the bubble and let a preview message appear after 5 seconds.
 You can use these commands:
 
 ```js
-import { showPreviewMessage } from '@typebot.io/nextjs'
+import { showPreviewMessage } from '@mozbot.io/nextjs'
 
-Typebot.showPreviewMessage()
+Mozbot.showPreviewMessage()
 ```
 
 ```js
-import { hidePreviewMessage } from '@typebot.io/nextjs'
+import { hidePreviewMessage } from '@mozbot.io/nextjs'
 
-Typebot.hidePreviewMessage()
+Mozbot.hidePreviewMessage()
 ```
 
 ### Open or close the chat window
@@ -101,19 +101,19 @@ Typebot.hidePreviewMessage()
 You can use these commands:
 
 ```js
-import { open } from '@typebot.io/nextjs'
+import { open } from '@mozbot.io/nextjs'
 
 open()
 ```
 
 ```js
-import { close } from '@typebot.io/nextjs'
+import { close } from '@mozbot.io/nextjs'
 
 close()
 ```
 
 ```js
-import { toggle } from '@typebot.io/nextjs'
+import { toggle } from '@mozbot.io/nextjs'
 
 toggle()
 ```
@@ -123,12 +123,12 @@ toggle()
 You can prefill the bot variable values in your embed code by adding the `prefilledVariables` option. Here is an example:
 
 ```tsx
-import { Standard } from '@typebot.io/nextjs'
+import { Standard } from '@mozbot.io/nextjs'
 
 const App = () => {
   return (
     <Standard
-      typebot="lead-generation-copy-3luzm6b"
+      mozbot="lead-generation-copy-3luzm6b"
       style={{ width: '100%', height: '600px' }}
       prefilledVariables={{
         'Current URL': 'https://my-site/account',
@@ -139,6 +139,6 @@ const App = () => {
 }
 ```
 
-It will prefill the `Current URL` variable with "https://my-site/account" and the `User name` variable with "John Doe". More info about variables: [here](/editor/variables).
+It will prefill the `Current URL` variable with "<https://my-site/account>" and the `User name` variable with "John Doe". More info about variables: [here](/editor/variables).
 
-Note that if your site URL contains query params (i.e. https://typebot.io?User%20name=John%20Doe), the variables will automatically be injected to the typebot. So you don't need to manually transfer query params to the bot embed configuration.
+Note that if your site URL contains query params (i.e. <https://mozbot.io?User%20name=John%20Doe>), the variables will automatically be injected to the mozbot. So you don't need to manually transfer query params to the bot embed configuration.

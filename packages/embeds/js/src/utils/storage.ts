@@ -1,14 +1,14 @@
-import { StartChatResponse } from '@typebot.io/schemas/features/chat/schema'
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
+import { StartChatResponse } from '@mozbot.io/schemas/features/chat/schema'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
 
 const storageResultIdKey = 'resultId'
 
-export const getExistingResultIdFromStorage = (typebotId?: string) => {
-  if (!typebotId) return
+export const getExistingResultIdFromStorage = (mozbotId?: string) => {
+  if (!mozbotId) return
   try {
     return (
-      sessionStorage.getItem(`${storageResultIdKey}-${typebotId}`) ??
-      localStorage.getItem(`${storageResultIdKey}-${typebotId}`) ??
+      sessionStorage.getItem(`${storageResultIdKey}-${mozbotId}`) ??
+      localStorage.getItem(`${storageResultIdKey}-${mozbotId}`) ??
       undefined
     )
   } catch {
@@ -18,10 +18,10 @@ export const getExistingResultIdFromStorage = (typebotId?: string) => {
 
 export const setResultInStorage =
   (storageType: 'local' | 'session' = 'session') =>
-  (typebotId: string, resultId: string) => {
+  (mozbotId: string, resultId: string) => {
     try {
       parseRememberUserStorage(storageType).setItem(
-        `${storageResultIdKey}-${typebotId}`,
+        `${storageResultIdKey}-${mozbotId}`,
         resultId
       )
     } catch {
@@ -30,13 +30,13 @@ export const setResultInStorage =
   }
 
 export const getInitialChatReplyFromStorage = (
-  typebotId: string | undefined
+  mozbotId: string | undefined
 ) => {
-  if (!typebotId) return
+  if (!mozbotId) return
   try {
     const rawInitialChatReply =
-      sessionStorage.getItem(`typebot-${typebotId}-initialChatReply`) ??
-      localStorage.getItem(`typebot-${typebotId}-initialChatReply`)
+      sessionStorage.getItem(`mozbot-${mozbotId}-initialChatReply`) ??
+      localStorage.getItem(`mozbot-${mozbotId}-initialChatReply`)
     if (!rawInitialChatReply) return
     return JSON.parse(rawInitialChatReply) as StartChatResponse
   } catch {
@@ -46,17 +46,17 @@ export const getInitialChatReplyFromStorage = (
 export const setInitialChatReplyInStorage = (
   initialChatReply: StartChatResponse,
   {
-    typebotId,
+    mozbotId,
     storage,
   }: {
-    typebotId: string
+    mozbotId: string
     storage?: 'local' | 'session'
   }
 ) => {
   try {
     const rawInitialChatReply = JSON.stringify(initialChatReply)
     parseRememberUserStorage(storage).setItem(
-      `typebot-${typebotId}-initialChatReply`,
+      `mozbot-${mozbotId}-initialChatReply`,
       rawInitialChatReply
     )
   } catch {
@@ -66,7 +66,7 @@ export const setInitialChatReplyInStorage = (
 
 export const setBotOpenedStateInStorage = () => {
   try {
-    sessionStorage.setItem(`typebot-botOpened`, 'true')
+    sessionStorage.setItem(`mozbot-botOpened`, 'true')
   } catch {
     /* empty */
   }
@@ -74,7 +74,7 @@ export const setBotOpenedStateInStorage = () => {
 
 export const removeBotOpenedStateInStorage = () => {
   try {
-    sessionStorage.removeItem(`typebot-botOpened`)
+    sessionStorage.removeItem(`mozbot-botOpened`)
   } catch {
     /* empty */
   }
@@ -82,7 +82,7 @@ export const removeBotOpenedStateInStorage = () => {
 
 export const getBotOpenedStateFromStorage = () => {
   try {
-    return sessionStorage.getItem(`typebot-botOpened`) === 'true'
+    return sessionStorage.getItem(`mozbot-botOpened`) === 'true'
   } catch {
     return false
   }
@@ -95,11 +95,11 @@ export const parseRememberUserStorage = (
     ? sessionStorage
     : localStorage
 
-export const wipeExistingChatStateInStorage = (typebotId: string) => {
+export const wipeExistingChatStateInStorage = (mozbotId: string) => {
   Object.keys(localStorage).forEach((key) => {
-    if (key.startsWith(`typebot-${typebotId}`)) localStorage.removeItem(key)
+    if (key.startsWith(`mozbot-${mozbotId}`)) localStorage.removeItem(key)
   })
   Object.keys(sessionStorage).forEach((key) => {
-    if (key.startsWith(`typebot-${typebotId}`)) sessionStorage.removeItem(key)
+    if (key.startsWith(`mozbot-${mozbotId}`)) sessionStorage.removeItem(key)
   })
 }

@@ -1,12 +1,12 @@
 import { parseVariables } from '@/features/variables'
 import { EdgeId, LogicState } from '@/types'
 import { sendEventToParent } from '@/utils/chat'
-import { RedirectBlock } from '@typebot.io/schemas'
-import { sanitizeUrl } from '@typebot.io/lib'
+import { RedirectBlock } from '@mozbot.io/schemas'
+import { sanitizeUrl } from '@mozbot.io/lib'
 
 export const executeRedirect = (
   block: RedirectBlock,
-  { typebot: { variables } }: LogicState
+  { mozbot: { variables } }: LogicState
 ): {
   nextEdgeId?: EdgeId
   blockedPopupUrl?: string

@@ -6,19 +6,19 @@
   },
   "servers": [
     {
-      "url": "https://app.typebot.io/api"
+      "url": "https://app.mozbot.io/api"
     }
   ],
   "externalDocs": {
-    "url": "https://docs.typebot.io/api-reference"
+    "url": "https://docs.mozbot.io/api-reference"
   },
   "paths": {
-    "/v1/typebots/{typebotId}/linkedTypebots": {
+    "/v1/mozbots/{mozbotId}/linkedMozbots": {
       "get": {
-        "operationId": "getLinkedTypebots",
-        "summary": "Get linked typebots",
+        "operationId": "getLinkedMozbots",
+        "summary": "Get linked mozbots",
         "tags": [
-          "Typebot"
+          "Mozbot"
         ],
         "security": [
           {
@@ -28,7 +28,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
+            "name": "mozbotId",
             "schema": {
               "type": "string"
             },
@@ -43,7 +43,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "typebots": {
+                    "mozbots": {
                       "type": "array",
                       "items": {
                         "oneOf": [
@@ -746,13 +746,13 @@
                                               "type": {
                                                 "type": "string",
                                                 "enum": [
-                                                  "Typebot link"
+                                                  "Mozbot link"
                                                 ]
                                               },
                                               "options": {
                                                 "type": "object",
                                                 "properties": {
-                                                  "typebotId": {
+                                                  "mozbotId": {
                                                     "type": "string"
                                                   },
                                                   "groupId": {
@@ -2668,7 +2668,7 @@
                     }
                   },
                   "required": [
-                    "typebots"
+                    "mozbots"
                   ]
                 }
               }
@@ -2727,7 +2727,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/analytics/inDepthData": {
+    "/v1/mozbots/{mozbotId}/analytics/inDepthData": {
       "get": {
         "operationId": "analytics-getInDepthAnalyticsData",
         "summary": "List total answers in blocks and off-default paths visited edges",
@@ -2742,7 +2742,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
+            "name": "mozbotId",
             "schema": {
               "type": "string"
             },
@@ -2882,7 +2882,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/analytics/stats": {
+    "/v1/mozbots/{mozbotId}/analytics/stats": {
       "get": {
         "operationId": "analytics-getStats",
         "summary": "Get results stats",
@@ -2897,7 +2897,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
+            "name": "mozbotId",
             "schema": {
               "type": "string"
             },
@@ -3782,12 +3782,12 @@
         }
       }
     },
-    "/v1/typebots": {
+    "/v1/mozbots": {
       "post": {
-        "operationId": "typebot-createTypebot",
-        "summary": "Create a typebot",
+        "operationId": "mozbot-createMozbot",
+        "summary": "Create a mozbot",
         "tags": [
-          "Typebot"
+          "Mozbot"
         ],
         "security": [
           {
@@ -3804,7 +3804,7 @@
                   "workspaceId": {
                     "type": "string"
                   },
-                  "typebot": {
+                  "mozbot": {
                     "type": "object",
                     "properties": {
                       "name": {
@@ -3983,7 +3983,7 @@
                 },
                 "required": [
                   "workspaceId",
-                  "typebot"
+                  "mozbot"
                 ]
               }
             }
@@ -3997,12 +3997,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "typebot": {
-                      "$ref": "#/components/schemas/typebotV6"
+                    "mozbot": {
+                      "$ref": "#/components/schemas/mozbotV6"
                     }
                   },
                   "required": [
-                    "typebot"
+                    "mozbot"
                   ]
                 }
               }
@@ -4051,10 +4051,10 @@
         }
       },
       "get": {
-        "operationId": "typebot-listTypebots",
-        "summary": "List typebots",
+        "operationId": "mozbot-listMozbots",
+        "summary": "List mozbots",
         "tags": [
-          "Typebot"
+          "Mozbot"
         ],
         "security": [
           {
@@ -4088,7 +4088,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "typebots": {
+                    "mozbots": {
                       "type": "array",
                       "items": {
                         "type": "object",
@@ -4103,7 +4103,7 @@
                           "id": {
                             "type": "string"
                           },
-                          "publishedTypebotId": {
+                          "publishedmozbotId": {
                             "type": "string"
                           }
                         },
@@ -4116,7 +4116,7 @@
                     }
                   },
                   "required": [
-                    "typebots"
+                    "mozbots"
                   ]
                 }
               }
@@ -4175,12 +4175,12 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}": {
+    "/v1/mozbots/{mozbotId}": {
       "patch": {
-        "operationId": "typebot-updateTypebot",
-        "summary": "Update a typebot",
+        "operationId": "mozbot-updateMozbot",
+        "summary": "Update a mozbot",
         "tags": [
-          "Typebot"
+          "Mozbot"
         ],
         "security": [
           {
@@ -4190,11 +4190,11 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
-            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+            "name": "mozbotId",
+            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)",
             "schema": {
               "type": "string",
-              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
             },
             "required": true
           }
@@ -4206,7 +4206,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "typebot": {
+                  "mozbot": {
                     "anyOf": [
                       {
                         "type": "object",
@@ -4403,7 +4403,7 @@
                             "type": "string"
                           }
                         },
-                        "title": "Typebot V6"
+                        "title": "Mozbot V6"
                       },
                       {
                         "type": "object",
@@ -5115,13 +5115,13 @@
                                           "type": {
                                             "type": "string",
                                             "enum": [
-                                              "Typebot link"
+                                              "Mozbot link"
                                             ]
                                           },
                                           "options": {
                                             "type": "object",
                                             "properties": {
-                                              "typebotId": {
+                                              "mozbotId": {
                                                 "type": "string"
                                               },
                                               "groupId": {
@@ -7083,13 +7083,13 @@
                             "type": "string"
                           }
                         },
-                        "title": "Typebot V5"
+                        "title": "Mozbot V5"
                       }
                     ]
                   }
                 },
                 "required": [
-                  "typebot"
+                  "mozbot"
                 ]
               }
             }
@@ -7103,12 +7103,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "typebot": {
-                      "$ref": "#/components/schemas/typebotV6"
+                    "mozbot": {
+                      "$ref": "#/components/schemas/mozbotV6"
                     }
                   },
                   "required": [
-                    "typebot"
+                    "mozbot"
                   ]
                 }
               }
@@ -7167,10 +7167,10 @@
         }
       },
       "get": {
-        "operationId": "typebot-getTypebot",
-        "summary": "Get a typebot",
+        "operationId": "mozbot-getMozbot",
+        "summary": "Get a mozbot",
         "tags": [
-          "Typebot"
+          "Mozbot"
         ],
         "security": [
           {
@@ -7180,22 +7180,22 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
-            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+            "name": "mozbotId",
+            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)",
             "schema": {
               "type": "string",
-              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
             },
             "required": true
           },
           {
             "in": "query",
             "name": "migrateToLatestVersion",
-            "description": "If enabled, the typebot will be converted to the latest schema version",
+            "description": "If enabled, the mozbot will be converted to the latest schema version",
             "schema": {
               "type": "boolean",
               "default": false,
-              "description": "If enabled, the typebot will be converted to the latest schema version"
+              "description": "If enabled, the mozbot will be converted to the latest schema version"
             }
           }
         ],
@@ -7207,22 +7207,22 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "typebot": {
+                    "mozbot": {
                       "oneOf": [
                         {
-                          "$ref": "#/components/schemas/typebotV6"
+                          "$ref": "#/components/schemas/mozbotV6"
                         },
                         {
-                          "$ref": "#/components/schemas/typebotV5"
+                          "$ref": "#/components/schemas/mozbotV5"
                         }
                       ],
                       "discriminator": {
                         "propertyName": "version",
                         "mapping": {
-                          "3": "#/components/schemas/typebotV5",
-                          "4": "#/components/schemas/typebotV5",
-                          "5": "#/components/schemas/typebotV5",
-                          "6": "#/components/schemas/typebotV6"
+                          "3": "#/components/schemas/mozbotV5",
+                          "4": "#/components/schemas/mozbotV5",
+                          "5": "#/components/schemas/mozbotV5",
+                          "6": "#/components/schemas/mozbotV6"
                         }
                       }
                     },
@@ -7236,7 +7236,7 @@
                     }
                   },
                   "required": [
-                    "typebot",
+                    "mozbot",
                     "currentUserMode"
                   ]
                 }
@@ -7296,10 +7296,10 @@
         }
       },
       "delete": {
-        "operationId": "typebot-deleteTypebot",
-        "summary": "Delete a typebot",
+        "operationId": "mozbot-deleteMozbot",
+        "summary": "Delete a mozbot",
         "tags": [
-          "Typebot"
+          "Mozbot"
         ],
         "security": [
           {
@@ -7309,11 +7309,11 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
-            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+            "name": "mozbotId",
+            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)",
             "schema": {
               "type": "string",
-              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
             },
             "required": true
           }
@@ -7393,12 +7393,12 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/publishedTypebot": {
+    "/v1/mozbots/{mozbotId}/publishedMozbot": {
       "get": {
-        "operationId": "typebot-getPublishedTypebot",
-        "summary": "Get published typebot",
+        "operationId": "mozbot-getPublishedMozbot",
+        "summary": "Get published mozbot",
         "tags": [
-          "Typebot"
+          "Mozbot"
         ],
         "security": [
           {
@@ -7408,22 +7408,22 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
-            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+            "name": "mozbotId",
+            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)",
             "schema": {
               "type": "string",
-              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
             },
             "required": true
           },
           {
             "in": "query",
             "name": "migrateToLatestVersion",
-            "description": "If enabled, the typebot will be converted to the latest schema version",
+            "description": "If enabled, the mozbot will be converted to the latest schema version",
             "schema": {
               "type": "boolean",
               "default": false,
-              "description": "If enabled, the typebot will be converted to the latest schema version"
+              "description": "If enabled, the mozbot will be converted to the latest schema version"
             }
           }
         ],
@@ -7435,23 +7435,23 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "publishedTypebot": {
+                    "publishedMozbot": {
                       "nullable": true,
                       "oneOf": [
                         {
-                          "$ref": "#/components/schemas/publicTypebotV6"
+                          "$ref": "#/components/schemas/publicMozbotV6"
                         },
                         {
-                          "$ref": "#/components/schemas/publicTypebotV5"
+                          "$ref": "#/components/schemas/publicMozbotV5"
                         }
                       ],
                       "discriminator": {
                         "propertyName": "version",
                         "mapping": {
-                          "3": "#/components/schemas/publicTypebotV5",
-                          "4": "#/components/schemas/publicTypebotV5",
-                          "5": "#/components/schemas/publicTypebotV5",
-                          "6": "#/components/schemas/publicTypebotV6"
+                          "3": "#/components/schemas/publicMozbotV5",
+                          "4": "#/components/schemas/publicMozbotV5",
+                          "5": "#/components/schemas/publicMozbotV5",
+                          "6": "#/components/schemas/publicMozbotV6"
                         }
                       }
                     },
@@ -7467,7 +7467,7 @@
                     }
                   },
                   "required": [
-                    "publishedTypebot"
+                    "publishedMozbot"
                   ]
                 }
               }
@@ -7526,12 +7526,12 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/publish": {
+    "/v1/mozbots/{mozbotId}/publish": {
       "post": {
-        "operationId": "typebot-publishTypebot",
-        "summary": "Publish a typebot",
+        "operationId": "mozbot-publishMozbot",
+        "summary": "Publish a mozbot",
         "tags": [
-          "Typebot"
+          "Mozbot"
         ],
         "security": [
           {
@@ -7541,11 +7541,11 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
-            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+            "name": "mozbotId",
+            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)",
             "schema": {
               "type": "string",
-              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
             },
             "required": true
           }
@@ -7615,12 +7615,12 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/unpublish": {
+    "/v1/mozbots/{mozbotId}/unpublish": {
       "post": {
-        "operationId": "typebot-unpublishTypebot",
-        "summary": "Unpublish a typebot",
+        "operationId": "mozbot-unpublishMozbot",
+        "summary": "Unpublish a mozbot",
         "tags": [
-          "Typebot"
+          "Mozbot"
         ],
         "security": [
           {
@@ -7630,11 +7630,11 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
-            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+            "name": "mozbotId",
+            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)",
             "schema": {
               "type": "string",
-              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
             },
             "required": true
           }
@@ -7704,12 +7704,12 @@
         }
       }
     },
-    "/v1/typebots/import": {
+    "/v1/mozbots/import": {
       "post": {
-        "operationId": "typebot-importTypebot",
-        "summary": "Import a typebot",
+        "operationId": "mozbot-importMozbot",
+        "summary": "Import a mozbot",
         "tags": [
-          "Typebot"
+          "Mozbot"
         ],
         "security": [
           {
@@ -7727,7 +7727,7 @@
                     "type": "string",
                     "description": "[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)"
                   },
-                  "typebot": {
+                  "mozbot": {
                     "oneOf": [
                       {
                         "type": "object",
@@ -7914,7 +7914,7 @@
                           "icon",
                           "folderId"
                         ],
-                        "title": "Typebot V6"
+                        "title": "Mozbot V6"
                       },
                       {
                         "type": "object",
@@ -8621,13 +8621,13 @@
                                           "type": {
                                             "type": "string",
                                             "enum": [
-                                              "Typebot link"
+                                              "Mozbot link"
                                             ]
                                           },
                                           "options": {
                                             "type": "object",
                                             "properties": {
-                                              "typebotId": {
+                                              "mozbotId": {
                                                 "type": "string"
                                               },
                                               "groupId": {
@@ -10584,14 +10584,14 @@
                           "icon",
                           "folderId"
                         ],
-                        "title": "Typebot V5"
+                        "title": "Mozbot V5"
                       }
                     ]
                   }
                 },
                 "required": [
                   "workspaceId",
-                  "typebot"
+                  "mozbot"
                 ]
               }
             }
@@ -10605,12 +10605,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "typebot": {
-                      "$ref": "#/components/schemas/typebotV6"
+                    "mozbot": {
+                      "$ref": "#/components/schemas/mozbotV6"
                     }
                   },
                   "required": [
-                    "typebot"
+                    "mozbot"
                   ]
                 }
               }
@@ -10659,7 +10659,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/webhookBlocks": {
+    "/v1/mozbots/{mozbotId}/webhookBlocks": {
       "get": {
         "operationId": "webhook-listWebhookBlocks",
         "summary": "List webhook blocks",
@@ -10675,7 +10675,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
+            "name": "mozbotId",
             "schema": {
               "type": "string"
             },
@@ -10782,7 +10782,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/webhookBlocks/{blockId}/getResultExample": {
+    "/v1/mozbots/{mozbotId}/webhookBlocks/{blockId}/getResultExample": {
       "get": {
         "operationId": "webhook-getResultExample",
         "summary": "Get result example",
@@ -10798,7 +10798,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
+            "name": "mozbotId",
             "schema": {
               "type": "string"
             },
@@ -10887,7 +10887,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/webhookBlocks/{blockId}/subscribe": {
+    "/v1/mozbots/{mozbotId}/webhookBlocks/{blockId}/subscribe": {
       "post": {
         "operationId": "webhook-subscribeWebhook",
         "summary": "Subscribe to webhook block",
@@ -10902,7 +10902,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
+            "name": "mozbotId",
             "schema": {
               "type": "string"
             },
@@ -11002,7 +11002,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/webhookBlocks/{blockId}/unsubscribe": {
+    "/v1/mozbots/{mozbotId}/webhookBlocks/{blockId}/unsubscribe": {
       "post": {
         "operationId": "webhook-unsubscribeWebhook",
         "summary": "Unsubscribe from webhook block",
@@ -11017,7 +11017,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
+            "name": "mozbotId",
             "schema": {
               "type": "string"
             },
@@ -11099,7 +11099,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/results": {
+    "/v1/mozbots/{mozbotId}/results": {
       "get": {
         "operationId": "results-getResults",
         "summary": "List results ordered by descending creation date",
@@ -11114,11 +11114,11 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
-            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+            "name": "mozbotId",
+            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)",
             "schema": {
               "type": "string",
-              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
             },
             "required": true
           },
@@ -11183,7 +11183,7 @@
                           "createdAt": {
                             "type": "string"
                           },
-                          "typebotId": {
+                          "mozbotId": {
                             "type": "string"
                           },
                           "variables": {
@@ -11265,7 +11265,7 @@
                         "required": [
                           "id",
                           "createdAt",
-                          "typebotId",
+                          "mozbotId",
                           "variables",
                           "isCompleted",
                           "hasStarted",
@@ -11353,11 +11353,11 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
-            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+            "name": "mozbotId",
+            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)",
             "schema": {
               "type": "string",
-              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
             },
             "required": true
           },
@@ -11433,7 +11433,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/results/{resultId}": {
+    "/v1/mozbots/{mozbotId}/results/{resultId}": {
       "get": {
         "operationId": "results-getResult",
         "summary": "Get result by id",
@@ -11448,11 +11448,11 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
-            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+            "name": "mozbotId",
+            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)",
             "schema": {
               "type": "string",
-              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
             },
             "required": true
           },
@@ -11484,7 +11484,7 @@
                         "createdAt": {
                           "type": "string"
                         },
-                        "typebotId": {
+                        "mozbotId": {
                           "type": "string"
                         },
                         "variables": {
@@ -11566,7 +11566,7 @@
                       "required": [
                         "id",
                         "createdAt",
-                        "typebotId",
+                        "mozbotId",
                         "variables",
                         "isCompleted",
                         "hasStarted",
@@ -11636,7 +11636,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/results/{resultId}/logs": {
+    "/v1/mozbots/{mozbotId}/results/{resultId}/logs": {
       "get": {
         "operationId": "results-getResultLogs",
         "summary": "List result logs",
@@ -11651,11 +11651,11 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
-            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)",
+            "name": "mozbotId",
+            "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)",
             "schema": {
               "type": "string",
-              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+              "description": "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
             },
             "required": true
           },
@@ -14694,7 +14694,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/collaborators": {
+    "/v1/mozbots/{mozbotId}/collaborators": {
       "get": {
         "operationId": "collaborators-getCollaborators",
         "summary": "Get collaborators",
@@ -14709,7 +14709,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
+            "name": "mozbotId",
             "schema": {
               "type": "string"
             },
@@ -14740,7 +14740,7 @@
                           "userId": {
                             "type": "string"
                           },
-                          "typebotId": {
+                          "mozbotId": {
                             "type": "string"
                           },
                           "createdAt": {
@@ -14753,7 +14753,7 @@
                         "required": [
                           "type",
                           "userId",
-                          "typebotId",
+                          "mozbotId",
                           "createdAt",
                           "updatedAt"
                         ]
@@ -15324,7 +15324,7 @@
         }
       }
     },
-    "/v1/typebots/{typebotId}/whatsapp/start-preview": {
+    "/v1/mozbots/{mozbotId}/whatsapp/start-preview": {
       "post": {
         "operationId": "whatsApp-startWhatsAppPreview",
         "summary": "Start preview",
@@ -15339,7 +15339,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "typebotId",
+            "name": "mozbotId",
             "schema": {
               "type": "string"
             },
@@ -18173,13 +18173,13 @@
               "type": {
                 "type": "string",
                 "enum": [
-                  "Typebot link"
+                  "Mozbot link"
                 ]
               },
               "options": {
                 "type": "object",
                 "properties": {
-                  "typebotId": {
+                  "mozbotId": {
                     "type": "string"
                   },
                   "groupId": {
@@ -23868,7 +23868,7 @@
         },
         "title": "Settings"
       },
-      "typebotV6": {
+      "mozbotV6": {
         "type": "object",
         "properties": {
           "version": {
@@ -24099,9 +24099,9 @@
           "whatsAppCredentialsId",
           "riskLevel"
         ],
-        "title": "Typebot V6"
+        "title": "Mozbot V6"
       },
-      "typebotV5": {
+      "mozbotV5": {
         "type": "object",
         "properties": {
           "version": {
@@ -24809,13 +24809,13 @@
                           "type": {
                             "type": "string",
                             "enum": [
-                              "Typebot link"
+                              "Mozbot link"
                             ]
                           },
                           "options": {
                             "type": "object",
                             "properties": {
-                              "typebotId": {
+                              "mozbotId": {
                                 "type": "string"
                               },
                               "groupId": {
@@ -26815,9 +26815,9 @@
           "whatsAppCredentialsId",
           "riskLevel"
         ],
-        "title": "Typebot V5"
+        "title": "Mozbot V5"
       },
-      "publicTypebotV6": {
+      "publicMozbotV6": {
         "type": "object",
         "properties": {
           "id": {
@@ -26835,7 +26835,7 @@
           "updatedAt": {
             "type": "string"
           },
-          "typebotId": {
+          "mozbotId": {
             "type": "string"
           },
           "groups": {
@@ -26963,7 +26963,7 @@
           "version",
           "createdAt",
           "updatedAt",
-          "typebotId",
+          "mozbotId",
           "groups",
           "events",
           "edges",
@@ -26971,9 +26971,9 @@
           "theme",
           "settings"
         ],
-        "title": "Public Typebot V6"
+        "title": "Public Mozbot V6"
       },
-      "publicTypebotV5": {
+      "publicMozbotV5": {
         "type": "object",
         "properties": {
           "id": {
@@ -26993,7 +26993,7 @@
           "updatedAt": {
             "type": "string"
           },
-          "typebotId": {
+          "mozbotId": {
             "type": "string"
           },
           "groups": {
@@ -27684,13 +27684,13 @@
                           "type": {
                             "type": "string",
                             "enum": [
-                              "Typebot link"
+                              "Mozbot link"
                             ]
                           },
                           "options": {
                             "type": "object",
                             "properties": {
-                              "typebotId": {
+                              "mozbotId": {
                                 "type": "string"
                               },
                               "groupId": {
@@ -29602,7 +29602,7 @@
           "version",
           "createdAt",
           "updatedAt",
-          "typebotId",
+          "mozbotId",
           "groups",
           "events",
           "edges",
@@ -29610,7 +29610,7 @@
           "theme",
           "settings"
         ],
-        "title": "Public Typebot V5"
+        "title": "Public Mozbot V5"
       }
     }
   }

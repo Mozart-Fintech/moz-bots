@@ -1,11 +1,11 @@
 import { SetVariableLabel } from '@/components/SetVariableLabel'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { Flex, Stack, Text, Tooltip } from '@chakra-ui/react'
 import { useForgedBlock } from '../hooks/useForgedBlock'
-import { ForgedBlock } from '@typebot.io/forge-repository/types'
-import { BlockIndices } from '@typebot.io/schemas'
+import { ForgedBlock } from '@mozbot.io/forge-repository/types'
+import { BlockIndices } from '@mozbot.io/schemas'
 import { useMemo } from 'react'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
 import { ThunderIcon } from '@/components/icons'
 
 type Props = {
@@ -17,18 +17,18 @@ export const ForgedBlockNodeContent = ({ block, indices }: Props) => {
     block.type,
     block.options?.action
   )
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
 
   const isStreamingNextBlock = useMemo(() => {
     if (!actionDef?.run?.stream?.getStreamVariableId) return false
-    const variable = typebot?.variables.find(
+    const variable = mozbot?.variables.find(
       (variable) =>
         variable.id ===
         actionDef.run!.stream!.getStreamVariableId(block.options)
     )
     if (!variable) return false
     const nextBlock =
-      typebot?.groups[indices.groupIndex]?.blocks[indices.blockIndex + 1]
+      mozbot?.groups[indices.groupIndex]?.blocks[indices.blockIndex + 1]
     return (
       nextBlock?.type === BubbleBlockType.TEXT &&
       nextBlock.content?.richText?.length === 1 &&
@@ -41,8 +41,8 @@ export const ForgedBlockNodeContent = ({ block, indices }: Props) => {
     block.options,
     indices.blockIndex,
     indices.groupIndex,
-    typebot?.groups,
-    typebot?.variables,
+    mozbot?.groups,
+    mozbot?.variables,
   ])
 
   const setVariableIds = actionDef?.getSetVariableIds?.(block.options) ?? []
@@ -54,12 +54,12 @@ export const ForgedBlockNodeContent = ({ block, indices }: Props) => {
       <Text color={isConfigured ? 'currentcolor' : 'gray.500'} noOfLines={1}>
         {isConfigured ? block.options.action : 'Configure...'}
       </Text>
-      {typebot &&
+      {mozbot &&
         isConfigured &&
         setVariableIds.map((variableId, idx) => (
           <SetVariableLabel
             key={variableId + idx}
-            variables={typebot.variables}
+            variables={mozbot.variables}
             variableId={variableId}
           />
         ))}

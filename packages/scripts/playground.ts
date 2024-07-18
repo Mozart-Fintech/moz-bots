@@ -1,4 +1,4 @@
-import { PrismaClient } from '@typebot.io/prisma'
+import { PrismaClient } from '@mozbot.io/prisma'
 import { promptAndSetEnvironment } from './utils'
 
 const executePlayground = async () => {
@@ -25,7 +25,7 @@ const executePlayground = async () => {
     },
     include: {
       members: true,
-      typebots: {
+      mozbots: {
         select: {
           name: true,
           riskLevel: true,

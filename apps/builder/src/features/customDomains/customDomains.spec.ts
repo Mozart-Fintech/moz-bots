@@ -1,21 +1,21 @@
 import test, { expect } from '@playwright/test'
 import { createId } from '@paralleldrive/cuid2'
-import { createTypebots } from '@typebot.io/playwright/databaseActions'
-import { parseDefaultGroupWithBlock } from '@typebot.io/playwright/databaseHelpers'
-import { starterWorkspaceId } from '@typebot.io/playwright/databaseSetup'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
+import { createMozbots } from '@mozbot.io/playwright/databaseActions'
+import { parseDefaultGroupWithBlock } from '@mozbot.io/playwright/databaseHelpers'
+import { starterWorkspaceId } from '@mozbot.io/playwright/databaseSetup'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
 
 test('should be able to connect custom domain', async ({ page }) => {
-  const typebotId = createId()
-  await createTypebots([
+  const mozbotId = createId()
+  await createMozbots([
     {
-      id: typebotId,
+      id: mozbotId,
       ...parseDefaultGroupWithBlock({
         type: InputBlockType.TEXT,
       }),
     },
   ])
-  await page.goto(`/typebots/${typebotId}/share`)
+  await page.goto(`/mozbots/${mozbotId}/share`)
   await page.click('text=Add my domain')
   await page.click('text=Connect new')
   await page.fill('input[placeholder="bot.my-domain.com"]', 'test')
@@ -44,17 +44,17 @@ test('should be able to connect custom domain', async ({ page }) => {
 
 test.describe('Starter workspace', () => {
   test("Add my domain shouldn't be available", async ({ page }) => {
-    const typebotId = createId()
-    await createTypebots([
+    const mozbotId = createId()
+    await createMozbots([
       {
-        id: typebotId,
+        id: mozbotId,
         workspaceId: starterWorkspaceId,
         ...parseDefaultGroupWithBlock({
           type: InputBlockType.TEXT,
         }),
       },
     ])
-    await page.goto(`/typebots/${typebotId}/share`)
+    await page.goto(`/mozbots/${mozbotId}/share`)
     await expect(
       page.locator('[data-testid="pro-lock-tag"]').nth(0)
     ).toBeVisible()

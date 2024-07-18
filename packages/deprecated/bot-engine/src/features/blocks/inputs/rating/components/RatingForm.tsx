@@ -1,9 +1,9 @@
 import { InputSubmitContent } from '@/types'
-import { RatingInputBlock } from '@typebot.io/schemas'
+import { RatingInputBlock } from '@mozbot.io/schemas'
 import React, { FormEvent, useState } from 'react'
-import { isDefined, isEmpty, isNotDefined } from '@typebot.io/lib'
+import { isDefined, isEmpty, isNotDefined } from '@mozbot.io/lib'
 import { SendButton } from '../../../../../components/SendButton'
-import { defaultRatingInputOptions } from '@typebot.io/schemas/features/blocks/inputs/rating/constants'
+import { defaultRatingInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/rating/constants'
 
 type Props = {
   block: RatingInputBlock
@@ -88,7 +88,7 @@ const RatingButton = ({
           onClick(idx)
         }}
         className={
-          'py-2 px-4 mr-2 mb-2 text-left font-semibold rounded-md transition-all filter hover:brightness-90 active:brightness-75 duration-100 focus:outline-none typebot-button ' +
+          'py-2 px-4 mr-2 mb-2 text-left font-semibold rounded-md transition-all filter hover:brightness-90 active:brightness-75 duration-100 focus:outline-none mozbot-button ' +
           (isDefined(rating) && idx <= rating ? '' : 'selectable')
         }
       >

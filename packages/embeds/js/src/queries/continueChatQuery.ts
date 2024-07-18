@@ -1,6 +1,6 @@
 import { guessApiHost } from '@/utils/guessApiHost'
-import { isNotEmpty } from '@typebot.io/lib'
-import { ContinueChatResponse, Message } from '@typebot.io/schemas'
+import { isNotEmpty } from '@mozbot.io/lib'
+import { ContinueChatResponse, Message } from '@mozbot.io/schemas'
 import ky from 'ky'
 
 export const continueChatQuery = async ({

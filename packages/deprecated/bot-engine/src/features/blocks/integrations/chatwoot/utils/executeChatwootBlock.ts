@@ -2,7 +2,7 @@ import { parseVariables } from '@/features/variables'
 import { IntegrationState } from '@/types'
 import { sendEventToParent } from '@/utils/chat'
 import { isEmbedded } from '@/utils/helpers'
-import { ChatwootBlock } from '@typebot.io/schemas'
+import { ChatwootBlock } from '@mozbot.io/schemas'
 
 const parseSetUserCode = (
   user: NonNullable<ChatwootBlock['options']>['user']

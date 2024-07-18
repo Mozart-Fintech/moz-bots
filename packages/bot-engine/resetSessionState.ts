@@ -1,4 +1,4 @@
-import { SessionState } from '@typebot.io/schemas/features/chat/sessionState'
+import { SessionState } from '@mozbot.io/schemas/features/chat/sessionState'
 
 export const resetSessionState = (state: SessionState): SessionState => ({
   ...state,
@@ -6,12 +6,12 @@ export const resetSessionState = (state: SessionState): SessionState => ({
   currentVisitedEdgeIndex: undefined,
   previewMetadata: undefined,
   progressMetadata: undefined,
-  typebotsQueue: state.typebotsQueue.map((queueItem) => ({
+  mozbotsQueue: state.mozbotsQueue.map((queueItem) => ({
     ...queueItem,
     answers: [],
-    typebot: {
-      ...queueItem.typebot,
-      variables: queueItem.typebot.variables.map((variable) => ({
+    mozbot: {
+      ...queueItem.mozbot,
+      variables: queueItem.mozbot.variables.map((variable) => ({
         ...variable,
         value: undefined,
       })),

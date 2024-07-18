@@ -5,32 +5,32 @@ import {
   GeneralTheme,
   InputTheme,
   Theme,
-} from '@typebot.io/schemas'
-import { BackgroundType } from '@typebot.io/schemas/features/typebot/theme/constants'
+} from '@mozbot.io/schemas'
+import { BackgroundType } from '@mozbot.io/schemas/features/mozbot/theme/constants'
 
 const cssVariableNames = {
   general: {
-    bgImage: '--typebot-container-bg-image',
-    bgColor: '--typebot-container-bg-color',
-    fontFamily: '--typebot-container-font-family',
+    bgImage: '--mozbot-container-bg-image',
+    bgColor: '--mozbot-container-bg-color',
+    fontFamily: '--mozbot-container-font-family',
   },
   chat: {
     hostBubbles: {
-      bgColor: '--typebot-host-bubble-bg-color',
-      color: '--typebot-host-bubble-color',
+      bgColor: '--mozbot-host-bubble-bg-color',
+      color: '--mozbot-host-bubble-color',
     },
     guestBubbles: {
-      bgColor: '--typebot-guest-bubble-bg-color',
-      color: '--typebot-guest-bubble-color',
+      bgColor: '--mozbot-guest-bubble-bg-color',
+      color: '--mozbot-guest-bubble-color',
     },
     inputs: {
-      bgColor: '--typebot-input-bg-color',
-      color: '--typebot-input-color',
-      placeholderColor: '--typebot-input-placeholder-color',
+      bgColor: '--mozbot-input-bg-color',
+      color: '--mozbot-input-color',
+      placeholderColor: '--mozbot-input-placeholder-color',
     },
     buttons: {
-      bgColor: '--typebot-button-bg-color',
-      color: '--typebot-button-color',
+      bgColor: '--mozbot-button-bg-color',
+      color: '--mozbot-button-color',
     },
   },
 }
@@ -49,7 +49,7 @@ const setGeneralTheme = (
   documentStyle: CSSStyleDeclaration
 ) => {
   const { background, font } = generalTheme
-  if (background) setTypebotBackground
+  if (background) setMozbotBackground
   if (font && typeof font === 'string')
     documentStyle.setProperty(cssVariableNames.general.fontFamily, font)
 }
@@ -128,7 +128,7 @@ const setInputs = (inputs: InputTheme, documentStyle: CSSStyleDeclaration) => {
     )
 }
 
-const setTypebotBackground = (
+const setMozbotBackground = (
   background: Background,
   documentStyle: CSSStyleDeclaration
 ) => {

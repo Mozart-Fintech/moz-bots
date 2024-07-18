@@ -1,17 +1,17 @@
 import test, { expect } from '@playwright/test'
-import { importTypebotInDatabase } from '@typebot.io/playwright/databaseActions'
+import { importMozbotInDatabase } from '@mozbot.io/playwright/databaseActions'
 import { createId } from '@paralleldrive/cuid2'
 import { getTestAsset } from '@/test/utils/playwright'
 
-const typebotId = createId()
+const mozbotId = createId()
 
 test.describe('Wait block', () => {
   test('wait should trigger', async ({ page }) => {
-    await importTypebotInDatabase(getTestAsset('typebots/logic/wait.json'), {
-      id: typebotId,
+    await importMozbotInDatabase(getTestAsset('mozbots/logic/wait.json'), {
+      id: mozbotId,
     })
 
-    await page.goto(`/typebots/${typebotId}/edit`)
+    await page.goto(`/mozbots/${mozbotId}/edit`)
     await page.click('text=Configure...')
     await page.getByRole('textbox', { name: 'Seconds to wait for:' }).fill('3')
 
@@ -19,11 +19,11 @@ test.describe('Wait block', () => {
     await page.getByRole('button', { name: 'Wait now' }).click()
     await page.waitForTimeout(1000)
     await expect(
-      page.locator('typebot-standard').locator('text="Hi there!"')
+      page.locator('mozbot-standard').locator('text="Hi there!"')
     ).toBeHidden()
     await page.waitForTimeout(3000)
     await expect(
-      page.locator('typebot-standard').locator('text="Hi there!"')
+      page.locator('mozbot-standard').locator('text="Hi there!"')
     ).toBeVisible()
   })
 })

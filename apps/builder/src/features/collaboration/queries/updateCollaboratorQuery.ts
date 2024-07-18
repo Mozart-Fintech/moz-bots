@@ -1,13 +1,13 @@
-import { CollaboratorsOnTypebots } from '@typebot.io/prisma'
-import { sendRequest } from '@typebot.io/lib'
+import { CollaboratorsOnMozbots } from '@mozbot.io/prisma'
+import { sendRequest } from '@mozbot.io/lib'
 
 export const updateCollaboratorQuery = (
-  typebotId: string,
+  mozbotId: string,
   userId: string,
-  collaborator: Omit<CollaboratorsOnTypebots, 'createdAt' | 'updatedAt'>
+  collaborator: Omit<CollaboratorsOnMozbots, 'createdAt' | 'updatedAt'>
 ) =>
   sendRequest({
     method: 'PATCH',
-    url: `/api/typebots/${typebotId}/collaborators/${userId}`,
+    url: `/api/mozbots/${mozbotId}/collaborators/${userId}`,
     body: collaborator,
   })

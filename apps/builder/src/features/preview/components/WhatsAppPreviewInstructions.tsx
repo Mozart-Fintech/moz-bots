@@ -1,5 +1,5 @@
 import { TextInput } from '@/components/inputs'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { useToast } from '@/hooks/useToast'
 import { trpc } from '@/lib/trpc'
 import {
@@ -13,7 +13,7 @@ import {
   StackProps,
   Text,
 } from '@chakra-ui/react'
-import { isEmpty } from '@typebot.io/lib'
+import { isEmpty } from '@mozbot.io/lib'
 import { FormEvent, useState } from 'react'
 import {
   getPhoneNumberFromLocalStorage,
@@ -23,7 +23,7 @@ import { useEditor } from '@/features/editor/providers/EditorProvider'
 import { BuoyIcon, ExternalLinkIcon } from '@/components/icons'
 
 export const WhatsAppPreviewInstructions = (props: StackProps) => {
-  const { typebot, save } = useTypebot()
+  const { mozbot, save } = useMozbot()
   const { startPreviewAtGroup, startPreviewAtEvent } = useEditor()
   const [phoneNumber, setPhoneNumber] = useState(
     getPhoneNumberFromLocalStorage() ?? ''
@@ -51,11 +51,11 @@ export const WhatsAppPreviewInstructions = (props: StackProps) => {
 
   const sendWhatsAppPreviewStartMessage = async (e: FormEvent) => {
     e.preventDefault()
-    if (!typebot) return
+    if (!mozbot) return
     await save()
     mutate({
       to: phoneNumber,
-      typebotId: typebot.id,
+      mozbotId: mozbot.id,
       startFrom: startPreviewAtGroup
         ? { type: 'group', groupId: startPreviewAtGroup }
         : startPreviewAtEvent
@@ -78,7 +78,7 @@ export const WhatsAppPreviewInstructions = (props: StackProps) => {
         <Text fontSize="sm">Need help?</Text>
         <Button
           as={Link}
-          href="https://docs.typebot.io/deploy/whatsapp/overview"
+          href="https://docs.mozbot.io/deploy/whatsapp/overview"
           leftIcon={<BuoyIcon />}
           size="sm"
         >

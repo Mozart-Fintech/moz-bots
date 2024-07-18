@@ -1,4 +1,4 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 
 type Props = {
   existingSessionId: string | undefined

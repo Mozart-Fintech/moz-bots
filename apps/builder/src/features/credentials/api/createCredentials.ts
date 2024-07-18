@@ -1,19 +1,19 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
-import { smtpCredentialsSchema } from '@typebot.io/schemas/features/blocks/integrations/sendEmail'
-import { encrypt } from '@typebot.io/lib/api/encryption/encrypt'
+import { smtpCredentialsSchema } from '@mozbot.io/schemas/features/blocks/integrations/sendEmail'
+import { encrypt } from '@mozbot.io/lib/api/encryption/encrypt'
 import { z } from 'zod'
-import { whatsAppCredentialsSchema } from '@typebot.io/schemas/features/whatsapp'
+import { whatsAppCredentialsSchema } from '@mozbot.io/schemas/features/whatsapp'
 import {
   Credentials,
   googleSheetsCredentialsSchema,
   stripeCredentialsSchema,
-} from '@typebot.io/schemas'
-import { isDefined } from '@typebot.io/lib/utils'
+} from '@mozbot.io/schemas'
+import { isDefined } from '@mozbot.io/lib/utils'
 import { isWriteWorkspaceForbidden } from '@/features/workspace/helpers/isWriteWorkspaceForbidden'
-import { trackEvents } from '@typebot.io/telemetry/trackEvents'
-import { forgedCredentialsSchemas } from '@typebot.io/forge-repository/credentials'
+import { trackEvents } from '@mozbot.io/telemetry/trackEvents'
+import { forgedCredentialsSchemas } from '@mozbot.io/forge-repository/credentials'
 
 const inputShape = {
   data: true,

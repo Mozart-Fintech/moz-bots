@@ -1,4 +1,4 @@
-import { Workspace } from '@typebot.io/schemas'
+import { Workspace } from '@mozbot.io/schemas'
 
 export const parseNewName = (
   userFullName: string | undefined,

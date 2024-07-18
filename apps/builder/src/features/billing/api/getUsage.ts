@@ -1,6 +1,6 @@
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { z } from 'zod'
-import { getUsage as getUsageHandler } from '@typebot.io/billing/api/getUsage'
+import { getUsage as getUsageHandler } from '@mozbot.io/billing/api/getUsage'
 
 export const getUsage = authenticatedProcedure
   .meta({

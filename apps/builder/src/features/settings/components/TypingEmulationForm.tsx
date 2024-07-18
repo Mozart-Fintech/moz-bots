@@ -1,11 +1,11 @@
 import { HStack, Stack, Text } from '@chakra-ui/react'
-import { Settings } from '@typebot.io/schemas'
+import { Settings } from '@mozbot.io/schemas'
 import React from 'react'
 import { NumberInput } from '@/components/inputs'
 import { SwitchWithLabel } from '@/components/inputs/SwitchWithLabel'
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
 import { SwitchWithRelatedSettings } from '@/components/SwitchWithRelatedSettings'
-import { isDefined } from '@typebot.io/lib'
+import { isDefined } from '@mozbot.io/lib'
 
 type Props = {
   typingEmulation: Settings['typingEmulation']

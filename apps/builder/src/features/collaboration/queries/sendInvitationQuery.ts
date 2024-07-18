@@ -1,12 +1,12 @@
-import { CollaborationType } from '@typebot.io/prisma'
-import { sendRequest } from '@typebot.io/lib'
+import { CollaborationType } from '@mozbot.io/prisma'
+import { sendRequest } from '@mozbot.io/lib'
 
 export const sendInvitationQuery = (
-  typebotId: string,
+  mozbotId: string,
   { email, type }: { email: string; type: CollaborationType }
 ) =>
   sendRequest({
     method: 'POST',
-    url: `/api/typebots/${typebotId}/invitations`,
+    url: `/api/mozbots/${mozbotId}/invitations`,
     body: { email, type },
   })

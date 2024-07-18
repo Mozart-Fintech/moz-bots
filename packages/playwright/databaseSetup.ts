@@ -3,10 +3,10 @@ import {
   Plan,
   PrismaClient,
   WorkspaceRole,
-} from '@typebot.io/prisma'
-import { encrypt } from '@typebot.io/lib/api/encryption/encrypt'
-import { env } from '@typebot.io/env'
-import { StripeCredentials } from '@typebot.io/schemas'
+} from '@mozbot.io/prisma'
+import { encrypt } from '@mozbot.io/lib/api/encryption/encrypt'
+import { env } from '@mozbot.io/env'
+import { StripeCredentials } from '@mozbot.io/schemas'
 
 const prisma = new PrismaClient()
 
@@ -132,7 +132,7 @@ const setupCredentials = async () => {
     expiry_date: 1642441058842,
     access_token:
       'ya29.A0ARrdaM--PV_87ebjywDJpXKb77NBFJl16meVUapYdfNv6W6ZzqqC47fNaPaRjbDbOIIcp6f49cMaX5ndK9TAFnKwlVqz3nrK9nLKqgyDIhYsIq47smcAIZkK56SWPx3X3DwAFqRu2UPojpd2upWwo-3uJrod',
-    // This token is linked to a test Google account (typebot.test.user@gmail.com)
+    // This token is linked to a test Google account (mozbot.test.user@gmail.com)
     refresh_token:
       '1//039xWRt8YaYa3CgYIARAAGAMSNwF-L9Iru9FyuTrDSa7lkSceggPho83kJt2J29G69iEhT1C6XV1vmo6bQS9puL_R2t8FIwR3gek',
   })
@@ -176,7 +176,7 @@ export const setupDatabase = async () => {
 export const teardownDatabase = async () => {
   await prisma.webhook.deleteMany({
     where: {
-      typebot: {
+      mozbot: {
         workspace: {
           members: {
             some: { userId: { in: [userId, otherUserId] } },

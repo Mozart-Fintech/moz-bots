@@ -1,18 +1,18 @@
-import { SessionState } from '@typebot.io/schemas'
+import { SessionState } from '@mozbot.io/schemas'
 import {
   CreateSpeechOpenAIOptions,
   OpenAICredentials,
-} from '@typebot.io/schemas/features/blocks/integrations/openai'
-import { isNotEmpty } from '@typebot.io/lib'
-import { decrypt } from '@typebot.io/lib/api/encryption/decrypt'
-import prisma from '@typebot.io/lib/prisma'
-import { defaultOpenAIOptions } from '@typebot.io/schemas/features/blocks/integrations/openai/constants'
+} from '@mozbot.io/schemas/features/blocks/integrations/openai'
+import { isNotEmpty } from '@mozbot.io/lib'
+import { decrypt } from '@mozbot.io/lib/api/encryption/decrypt'
+import prisma from '@mozbot.io/lib/prisma'
+import { defaultOpenAIOptions } from '@mozbot.io/schemas/features/blocks/integrations/openai/constants'
 import { ExecuteIntegrationResponse } from '../../../../../types'
 import OpenAI, { ClientOptions } from 'openai'
-import { uploadFileToBucket } from '@typebot.io/lib/s3/uploadFileToBucket'
-import { updateVariablesInSession } from '@typebot.io/variables/updateVariablesInSession'
+import { uploadFileToBucket } from '@mozbot.io/lib/s3/uploadFileToBucket'
+import { updateVariablesInSession } from '@mozbot.io/variables/updateVariablesInSession'
 import { createId } from '@paralleldrive/cuid2'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
 
 export const createSpeechOpenAI = async (
   state: SessionState,
@@ -78,7 +78,7 @@ export const createSpeechOpenAI = async (
 
   const openai = new OpenAI(config)
 
-  const variables = newSessionState.typebotsQueue[0].typebot.variables
+  const variables = newSessionState.mozbotsQueue[0].mozbot.variables
   const saveUrlInVariable = variables.find(
     (v) => v.id === options.saveUrlInVariableId
   )

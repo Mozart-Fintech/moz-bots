@@ -1,4 +1,4 @@
-import { createAction } from '@typebot.io/forge'
+import { createAction } from '@mozbot.io/forge'
 import { defaultOpenAIOptions } from '../constants'
 import { auth } from '../auth'
 import { baseOptions } from '../baseOptions'

@@ -3,7 +3,7 @@ import { HelpCircleIcon } from 'assets/icons/HelpCircleIcon'
 import Link from 'next/link'
 import React from 'react'
 import { PricingCard } from './PricingCard'
-import { chatsLimits } from '@typebot.io/billing/constants'
+import { chatsLimits } from '@mozbot.io/billing/constants'
 
 export const FreePlanCard = () => (
   <PricingCard
@@ -11,7 +11,7 @@ export const FreePlanCard = () => (
       price: 'Free',
       name: 'Personal',
       features: [
-        'Unlimited typebots',
+        'Unlimited mozbots',
         <>
           <Text>
             <chakra.span fontWeight="bold">{chatsLimits.FREE}</chakra.span>{' '}
@@ -38,7 +38,7 @@ export const FreePlanCard = () => (
     button={
       <Button
         as={Link}
-        href="https://app.typebot.io/register"
+        href="https://app.mozbot.io/register"
         variant="outline"
         colorScheme="gray"
         size="lg"

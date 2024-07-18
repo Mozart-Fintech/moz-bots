@@ -1,24 +1,24 @@
 import test, { expect } from '@playwright/test'
-import { createTypebots } from '@typebot.io/playwright/databaseActions'
-import { parseDefaultGroupWithBlock } from '@typebot.io/playwright/databaseHelpers'
+import { createMozbots } from '@mozbot.io/playwright/databaseActions'
+import { parseDefaultGroupWithBlock } from '@mozbot.io/playwright/databaseHelpers'
 import { createId } from '@paralleldrive/cuid2'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { defaultTextInputOptions } from '@typebot.io/schemas/features/blocks/inputs/text/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { defaultTextInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/text/constants'
 import { getTestAsset } from '@/test/utils/playwright'
 
 test.describe.parallel('Text input block', () => {
   test('options should work', async ({ page }) => {
-    const typebotId = createId()
-    await createTypebots([
+    const mozbotId = createId()
+    await createMozbots([
       {
-        id: typebotId,
+        id: mozbotId,
         ...parseDefaultGroupWithBlock({
           type: InputBlockType.TEXT,
         }),
       },
     ])
 
-    await page.goto(`/typebots/${typebotId}/edit`)
+    await page.goto(`/mozbots/${mozbotId}/edit`)
 
     await page.click('text=Test')
     await expect(
@@ -40,17 +40,17 @@ test.describe.parallel('Text input block', () => {
   })
 
   test('hey boy', async ({ page }) => {
-    const typebotId = createId()
-    await createTypebots([
+    const mozbotId = createId()
+    await createMozbots([
       {
-        id: typebotId,
+        id: mozbotId,
         ...parseDefaultGroupWithBlock({
           type: InputBlockType.TEXT,
         }),
       },
     ])
 
-    await page.goto(`/typebots/${typebotId}/edit`)
+    await page.goto(`/mozbots/${mozbotId}/edit`)
 
     await page.click(`text=${defaultTextInputOptions.labels.placeholder}`)
     await page.getByText('Allow attachments').click()
@@ -67,7 +67,7 @@ test.describe.parallel('Text input block', () => {
     ).toBeVisible()
     await page
       .locator('#document-upload')
-      .setInputFiles(getTestAsset('typebots/theme.json'))
+      .setInputFiles(getTestAsset('mozbots/theme.json'))
     await expect(page.getByText('theme.json')).toBeVisible()
     await page
       .locator('#photos-upload')

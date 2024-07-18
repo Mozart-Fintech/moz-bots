@@ -8,9 +8,9 @@ import {
   SessionState,
   SetVariableHistoryItem,
   Variable,
-} from '@typebot.io/schemas'
-import { byId, isDefined } from '@typebot.io/lib'
-import { isInputBlock } from '@typebot.io/schemas/helpers'
+} from '@mozbot.io/schemas'
+import { byId, isDefined } from '@mozbot.io/lib'
+import { isInputBlock } from '@mozbot.io/schemas/helpers'
 import { executeGroup, parseInput } from './executeGroup'
 import { getNextGroup } from './getNextGroup'
 import { formatEmail } from './blocks/inputs/email/formatEmail'
@@ -23,28 +23,28 @@ import { validateNumber } from './blocks/inputs/number/validateNumber'
 import { parseDateReply } from './blocks/inputs/date/parseDateReply'
 import { validateRatingReply } from './blocks/inputs/rating/validateRatingReply'
 import { parsePictureChoicesReply } from './blocks/inputs/pictureChoice/parsePictureChoicesReply'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
-import { updateVariablesInSession } from '@typebot.io/variables/updateVariablesInSession'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
+import { updateVariablesInSession } from '@mozbot.io/variables/updateVariablesInSession'
 import { startBotFlow } from './startBotFlow'
 import { TRPCError } from '@trpc/server'
 import { parseNumber } from './blocks/inputs/number/parseNumber'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { defaultPaymentInputOptions } from '@typebot.io/schemas/features/blocks/inputs/payment/constants'
-import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integrations/constants'
-import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
-import { defaultEmailInputOptions } from '@typebot.io/schemas/features/blocks/inputs/email/constants'
-import { defaultChoiceInputOptions } from '@typebot.io/schemas/features/blocks/inputs/choice/constants'
-import { defaultPictureChoiceOptions } from '@typebot.io/schemas/features/blocks/inputs/pictureChoice/constants'
-import { defaultFileInputOptions } from '@typebot.io/schemas/features/blocks/inputs/file/constants'
-import { VisitedEdge } from '@typebot.io/prisma'
-import { getBlockById } from '@typebot.io/schemas/helpers'
-import { ForgedBlock } from '@typebot.io/forge-repository/types'
-import { forgedBlocks } from '@typebot.io/forge-repository/definitions'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { defaultPaymentInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/payment/constants'
+import { IntegrationBlockType } from '@mozbot.io/schemas/features/blocks/integrations/constants'
+import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
+import { defaultEmailInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/email/constants'
+import { defaultChoiceInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/choice/constants'
+import { defaultPictureChoiceOptions } from '@mozbot.io/schemas/features/blocks/inputs/pictureChoice/constants'
+import { defaultFileInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/file/constants'
+import { VisitedEdge } from '@mozbot.io/prisma'
+import { getBlockById } from '@mozbot.io/schemas/helpers'
+import { ForgedBlock } from '@mozbot.io/forge-repository/types'
+import { forgedBlocks } from '@mozbot.io/forge-repository/definitions'
 import { resumeChatCompletion } from './blocks/integrations/legacy/openai/resumeChatCompletion'
-import { env } from '@typebot.io/env'
-import { isURL } from '@typebot.io/lib/validators/isURL'
-import { isForgedBlockType } from '@typebot.io/schemas/features/blocks/forged/helpers'
+import { env } from '@mozbot.io/env'
+import { isURL } from '@mozbot.io/lib/validators/isURL'
+import { isForgedBlockType } from '@mozbot.io/schemas/features/blocks/forged/helpers'
 import { resetSessionState } from './resetSessionState'
 
 type Params = {
@@ -77,7 +77,7 @@ export const continueBotFlow = async (
 
   const { block, group, blockIndex } = getBlockById(
     newSessionState.currentBlockId,
-    state.typebotsQueue[0].typebot.groups
+    state.mozbotsQueue[0].mozbot.groups
   )
 
   if (!block)
@@ -89,7 +89,7 @@ export const continueBotFlow = async (
   let variableToUpdate: Variable | undefined
 
   if (block.type === LogicBlockType.SET_VARIABLE) {
-    const existingVariable = state.typebotsQueue[0].typebot.variables.find(
+    const existingVariable = state.mozbotsQueue[0].mozbot.variables.find(
       byId(block.options?.variableId)
     )
     if (existingVariable && reply) {
@@ -127,7 +127,7 @@ export const continueBotFlow = async (
       if (action) {
         if (action.run?.stream?.getStreamVariableId) {
           firstBubbleWasStreamed = true
-          variableToUpdate = state.typebotsQueue[0].typebot.variables.find(
+          variableToUpdate = state.mozbotsQueue[0].mozbot.variables.find(
             (v) => v.id === action?.run?.stream?.getStreamVariableId(options)
           )
         }
@@ -135,7 +135,7 @@ export const continueBotFlow = async (
         if (
           action.run?.web?.displayEmbedBubble?.waitForEvent?.getSaveVariableId
         ) {
-          variableToUpdate = state.typebotsQueue[0].typebot.variables.find(
+          variableToUpdate = state.mozbotsQueue[0].mozbot.variables.find(
             (v) =>
               v.id ===
               action?.run?.web?.displayEmbedBubble?.waitForEvent?.getSaveVariableId?.(
@@ -149,7 +149,7 @@ export const continueBotFlow = async (
     block.type === BubbleBlockType.EMBED &&
     block.content?.waitForEvent?.saveDataInVariableId
   ) {
-    variableToUpdate = state.typebotsQueue[0].typebot.variables.find(
+    variableToUpdate = state.mozbotsQueue[0].mozbot.variables.find(
       (v) => v.id === block.content?.waitForEvent?.saveDataInVariableId
     )
   }
@@ -226,7 +226,7 @@ export const continueBotFlow = async (
     }
   }
 
-  if (!nextEdgeId && state.typebotsQueue.length === 1)
+  if (!nextEdgeId && state.mozbotsQueue.length === 1)
     return {
       messages: [],
       newSessionState,
@@ -306,7 +306,7 @@ const saveAttachmentsVarIfAny = ({
   )
     return state
 
-  const variable = state.typebotsQueue[0].typebot.variables.find(
+  const variable = state.mozbotsQueue[0].mozbot.variables.find(
     (variable) => variable.id === block.options?.attachments?.saveVariableId
   )
 
@@ -339,7 +339,7 @@ const saveInputVarIfAny = ({
   reply: Message
   state: SessionState
 }): SessionState => {
-  const foundVariable = state.typebotsQueue[0].typebot.variables.find(
+  const foundVariable = state.mozbotsQueue[0].mozbot.variables.find(
     (variable) => variable.id === block.options?.variableId
   )
   if (!foundVariable) return state
@@ -371,7 +371,7 @@ const parseRetryMessage =
       block.options &&
       'retryMessageContent' in block.options &&
       block.options.retryMessageContent
-        ? parseVariables(state.typebotsQueue[0].typebot.variables)(
+        ? parseVariables(state.mozbotsQueue[0].mozbot.variables)(
             block.options.retryMessageContent
           )
         : parseDefaultRetryMessage(block)
@@ -422,7 +422,7 @@ const saveAnswerInDb =
 
     newSessionState = {
       ...saveVariablesValueIfAny(newSessionState, block)(reply),
-      previewMetadata: state.typebotsQueue[0].resultId
+      previewMetadata: state.mozbotsQueue[0].resultId
         ? newSessionState.previewMetadata
         : {
             ...newSessionState.previewMetadata,
@@ -435,7 +435,7 @@ const saveAnswerInDb =
     }
 
     const key = block.options?.variableId
-      ? newSessionState.typebotsQueue[0].typebot.variables.find(
+      ? newSessionState.mozbotsQueue[0].mozbot.variables.find(
           (variable) => variable.id === block.options?.variableId
         )?.name
       : parseGroupKey(block.id, { state: newSessionState })
@@ -450,7 +450,7 @@ const saveAnswerInDb =
   }
 
 const parseGroupKey = (blockId: string, { state }: { state: SessionState }) => {
-  const group = state.typebotsQueue[0].typebot.groups.find((group) =>
+  const group = state.mozbotsQueue[0].mozbot.groups.find((group) =>
     group.blocks.find((b) => b.id === blockId)
   )
   if (!group) return
@@ -466,7 +466,7 @@ const parseGroupKey = (blockId: string, { state }: { state: SessionState }) => {
 
 const setNewAnswerInState =
   (state: SessionState) => (newAnswer: AnswerInSessionState) => {
-    const answers = state.typebotsQueue[0].answers
+    const answers = state.mozbotsQueue[0].answers
     const newAnswers = answers
       .filter((answer) => answer.key !== newAnswer.key)
       .concat(newAnswer)
@@ -476,24 +476,24 @@ const setNewAnswerInState =
       progressMetadata: state.progressMetadata
         ? { totalAnswers: state.progressMetadata.totalAnswers + 1 }
         : undefined,
-      typebotsQueue: state.typebotsQueue.map((typebot, index) =>
+      mozbotsQueue: state.mozbotsQueue.map((mozbot, index) =>
         index === 0
           ? {
-              ...typebot,
+              ...mozbot,
               answers: newAnswers,
             }
-          : typebot
+          : mozbot
       ),
     } satisfies SessionState
   }
 
 const getOutgoingEdgeId =
-  (state: Pick<SessionState, 'typebotsQueue'>) =>
+  (state: Pick<SessionState, 'mozbotsQueue'>) =>
   (
     block: Block,
     reply: string | undefined
   ): { edgeId: string | undefined; isOffDefaultPath: boolean } => {
-    const variables = state.typebotsQueue[0].typebot.variables
+    const variables = state.mozbotsQueue[0].mozbot.variables
     if (
       block.type === InputBlockType.CHOICE &&
       !(
@@ -562,7 +562,7 @@ const parseReply =
         if (!reply) return { status: 'fail' }
         const isValid = validateNumber(reply.text, {
           options: block.options,
-          variables: state.typebotsQueue[0].typebot.variables,
+          variables: state.mozbotsQueue[0].mozbot.variables,
         })
         if (!isValid) return { status: 'fail' }
         return { status: 'success', reply: parseNumber(reply.text) }

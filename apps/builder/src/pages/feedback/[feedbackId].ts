@@ -1,10 +1,10 @@
 import { getServerSession } from 'next-auth'
-import { User } from '@typebot.io/prisma'
-import { isNotDefined } from '@typebot.io/lib'
+import { User } from '@mozbot.io/prisma'
+import { isNotDefined } from '@mozbot.io/lib'
 import { sign } from 'jsonwebtoken'
 import { getAuthOptions } from '../api/auth/[...nextauth]'
 import { GetServerSidePropsContext } from 'next'
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 
 export default function Page() {
   return null
@@ -28,7 +28,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     redirect: {
       permanent: false,
-      destination: `https://feedback.typebot.io/feedback/${feedbackId}/?sso=${sleekplanToken}`,
+      destination: `https://feedback.mozbot.io/feedback/${feedbackId}/?sso=${sleekplanToken}`,
     },
   }
 }

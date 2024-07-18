@@ -1,8 +1,8 @@
 import React from 'react'
 import { Stack, Text } from '@chakra-ui/react'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { SetVariableLabel } from '@/components/SetVariableLabel'
-import { ZemanticAiBlock } from '@typebot.io/schemas'
+import { ZemanticAiBlock } from '@mozbot.io/schemas'
 
 type Props = {
   options: ZemanticAiBlock['options']
@@ -11,7 +11,7 @@ type Props = {
 export const ZemanticAiNodeBody = ({
   options: { query, projectId, responseMapping } = {},
 }: Props) => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   return (
     <Stack>
       <Text
@@ -20,14 +20,14 @@ export const ZemanticAiNodeBody = ({
       >
         {query && projectId ? `Ask: ${query}` : 'Configure...'}
       </Text>
-      {typebot &&
+      {mozbot &&
         responseMapping
           ?.map((mapping) => mapping.variableId)
           .map((variableId, idx) =>
             variableId ? (
               <SetVariableLabel
                 key={variableId + idx}
-                variables={typebot.variables}
+                variables={mozbot.variables}
                 variableId={variableId}
               />
             ) : null

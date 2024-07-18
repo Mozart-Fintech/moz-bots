@@ -1,6 +1,6 @@
 import { CodeEditor } from '@/components/inputs/CodeEditor'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
-import { PopupProps } from '@typebot.io/nextjs'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
+import { PopupProps } from '@mozbot.io/nextjs'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import { parseReactPopupProps } from '../../snippetParsers'
@@ -8,14 +8,14 @@ import { parseReactPopupProps } from '../../snippetParsers'
 export const NextjsPopupSnippet = ({
   autoShowDelay,
 }: Pick<PopupProps, 'autoShowDelay'>) => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
 
   const snippet = prettier.format(
-    `import { Popup } from "@typebot.io/nextjs";
+    `import { Popup } from "@mozbot.io/nextjs";
 
       const App = () => {
         return <Popup ${parseReactPopupProps({
-          typebot: typebot?.publicId ?? '',
+          mozbot: mozbot?.publicId ?? '',
           autoShowDelay,
         })}/>;
       }`,

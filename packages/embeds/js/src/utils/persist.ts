@@ -2,7 +2,7 @@
 // Simplified version
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
 import type { Setter, Signal } from 'solid-js'
 import { createSignal, untrack } from 'solid-js'
 import { reconcile } from 'solid-js/store'

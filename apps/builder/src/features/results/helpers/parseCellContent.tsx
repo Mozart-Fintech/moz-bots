@@ -1,6 +1,6 @@
 import { Stack, Text } from '@chakra-ui/react'
-import { VariableWithValue } from '@typebot.io/schemas'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
+import { VariableWithValue } from '@mozbot.io/schemas'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
 import { FileLinks } from '../components/FileLinks'
 
 export const parseCellContent = (

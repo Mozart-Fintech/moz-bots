@@ -1,40 +1,40 @@
-import { Typebot, PublicTypebot } from '@typebot.io/schemas'
+import { Mozbot, PublicMozbot } from '@mozbot.io/schemas'
 import { diff } from 'deep-object-diff'
 import { dequal } from 'dequal'
 
 export const isPublished = (
-  typebot: Typebot,
-  publicTypebot: PublicTypebot,
+  mozbot: Mozbot,
+  publicMozbot: PublicMozbot,
   debug?: boolean
 ) => {
   if (debug)
     console.log(
       'diff:',
       diff(
-        JSON.parse(JSON.stringify(typebot.groups)),
-        JSON.parse(JSON.stringify(publicTypebot.groups))
+        JSON.parse(JSON.stringify(mozbot.groups)),
+        JSON.parse(JSON.stringify(publicMozbot.groups))
       )
     )
   return (
     dequal(
-      JSON.parse(JSON.stringify(typebot.groups)),
-      JSON.parse(JSON.stringify(publicTypebot.groups))
+      JSON.parse(JSON.stringify(mozbot.groups)),
+      JSON.parse(JSON.stringify(publicMozbot.groups))
     ) &&
     dequal(
-      JSON.parse(JSON.stringify(typebot.settings)),
-      JSON.parse(JSON.stringify(publicTypebot.settings))
+      JSON.parse(JSON.stringify(mozbot.settings)),
+      JSON.parse(JSON.stringify(publicMozbot.settings))
     ) &&
     dequal(
-      JSON.parse(JSON.stringify(typebot.theme)),
-      JSON.parse(JSON.stringify(publicTypebot.theme))
+      JSON.parse(JSON.stringify(mozbot.theme)),
+      JSON.parse(JSON.stringify(publicMozbot.theme))
     ) &&
     dequal(
-      JSON.parse(JSON.stringify(typebot.variables)),
-      JSON.parse(JSON.stringify(publicTypebot.variables))
+      JSON.parse(JSON.stringify(mozbot.variables)),
+      JSON.parse(JSON.stringify(publicMozbot.variables))
     ) &&
     dequal(
-      JSON.parse(JSON.stringify(typebot.events)),
-      JSON.parse(JSON.stringify(publicTypebot.events))
+      JSON.parse(JSON.stringify(mozbot.events)),
+      JSON.parse(JSON.stringify(publicMozbot.events))
     )
   )
 }

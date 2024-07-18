@@ -1,25 +1,25 @@
 import {
   BlockV5,
   BlockV6,
-  PublicTypebot,
-  Typebot,
-  TypebotV6,
-} from '@typebot.io/schemas'
-import { isDefined } from '@typebot.io/lib/utils'
-import { createId } from '@typebot.io/lib/createId'
+  PublicMozbot,
+  Mozbot,
+  MozbotV6,
+} from '@mozbot.io/schemas'
+import { isDefined } from '@mozbot.io/lib/utils'
+import { createId } from '@mozbot.io/lib/createId'
 import { proWorkspaceId } from './databaseSetup'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { EventType } from '@typebot.io/schemas/features/events/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { EventType } from '@mozbot.io/schemas/features/events/constants'
 
-export const parseTestTypebot = (partialTypebot: Partial<Typebot>): Typebot => {
-  const version = partialTypebot.version ?? ('3' as any)
+export const parseTestMozbot = (partialMozbot: Partial<Mozbot>): Mozbot => {
+  const version = partialMozbot.version ?? ('3' as any)
 
   return {
     id: createId(),
     version,
     workspaceId: proWorkspaceId,
     folderId: null,
-    name: 'My typebot',
+    name: 'My mozbot',
     theme: {},
     settings: {},
     publicId: null,
@@ -45,7 +45,7 @@ export const parseTestTypebot = (partialTypebot: Partial<Typebot>): Typebot => {
           ]
         : null,
     variables: [{ id: 'var1', name: 'var1' }],
-    ...partialTypebot,
+    ...partialMozbot,
     edges: [
       {
         id: 'edge1',
@@ -54,7 +54,7 @@ export const parseTestTypebot = (partialTypebot: Partial<Typebot>): Typebot => {
       },
     ],
     groups: (version === '6'
-      ? partialTypebot.groups ?? []
+      ? partialMozbot.groups ?? []
       : [
           {
             id: 'group0',
@@ -69,24 +69,24 @@ export const parseTestTypebot = (partialTypebot: Partial<Typebot>): Typebot => {
             ],
             graphCoordinates: { x: 0, y: 0 },
           },
-          ...(partialTypebot.groups ?? []),
+          ...(partialMozbot.groups ?? []),
         ]) as any[],
   }
 }
 
-export const parseTypebotToPublicTypebot = (
+export const parseMozbotToPublicMozbot = (
   id: string,
-  typebot: Typebot
-): Omit<PublicTypebot, 'createdAt' | 'updatedAt'> => ({
+  mozbot: Mozbot
+): Omit<PublicMozbot, 'createdAt' | 'updatedAt'> => ({
   id,
-  version: typebot.version,
-  groups: typebot.groups,
-  typebotId: typebot.id,
-  theme: typebot.theme,
-  settings: typebot.settings,
-  variables: typebot.variables,
-  edges: typebot.edges,
-  events: typebot.events,
+  version: mozbot.version,
+  groups: mozbot.groups,
+  mozbotId: mozbot.id,
+  theme: mozbot.theme,
+  settings: mozbot.settings,
+  variables: mozbot.variables,
+  edges: mozbot.edges,
+  events: mozbot.events,
 })
 
 type Options = {
@@ -96,7 +96,7 @@ type Options = {
 export const parseDefaultGroupWithBlock = (
   block: Partial<BlockV6>,
   options?: Options
-): Pick<TypebotV6, 'groups'> => ({
+): Pick<MozbotV6, 'groups'> => ({
   groups: [
     {
       graphCoordinates: { x: 200, y: 200 },

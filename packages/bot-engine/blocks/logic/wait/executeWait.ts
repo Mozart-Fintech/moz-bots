@@ -1,13 +1,13 @@
 import { ExecuteLogicResponse } from '../../../types'
-import { SessionState, WaitBlock } from '@typebot.io/schemas'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
-import { isNotDefined } from '@typebot.io/lib'
+import { SessionState, WaitBlock } from '@mozbot.io/schemas'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
+import { isNotDefined } from '@mozbot.io/lib'
 
 export const executeWait = (
   state: SessionState,
   block: WaitBlock
 ): ExecuteLogicResponse => {
-  const { variables } = state.typebotsQueue[0].typebot
+  const { variables } = state.mozbotsQueue[0].mozbot
   if (!block.options?.secondsToWaitFor)
     return { outgoingEdgeId: block.outgoingEdgeId }
 

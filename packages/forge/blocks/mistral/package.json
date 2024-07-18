@@ -1,23 +1,23 @@
 {
-  "name": "@typebot.io/mistral-block",
+  "name": "@mozbot.io/mistral-block",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
   "keywords": [],
   "license": "AGPL-3.0-or-later",
   "devDependencies": {
-    "@typebot.io/forge": "workspace:*",
-    "@typebot.io/lib": "workspace:*",
-    "@typebot.io/tsconfig": "workspace:*",
+    "@mozbot.io/forge": "workspace:*",
+    "@mozbot.io/lib": "workspace:*",
+    "@mozbot.io/tsconfig": "workspace:*",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "typescript": "5.4.5"
   },
   "dependencies": {
     "@ai-sdk/mistral": "0.0.22",
-    "@typebot.io/openai-block": "workspace:*",
+    "@mozbot.io/openai-block": "workspace:*",
     "ai": "3.2.22",
     "ky": "1.2.4",
-    "@typebot.io/ai": "workspace:*"
+    "@mozbot.io/ai": "workspace:*"
   }
 }

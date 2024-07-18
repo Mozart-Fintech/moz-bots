@@ -11,24 +11,24 @@ import {
   ChatLog,
   ExecutableHttpRequest,
   AnswerInSessionState,
-  TypebotInSession,
-} from '@typebot.io/schemas'
+  MozbotInSession,
+} from '@mozbot.io/schemas'
 import { stringify } from 'qs'
-import { isDefined, isEmpty, isNotDefined, omit } from '@typebot.io/lib'
+import { isDefined, isEmpty, isNotDefined, omit } from '@mozbot.io/lib'
 import ky, { HTTPError, Options, TimeoutError } from 'ky'
 import { resumeWebhookExecution } from './resumeWebhookExecution'
 import { ExecuteIntegrationResponse } from '../../../types'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
-import prisma from '@typebot.io/lib/prisma'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
+import prisma from '@mozbot.io/lib/prisma'
 import {
   HttpMethod,
   defaultTimeout,
   defaultWebhookAttributes,
   maxTimeout,
-} from '@typebot.io/schemas/features/blocks/integrations/webhook/constants'
-import { env } from '@typebot.io/env'
-import { parseAnswers } from '@typebot.io/results/parseAnswers'
-import { JSONParse } from '@typebot.io/lib/JSONParse'
+} from '@mozbot.io/schemas/features/blocks/integrations/webhook/constants'
+import { env } from '@mozbot.io/env'
+import { parseAnswers } from '@mozbot.io/results/parseAnswers'
+import { JSONParse } from '@mozbot.io/lib/JSONParse'
 
 type ParsedWebhook = ExecutableHttpRequest & {
   basicAuth: { username?: string; password?: string }
@@ -65,8 +65,8 @@ export const executeWebhookBlock = async (
   const parsedWebhook = await parseWebhookAttributes({
     webhook,
     isCustomBody: block.options?.isCustomBody,
-    typebot: state.typebotsQueue[0].typebot,
-    answers: state.typebotsQueue[0].answers,
+    mozbot: state.mozbotsQueue[0].mozbot,
+    answers: state.mozbotsQueue[0].answers,
   })
   if (!parsedWebhook) {
     logs.push({
@@ -111,12 +111,12 @@ const checkIfBodyIsAVariable = (body: string) => /^{{.+}}$/.test(body)
 export const parseWebhookAttributes = async ({
   webhook,
   isCustomBody,
-  typebot,
+  mozbot,
   answers,
 }: {
   webhook: HttpRequest
   isCustomBody?: boolean
-  typebot: TypebotInSession
+  mozbot: MozbotInSession
   answers: AnswerInSessionState[]
 }): Promise<ParsedWebhook | undefined> => {
   if (!webhook.url) return
@@ -139,30 +139,30 @@ export const parseWebhookAttributes = async ({
   }
   const headers = convertKeyValueTableToObject(
     webhook.headers,
-    typebot.variables
+    mozbot.variables
   ) as ExecutableHttpRequest['headers'] | undefined
   const queryParams = stringify(
-    convertKeyValueTableToObject(webhook.queryParams, typebot.variables, true),
+    convertKeyValueTableToObject(webhook.queryParams, mozbot.variables, true),
     { indices: false }
   )
   const bodyContent = await getBodyContent({
     body: webhook.body,
     answers,
-    variables: typebot.variables,
+    variables: mozbot.variables,
     isCustomBody,
   })
   const method = webhook.method ?? defaultWebhookAttributes.method
   const { data: body, isJson } =
     bodyContent && method !== HttpMethod.GET
       ? safeJsonParse(
-          parseVariables(typebot.variables, {
+          parseVariables(mozbot.variables, {
             isInsideJson: !checkIfBodyIsAVariable(bodyContent),
           })(bodyContent)
         )
       : { data: undefined, isJson: false }
 
   return {
-    url: parseVariables(typebot.variables)(
+    url: parseVariables(mozbot.variables)(
       webhook.url + (queryParams !== '' ? `?${queryParams}` : '')
     ),
     basicAuth,
@@ -288,7 +288,7 @@ export const executeWebhook = async (
     }
     const response = {
       statusCode: 500,
-      data: { message: `Error from Typebot server: ${error}` },
+      data: { message: `Error from Mozbot server: ${error}` },
     }
     console.error(error)
     logs.push({

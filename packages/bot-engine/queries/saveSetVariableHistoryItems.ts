@@ -1,6 +1,6 @@
-import prisma from '@typebot.io/lib/prisma'
-import { Prisma } from '@typebot.io/prisma'
-import { SetVariableHistoryItem } from '@typebot.io/schemas'
+import prisma from '@mozbot.io/lib/prisma'
+import { Prisma } from '@mozbot.io/prisma'
+import { SetVariableHistoryItem } from '@mozbot.io/schemas'
 
 export const saveSetVariableHistoryItems = (
   setVariableHistory: SetVariableHistoryItem[]

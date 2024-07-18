@@ -1,5 +1,5 @@
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
-import { Message } from '@typebot.io/schemas'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
+import { Message } from '@mozbot.io/schemas'
 import { computeCurrentProgress } from '../computeCurrentProgress'
 import { filterPotentiallySensitiveLogs } from '../logs/filterPotentiallySensitiveLogs'
 import { restartSession } from '../queries/restartSession'
@@ -28,7 +28,7 @@ export const startChat = async ({
   textBubbleContentFormat,
 }: Props) => {
   const {
-    typebot,
+    mozbot,
     messages,
     input,
     resultId,
@@ -92,10 +92,10 @@ export const startChat = async ({
 
   return {
     sessionId: session.id,
-    typebot: {
-      id: typebot.id,
-      theme: typebot.theme,
-      settings: typebot.settings,
+    mozbot: {
+      id: mozbot.id,
+      theme: mozbot.theme,
+      settings: mozbot.settings,
     },
     messages,
     input,
@@ -108,7 +108,7 @@ export const startChat = async ({
       ? isEnded
         ? 100
         : computeCurrentProgress({
-            typebotsQueue: newSessionState.typebotsQueue,
+            mozbotsQueue: newSessionState.mozbotsQueue,
             progressMetadata: newSessionState.progressMetadata,
             currentInputBlockId: input?.id,
           })

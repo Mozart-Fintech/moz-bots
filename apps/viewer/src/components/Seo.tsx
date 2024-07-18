@@ -2,20 +2,20 @@ import { gtmHeadSnippet } from '@/lib/google-tag-manager'
 import Head from 'next/head'
 import Script from 'next/script'
 import React from 'react'
-import { isNotEmpty } from '@typebot.io/lib'
-import { Settings } from '@typebot.io/schemas'
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
-import { env } from '@typebot.io/env'
+import { isNotEmpty } from '@mozbot.io/lib'
+import { Settings } from '@mozbot.io/schemas'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
+import { env } from '@mozbot.io/env'
 
 type SEOProps = {
   url: string
-  typebotName: string
+  mozbotName: string
   metadata?: Settings['metadata']
 }
 
 export const SEO = ({
   url,
-  typebotName,
+  mozbotName,
   metadata: {
     title,
     description,
@@ -26,7 +26,7 @@ export const SEO = ({
 }: SEOProps) => (
   <>
     <Head key="seo">
-      <title>{title ?? typebotName}</title>
+      <title>{title ?? mozbotName}</title>
       <meta name="robots" content="noindex" />
       <link
         rel="icon"
@@ -36,7 +36,7 @@ export const SEO = ({
           defaultSettings.metadata.favIconUrl(env.NEXT_PUBLIC_VIEWER_URL[0])
         }
       />
-      <meta name="title" content={title ?? typebotName} />
+      <meta name="title" content={title ?? mozbotName} />
       <meta
         name="description"
         content={
@@ -46,9 +46,9 @@ export const SEO = ({
       />
 
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={url ?? 'https://bot.typebot.io'} />
-      <meta property="og:title" content={title ?? typebotName} />
-      <meta property="og:site_name" content={title ?? typebotName} />
+      <meta property="og:url" content={url ?? 'https://bot.mozbot.io'} />
+      <meta property="og:title" content={title ?? mozbotName} />
+      <meta property="og:site_name" content={title ?? mozbotName} />
       <meta
         property="og:description"
         content={
@@ -66,8 +66,8 @@ export const SEO = ({
       />
 
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={url ?? 'https://bot.typebot.io'} />
-      <meta property="twitter:title" content={title ?? typebotName} />
+      <meta property="twitter:url" content={url ?? 'https://bot.mozbot.io'} />
+      <meta property="twitter:title" content={title ?? mozbotName} />
       <meta
         property="twitter:description"
         content={

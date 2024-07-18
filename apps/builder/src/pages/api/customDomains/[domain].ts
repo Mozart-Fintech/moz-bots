@@ -1,13 +1,13 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 import {
   badRequest,
   methodNotAllowed,
   notAuthenticated,
-} from '@typebot.io/lib/api'
+} from '@mozbot.io/lib/api'
 import ky from 'ky'
 import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser'
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getAuthenticatedUser(req, res)

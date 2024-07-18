@@ -1,5 +1,5 @@
-import { isDefined } from '@typebot.io/lib'
-import { Workspace, Plan } from '@typebot.io/prisma'
+import { isDefined } from '@mozbot.io/lib'
+import { Workspace, Plan } from '@mozbot.io/prisma'
 
 export const hasProPerks = (workspace?: Pick<Workspace, 'plan'>) =>
   isDefined(workspace) &&

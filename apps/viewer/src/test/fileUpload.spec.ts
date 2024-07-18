@@ -2,29 +2,29 @@ import test, { expect } from '@playwright/test'
 import { createId } from '@paralleldrive/cuid2'
 import { parse } from 'papaparse'
 import { readFileSync } from 'fs'
-import { isDefined } from '@typebot.io/lib'
-import { importTypebotInDatabase } from '@typebot.io/playwright/databaseActions'
+import { isDefined } from '@mozbot.io/lib'
+import { importMozbotInDatabase } from '@mozbot.io/playwright/databaseActions'
 import { getTestAsset } from '@/test/utils/playwright'
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 
 test('should work as expected', async ({ page, browser }) => {
-  const typebotId = createId()
-  await importTypebotInDatabase(getTestAsset('typebots/fileUpload.json'), {
-    id: typebotId,
-    publicId: `${typebotId}-public`,
+  const mozbotId = createId()
+  await importMozbotInDatabase(getTestAsset('mozbots/fileUpload.json'), {
+    id: mozbotId,
+    publicId: `${mozbotId}-public`,
   })
-  await page.goto(`/${typebotId}-public`)
+  await page.goto(`/${mozbotId}-public`)
   await page
     .locator(`input[type="file"]`)
     .setInputFiles([
-      getTestAsset('typebots/api.json'),
-      getTestAsset('typebots/fileUpload.json'),
-      getTestAsset('typebots/hugeGroup.json'),
+      getTestAsset('mozbots/api.json'),
+      getTestAsset('mozbots/fileUpload.json'),
+      getTestAsset('mozbots/hugeGroup.json'),
     ])
   await expect(page.locator(`text="3"`)).toBeVisible()
   await page.locator('text="Upload 3 files"').click()
   await expect(page.locator(`text="3 files uploaded"`)).toBeVisible()
-  await page.goto(`${env.NEXTAUTH_URL}/typebots/${typebotId}/results`)
+  await page.goto(`${env.NEXTAUTH_URL}/mozbots/${mozbotId}/results`)
   await expect(page.getByRole('link', { name: 'api.json' })).toHaveAttribute(
     'href',
     /.+\/api\.json/

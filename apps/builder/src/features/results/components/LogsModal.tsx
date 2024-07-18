@@ -17,17 +17,17 @@ import {
   Text,
   Tag,
 } from '@chakra-ui/react'
-import { Log } from '@typebot.io/prisma'
-import { isDefined } from '@typebot.io/lib'
+import { Log } from '@mozbot.io/prisma'
+import { isDefined } from '@mozbot.io/lib'
 import { useLogs } from '../hooks/useLogs'
 
 type Props = {
-  typebotId: string
+  mozbotId: string
   resultId: string | null
   onClose: () => void
 }
-export const LogsModal = ({ typebotId, resultId, onClose }: Props) => {
-  const { isLoading, logs } = useLogs(typebotId, resultId)
+export const LogsModal = ({ mozbotId, resultId, onClose }: Props) => {
+  const { isLoading, logs } = useLogs(mozbotId, resultId)
 
   return (
     <Modal isOpen={isDefined(resultId)} onClose={onClose} size="xl">

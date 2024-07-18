@@ -76,13 +76,13 @@ CREATE TABLE "DashboardFolder" (
 );
 
 -- CreateTable
-CREATE TABLE "Typebot" (
+CREATE TABLE "Mozbot" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "name" TEXT NOT NULL,
     "ownerId" TEXT NOT NULL,
-    "publishedTypebotId" TEXT,
+    "publishedmozbotId" TEXT,
     "folderId" TEXT,
     "blocks" JSONB[],
     "variables" JSONB[],
@@ -91,13 +91,13 @@ CREATE TABLE "Typebot" (
     "settings" JSONB NOT NULL,
     "publicId" TEXT,
 
-    CONSTRAINT "Typebot_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Mozbot_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "PublicTypebot" (
+CREATE TABLE "PublicMozbot" (
     "id" TEXT NOT NULL,
-    "typebotId" TEXT NOT NULL,
+    "mozbotId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "blocks" JSONB[],
     "variables" JSONB[],
@@ -106,14 +106,14 @@ CREATE TABLE "PublicTypebot" (
     "settings" JSONB NOT NULL,
     "publicId" TEXT,
 
-    CONSTRAINT "PublicTypebot_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PublicMozbot_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Result" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "typebotId" TEXT NOT NULL,
+    "mozbotId" TEXT NOT NULL,
     "isCompleted" BOOLEAN NOT NULL,
 
     CONSTRAINT "Result_pkey" PRIMARY KEY ("id")
@@ -159,13 +159,13 @@ CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token"
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Typebot_publicId_key" ON "Typebot"("publicId");
+CREATE UNIQUE INDEX "Mozbot_publicId_key" ON "Mozbot"("publicId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "PublicTypebot_typebotId_key" ON "PublicTypebot"("typebotId");
+CREATE UNIQUE INDEX "PublicMozbot_mozbotId_key" ON "PublicMozbot"("mozbotId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "PublicTypebot_publicId_key" ON "PublicTypebot"("publicId");
+CREATE UNIQUE INDEX "PublicMozbot_publicId_key" ON "PublicMozbot"("publicId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Answer_resultId_blockId_stepId_key" ON "Answer"("resultId", "blockId", "stepId");
@@ -186,16 +186,16 @@ ALTER TABLE "DashboardFolder" ADD CONSTRAINT "DashboardFolder_ownerId_fkey" FORE
 ALTER TABLE "DashboardFolder" ADD CONSTRAINT "DashboardFolder_parentFolderId_fkey" FOREIGN KEY ("parentFolderId") REFERENCES "DashboardFolder"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Typebot" ADD CONSTRAINT "Typebot_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Mozbot" ADD CONSTRAINT "Mozbot_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Typebot" ADD CONSTRAINT "Typebot_folderId_fkey" FOREIGN KEY ("folderId") REFERENCES "DashboardFolder"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Mozbot" ADD CONSTRAINT "Mozbot_folderId_fkey" FOREIGN KEY ("folderId") REFERENCES "DashboardFolder"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PublicTypebot" ADD CONSTRAINT "PublicTypebot_typebotId_fkey" FOREIGN KEY ("typebotId") REFERENCES "Typebot"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "PublicMozbot" ADD CONSTRAINT "PublicMozbot_mozbotId_fkey" FOREIGN KEY ("mozbotId") REFERENCES "Mozbot"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Result" ADD CONSTRAINT "Result_typebotId_fkey" FOREIGN KEY ("typebotId") REFERENCES "Typebot"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Result" ADD CONSTRAINT "Result_mozbotId_fkey" FOREIGN KEY ("mozbotId") REFERENCES "Mozbot"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Answer" ADD CONSTRAINT "Answer_resultId_fkey" FOREIGN KEY ("resultId") REFERENCES "Result"("id") ON DELETE CASCADE ON UPDATE CASCADE;

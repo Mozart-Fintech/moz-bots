@@ -1,4 +1,4 @@
-import { isDefined } from '@typebot.io/lib'
+import { isDefined } from '@mozbot.io/lib'
 import { ModalProps } from '../../EmbedButton'
 import { useState } from 'react'
 import { EmbedModal } from '../../EmbedModal'

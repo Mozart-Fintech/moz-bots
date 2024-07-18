@@ -1,15 +1,15 @@
 import test, { expect } from '@playwright/test'
 import { createId } from '@paralleldrive/cuid2'
-import { importTypebotInDatabase } from '@typebot.io/playwright/databaseActions'
+import { importMozbotInDatabase } from '@mozbot.io/playwright/databaseActions'
 import { getTestAsset } from '@/test/utils/playwright'
 
 test('should execute webhooks properly', async ({ page }) => {
-  const typebotId = createId()
-  await importTypebotInDatabase(getTestAsset('typebots/webhook.json'), {
-    id: typebotId,
-    publicId: `${typebotId}-public`,
+  const mozbotId = createId()
+  await importMozbotInDatabase(getTestAsset('mozbots/webhook.json'), {
+    id: mozbotId,
+    publicId: `${mozbotId}-public`,
   })
-  await page.goto(`/${typebotId}-public`)
+  await page.goto(`/${mozbotId}-public`)
   await page.locator('text=Send failing webhook').click()
   await page.locator('[placeholder="Type a name..."]').fill('John')
   await page.locator('text="Send"').click()
@@ -22,7 +22,7 @@ test('should execute webhooks properly', async ({ page }) => {
   await expect(
     page.getByText('{"name":"John","age":30,"gender":"Male"}')
   ).toBeVisible()
-  await page.goto(`http://localhost:3000/typebots/${typebotId}/results`)
+  await page.goto(`http://localhost:3000/mozbots/${mozbotId}/results`)
   await page.click('text="See logs"')
   await expect(
     page.locator('text="Webhook successfuly executed." >> nth=1')

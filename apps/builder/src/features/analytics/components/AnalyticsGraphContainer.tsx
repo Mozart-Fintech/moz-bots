@@ -4,14 +4,14 @@ import {
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import {
   Edge,
   GroupV6,
   Stats,
   TotalAnswers,
   TotalVisitedEdges,
-} from '@typebot.io/schemas'
+} from '@mozbot.io/schemas'
 import React, { useMemo } from 'react'
 import { StatsCards } from './StatsCards'
 import { ChangePlanModal } from '@/features/billing/components/ChangePlanModal'
@@ -19,10 +19,10 @@ import { Graph } from '@/features/graph/components/Graph'
 import { GraphProvider } from '@/features/graph/providers/GraphProvider'
 import { useTranslate } from '@tolgee/react'
 import { trpc } from '@/lib/trpc'
-import { isDefined } from '@typebot.io/lib'
+import { isDefined } from '@mozbot.io/lib'
 import { EventsCoordinatesProvider } from '@/features/graph/providers/EventsCoordinateProvider'
 import { timeFilterValues } from '../constants'
-import { blockHasItems, isInputBlock } from '@typebot.io/schemas/helpers'
+import { blockHasItems, isInputBlock } from '@mozbot.io/schemas/helpers'
 
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
@@ -39,31 +39,31 @@ export const AnalyticsGraphContainer = ({
 }: Props) => {
   const { t } = useTranslate()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { typebot, publishedTypebot } = useTypebot()
+  const { mozbot, publishedMozbot } = useMozbot()
   const { data } = trpc.analytics.getInDepthAnalyticsData.useQuery(
     {
-      typebotId: typebot?.id as string,
+      mozbotId: mozbot?.id as string,
       timeFilter,
       timeZone,
     },
-    { enabled: isDefined(publishedTypebot) }
+    { enabled: isDefined(publishedMozbot) }
   )
 
   const totalVisitedEdges = useMemo(() => {
     if (
-      !publishedTypebot?.edges ||
-      !publishedTypebot.groups ||
-      !publishedTypebot.events ||
+      !publishedMozbot?.edges ||
+      !publishedMozbot.groups ||
+      !publishedMozbot.events ||
       !data?.totalAnswers ||
       !stats?.totalViews
     )
       return
-    const firstEdgeId = publishedTypebot.events[0].outgoingEdgeId
+    const firstEdgeId = publishedMozbot.events[0].outgoingEdgeId
     if (!firstEdgeId) return
     return populateEdgesWithVisitData({
       edgeId: firstEdgeId,
-      edges: publishedTypebot.edges,
-      groups: publishedTypebot.groups,
+      edges: publishedMozbot.edges,
+      groups: publishedMozbot.groups,
       currentTotalUsers: stats.totalViews,
       totalVisitedEdges: data.offDefaultPathVisitedEdges
         ? [...data.offDefaultPathVisitedEdges]
@@ -74,9 +74,9 @@ export const AnalyticsGraphContainer = ({
   }, [
     data?.offDefaultPathVisitedEdges,
     data?.totalAnswers,
-    publishedTypebot?.edges,
-    publishedTypebot?.groups,
-    publishedTypebot?.events,
+    publishedMozbot?.edges,
+    publishedMozbot?.groups,
+    publishedMozbot?.events,
     stats?.totalViews,
   ])
 
@@ -94,12 +94,12 @@ export const AnalyticsGraphContainer = ({
       h="full"
       justifyContent="center"
     >
-      {publishedTypebot && stats ? (
+      {publishedMozbot && stats ? (
         <GraphProvider isReadOnly isAnalytics>
-          <EventsCoordinatesProvider events={publishedTypebot?.events}>
+          <EventsCoordinatesProvider events={publishedMozbot?.events}>
             <Graph
               flex="1"
-              typebot={publishedTypebot}
+              mozbot={publishedMozbot}
               onUnlockProPlanClick={onOpen}
               totalAnswers={data?.totalAnswers}
               totalVisitedEdges={totalVisitedEdges}

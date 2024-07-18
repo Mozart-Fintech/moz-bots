@@ -14,15 +14,15 @@ import {
 import { Logo } from 'assets/icons/Logo'
 import { TextLink } from './TextLink'
 
-const discordServerUrl = 'https://typebot.io/discord'
-const typebotLinkedInUrl = 'https://www.linkedin.com/company/typebot'
-const typebotTwitterUrl = 'https://twitter.com/Typebot_io'
+const discordServerUrl = 'https://mozbot.io/discord'
+const mozbotLinkedInUrl = 'https://www.linkedin.com/company/mozbot'
+const mozbotTwitterUrl = 'https://twitter.com/Mozbot_io'
 const baptisteTwitterUrl = 'https://twitter.com/baptisteArno'
-const statusPageUrl = 'https://status.typebot.io'
-export const contactUrl = 'https://bot.typebot.io/landing-page-bubble-en'
-export const roadmapLink = 'https://app.typebot.io/feedback'
-export const documentationLink = 'https://docs.typebot.io'
-export const githubRepoLink = 'https://github.com/baptisteArno/typebot.io'
+const statusPageUrl = 'https://status.mozbot.io'
+export const contactUrl = 'https://bot.mozbot.io/landing-page-bubble-en'
+export const roadmapLink = 'https://app.mozbot.io/feedback'
+export const documentationLink = 'https://docs.mozbot.io'
+export const githubRepoLink = 'https://github.com/baptisteArno/mozbot.io'
 
 export const Footer = () => {
   return (
@@ -33,7 +33,7 @@ export const Footer = () => {
             <HStack>
               <Logo boxSize="30px" />
               <Heading as="p" fontSize="lg">
-                Typebot
+                Mozbot
               </Heading>
             </HStack>
             <Text>
@@ -62,10 +62,10 @@ export const Footer = () => {
             <TextLink href={githubRepoLink} isExternal>
               GitHub repository
             </TextLink>
-            <TextLink href={typebotTwitterUrl} isExternal>
+            <TextLink href={mozbotTwitterUrl} isExternal>
               Twitter
             </TextLink>
-            <TextLink href={typebotLinkedInUrl} isExternal>
+            <TextLink href={mozbotLinkedInUrl} isExternal>
               LinkedIn
             </TextLink>
             <TextLink href="/oss-friends">OSS Friends</TextLink>
@@ -73,7 +73,7 @@ export const Footer = () => {
           <Stack align={'flex-start'}>
             <ListHeader>Company</ListHeader>
             <TextLink href="/about">About</TextLink>
-            <TextLink href="mailto:support@typebot.io">Contact</TextLink>
+            <TextLink href="mailto:support@mozbot.io">Contact</TextLink>
             <TextLink href={'/terms-of-service'}>Terms of Service</TextLink>
             <TextLink href={'/privacy-policies'}>Privacy Policy</TextLink>
           </Stack>

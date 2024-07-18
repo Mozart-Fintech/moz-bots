@@ -1,5 +1,5 @@
-import { sendRequest } from '@typebot.io/lib'
-import { User } from '@typebot.io/schemas'
+import { sendRequest } from '@mozbot.io/lib'
+import { User } from '@mozbot.io/schemas'
 
 export const updateUserQuery = async (id: string, user: Partial<User>) =>
   sendRequest({

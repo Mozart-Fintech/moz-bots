@@ -2,8 +2,8 @@ import { UpdateStripeCredentialsModalContent } from '@/features/blocks/inputs/pa
 import { SmtpUpdateModalContent } from '@/features/blocks/integrations/sendEmail/components/SmtpUpdateModalContent'
 import { UpdateForgedCredentialsModalContent } from '@/features/forge/components/credentials/UpdateForgedCredentialsModalContent'
 import { Modal, ModalOverlay } from '@chakra-ui/react'
-import { forgedBlocks } from '@typebot.io/forge-repository/definitions'
-import { Credentials } from '@typebot.io/schemas/features/credentials'
+import { forgedBlocks } from '@mozbot.io/forge-repository/definitions'
+import { Credentials } from '@mozbot.io/schemas/features/credentials'
 
 export const CredentialsUpdateModal = ({
   editingCredentials,

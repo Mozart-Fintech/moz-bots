@@ -19,11 +19,11 @@ import {
   Stack,
 } from '@chakra-ui/react'
 import { EditIcon, PlusIcon, TrashIcon } from '@/components/icons'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { createId } from '@paralleldrive/cuid2'
-import { Variable } from '@typebot.io/schemas'
+import { Variable } from '@mozbot.io/schemas'
 import React, { useState, useRef, ChangeEvent, ReactNode } from 'react'
-import { byId, isDefined, isNotDefined } from '@typebot.io/lib'
+import { byId, isDefined, isNotDefined } from '@mozbot.io/lib'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { useParentModal } from '@/features/graph/providers/ParentModalProvider'
 import { MoreInfoTooltip } from '../MoreInfoTooltip'
@@ -60,9 +60,8 @@ export const VariableSearchInput = ({
   const { onOpen, onClose, isOpen } = useDisclosure({
     defaultIsOpen: autoFocus,
   })
-  const { typebot, createVariable, deleteVariable, updateVariable } =
-    useTypebot()
-  const variables = typebot?.variables ?? []
+  const { mozbot, createVariable, deleteVariable, updateVariable } = useMozbot()
+  const variables = mozbot?.variables ?? []
   const [inputValue, setInputValue] = useState(
     variables.find(byId(initialVariableId))?.name ?? ''
   )

@@ -1,8 +1,8 @@
-import { PublicTypebotV6 } from '@typebot.io/schemas'
-import { isInputBlock } from '@typebot.io/schemas/helpers'
+import { PublicMozbotV6 } from '@mozbot.io/schemas'
+import { isInputBlock } from '@mozbot.io/schemas/helpers'
 
 export const parseBlockIdVariableIdMap = (
-  groups?: PublicTypebotV6['groups']
+  groups?: PublicMozbotV6['groups']
 ): {
   [key: string]: string
 } => {

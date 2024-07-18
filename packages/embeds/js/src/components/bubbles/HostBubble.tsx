@@ -13,8 +13,8 @@ import type {
   Settings,
   TextBubbleBlock,
   VideoBubbleBlock,
-} from '@typebot.io/schemas'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
+} from '@mozbot.io/schemas'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
 import { Match, Switch } from 'solid-js'
 
 type Props = {

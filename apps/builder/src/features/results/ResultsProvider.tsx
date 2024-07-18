@@ -3,19 +3,19 @@ import {
   ResultHeaderCell,
   ResultWithAnswers,
   TableData,
-  Typebot,
-} from '@typebot.io/schemas'
+  Mozbot,
+} from '@mozbot.io/schemas'
 import { createContext, ReactNode, useContext, useMemo } from 'react'
-import { useTypebot } from '../editor/providers/TypebotProvider'
+import { useMozbot } from '../editor/providers/MozbotProvider'
 import { useResultsQuery } from './hooks/useResultsQuery'
 import { trpc } from '@/lib/trpc'
-import { isDefined } from '@typebot.io/lib/utils'
-import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
-import { parseResultHeader } from '@typebot.io/results/parseResultHeader'
-import { convertResultsToTableData } from '@typebot.io/results/convertResultsToTableData'
+import { isDefined } from '@mozbot.io/lib/utils'
+import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
+import { parseResultHeader } from '@mozbot.io/results/parseResultHeader'
+import { convertResultsToTableData } from '@mozbot.io/results/convertResultsToTableData'
 import { parseCellContent } from './helpers/parseCellContent'
 import { timeFilterValues } from '../analytics/constants'
-import { parseBlockIdVariableIdMap } from '@typebot.io/results/parseBlockIdVariableIdMap'
+import { parseBlockIdVariableIdMap } from '@mozbot.io/results/parseBlockIdVariableIdMap'
 
 const resultsContext = createContext<{
   resultsList: { results: ResultWithAnswers[] }[] | undefined
@@ -34,45 +34,45 @@ const resultsContext = createContext<{
 export const ResultsProvider = ({
   timeFilter,
   children,
-  typebotId,
+  mozbotId,
   totalResults,
   onDeleteResults,
 }: {
   timeFilter: (typeof timeFilterValues)[number]
   children: ReactNode
-  typebotId: string
+  mozbotId: string
   totalResults: number
   onDeleteResults: (totalResultsDeleted: number) => void
 }) => {
-  const { publishedTypebot } = useTypebot()
+  const { publishedMozbot } = useMozbot()
   const { showToast } = useToast()
   const { data, fetchNextPage, hasNextPage, refetch } = useResultsQuery({
     timeFilter,
-    typebotId,
+    mozbotId,
     onError: (error) => {
       showToast({ description: error })
     },
   })
 
-  const linkedTypebotIds =
-    publishedTypebot?.groups
+  const linkedmozbotIds =
+    publishedMozbot?.groups
       .flatMap((group) => group.blocks)
-      .reduce<string[]>((typebotIds, block) => {
-        if (block.type !== LogicBlockType.TYPEBOT_LINK) return typebotIds
-        const typebotId = block.options?.typebotId
-        return isDefined(typebotId) &&
-          !typebotIds.includes(typebotId) &&
+      .reduce<string[]>((mozbotIds, block) => {
+        if (block.type !== LogicBlockType.MOZBOT_LINK) return mozbotIds
+        const mozbotId = block.options?.mozbotId
+        return isDefined(mozbotId) &&
+          !mozbotIds.includes(mozbotId) &&
           block.options?.mergeResults !== false
-          ? [...typebotIds, typebotId]
-          : typebotIds
+          ? [...mozbotIds, mozbotId]
+          : mozbotIds
       }, []) ?? []
 
-  const { data: linkedTypebotsData } = trpc.getLinkedTypebots.useQuery(
+  const { data: linkedMozbotsData } = trpc.getLinkedMozbots.useQuery(
     {
-      typebotId,
+      mozbotId,
     },
     {
-      enabled: linkedTypebotIds.length > 0,
+      enabled: linkedmozbotIds.length > 0,
     }
   )
 
@@ -83,31 +83,28 @@ export const ResultsProvider = ({
 
   const resultHeader = useMemo(
     () =>
-      publishedTypebot
+      publishedMozbot
         ? parseResultHeader(
-            publishedTypebot,
-            linkedTypebotsData?.typebots as Pick<
-              Typebot,
-              'groups' | 'variables'
-            >[]
+            publishedMozbot,
+            linkedMozbotsData?.mozbots as Pick<Mozbot, 'groups' | 'variables'>[]
           )
         : [],
-    [linkedTypebotsData?.typebots, publishedTypebot]
+    [linkedMozbotsData?.mozbots, publishedMozbot]
   )
 
   const tableData = useMemo(
     () =>
-      publishedTypebot
+      publishedMozbot
         ? convertResultsToTableData({
             results: data?.flatMap((d) => d.results) ?? [],
             headerCells: resultHeader,
             cellParser: parseCellContent,
             blockIdVariableIdMap: parseBlockIdVariableIdMap(
-              publishedTypebot.groups
+              publishedMozbot.groups
             ),
           })
         : [],
-    [publishedTypebot, data, resultHeader]
+    [publishedMozbot, data, resultHeader]
   )
 
   return (

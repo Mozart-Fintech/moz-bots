@@ -1,25 +1,25 @@
 import test, { expect } from '@playwright/test'
-import { createTypebots } from '@typebot.io/playwright/databaseActions'
-import { parseDefaultGroupWithBlock } from '@typebot.io/playwright/databaseHelpers'
+import { createMozbots } from '@mozbot.io/playwright/databaseActions'
+import { parseDefaultGroupWithBlock } from '@mozbot.io/playwright/databaseHelpers'
 import { createId } from '@paralleldrive/cuid2'
-import { freeWorkspaceId } from '@typebot.io/playwright/databaseSetup'
+import { freeWorkspaceId } from '@mozbot.io/playwright/databaseSetup'
 import { getTestAsset } from '@/test/utils/playwright'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
 
 test.describe.configure({ mode: 'parallel' })
 
 test('options should work', async ({ page }) => {
-  const typebotId = createId()
-  await createTypebots([
+  const mozbotId = createId()
+  await createMozbots([
     {
-      id: typebotId,
+      id: mozbotId,
       ...parseDefaultGroupWithBlock({
         type: InputBlockType.FILE,
       }),
     },
   ])
 
-  await page.goto(`/typebots/${typebotId}/edit`)
+  await page.goto(`/mozbots/${mozbotId}/edit`)
 
   await page.click('text=Test')
   await expect(page.locator(`text=Click to upload`)).toBeVisible()
@@ -56,11 +56,11 @@ test('options should work', async ({ page }) => {
 })
 
 test.describe('Free workspace', () => {
-  test("shouldn't be able to publish typebot", async ({ page }) => {
-    const typebotId = createId()
-    await createTypebots([
+  test("shouldn't be able to publish mozbot", async ({ page }) => {
+    const mozbotId = createId()
+    await createMozbots([
       {
-        id: typebotId,
+        id: mozbotId,
         ...parseDefaultGroupWithBlock({
           type: InputBlockType.FILE,
         }),
@@ -68,7 +68,7 @@ test.describe('Free workspace', () => {
         workspaceId: freeWorkspaceId,
       },
     ])
-    await page.goto(`/typebots/${typebotId}/edit`)
+    await page.goto(`/mozbots/${mozbotId}/edit`)
     await page.click('text="Collect file"')
     await page.click('text="Allow multiple files?"')
     await page.click('text="Publish"')

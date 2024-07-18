@@ -1,9 +1,9 @@
 import React from 'react'
 import { Stack, Text } from '@chakra-ui/react'
 import { WithVariableContent } from '@/features/graph/components/nodes/block/WithVariableContent'
-import { TextInputBlock } from '@typebot.io/schemas'
-import { defaultTextInputOptions } from '@typebot.io/schemas/features/blocks/inputs/text/constants'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { TextInputBlock } from '@mozbot.io/schemas'
+import { defaultTextInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/text/constants'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { SetVariableLabel } from '@/components/SetVariableLabel'
 
 type Props = {
@@ -11,9 +11,9 @@ type Props = {
 }
 
 export const TextInputNodeContent = ({ options }: Props) => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const attachmentVariableId =
-    typebot &&
+    mozbot &&
     options?.attachments?.isEnabled &&
     options?.attachments.saveVariableId
   if (options?.variableId)
@@ -25,7 +25,7 @@ export const TextInputNodeContent = ({ options }: Props) => {
         />
         {attachmentVariableId && (
           <SetVariableLabel
-            variables={typebot.variables}
+            variables={mozbot.variables}
             variableId={attachmentVariableId}
           />
         )}
@@ -39,7 +39,7 @@ export const TextInputNodeContent = ({ options }: Props) => {
       </Text>
       {attachmentVariableId && (
         <SetVariableLabel
-          variables={typebot.variables}
+          variables={mozbot.variables}
           variableId={attachmentVariableId}
         />
       )}

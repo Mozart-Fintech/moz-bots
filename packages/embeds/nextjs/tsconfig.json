@@ -1,5 +1,5 @@
 {
-  "extends": "@typebot.io/tsconfig/react-library.json",
+  "extends": "@mozbot.io/tsconfig/react-library.json",
   "include": ["src/**/*"],
   "compilerOptions": {
     "baseUrl": ".",

@@ -1,11 +1,11 @@
 import { TextInput } from '@/components/inputs'
 import { VariableSearchInput } from '@/components/inputs/VariableSearchInput'
 import { FormLabel, Stack } from '@chakra-ui/react'
-import { PhoneNumberInputBlock, Variable } from '@typebot.io/schemas'
+import { PhoneNumberInputBlock, Variable } from '@mozbot.io/schemas'
 import React from 'react'
 import { CountryCodeSelect } from './CountryCodeSelect'
 import { useTranslate } from '@tolgee/react'
-import { defaultPhoneInputOptions } from '@typebot.io/schemas/features/blocks/inputs/phone/constants'
+import { defaultPhoneInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/phone/constants'
 
 type Props = {
   options: PhoneNumberInputBlock['options']

@@ -17,12 +17,12 @@ import {
   CloseButton,
   SlideFade,
 } from '@chakra-ui/react'
-import { useTypebot } from '../../editor/providers/TypebotProvider'
+import { useMozbot } from '../../editor/providers/MozbotProvider'
 import { FormEvent, useState } from 'react'
 import { headerHeight } from '../../editor/constants'
 import { useDrag } from '@use-gesture/react'
 import { ResizeHandle } from './ResizeHandle'
-import { InputBlock, SetVariableBlock, Variable } from '@typebot.io/schemas'
+import { InputBlock, SetVariableBlock, Variable } from '@mozbot.io/schemas'
 import {
   CheckIcon,
   MoreHorizontalIcon,
@@ -30,22 +30,21 @@ import {
   TrashIcon,
 } from '@/components/icons'
 import { SwitchWithLabel } from '@/components/inputs/SwitchWithLabel'
-import { isNotEmpty } from '@typebot.io/lib'
+import { isNotEmpty } from '@mozbot.io/lib'
 import { createId } from '@paralleldrive/cuid2'
-import { isInputBlock } from '@typebot.io/schemas/helpers'
-import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
-import { sessionOnlySetVariableOptions } from '@typebot.io/schemas/features/blocks/logic/setVariable/constants'
+import { isInputBlock } from '@mozbot.io/schemas/helpers'
+import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
+import { sessionOnlySetVariableOptions } from '@mozbot.io/schemas/features/blocks/logic/setVariable/constants'
 
 type Props = {
   onClose: () => void
 }
 export const VariablesDrawer = ({ onClose }: Props) => {
-  const { typebot, createVariable, updateVariable, deleteVariable } =
-    useTypebot()
+  const { mozbot, createVariable, updateVariable, deleteVariable } = useMozbot()
   const [width, setWidth] = useState(500)
   const [isResizeHandleVisible, setIsResizeHandleVisible] = useState(false)
   const [searchValue, setSearchValue] = useState('')
-  const filteredVariables = typebot?.variables.filter((v) =>
+  const filteredVariables = mozbot?.variables.filter((v) =>
     isNotEmpty(searchValue)
       ? v.name.toLowerCase().includes(searchValue.toLowerCase())
       : true
@@ -74,7 +73,7 @@ export const VariablesDrawer = ({ onClose }: Props) => {
   }
 
   const setVariableAndInputBlocks =
-    typebot?.groups.flatMap(
+    mozbot?.groups.flatMap(
       (g) =>
         g.blocks.filter(
           (b) => b.type === LogicBlockType.SET_VARIABLE || isInputBlock(b)
@@ -207,7 +206,7 @@ const VariableItem = ({
               <PopoverBody>
                 <SwitchWithLabel
                   label="Save in results?"
-                  moreInfoContent="Check this option if you want to save the variable value in the typebot Results table."
+                  moreInfoContent="Check this option if you want to save the variable value in the mozbot Results table."
                   initialValue={!variable.isSessionVariable}
                   onCheckChange={() =>
                     onChange({

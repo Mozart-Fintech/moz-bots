@@ -1,13 +1,13 @@
-import { isLight } from '@typebot.io/lib/hexToRgb'
-import { ContainerTheme, GeneralTheme } from '@typebot.io/schemas'
+import { isLight } from '@mozbot.io/lib/hexToRgb'
+import { ContainerTheme, GeneralTheme } from '@mozbot.io/schemas'
 import {
   BackgroundType,
   defaultBackgroundColor,
   defaultBackgroundType,
   defaultContainerBackgroundColor,
   defaultOpacity,
-} from '@typebot.io/schemas/features/typebot/theme/constants'
-import { isEmpty, isNotEmpty } from '@typebot.io/lib'
+} from '@mozbot.io/schemas/features/mozbot/theme/constants'
+import { isEmpty, isNotEmpty } from '@mozbot.io/lib'
 
 type Props = {
   chatContainer: ContainerTheme | undefined

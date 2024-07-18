@@ -1,21 +1,21 @@
-import { Prisma, PrismaClient } from '@typebot.io/prisma'
-import { Block, Typebot } from '@typebot.io/schemas'
-import { deleteFilesFromBucket } from '@typebot.io/lib/s3/deleteFilesFromBucket'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { isDefined } from '@typebot.io/lib'
+import { Prisma, PrismaClient } from '@mozbot.io/prisma'
+import { Block, Mozbot } from '@mozbot.io/schemas'
+import { deleteFilesFromBucket } from '@mozbot.io/lib/s3/deleteFilesFromBucket'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { isDefined } from '@mozbot.io/lib'
 
 type ArchiveResultsProps = {
-  typebot: Pick<Typebot, 'groups'>
-  resultsFilter?: Omit<Prisma.ResultWhereInput, 'typebotId'> & {
-    typebotId: string
+  mozbot: Pick<Mozbot, 'groups'>
+  resultsFilter?: Omit<Prisma.ResultWhereInput, 'mozbotId'> & {
+    mozbotId: string
   }
 }
 
 export const archiveResults =
   (prisma: PrismaClient) =>
-  async ({ typebot, resultsFilter }: ArchiveResultsProps) => {
+  async ({ mozbot, resultsFilter }: ArchiveResultsProps) => {
     const batchSize = 100
-    const fileUploadBlockIds = typebot.groups
+    const fileUploadBlockIds = mozbot.groups
       .flatMap<Block>((group) => group.blocks)
       .filter((block) => block.type === InputBlockType.FILE)
       .map((block) => block.id)

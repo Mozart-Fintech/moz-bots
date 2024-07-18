@@ -1,11 +1,11 @@
 -- AlterTable
 ALTER TABLE
-  "PublicTypebot"
+  "PublicMozbot"
 ADD
   COLUMN "version" TEXT;
 
 -- AlterTable
 ALTER TABLE
-  "Typebot"
+  "Mozbot"
 ADD
   COLUMN "version" TEXT;

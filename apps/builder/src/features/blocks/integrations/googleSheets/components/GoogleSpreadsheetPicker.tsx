@@ -1,10 +1,10 @@
 import { FileIcon } from '@/components/icons'
 import { trpc } from '@/lib/trpc'
 import { Button, Flex, HStack, IconButton, Text } from '@chakra-ui/react'
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 import React, { useEffect, useState } from 'react'
 import { GoogleSheetsLogo } from './GoogleSheetsLogo'
-import { isDefined } from '@typebot.io/lib'
+import { isDefined } from '@mozbot.io/lib'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const window: any

@@ -18,8 +18,8 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { useTranslate } from '@tolgee/react'
-import { isNotEmpty } from '@typebot.io/lib'
-import { StripeCredentials } from '@typebot.io/schemas'
+import { isNotEmpty } from '@mozbot.io/lib'
+import { StripeCredentials } from '@mozbot.io/schemas'
 import { useEffect, useState } from 'react'
 
 type Props = {
@@ -142,7 +142,7 @@ export const UpdateStripeCredentialsModalContent = ({
               )}
               defaultValue={stripeConfig?.name}
               onChange={handleNameChange}
-              placeholder="Typebot"
+              placeholder="Mozbot"
               withVariableButton={false}
               debounceTimeout={0}
             />

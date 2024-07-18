@@ -8,15 +8,15 @@ import {
 } from '@chakra-ui/react'
 import { DownloadIcon, TrashIcon } from '@/components/icons'
 import { ConfirmModal } from '@/components/ConfirmModal'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { unparse } from 'papaparse'
 import React, { useState } from 'react'
 import { useToast } from '@/hooks/useToast'
 import { useResults } from '../../ResultsProvider'
 import { trpc } from '@/lib/trpc'
-import { byId } from '@typebot.io/lib/utils'
-import { parseColumnsOrder } from '@typebot.io/results/parseColumnsOrder'
-import { parseUniqueKey } from '@typebot.io/lib/parseUniqueKey'
+import { byId } from '@mozbot.io/lib/utils'
+import { parseColumnsOrder } from '@mozbot.io/results/parseColumnsOrder'
+import { parseUniqueKey } from '@mozbot.io/lib/parseUniqueKey'
 
 type Props = {
   selectedResultsId: string[]
@@ -28,7 +28,7 @@ export const SelectionToolbar = ({
   onClearSelection,
 }: Props) => {
   const selectLabelColor = useColorModeValue('blue.500', 'blue.200')
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const { showToast } = useToast()
   const { resultHeader, tableData, onDeleteResults } = useResults()
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -50,15 +50,15 @@ export const SelectionToolbar = ({
     },
   })
 
-  const workspaceId = typebot?.workspaceId
-  const typebotId = typebot?.id
+  const workspaceId = mozbot?.workspaceId
+  const mozbotId = mozbot?.id
 
   const totalSelected = selectedResultsId.length
 
   const deleteResults = async () => {
-    if (!workspaceId || !typebotId) return
+    if (!workspaceId || !mozbotId) return
     deleteResultsMutation.mutate({
-      typebotId,
+      mozbotId,
       resultIds: selectedResultsId.join(','),
     })
   }
@@ -71,13 +71,12 @@ export const SelectionToolbar = ({
     )
 
     const headerIds = parseColumnsOrder(
-      typebot?.resultsTablePreferences?.columnsOrder,
+      mozbot?.resultsTablePreferences?.columnsOrder,
       resultHeader
     )
       .reduce<string[]>((currentHeaderIds, columnId) => {
         if (
-          typebot?.resultsTablePreferences?.columnsVisibility[columnId] ===
-          false
+          mozbot?.resultsTablePreferences?.columnsVisibility[columnId] === false
         )
           return currentHeaderIds
         const columnLabel = resultHeader.find(
@@ -87,11 +86,11 @@ export const SelectionToolbar = ({
         return [...currentHeaderIds, columnLabel]
       }, [])
       .concat(
-        typebot?.resultsTablePreferences?.columnsOrder
+        mozbot?.resultsTablePreferences?.columnsOrder
           ? resultHeader
               .filter(
                 (headerCell) =>
-                  !typebot?.resultsTablePreferences?.columnsOrder.includes(
+                  !mozbot?.resultsTablePreferences?.columnsOrder.includes(
                     headerCell.id
                   )
               )
@@ -113,7 +112,7 @@ export const SelectionToolbar = ({
     const csvData = new Blob([unparse(data)], {
       type: 'text/csv;charset=utf-8;',
     })
-    const fileName = `typebot-export_${new Date()
+    const fileName = `mozbot-export_${new Date()
       .toLocaleDateString()
       .replaceAll('/', '-')}`
     const tempLink = document.createElement('a')

@@ -1,4 +1,4 @@
-import { createBlock } from '@typebot.io/forge'
+import { createBlock } from '@mozbot.io/forge'
 import { ZemanticAiLogo } from './logo'
 import ky from 'ky'
 import { searchDocuments } from './actions/searchDocuments'

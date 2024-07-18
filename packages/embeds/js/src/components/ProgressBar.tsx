@@ -3,9 +3,9 @@ type Props = {
 }
 
 export const ProgressBar = (props: Props) => (
-  <div class="typebot-progress-bar-container">
+  <div class="mozbot-progress-bar-container">
     <div
-      class="typebot-progress-bar"
+      class="mozbot-progress-bar"
       style={{
         width: `${props.value}%`,
       }}

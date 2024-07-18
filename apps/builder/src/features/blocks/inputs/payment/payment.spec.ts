@@ -1,28 +1,28 @@
 import test, { expect } from '@playwright/test'
-import { createTypebots } from '@typebot.io/playwright/databaseActions'
-import { parseDefaultGroupWithBlock } from '@typebot.io/playwright/databaseHelpers'
+import { createMozbots } from '@mozbot.io/playwright/databaseActions'
+import { parseDefaultGroupWithBlock } from '@mozbot.io/playwright/databaseHelpers'
 import { createId } from '@paralleldrive/cuid2'
 import { stripePaymentForm } from '@/test/utils/selectorUtils'
-import { env } from '@typebot.io/env'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
+import { env } from '@mozbot.io/env'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
 
 test.describe('Payment input block', () => {
   test('Can configure Stripe account', async ({ page }) => {
-    const typebotId = createId()
-    await createTypebots([
+    const mozbotId = createId()
+    await createMozbots([
       {
-        id: typebotId,
+        id: mozbotId,
         ...parseDefaultGroupWithBlock({
           type: InputBlockType.PAYMENT,
         }),
       },
     ])
 
-    await page.goto(`/typebots/${typebotId}/edit`)
+    await page.goto(`/mozbots/${mozbotId}/edit`)
     await page.click('text=Configure...')
     await page.getByRole('button', { name: 'Select Stripe account' }).click()
     await page.getByRole('menuitem', { name: 'Connect new' }).click()
-    await page.fill('[placeholder="Typebot"]', 'My Stripe Account')
+    await page.fill('[placeholder="Mozbot"]', 'My Stripe Account')
     await page.fill('[placeholder="sk_test_..."]', env.STRIPE_SECRET_KEY ?? '')
     await page.fill('[placeholder="sk_live_..."]', env.STRIPE_SECRET_KEY ?? '')
     await page.fill(
@@ -41,7 +41,7 @@ test.describe('Payment input block', () => {
     await page.selectOption('select', 'EUR')
     await page.click('text=Additional information')
     await page.fill('[placeholder="John Smith"]', 'Baptiste')
-    await page.fill('[placeholder="john@gmail.com"]', 'test@typebot.io')
+    await page.fill('[placeholder="john@gmail.com"]', 'test@mozbot.io')
     await expect(page.locator('text="Phone number:"')).toBeVisible()
 
     await page.click('text=Test')

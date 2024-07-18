@@ -1,7 +1,7 @@
-import { PrismaClient } from '@typebot.io/prisma'
+import { PrismaClient } from '@mozbot.io/prisma'
 import { promptAndSetEnvironment } from './utils'
-import { Result } from '@typebot.io/schemas'
-import { isDefined, isNotDefined } from '@typebot.io/lib'
+import { Result } from '@mozbot.io/schemas'
+import { isDefined, isNotDefined } from '@mozbot.io/lib'
 
 let progress = 0
 

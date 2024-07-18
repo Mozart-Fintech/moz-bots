@@ -1,11 +1,11 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
-import { DashboardFolder, Plan, WorkspaceRole } from '@typebot.io/prisma'
-import { folderSchema } from '@typebot.io/schemas'
+import { DashboardFolder, Plan, WorkspaceRole } from '@mozbot.io/prisma'
+import { folderSchema } from '@mozbot.io/schemas'
 import { z } from 'zod'
 import { getUserRoleInWorkspace } from '@/features/workspace/helpers/getUserRoleInWorkspace'
-import { trackEvents } from '@typebot.io/telemetry/trackEvents'
+import { trackEvents } from '@mozbot.io/telemetry/trackEvents'
 
 export const createFolder = authenticatedProcedure
   .meta({

@@ -7,13 +7,13 @@ import { CodeEditor } from '@/components/inputs/CodeEditor'
 import { Select } from '@/components/inputs/Select'
 import { SwitchWithLabel } from '@/components/inputs/SwitchWithLabel'
 import { Stack, Text } from '@chakra-ui/react'
-import { isDefined, isEmpty } from '@typebot.io/lib'
-import { PixelBlock } from '@typebot.io/schemas'
+import { isDefined, isEmpty } from '@mozbot.io/lib'
+import { PixelBlock } from '@mozbot.io/schemas'
 import {
   defaultPixelOptions,
   pixelEventTypes,
   pixelObjectProperties,
-} from '@typebot.io/schemas/features/blocks/integrations/pixel/constants'
+} from '@mozbot.io/schemas/features/blocks/integrations/pixel/constants'
 import React from 'react'
 
 const pixelReferenceUrl =

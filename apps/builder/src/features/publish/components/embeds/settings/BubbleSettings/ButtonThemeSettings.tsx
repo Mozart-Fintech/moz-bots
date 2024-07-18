@@ -1,7 +1,7 @@
 import { ColorPicker } from '@/components/ColorPicker'
 import { ImageUploadContent } from '@/components/ImageUploadContent'
 import { ChevronDownIcon } from '@/components/icons'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import {
   Button,
@@ -17,7 +17,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { ButtonTheme } from '@typebot.io/nextjs'
+import { ButtonTheme } from '@mozbot.io/nextjs'
 import React from 'react'
 
 type Props = {
@@ -27,7 +27,7 @@ type Props = {
 
 export const ButtonThemeSettings = ({ buttonTheme, onChange }: Props) => {
   const { workspace } = useWorkspace()
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const updateBackgroundColor = (backgroundColor: string) => {
     onChange({
       ...buttonTheme,
@@ -80,7 +80,7 @@ export const ButtonThemeSettings = ({ buttonTheme, onChange }: Props) => {
                   <Button size="sm">Pick an image</Button>
                 </PopoverTrigger>
                 <PopoverContent p="4" w="500px">
-                  {workspace?.id && typebot?.id && (
+                  {workspace?.id && mozbot?.id && (
                     <ImageUploadContent
                       onSubmit={(url) => {
                         updateCustomIconSrc(url)
@@ -88,7 +88,7 @@ export const ButtonThemeSettings = ({ buttonTheme, onChange }: Props) => {
                       }}
                       uploadFileProps={{
                         workspaceId: workspace.id,
-                        typebotId: typebot.id,
+                        mozbotId: mozbot.id,
                         fileName: 'bubble-icon',
                       }}
                     />

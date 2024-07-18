@@ -1,11 +1,11 @@
 import { Text, TextProps } from '@chakra-ui/react'
 import React from 'react'
 import { useTranslate } from '@tolgee/react'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integrations/constants'
-import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
-import { Block } from '@typebot.io/schemas'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { IntegrationBlockType } from '@mozbot.io/schemas/features/blocks/integrations/constants'
+import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
+import { Block } from '@mozbot.io/schemas'
 import { ForgedBlockLabel } from '@/features/forge/ForgedBlockLabel'
 
 type Props = { type: Block['type'] } & TextProps
@@ -135,10 +135,10 @@ export const BlockLabel = ({ type, ...props }: Props): JSX.Element => {
           {t('editor.sidebarBlock.script.label')}
         </Text>
       )
-    case LogicBlockType.TYPEBOT_LINK:
+    case LogicBlockType.MOZBOT_LINK:
       return (
         <Text fontSize="sm" {...props}>
-          {t('editor.sidebarBlock.typebot.label')}
+          {t('editor.sidebarBlock.mozbot.label')}
         </Text>
       )
     case LogicBlockType.WAIT:

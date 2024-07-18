@@ -16,8 +16,8 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react'
-import { proChatTiers } from '@typebot.io/billing/constants'
-import { formatPrice } from '@typebot.io/billing/helpers/formatPrice'
+import { proChatTiers } from '@mozbot.io/billing/constants'
+import { formatPrice } from '@mozbot.io/billing/helpers/formatPrice'
 
 type Props = {
   isOpen: boolean

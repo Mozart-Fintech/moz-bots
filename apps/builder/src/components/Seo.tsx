@@ -1,4 +1,4 @@
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 import Head from 'next/head'
 
 const getOrigin = () => {
@@ -19,7 +19,7 @@ export const Seo = ({
   currentUrl?: string
   imagePreviewUrl?: string
 }) => {
-  const formattedTitle = `${title} | Typebot`
+  const formattedTitle = `${title} | Mozbot`
 
   return (
     <Head>

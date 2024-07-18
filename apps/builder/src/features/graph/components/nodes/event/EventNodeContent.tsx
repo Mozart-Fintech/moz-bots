@@ -1,5 +1,5 @@
 import { StartEventNode } from '@/features/events/start/StartEventNode'
-import { TEvent } from '@typebot.io/schemas'
+import { TEvent } from '@mozbot.io/schemas'
 
 type Props = {
   event: TEvent

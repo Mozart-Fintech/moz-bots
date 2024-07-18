@@ -2,7 +2,7 @@ import { CommandData } from '../types'
 
 export const close = () => {
   const message: CommandData = {
-    isFromTypebot: true,
+    isFromMozbot: true,
     command: 'close',
   }
   window.postMessage(message)

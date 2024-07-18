@@ -8,7 +8,7 @@ import {
   VStack,
   Text,
 } from '@chakra-ui/react'
-import { GraphNavigation } from '@typebot.io/prisma'
+import { GraphNavigation } from '@mozbot.io/prisma'
 
 type Props = {
   defaultValue: string

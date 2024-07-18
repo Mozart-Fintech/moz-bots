@@ -2,10 +2,10 @@ import { SendButton } from '@/components/SendButton'
 import { CommandData } from '@/features/commands/types'
 import { InputSubmitContent } from '@/types'
 import { isMobile } from '@/utils/isMobileSignal'
-import type { NumberInputBlock } from '@typebot.io/schemas'
+import type { NumberInputBlock } from '@mozbot.io/schemas'
 import { createSignal, onCleanup, onMount } from 'solid-js'
 import { numberInputHelper } from '../numberInputHelper'
-import { defaultNumberInputOptions } from '@typebot.io/schemas/features/blocks/inputs/number/constants'
+import { defaultNumberInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/number/constants'
 
 type NumberInputProps = {
   block: NumberInputBlock
@@ -46,16 +46,16 @@ export const NumberInput = (props: NumberInputProps) => {
 
   const processIncomingEvent = (event: MessageEvent<CommandData>) => {
     const { data } = event
-    if (!data.isFromTypebot) return
+    if (!data.isFromMozbot) return
     if (data.command === 'setInputValue') setInputValue(data.value)
   }
 
   return (
     <div
-      class="typebot-input-form flex w-full gap-2 items-end max-w-[350px]"
+      class="mozbot-input-form flex w-full gap-2 items-end max-w-[350px]"
       onKeyDown={submitWhenEnter}
     >
-      <div class={'flex typebot-input w-full'}>
+      <div class={'flex mozbot-input w-full'}>
         <input
           ref={inputRef}
           class="focus:outline-none bg-transparent px-4 py-4 flex-1 w-full text-input"

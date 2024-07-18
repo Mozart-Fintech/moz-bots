@@ -19,9 +19,9 @@ import { useToast } from '@/hooks/useToast'
 import { TextInput } from '@/components/inputs'
 import { MoreInfoTooltip } from '@/components/MoreInfoTooltip'
 import { TextLink } from '@/components/TextLink'
-import { StripeCredentials } from '@typebot.io/schemas'
+import { StripeCredentials } from '@mozbot.io/schemas'
 import { trpc } from '@/lib/trpc'
-import { isNotEmpty } from '@typebot.io/lib'
+import { isNotEmpty } from '@mozbot.io/lib'
 import { useUser } from '@/features/account/hooks/useUser'
 import { useTranslate } from '@tolgee/react'
 
@@ -152,7 +152,7 @@ export const StripeCreateModalContent = ({
                 'blocks.inputs.payment.settings.stripeConfig.accountName.label'
               )}
               onChange={handleNameChange}
-              placeholder="Typebot"
+              placeholder="Mozbot"
               withVariableButton={false}
               debounceTimeout={0}
             />

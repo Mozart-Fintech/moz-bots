@@ -7,11 +7,11 @@ import {
   Image,
   chakra,
 } from '@chakra-ui/react'
-import { BubbleProps } from '@typebot.io/nextjs'
-import { isDefined, isSvgSrc } from '@typebot.io/lib'
+import { BubbleProps } from '@mozbot.io/nextjs'
+import { isDefined, isSvgSrc } from '@mozbot.io/lib'
 import { PreviewMessageSettings } from './PreviewMessageSettings'
 import { ThemeSettings } from './ThemeSettings'
-import { isLight } from '@typebot.io/lib/hexToRgb'
+import { isLight } from '@mozbot.io/lib/hexToRgb'
 
 type Props = {
   defaultPreviewMessageAvatar: string

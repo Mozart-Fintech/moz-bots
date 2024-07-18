@@ -1,12 +1,12 @@
 import { Tag, Text } from '@chakra-ui/react'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
-import { SetVariableBlock, Variable } from '@typebot.io/schemas'
-import { byId } from '@typebot.io/lib'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
+import { SetVariableBlock, Variable } from '@mozbot.io/schemas'
+import { byId } from '@mozbot.io/lib'
 
 export const SetVariableContent = ({ block }: { block: SetVariableBlock }) => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const variableName =
-    typebot?.variables.find(byId(block.options?.variableId))?.name ?? ''
+    mozbot?.variables.find(byId(block.options?.variableId))?.name ?? ''
   return (
     <Text color={'gray.500'} noOfLines={4}>
       {variableName === '' ? (
@@ -14,7 +14,7 @@ export const SetVariableContent = ({ block }: { block: SetVariableBlock }) => {
       ) : (
         <Expression
           options={block.options}
-          variables={typebot?.variables ?? []}
+          variables={mozbot?.variables ?? []}
         />
       )}
     </Text>

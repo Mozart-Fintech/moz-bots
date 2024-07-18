@@ -1,15 +1,15 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
-import { collaboratorSchema } from '@typebot.io/schemas/features/collaborators'
-import { isReadTypebotForbidden } from '@/features/typebot/helpers/isReadTypebotForbidden'
+import { collaboratorSchema } from '@mozbot.io/schemas/features/collaborators'
+import { isReadMozbotForbidden } from '@/features/mozbot/helpers/isReadMozbotForbidden'
 
 export const getCollaborators = authenticatedProcedure
   .meta({
     openapi: {
       method: 'GET',
-      path: '/v1/typebots/{typebotId}/collaborators',
+      path: '/v1/mozbots/{mozbotId}/collaborators',
       protect: true,
       summary: 'Get collaborators',
       tags: ['Collaborators'],
@@ -17,7 +17,7 @@ export const getCollaborators = authenticatedProcedure
   })
   .input(
     z.object({
-      typebotId: z.string(),
+      mozbotId: z.string(),
     })
   )
   .output(
@@ -25,10 +25,10 @@ export const getCollaborators = authenticatedProcedure
       collaborators: z.array(collaboratorSchema),
     })
   )
-  .query(async ({ input: { typebotId }, ctx: { user } }) => {
-    const existingTypebot = await prisma.typebot.findFirst({
+  .query(async ({ input: { mozbotId }, ctx: { user } }) => {
+    const existingMozbot = await prisma.mozbot.findFirst({
       where: {
-        id: typebotId,
+        id: mozbotId,
       },
       include: {
         collaborators: true,
@@ -46,12 +46,12 @@ export const getCollaborators = authenticatedProcedure
       },
     })
     if (
-      !existingTypebot?.id ||
-      (await isReadTypebotForbidden(existingTypebot, user))
+      !existingMozbot?.id ||
+      (await isReadMozbotForbidden(existingMozbot, user))
     )
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Typebot not found' })
+      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
 
     return {
-      collaborators: existingTypebot.collaborators,
+      collaborators: existingMozbot.collaborators,
     }
   })

@@ -1,7 +1,7 @@
-import { sendRequest } from '@typebot.io/lib'
+import { sendRequest } from '@mozbot.io/lib'
 
-export const deleteInvitationQuery = (typebotId: string, email: string) =>
+export const deleteInvitationQuery = (mozbotId: string, email: string) =>
   sendRequest({
     method: 'DELETE',
-    url: `/api/typebots/${typebotId}/invitations/${email}`,
+    url: `/api/mozbots/${mozbotId}/invitations/${email}`,
   })

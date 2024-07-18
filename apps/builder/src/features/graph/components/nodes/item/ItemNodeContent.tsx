@@ -7,9 +7,9 @@ import {
   ConditionItem,
   Item,
   ItemIndices,
-} from '@typebot.io/schemas'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
+} from '@mozbot.io/schemas'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
 import React from 'react'
 
 type Props = {

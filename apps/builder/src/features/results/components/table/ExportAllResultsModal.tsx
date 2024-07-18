@@ -1,7 +1,7 @@
 import { AlertInfo } from '@/components/AlertInfo'
 import { DownloadIcon } from '@/components/icons'
 import { SwitchWithLabel } from '@/components/inputs/SwitchWithLabel'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { useToast } from '@/hooks/useToast'
 import { trpc } from '@/lib/trpc'
 import {
@@ -20,14 +20,14 @@ import {
 import { TRPCError } from '@trpc/server'
 import { unparse } from 'papaparse'
 import { useState } from 'react'
-import { parseResultHeader } from '@typebot.io/results/parseResultHeader'
-import { convertResultsToTableData } from '@typebot.io/results/convertResultsToTableData'
-import { parseColumnsOrder } from '@typebot.io/results/parseColumnsOrder'
-import { parseUniqueKey } from '@typebot.io/lib/parseUniqueKey'
+import { parseResultHeader } from '@mozbot.io/results/parseResultHeader'
+import { convertResultsToTableData } from '@mozbot.io/results/convertResultsToTableData'
+import { parseColumnsOrder } from '@mozbot.io/results/parseColumnsOrder'
+import { parseUniqueKey } from '@mozbot.io/lib/parseUniqueKey'
 import { useResults } from '../../ResultsProvider'
-import { byId, isDefined } from '@typebot.io/lib'
-import { Typebot } from '@typebot.io/schemas'
-import { parseBlockIdVariableIdMap } from '@typebot.io/results/parseBlockIdVariableIdMap'
+import { byId, isDefined } from '@mozbot.io/lib'
+import { Mozbot } from '@mozbot.io/schemas'
+import { parseBlockIdVariableIdMap } from '@mozbot.io/results/parseBlockIdVariableIdMap'
 
 type Props = {
   isOpen: boolean
@@ -35,9 +35,9 @@ type Props = {
 }
 
 export const ExportAllResultsModal = ({ isOpen, onClose }: Props) => {
-  const { typebot, publishedTypebot } = useTypebot()
-  const workspaceId = typebot?.workspaceId
-  const typebotId = typebot?.id
+  const { mozbot, publishedMozbot } = useMozbot()
+  const workspaceId = mozbot?.workspaceId
+  const mozbotId = mozbot?.id
   const { showToast } = useToast()
   const { resultHeader: existingResultHeader, totalResults } = useResults()
   const trpcContext = trpc.useContext()
@@ -47,17 +47,17 @@ export const ExportAllResultsModal = ({ isOpen, onClose }: Props) => {
   const [areDeletedBlocksIncluded, setAreDeletedBlocksIncluded] =
     useState(false)
 
-  const { data: linkedTypebotsData } = trpc.getLinkedTypebots.useQuery(
+  const { data: linkedMozbotsData } = trpc.getLinkedMozbots.useQuery(
     {
-      typebotId: typebotId as string,
+      mozbotId: mozbotId as string,
     },
     {
-      enabled: isDefined(typebotId),
+      enabled: isDefined(mozbotId),
     }
   )
 
   const getAllResults = async () => {
-    if (!workspaceId || !typebotId) return []
+    if (!workspaceId || !mozbotId) return []
     const allResults = []
     let cursor: string | undefined
     setExportProgressValue(0)
@@ -65,7 +65,7 @@ export const ExportAllResultsModal = ({ isOpen, onClose }: Props) => {
       try {
         const { results, nextCursor } =
           await trpcContext.results.getResults.fetch({
-            typebotId,
+            mozbotId,
             limit: 100,
             cursor,
             timeFilter: 'allTime',
@@ -83,7 +83,7 @@ export const ExportAllResultsModal = ({ isOpen, onClose }: Props) => {
   }
 
   const exportAllResultsToCSV = async () => {
-    if (!publishedTypebot) return
+    if (!publishedMozbot) return
 
     setIsExportLoading(true)
 
@@ -93,11 +93,8 @@ export const ExportAllResultsModal = ({ isOpen, onClose }: Props) => {
 
     const resultHeader = areDeletedBlocksIncluded
       ? parseResultHeader(
-          publishedTypebot,
-          linkedTypebotsData?.typebots as Pick<
-            Typebot,
-            'groups' | 'variables'
-          >[],
+          publishedMozbot,
+          linkedMozbotsData?.mozbots as Pick<Mozbot, 'groups' | 'variables'>[],
           results
         )
       : existingResultHeader
@@ -105,15 +102,15 @@ export const ExportAllResultsModal = ({ isOpen, onClose }: Props) => {
     const dataToUnparse = convertResultsToTableData({
       results,
       headerCells: resultHeader,
-      blockIdVariableIdMap: parseBlockIdVariableIdMap(typebot?.groups),
+      blockIdVariableIdMap: parseBlockIdVariableIdMap(mozbot?.groups),
     })
 
     const headerIds = parseColumnsOrder(
-      typebot?.resultsTablePreferences?.columnsOrder,
+      mozbot?.resultsTablePreferences?.columnsOrder,
       resultHeader
     ).reduce<string[]>((currentHeaderIds, columnId) => {
       if (
-        typebot?.resultsTablePreferences?.columnsVisibility[columnId] === false
+        mozbot?.resultsTablePreferences?.columnsVisibility[columnId] === false
       )
         return currentHeaderIds
       const columnLabel = resultHeader.find(
@@ -137,7 +134,7 @@ export const ExportAllResultsModal = ({ isOpen, onClose }: Props) => {
     const csvData = new Blob([unparse(data)], {
       type: 'text/csv;charset=utf-8;',
     })
-    const fileName = `typebot-export_${new Date()
+    const fileName = `mozbot-export_${new Date()
       .toLocaleDateString()
       .replaceAll('/', '-')}`
     const tempLink = document.createElement('a')

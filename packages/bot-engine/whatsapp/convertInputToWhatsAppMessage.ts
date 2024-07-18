@@ -1,12 +1,12 @@
-import { ButtonItem, ContinueChatResponse } from '@typebot.io/schemas'
-import { WhatsAppSendingMessage } from '@typebot.io/schemas/features/whatsapp'
-import { isDefined, isEmpty } from '@typebot.io/lib/utils'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { defaultPictureChoiceOptions } from '@typebot.io/schemas/features/blocks/inputs/pictureChoice/constants'
-import { defaultChoiceInputOptions } from '@typebot.io/schemas/features/blocks/inputs/choice/constants'
-import { convertRichTextToMarkdown } from '@typebot.io/lib/markdown/convertRichTextToMarkdown'
-import { env } from '@typebot.io/env'
+import { ButtonItem, ContinueChatResponse } from '@mozbot.io/schemas'
+import { WhatsAppSendingMessage } from '@mozbot.io/schemas/features/whatsapp'
+import { isDefined, isEmpty } from '@mozbot.io/lib/utils'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { defaultPictureChoiceOptions } from '@mozbot.io/schemas/features/blocks/inputs/pictureChoice/constants'
+import { defaultChoiceInputOptions } from '@mozbot.io/schemas/features/blocks/inputs/choice/constants'
+import { convertRichTextToMarkdown } from '@mozbot.io/lib/markdown/convertRichTextToMarkdown'
+import { env } from '@mozbot.io/env'
 
 export const convertInputToWhatsAppMessages = (
   input: NonNullable<ContinueChatResponse['input']>,

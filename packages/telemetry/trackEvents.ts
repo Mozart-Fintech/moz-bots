@@ -1,5 +1,5 @@
-import { env } from '@typebot.io/env'
-import { TelemetryEvent } from '@typebot.io/schemas/features/telemetry'
+import { env } from '@mozbot.io/env'
+import { TelemetryEvent } from '@mozbot.io/schemas/features/telemetry'
 import { PostHog } from 'posthog-node'
 import ky from 'ky'
 
@@ -37,15 +37,15 @@ export const trackEvents = async (events: TelemetryEvent[]) => {
         groupKey: event.workspaceId,
         properties: event.data,
       })
-    if (event.name === 'Typebot created' || event.name === 'Typebot published')
+    if (event.name === 'Mozbot created' || event.name === 'Mozbot published')
       client.groupIdentify({
-        groupType: 'typebot',
-        groupKey: event.typebotId,
+        groupType: 'mozbot',
+        groupKey: event.mozbotId,
         properties: { name: event.data.name },
       })
-    const groups: { workspace?: string; typebot?: string } = {}
+    const groups: { workspace?: string; mozbot?: string } = {}
     if ('workspaceId' in event) groups['workspace'] = event.workspaceId
-    if ('typebotId' in event) groups['typebot'] = event.typebotId
+    if ('mozbotId' in event) groups['mozbot'] = event.mozbotId
     client.capture({
       distinctId: event.userId,
       event: event.name,

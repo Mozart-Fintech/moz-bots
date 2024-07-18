@@ -1,7 +1,7 @@
-import { Invitation, PrismaClient, WorkspaceRole } from '@typebot.io/prisma'
+import { Invitation, PrismaClient, WorkspaceRole } from '@mozbot.io/prisma'
 
 export type InvitationWithWorkspaceId = Invitation & {
-  typebot: {
+  mozbot: {
     workspaceId: string | null
   }
 }
@@ -11,9 +11,9 @@ export const convertInvitationsToCollaborations = async (
   { id, email }: { id: string; email: string },
   invitations: InvitationWithWorkspaceId[]
 ) => {
-  await p.collaboratorsOnTypebots.createMany({
+  await p.collaboratorsOnMozbots.createMany({
     data: invitations.map((invitation) => ({
-      typebotId: invitation.typebotId,
+      mozbotId: invitation.mozbotId,
       type: invitation.type,
       userId: id,
     })),
@@ -21,19 +21,19 @@ export const convertInvitationsToCollaborations = async (
   const workspaceInvitations = invitations.reduce<InvitationWithWorkspaceId[]>(
     (acc, invitation) =>
       acc.some(
-        (inv) => inv.typebot.workspaceId === invitation.typebot.workspaceId
+        (inv) => inv.mozbot.workspaceId === invitation.mozbot.workspaceId
       )
         ? acc
         : [...acc, invitation],
     []
   )
   for (const invitation of workspaceInvitations) {
-    if (!invitation.typebot.workspaceId) continue
+    if (!invitation.mozbot.workspaceId) continue
     await p.memberInWorkspace.createMany({
       data: [
         {
           userId: id,
-          workspaceId: invitation.typebot.workspaceId,
+          workspaceId: invitation.mozbot.workspaceId,
           role: WorkspaceRole.GUEST,
         },
       ],

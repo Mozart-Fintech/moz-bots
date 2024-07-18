@@ -1,8 +1,8 @@
 import { parseVariables } from '@/features/variables'
 import { useAnswers } from '@/providers/AnswersProvider'
-import { useTypebot } from '@/providers/TypebotProvider'
+import { useMozbot } from '@/providers/MozbotProvider'
 import { InputSubmitContent } from '@/types'
-import { ChoiceInputBlock } from '@typebot.io/schemas'
+import { ChoiceInputBlock } from '@mozbot.io/schemas'
 import React, { useState } from 'react'
 import { SendButton } from '../../../../../components/SendButton'
 
@@ -13,8 +13,8 @@ type ChoiceFormProps = {
 
 export const ChoiceForm = ({ block, onSubmit }: ChoiceFormProps) => {
   const {
-    typebot: { variables },
-  } = useTypebot()
+    mozbot: { variables },
+  } = useMozbot()
   const { resultValues } = useAnswers()
   const [selectedIndices, setSelectedIndices] = useState<number[]>([])
 
@@ -61,7 +61,7 @@ export const ChoiceForm = ({ block, onSubmit }: ChoiceFormProps) => {
               role={block.options?.isMultipleChoice ? 'checkbox' : 'button'}
               onClick={handleClick(idx)}
               className={
-                'py-2 px-4 text-left font-semibold rounded-md transition-all filter hover:brightness-90 active:brightness-75 duration-100 focus:outline-none typebot-button ' +
+                'py-2 px-4 text-left font-semibold rounded-md transition-all filter hover:brightness-90 active:brightness-75 duration-100 focus:outline-none mozbot-button ' +
                 (selectedIndices.includes(idx) ||
                 !block.options?.isMultipleChoice
                   ? ''

@@ -1,9 +1,9 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
-import { resultWithAnswersSchema } from '@typebot.io/schemas'
+import { resultWithAnswersSchema } from '@mozbot.io/schemas'
 import { z } from 'zod'
-import { isReadTypebotForbidden } from '@/features/typebot/helpers/isReadTypebotForbidden'
+import { isReadMozbotForbidden } from '@/features/mozbot/helpers/isReadMozbotForbidden'
 import {
   timeFilterValues,
   defaultTimeFilter,
@@ -19,7 +19,7 @@ export const getResults = authenticatedProcedure
   .meta({
     openapi: {
       method: 'GET',
-      path: '/v1/typebots/{typebotId}/results',
+      path: '/v1/mozbots/{mozbotId}/results',
       protect: true,
       summary: 'List results ordered by descending creation date',
       tags: ['Results'],
@@ -27,10 +27,10 @@ export const getResults = authenticatedProcedure
   })
   .input(
     z.object({
-      typebotId: z
+      mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
         ),
       limit: z.coerce.number().min(1).max(maxLimit).default(50),
       cursor: z.string().optional(),
@@ -52,9 +52,9 @@ export const getResults = authenticatedProcedure
         message: `limit must be between 1 and ${maxLimit}`,
       })
     const { cursor } = input
-    const typebot = await prisma.typebot.findUnique({
+    const mozbot = await prisma.mozbot.findUnique({
       where: {
-        id: input.typebotId,
+        id: input.mozbotId,
       },
       select: {
         id: true,
@@ -78,8 +78,8 @@ export const getResults = authenticatedProcedure
         },
       },
     })
-    if (!typebot || (await isReadTypebotForbidden(typebot, user)))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Typebot not found' })
+    if (!mozbot || (await isReadMozbotForbidden(mozbot, user)))
+      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
 
     const fromDate = parseFromDateFromTimeFilter(
       input.timeFilter,
@@ -91,7 +91,7 @@ export const getResults = authenticatedProcedure
       take: limit + 1,
       cursor: cursor ? { id: cursor } : undefined,
       where: {
-        typebotId: typebot.id,
+        mozbotId: mozbot.id,
         hasStarted: true,
         isArchived: false,
         createdAt: fromDate

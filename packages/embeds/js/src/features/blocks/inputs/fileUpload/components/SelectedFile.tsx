@@ -9,7 +9,7 @@ import {
 import { CloseIcon } from '@/components/icons/CloseIcon'
 import { FilePreview } from './FilePreview'
 import { Progress } from '@ark-ui/solid'
-import { isDefined } from '@typebot.io/lib'
+import { isDefined } from '@mozbot.io/lib'
 
 export const SelectedFile = (props: {
   file: File

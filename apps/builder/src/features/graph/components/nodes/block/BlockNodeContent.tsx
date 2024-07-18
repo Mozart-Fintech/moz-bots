@@ -1,4 +1,4 @@
-import { BlockIndices, BlockV6 } from '@typebot.io/schemas'
+import { BlockIndices, BlockV6 } from '@mozbot.io/schemas'
 import { WaitNodeContent } from '@/features/blocks/logic/wait/components/WaitNodeContent'
 import { ScriptNodeContent } from '@/features/blocks/logic/script/components/ScriptNodeContent'
 import { ButtonsBlockNode } from '@/features/blocks/inputs/buttons/components/ButtonsBlockNode'
@@ -25,7 +25,7 @@ import { WebhookContent } from '@/features/blocks/integrations/webhook/component
 import { ZapierContent } from '@/features/blocks/integrations/zapier/components/ZapierContent'
 import { RedirectNodeContent } from '@/features/blocks/logic/redirect/components/RedirectNodeContent'
 import { SetVariableContent } from '@/features/blocks/logic/setVariable/components/SetVariableContent'
-import { TypebotLinkNode } from '@/features/blocks/logic/typebotLink/components/TypebotLinkNode'
+import { MozbotLinkNode } from '@/features/blocks/logic/mozbotLink/components/MozbotLinkNode'
 import { ItemNodesList } from '../item/ItemNodesList'
 import { GoogleAnalyticsNodeBody } from '@/features/blocks/integrations/googleAnalytics/components/GoogleAnalyticsNodeBody'
 import { ChatwootNodeBody } from '@/features/blocks/integrations/chatwoot/components/ChatwootNodeBody'
@@ -33,10 +33,10 @@ import { AbTestNodeBody } from '@/features/blocks/logic/abTest/components/AbTest
 import { PictureChoiceNode } from '@/features/blocks/inputs/pictureChoice/components/PictureChoiceNode'
 import { PixelNodeBody } from '@/features/blocks/integrations/pixel/components/PixelNodeBody'
 import { ZemanticAiNodeBody } from '@/features/blocks/integrations/zemanticAi/ZemanticAiNodeBody'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
-import { IntegrationBlockType } from '@typebot.io/schemas/features/blocks/integrations/constants'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
+import { IntegrationBlockType } from '@mozbot.io/schemas/features/blocks/integrations/constants'
 import { ForgedBlockNodeContent } from '@/features/forge/components/ForgedBlockNodeContent'
 import { OpenAINodeBody } from '@/features/blocks/integrations/openai/components/OpenAINodeBody'
 
@@ -117,8 +117,8 @@ export const BlockNodeContent = ({
     case LogicBlockType.AB_TEST: {
       return <AbTestNodeBody block={block} groupId={groupId} />
     }
-    case LogicBlockType.TYPEBOT_LINK:
-      return <TypebotLinkNode block={block} />
+    case LogicBlockType.MOZBOT_LINK:
+      return <MozbotLinkNode block={block} />
     case LogicBlockType.CONDITION:
       return <ItemNodesList block={block} indices={indices} />
     case IntegrationBlockType.GOOGLE_SHEETS: {

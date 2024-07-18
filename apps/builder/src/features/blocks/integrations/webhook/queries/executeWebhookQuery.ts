@@ -1,13 +1,13 @@
-import { Variable, HttpResponse } from '@typebot.io/schemas'
-import { sendRequest } from '@typebot.io/lib'
+import { Variable, HttpResponse } from '@mozbot.io/schemas'
+import { sendRequest } from '@mozbot.io/lib'
 
 export const executeWebhook = (
-  typebotId: string,
+  mozbotId: string,
   variables: Variable[],
   { blockId }: { blockId: string }
 ) =>
   sendRequest<HttpResponse>({
-    url: `/api/typebots/${typebotId}/blocks/${blockId}/testWebhook`,
+    url: `/api/mozbots/${mozbotId}/blocks/${blockId}/testWebhook`,
     method: 'POST',
     body: {
       variables,

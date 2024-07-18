@@ -1,26 +1,26 @@
-import { parseVideoUrl } from '@typebot.io/schemas/features/blocks/bubbles/video/helpers'
+import { parseVideoUrl } from '@mozbot.io/schemas/features/blocks/bubbles/video/helpers'
 import {
   BubbleBlock,
   Variable,
   ContinueChatResponse,
-  Typebot,
-} from '@typebot.io/schemas'
-import { deepParseVariables } from '@typebot.io/variables/deepParseVariables'
-import { isDefined, isEmpty, isNotEmpty } from '@typebot.io/lib/utils'
+  Mozbot,
+} from '@mozbot.io/schemas'
+import { deepParseVariables } from '@mozbot.io/variables/deepParseVariables'
+import { isDefined, isEmpty, isNotEmpty } from '@mozbot.io/lib/utils'
 import {
   getVariablesToParseInfoInText,
   parseVariables,
-} from '@typebot.io/variables/parseVariables'
+} from '@mozbot.io/variables/parseVariables'
 import { TDescendant, TElement } from '@udecode/plate-common'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
-import { defaultVideoBubbleContent } from '@typebot.io/schemas/features/blocks/bubbles/video/constants'
-import { convertMarkdownToRichText } from '@typebot.io/lib/markdown/convertMarkdownToRichText'
-import { convertRichTextToMarkdown } from '@typebot.io/lib/markdown/convertRichTextToMarkdown'
-import { isSingleVariable } from '@typebot.io/variables/isSingleVariable'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
+import { defaultVideoBubbleContent } from '@mozbot.io/schemas/features/blocks/bubbles/video/constants'
+import { convertMarkdownToRichText } from '@mozbot.io/lib/markdown/convertMarkdownToRichText'
+import { convertRichTextToMarkdown } from '@mozbot.io/lib/markdown/convertRichTextToMarkdown'
+import { isSingleVariable } from '@mozbot.io/variables/isSingleVariable'
 
 type Params = {
   version: 1 | 2
-  typebotVersion: Typebot['version']
+  mozbotVersion: Mozbot['version']
   variables: Variable[]
   textBubbleContentFormat: 'richText' | 'markdown'
 }
@@ -31,7 +31,7 @@ export type BubbleBlockWithDefinedContent = BubbleBlock & {
 
 export const parseBubbleBlock = (
   block: BubbleBlockWithDefinedContent,
-  { version, variables, typebotVersion, textBubbleContentFormat }: Params
+  { version, variables, mozbotVersion, textBubbleContentFormat }: Params
 ): ContinueChatResponse['messages'][0] => {
   switch (block.type) {
     case BubbleBlockType.TEXT: {
@@ -48,7 +48,7 @@ export const parseBubbleBlock = (
 
       const richText = parseVariablesInRichText(block.content?.richText ?? [], {
         variables,
-        takeLatestIfList: typebotVersion !== '6',
+        takeLatestIfList: mozbotVersion !== '6',
       }).parsedElements
       return {
         ...block,

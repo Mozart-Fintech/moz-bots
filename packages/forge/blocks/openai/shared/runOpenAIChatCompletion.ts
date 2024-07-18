@@ -1,11 +1,11 @@
 import { maxToolCalls } from '../constants'
 import { ChatCompletionOptions } from './parseChatCompletionOptions'
-import { LogsStore, VariableStore } from '@typebot.io/forge/types'
+import { LogsStore, VariableStore } from '@mozbot.io/forge/types'
 import { createOpenAI } from '@ai-sdk/openai'
 import { APICallError, generateText } from 'ai'
 import { isModelCompatibleWithVision } from '../helpers/isModelCompatibleWithVision'
-import { parseTools } from '@typebot.io/ai/parseTools'
-import { parseChatCompletionMessages } from '@typebot.io/ai/parseChatCompletionMessages'
+import { parseTools } from '@mozbot.io/ai/parseTools'
+import { parseChatCompletionMessages } from '@mozbot.io/ai/parseChatCompletionMessages'
 
 type OpenAIConfig = {
   baseUrl: string

@@ -1,5 +1,5 @@
-import { ApiToken } from '@typebot.io/prisma'
-import { sendRequest } from '@typebot.io/lib'
+import { ApiToken } from '@mozbot.io/prisma'
+import { sendRequest } from '@mozbot.io/lib'
 
 export const deleteApiTokenQuery = ({
   userId,

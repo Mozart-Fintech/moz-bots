@@ -1,13 +1,13 @@
 import { MenuList, MenuItem } from '@chakra-ui/react'
 import { CopyIcon, TrashIcon } from '@/components/icons'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
-import { ItemIndices } from '@typebot.io/schemas'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
+import { ItemIndices } from '@mozbot.io/schemas'
 
 type Props = {
   indices: ItemIndices
 }
 export const ItemNodeContextMenu = ({ indices }: Props) => {
-  const { deleteItem, duplicateItem } = useTypebot()
+  const { deleteItem, duplicateItem } = useMozbot()
 
   return (
     <MenuList>

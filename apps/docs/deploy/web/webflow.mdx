@@ -6,15 +6,15 @@ Head over to the Share tab of your bot and click on the Webflow button to get th
 
 ## Advanced guides
 
-### Trigger a typebot command on a click of a button
+### Trigger a mozbot command on a click of a button
 
 1. Head over to the `Settings` tab of your button and add a dedicated `ID`
-2. In your typebot `Embed` element, insert this code in the existing `<script>` tag:
+2. In your mozbot `Embed` element, insert this code in the existing `<script>` tag:
 
 ```js
 document.getElementById('BUTTON_ID').addEventListener('click', (event) => {
   event.preventDefault()
-  Typebot.open()
+  Mozbot.open()
 })
 ```
 
@@ -24,20 +24,20 @@ It should look like:
 
 ```html
 <script type="module">
-  import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0.3/dist/web.js'
+  import Mozbot from 'https://cdn.jsdelivr.net/npm/@mozbot.io/js@0.3/dist/web.js'
 
-  Typebot.initPopup({
-    typebot: 'my-typebot',
+  Mozbot.initPopup({
+    mozbot: 'my-mozbot',
   })
 
   document.getElementById('BUTTON_ID_1').addEventListener('click', (event) => {
     event.preventDefault()
-    Typebot.open()
+    Mozbot.open()
   })
 
   document.getElementById('BUTTON_ID_2').addEventListener('click', (event) => {
     event.preventDefault()
-    Typebot.open()
+    Mozbot.open()
   })
 </script>
 ```

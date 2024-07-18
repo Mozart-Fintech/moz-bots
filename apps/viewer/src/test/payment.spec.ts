@@ -1,15 +1,15 @@
 import { createId } from '@paralleldrive/cuid2'
 import test, { expect } from '@playwright/test'
 import { getTestAsset } from './utils/playwright'
-import { importTypebotInDatabase } from '@typebot.io/playwright/databaseActions'
+import { importMozbotInDatabase } from '@mozbot.io/playwright/databaseActions'
 
 test('Payment redirection should work', async ({ page }) => {
-  const typebotId = createId()
-  await importTypebotInDatabase(getTestAsset('typebots/payment.json'), {
-    id: typebotId,
-    publicId: `${typebotId}-public`,
+  const mozbotId = createId()
+  await importMozbotInDatabase(getTestAsset('mozbots/payment.json'), {
+    id: mozbotId,
+    publicId: `${mozbotId}-public`,
   })
-  await page.goto(`/${typebotId}-public`)
+  await page.goto(`/${mozbotId}-public`)
   const paypalButton = page
     .frameLocator('iframe[title="Secure payment input frame"]')
     .getByTestId('paypal')

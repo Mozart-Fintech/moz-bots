@@ -1,4 +1,4 @@
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 import { Client, PostPolicyResult } from 'minio'
 
 type Props = {

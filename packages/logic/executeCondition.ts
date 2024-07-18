@@ -1,12 +1,12 @@
-import { isNotDefined, isDefined } from '@typebot.io/lib'
-import { Comparison, Condition, Variable } from '@typebot.io/schemas'
-import { findUniqueVariableValue } from '@typebot.io/variables/findUniqueVariableValue'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
+import { isNotDefined, isDefined } from '@mozbot.io/lib'
+import { Comparison, Condition, Variable } from '@mozbot.io/schemas'
+import { findUniqueVariableValue } from '@mozbot.io/variables/findUniqueVariableValue'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
 import {
   LogicalOperator,
   ComparisonOperators,
   defaultConditionItemContent,
-} from '@typebot.io/schemas/features/blocks/logic/condition/constants'
+} from '@mozbot.io/schemas/features/blocks/logic/condition/constants'
 
 type Props = {
   condition: Condition

@@ -1,15 +1,15 @@
 import { ThunderIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import { useEditor } from '@/features/editor/providers/EditorProvider'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { useGraph } from '@/features/graph/providers/GraphProvider'
 import { useToast } from '@/hooks/useToast'
-import { Standard } from '@typebot.io/nextjs'
-import { ContinueChatResponse } from '@typebot.io/schemas'
+import { Standard } from '@mozbot.io/nextjs'
+import { ContinueChatResponse } from '@mozbot.io/schemas'
 
 export const WebPreview = () => {
   const { user } = useUser()
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const { startPreviewAtGroup, startPreviewAtEvent } = useEditor()
   const { setPreviewingBlock } = useGraph()
 
@@ -36,13 +36,13 @@ export const WebPreview = () => {
     })
   }
 
-  if (!typebot) return null
+  if (!mozbot) return null
 
   return (
     <Standard
       key={`web-preview${startPreviewAtGroup ?? ''}`}
-      typebot={typebot}
-      sessionId={user ? `${typebot.id}-${user.id}` : undefined}
+      mozbot={mozbot}
+      sessionId={user ? `${mozbot.id}-${user.id}` : undefined}
       startFrom={
         startPreviewAtGroup
           ? { type: 'group', groupId: startPreviewAtGroup }
@@ -54,7 +54,7 @@ export const WebPreview = () => {
         setPreviewingBlock({
           id: block.id,
           groupId:
-            typebot.groups.find((g) => g.blocks.some((b) => b.id === block.id))
+            mozbot.groups.find((g) => g.blocks.some((b) => b.id === block.id))
               ?.id ?? '',
         })
       }

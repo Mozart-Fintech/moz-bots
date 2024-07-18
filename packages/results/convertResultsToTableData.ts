@@ -4,8 +4,8 @@ import {
   VariableWithValue,
   Answer,
   TableData,
-} from '@typebot.io/schemas'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
+} from '@mozbot.io/schemas'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
 import { isDefined } from '../lib/utils'
 
 type CellParser = (

@@ -1,5 +1,5 @@
-import { SmtpCredentials } from '@typebot.io/schemas'
-import { sendRequest } from '@typebot.io/lib'
+import { SmtpCredentials } from '@mozbot.io/schemas'
+import { sendRequest } from '@mozbot.io/lib'
 
 export const testSmtpConfig = (smtpData: SmtpCredentials['data'], to: string) =>
   sendRequest({

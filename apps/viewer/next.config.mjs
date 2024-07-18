@@ -1,6 +1,6 @@
 import { withSentryConfig } from '@sentry/nextjs'
 import { join, dirname } from 'path'
-import '@typebot.io/env/dist/env.mjs'
+import '@mozbot.io/env/dist/env.mjs'
 import { fileURLToPath } from 'url'
 import { configureRuntimeEnv } from 'next-runtime-env/build/configure.js'
 
@@ -50,7 +50,7 @@ const landingPageReferers = [
   '/blog',
 ].concat(['/blog/(.+)'])
 
-const currentHost = 'typebot.io'
+const currentHost = 'mozbot.io'
 const currentOrigin = `https://${currentHost}`
 const optionalQueryParams = `(\\/?\\?.*)?`
 
@@ -58,9 +58,9 @@ const optionalQueryParams = `(\\/?\\?.*)?`
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: [
-    '@typebot.io/lib',
-    '@typebot.io/schemas',
-    '@typebot.io/emails',
+    '@mozbot.io/lib',
+    '@mozbot.io/schemas',
+    '@mozbot.io/emails',
   ],
   output: 'standalone',
   experimental: {
@@ -101,7 +101,7 @@ const nextConfig = {
             }))
             .concat(
               landingPageReferers.map((path) => ({
-                source: '/typebots/:typebot*',
+                source: '/mozbots/:mozbot*',
                 has: [
                   {
                     type: 'header',
@@ -109,7 +109,7 @@ const nextConfig = {
                     value: `${currentOrigin}${path}${optionalQueryParams}`,
                   },
                 ],
-                destination: `${process.env.LANDING_PAGE_URL}/typebots/:typebot*`,
+                destination: `${process.env.LANDING_PAGE_URL}/mozbots/:mozbot*`,
               }))
             )
             .concat(
@@ -154,10 +154,9 @@ const nextConfig = {
       )
         .concat([
           {
-            source:
-              '/api/typebots/:typebotId/blocks/:blockId/storage/upload-url',
+            source: '/api/mozbots/:mozbotId/blocks/:blockId/storage/upload-url',
             destination:
-              '/api/v1/typebots/:typebotId/blocks/:blockId/storage/upload-url',
+              '/api/v1/mozbots/:mozbotId/blocks/:blockId/storage/upload-url',
           },
           {
             source: '/healthz',
@@ -169,33 +168,32 @@ const nextConfig = {
             ? [
                 {
                   source:
-                    '/api/typebots/:typebotId/blocks/:blockId/steps/:stepId/sampleResult',
-                  destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/getResultExample`,
+                    '/api/mozbots/:mozbotId/blocks/:blockId/steps/:stepId/sampleResult',
+                  destination: `${process.env.NEXTAUTH_URL}/api/v1/mozbots/:mozbotId/webhookBlocks/:blockId/getResultExample`,
+                },
+                {
+                  source: '/api/mozbots/:mozbotId/blocks/:blockId/sampleResult',
+                  destination: `${process.env.NEXTAUTH_URL}/api/v1/mozbots/:mozbotId/webhookBlocks/:blockId/getResultExample`,
                 },
                 {
                   source:
-                    '/api/typebots/:typebotId/blocks/:blockId/sampleResult',
-                  destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/getResultExample`,
+                    '/api/mozbots/:mozbotId/blocks/:blockId/steps/:stepId/unsubscribeWebhook',
+                  destination: `${process.env.NEXTAUTH_URL}/api/v1/mozbots/:mozbotId/webhookBlocks/:blockId/unsubscribe`,
                 },
                 {
                   source:
-                    '/api/typebots/:typebotId/blocks/:blockId/steps/:stepId/unsubscribeWebhook',
-                  destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/unsubscribe`,
+                    '/api/mozbots/:mozbotId/blocks/:blockId/unsubscribeWebhook',
+                  destination: `${process.env.NEXTAUTH_URL}/api/v1/mozbots/:mozbotId/webhookBlocks/:blockId/unsubscribe`,
                 },
                 {
                   source:
-                    '/api/typebots/:typebotId/blocks/:blockId/unsubscribeWebhook',
-                  destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/unsubscribe`,
+                    '/api/mozbots/:mozbotId/blocks/:blockId/steps/:stepId/subscribeWebhook',
+                  destination: `${process.env.NEXTAUTH_URL}/api/v1/mozbots/:mozbotId/webhookBlocks/:blockId/subscribe`,
                 },
                 {
                   source:
-                    '/api/typebots/:typebotId/blocks/:blockId/steps/:stepId/subscribeWebhook',
-                  destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/subscribe`,
-                },
-                {
-                  source:
-                    '/api/typebots/:typebotId/blocks/:blockId/subscribeWebhook',
-                  destination: `${process.env.NEXTAUTH_URL}/api/v1/typebots/:typebotId/webhookBlocks/:blockId/subscribe`,
+                    '/api/mozbots/:mozbotId/blocks/:blockId/subscribeWebhook',
+                  destination: `${process.env.NEXTAUTH_URL}/api/v1/mozbots/:mozbotId/webhookBlocks/:blockId/subscribe`,
                 },
               ]
             : []

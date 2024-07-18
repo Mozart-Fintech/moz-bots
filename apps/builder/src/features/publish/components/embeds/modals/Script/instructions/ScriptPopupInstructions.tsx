@@ -1,5 +1,5 @@
 import { CodeEditor } from '@/components/inputs/CodeEditor'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { Stack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import { PopupSettings } from '../../../settings/PopupSettings'
@@ -7,19 +7,19 @@ import { parseInitPopupCode } from '../../../snippetParsers'
 import {
   parseApiHostValue,
   parseInlineScript,
-  typebotImportCode,
+  mozbotImportCode,
 } from '../../../snippetParsers/shared'
 
 export const ScriptPopupInstructions = () => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const [inputValue, setInputValue] = useState<number>()
 
   const scriptSnippet = parseInlineScript(
-    `${typebotImportCode}
+    `${mozbotImportCode}
 
 ${parseInitPopupCode({
-  typebot: typebot?.publicId ?? '',
-  apiHost: parseApiHostValue(typebot?.customDomain),
+  mozbot: mozbot?.publicId ?? '',
+  apiHost: parseApiHostValue(mozbot?.customDomain),
   autoShowDelay: inputValue,
 })}`
   )
@@ -29,7 +29,7 @@ ${parseInitPopupCode({
       <PopupSettings
         onUpdateSettings={(settings) => setInputValue(settings.autoShowDelay)}
       />
-      <Text>Run this script to initialize the typebot:</Text>
+      <Text>Run this script to initialize the mozbot:</Text>
       <CodeEditor isReadOnly value={scriptSnippet} lang="javascript" />
     </Stack>
   )

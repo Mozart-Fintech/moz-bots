@@ -1,6 +1,6 @@
-import { safeStringify } from '@typebot.io/lib/safeStringify'
-import { isDefined } from '@typebot.io/lib/utils'
-import { Variable, VariableForTest } from '@typebot.io/schemas'
+import { safeStringify } from '@mozbot.io/lib/safeStringify'
+import { isDefined } from '@mozbot.io/lib/utils'
+import { Variable, VariableForTest } from '@mozbot.io/schemas'
 
 export const convertVariablesForTestToVariables = (
   variablesForTest: VariableForTest[],

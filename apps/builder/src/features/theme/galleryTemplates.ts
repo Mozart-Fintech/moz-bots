@@ -1,6 +1,6 @@
-import { env } from '@typebot.io/env'
-import { ThemeTemplate } from '@typebot.io/schemas'
-import { BackgroundType } from '@typebot.io/schemas/features/typebot/theme/constants'
+import { env } from '@mozbot.io/env'
+import { ThemeTemplate } from '@mozbot.io/schemas'
+import { BackgroundType } from '@mozbot.io/schemas/features/mozbot/theme/constants'
 
 const getOrigin = () => {
   if (typeof window !== 'undefined') {
@@ -13,13 +13,13 @@ const getOrigin = () => {
 export const galleryTemplates: Pick<ThemeTemplate, 'id' | 'name' | 'theme'>[] =
   [
     {
-      id: 'typebot-light',
-      name: 'Typebot Light',
+      id: 'mozbot-light',
+      name: 'Mozbot Light',
       theme: {},
     },
     {
-      id: 'typebot-dark',
-      name: 'Typebot Dark',
+      id: 'mozbot-dark',
+      name: 'Mozbot Dark',
       theme: {
         chat: {
           inputs: {

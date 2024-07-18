@@ -14,9 +14,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { trpc } from '@/lib/trpc'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
-import { ForgedBlockDefinition } from '@typebot.io/forge-repository/types'
+import { ForgedBlockDefinition } from '@mozbot.io/forge-repository/types'
 import { useToast } from '@/hooks/useToast'
-import { Credentials } from '@typebot.io/schemas/features/credentials'
+import { Credentials } from '@mozbot.io/schemas/features/credentials'
 
 type Props = Omit<ButtonProps, 'type'> & {
   blockDef: ForgedBlockDefinition

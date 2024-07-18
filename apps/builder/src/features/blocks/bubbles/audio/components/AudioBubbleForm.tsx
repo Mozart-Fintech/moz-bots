@@ -5,8 +5,8 @@ import { UploadButton } from '@/components/ImageUploadContent/UploadButton'
 import { SwitchWithLabel } from '@/components/inputs/SwitchWithLabel'
 import { useTranslate } from '@tolgee/react'
 import { FilePathUploadProps } from '@/features/upload/api/generateUploadUrl'
-import { AudioBubbleBlock } from '@typebot.io/schemas'
-import { defaultAudioBubbleContent } from '@typebot.io/schemas/features/blocks/bubbles/audio/constants'
+import { AudioBubbleBlock } from '@mozbot.io/schemas'
+import { defaultAudioBubbleContent } from '@mozbot.io/schemas/features/blocks/bubbles/audio/constants'
 
 type Props = {
   uploadFileProps: FilePathUploadProps

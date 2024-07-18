@@ -1,5 +1,5 @@
 import { Coordinates } from '@dnd-kit/utilities'
-import { Edge } from '@typebot.io/schemas'
+import { Edge } from '@mozbot.io/schemas'
 import {
   createContext,
   Dispatch,

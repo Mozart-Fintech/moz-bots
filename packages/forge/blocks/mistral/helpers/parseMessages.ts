@@ -1,7 +1,7 @@
 import { options as createChatCompletionOption } from '../actions/createChatCompletion'
-import { VariableStore } from '@typebot.io/forge'
-import { isDefined, isNotEmpty } from '@typebot.io/lib'
-import { z } from '@typebot.io/forge/zod'
+import { VariableStore } from '@mozbot.io/forge'
+import { isDefined, isNotEmpty } from '@mozbot.io/lib'
+import { z } from '@mozbot.io/forge/zod'
 import { CoreMessage } from 'ai'
 
 export const parseMessages = ({

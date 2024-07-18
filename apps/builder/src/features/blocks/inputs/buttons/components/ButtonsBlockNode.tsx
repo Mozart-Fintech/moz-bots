@@ -1,7 +1,7 @@
-import { BlockIndices, ChoiceInputBlock } from '@typebot.io/schemas'
+import { BlockIndices, ChoiceInputBlock } from '@mozbot.io/schemas'
 import React from 'react'
 import { Stack, Tag, Text, Wrap } from '@chakra-ui/react'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { SetVariableLabel } from '@/components/SetVariableLabel'
 import { ItemNodesList } from '@/features/graph/components/nodes/item/ItemNodesList'
 import { useTranslate } from '@tolgee/react'
@@ -12,9 +12,9 @@ type Props = {
 }
 
 export const ButtonsBlockNode = ({ block, indices }: Props) => {
-  const { typebot } = useTypebot()
+  const { mozbot } = useMozbot()
   const { t } = useTranslate()
-  const dynamicVariableName = typebot?.variables.find(
+  const dynamicVariableName = mozbot?.variables.find(
     (variable) => variable.id === block.options?.dynamicVariableId
   )?.name
 
@@ -34,7 +34,7 @@ export const ButtonsBlockNode = ({ block, indices }: Props) => {
       {block.options?.variableId ? (
         <SetVariableLabel
           variableId={block.options.variableId}
-          variables={typebot?.variables}
+          variables={mozbot?.variables}
         />
       ) : null}
     </Stack>

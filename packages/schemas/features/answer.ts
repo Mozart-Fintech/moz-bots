@@ -1,5 +1,5 @@
 import { z } from '../zod'
-import { Answer as AnswerV1Prisma, Prisma } from '@typebot.io/prisma'
+import { Answer as AnswerV1Prisma, Prisma } from '@mozbot.io/prisma'
 
 const answerV1Schema = z.object({
   createdAt: z.date(),

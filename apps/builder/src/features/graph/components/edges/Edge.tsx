@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
-import { Edge as EdgeProps } from '@typebot.io/schemas'
+import { Edge as EdgeProps } from '@mozbot.io/schemas'
 import { Portal, useColorMode, useDisclosure } from '@chakra-ui/react'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { colors } from '@/lib/theme'
 import { useEndpoints } from '../../providers/EndpointsProvider'
 import { computeEdgePath } from '../../helpers/computeEdgePath'
@@ -20,7 +20,7 @@ type Props = {
 
 export const Edge = ({ edge, fromGroupId }: Props) => {
   const isDark = useColorMode().colorMode === 'dark'
-  const { deleteEdge } = useTypebot()
+  const { deleteEdge } = useMozbot()
   const { previewingEdge, graphPosition, isReadOnly, setPreviewingEdge } =
     useGraph()
   const { sourceEndpointYOffsets, targetEndpointYOffsets } = useEndpoints()

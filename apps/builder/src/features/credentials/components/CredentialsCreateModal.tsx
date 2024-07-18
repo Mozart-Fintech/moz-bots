@@ -4,8 +4,8 @@ import { SmtpCreateModalContent } from '@/features/blocks/integrations/sendEmail
 import { CreateForgedCredentialsModalContent } from '@/features/forge/components/credentials/CreateForgedCredentialsModal'
 import { WhatsAppCreateModalContent } from '@/features/publish/components/embeds/modals/WhatsAppModal/WhatsAppCredentialsModal'
 import { Modal, ModalOverlay } from '@chakra-ui/react'
-import { forgedBlocks } from '@typebot.io/forge-repository/definitions'
-import { Credentials } from '@typebot.io/schemas/features/credentials'
+import { forgedBlocks } from '@mozbot.io/forge-repository/definitions'
+import { Credentials } from '@mozbot.io/schemas/features/credentials'
 
 export const CredentialsCreateModal = ({
   creatingType,

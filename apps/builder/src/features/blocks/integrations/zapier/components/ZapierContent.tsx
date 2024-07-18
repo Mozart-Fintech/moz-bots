@@ -1,5 +1,5 @@
 import { Text } from '@chakra-ui/react'
-import { ZapierBlock } from '@typebot.io/schemas'
+import { ZapierBlock } from '@mozbot.io/schemas'
 
 type Props = {
   block: ZapierBlock

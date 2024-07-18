@@ -1,6 +1,6 @@
 import { CoreAssistantMessage, CoreMessage, CoreUserMessage } from 'ai'
-import { VariableStore } from '@typebot.io/forge'
-import { isDefined, isEmpty } from '@typebot.io/lib'
+import { VariableStore } from '@mozbot.io/forge'
+import { isDefined, isEmpty } from '@mozbot.io/lib'
 import { splitUserTextMessageIntoBlocks } from './splitUserTextMessageIntoBlocks'
 import { Message, StandardMessage, DialogueMessage } from './types'
 

@@ -1,4 +1,4 @@
-import { ContinueChatResponse, StartChatResponse } from '@typebot.io/schemas'
+import { ContinueChatResponse, StartChatResponse } from '@mozbot.io/schemas'
 
 export type InputSubmitContent = {
   label?: string
@@ -7,7 +7,7 @@ export type InputSubmitContent = {
 }
 
 export type BotContext = {
-  typebot: StartChatResponse['typebot']
+  mozbot: StartChatResponse['mozbot']
   resultId?: string
   isPreview: boolean
   apiHost?: string

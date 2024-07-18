@@ -1,12 +1,12 @@
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { z } from 'zod'
 import { TRPCError } from '@trpc/server'
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { getUserRoleInWorkspace } from '@/features/workspace/helpers/getUserRoleInWorkspace'
-import { WorkspaceRole } from '@typebot.io/prisma'
-import { isWriteTypebotForbidden } from '@/features/typebot/helpers/isWriteTypebotForbidden'
-import { trackEvents } from '@typebot.io/telemetry/trackEvents'
-import { clientSideCreateEventSchema } from '@typebot.io/schemas'
+import { WorkspaceRole } from '@mozbot.io/prisma'
+import { isWriteMozbotForbidden } from '@/features/mozbot/helpers/isWriteMozbotForbidden'
+import { trackEvents } from '@mozbot.io/telemetry/trackEvents'
+import { clientSideCreateEventSchema } from '@mozbot.io/schemas'
 
 export const trackClientEvents = authenticatedProcedure
   .input(
@@ -33,12 +33,12 @@ export const trackClientEvents = authenticatedProcedure
         members: true,
       },
     })
-    const typebots = await prisma.typebot.findMany({
+    const mozbots = await prisma.mozbot.findMany({
       where: {
         id: {
           in: events
-            .filter((event) => 'typebotId' in event)
-            .map((event) => (event as { typebotId: string }).typebotId),
+            .filter((event) => 'mozbotId' in event)
+            .map((event) => (event as { mozbotId: string }).mozbotId),
         },
       },
       select: {
@@ -79,12 +79,12 @@ export const trackClientEvents = authenticatedProcedure
           })
       }
 
-      if ('typebotId' in event) {
-        const typebot = typebots.find((t) => t.id === event.typebotId)
-        if (!typebot || (await isWriteTypebotForbidden(typebot, user)))
+      if ('mozbotId' in event) {
+        const mozbot = mozbots.find((t) => t.id === event.mozbotId)
+        if (!mozbot || (await isWriteMozbotForbidden(mozbot, user)))
           throw new TRPCError({
             code: 'NOT_FOUND',
-            message: 'Typebot not found',
+            message: 'Mozbot not found',
           })
       }
     }

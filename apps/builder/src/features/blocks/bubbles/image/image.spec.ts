@@ -1,10 +1,10 @@
 import test, { expect } from '@playwright/test'
-import { createTypebots } from '@typebot.io/playwright/databaseActions'
-import { parseDefaultGroupWithBlock } from '@typebot.io/playwright/databaseHelpers'
+import { createMozbots } from '@mozbot.io/playwright/databaseActions'
+import { parseDefaultGroupWithBlock } from '@mozbot.io/playwright/databaseHelpers'
 import { createId } from '@paralleldrive/cuid2'
 import { getTestAsset } from '@/test/utils/playwright'
-import { proWorkspaceId } from '@typebot.io/playwright/databaseSetup'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
+import { proWorkspaceId } from '@mozbot.io/playwright/databaseSetup'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
 
 const unsplashImageSrc =
   'https://images.unsplash.com/photo-1504297050568-910d24c426d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80'
@@ -12,17 +12,17 @@ const unsplashImageSrc =
 test.describe.parallel('Image bubble block', () => {
   test.describe('Content settings', () => {
     test('should upload image file correctly', async ({ page }) => {
-      const typebotId = createId()
-      await createTypebots([
+      const mozbotId = createId()
+      await createMozbots([
         {
-          id: typebotId,
+          id: mozbotId,
           ...parseDefaultGroupWithBlock({
             type: BubbleBlockType.IMAGE,
           }),
         },
       ])
 
-      await page.goto(`/typebots/${typebotId}/edit`)
+      await page.goto(`/mozbots/${mozbotId}/edit`)
 
       await page.click('text=Click to edit...')
       await page.getByRole('button', { name: 'Upload' }).click()
@@ -30,24 +30,24 @@ test.describe.parallel('Image bubble block', () => {
       await expect(page.locator('img')).toHaveAttribute(
         'src',
         new RegExp(
-          `/public/workspaces/${proWorkspaceId}/typebots/${typebotId}/blocks/block2`,
+          `/public/workspaces/${proWorkspaceId}/mozbots/${mozbotId}/blocks/block2`,
           'gm'
         )
       )
     })
 
     test('should import image link correctly', async ({ page }) => {
-      const typebotId = createId()
-      await createTypebots([
+      const mozbotId = createId()
+      await createMozbots([
         {
-          id: typebotId,
+          id: mozbotId,
           ...parseDefaultGroupWithBlock({
             type: BubbleBlockType.IMAGE,
           }),
         },
       ])
 
-      await page.goto(`/typebots/${typebotId}/edit`)
+      await page.goto(`/mozbots/${mozbotId}/edit`)
 
       await page.click('text=Click to edit...')
       await page.fill(
@@ -58,17 +58,17 @@ test.describe.parallel('Image bubble block', () => {
     })
 
     test('should import gifs correctly', async ({ page }) => {
-      const typebotId = createId()
-      await createTypebots([
+      const mozbotId = createId()
+      await createMozbots([
         {
-          id: typebotId,
+          id: mozbotId,
           ...parseDefaultGroupWithBlock({
             type: BubbleBlockType.IMAGE,
           }),
         },
       ])
 
-      await page.goto(`/typebots/${typebotId}/edit`)
+      await page.goto(`/mozbots/${mozbotId}/edit`)
 
       await page.click('text=Click to edit...')
       await page.click('text=Giphy')
@@ -102,10 +102,10 @@ test.describe.parallel('Image bubble block', () => {
 
   test.describe('Preview', () => {
     test('should display correctly', async ({ page }) => {
-      const typebotId = createId()
-      await createTypebots([
+      const mozbotId = createId()
+      await createMozbots([
         {
-          id: typebotId,
+          id: mozbotId,
           ...parseDefaultGroupWithBlock({
             type: BubbleBlockType.IMAGE,
             content: {
@@ -115,7 +115,7 @@ test.describe.parallel('Image bubble block', () => {
         },
       ])
 
-      await page.goto(`/typebots/${typebotId}/edit`)
+      await page.goto(`/mozbots/${mozbotId}/edit`)
       await page.click('text=Test')
       await expect(page.locator('img')).toHaveAttribute('src', unsplashImageSrc)
     })

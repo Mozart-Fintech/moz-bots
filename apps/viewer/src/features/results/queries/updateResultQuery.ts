@@ -1,12 +1,12 @@
-import { Result } from '@typebot.io/schemas'
-import { sendRequest } from '@typebot.io/lib'
+import { Result } from '@mozbot.io/schemas'
+import { sendRequest } from '@mozbot.io/lib'
 
 export const updateResultQuery = async (
   resultId: string,
   result: Partial<Result>
 ) =>
   sendRequest<Result>({
-    url: `/api/typebots/t/results/${resultId}`,
+    url: `/api/mozbots/t/results/${resultId}`,
     method: 'PATCH',
     body: result,
   })

@@ -1,6 +1,6 @@
 import { guessApiHost } from '@/utils/guessApiHost'
-import type { ChatLog } from '@typebot.io/schemas'
-import { isNotEmpty } from '@typebot.io/lib'
+import type { ChatLog } from '@mozbot.io/schemas'
+import { isNotEmpty } from '@mozbot.io/lib'
 import ky from 'ky'
 
 export const saveClientLogsQuery = async ({

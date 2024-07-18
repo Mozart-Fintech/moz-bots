@@ -2,22 +2,22 @@ import { getTestAsset } from '@/test/utils/playwright'
 import test, { expect } from '@playwright/test'
 import { createId } from '@paralleldrive/cuid2'
 import {
-  importTypebotInDatabase,
+  importMozbotInDatabase,
   injectFakeResults,
-} from '@typebot.io/playwright/databaseActions'
-import { starterWorkspaceId } from '@typebot.io/playwright/databaseSetup'
+} from '@mozbot.io/playwright/databaseActions'
+import { starterWorkspaceId } from '@mozbot.io/playwright/databaseSetup'
 
 test('analytics are not available for non-pro workspaces', async ({ page }) => {
-  const typebotId = createId()
-  await importTypebotInDatabase(
-    getTestAsset('typebots/results/submissionHeader.json'),
+  const mozbotId = createId()
+  await importMozbotInDatabase(
+    getTestAsset('mozbots/results/submissionHeader.json'),
     {
-      id: typebotId,
+      id: mozbotId,
       workspaceId: starterWorkspaceId,
     }
   )
-  await injectFakeResults({ typebotId, count: 10 })
-  await page.goto(`/typebots/${typebotId}/results/analytics`)
+  await injectFakeResults({ mozbotId, count: 10 })
+  await page.goto(`/mozbots/${mozbotId}/results/analytics`)
   const firstDropoffBox = page.locator('text="%" >> nth=0')
   await firstDropoffBox.hover()
   await expect(

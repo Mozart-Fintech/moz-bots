@@ -1,21 +1,21 @@
-import { TypebotViewerProps } from '@/components/TypebotViewer'
+import { MozbotViewerProps } from '@/components/MozbotViewer'
 import { executeCondition } from '@/features/blocks/logic/condition'
 import { executeRedirect } from '@/features/blocks/logic/redirect'
 import { executeSetVariable } from '@/features/blocks/logic/setVariable'
-import { executeTypebotLink } from '@/features/blocks/logic/typebotLink'
+import { executeMozbotLink } from '@/features/blocks/logic/mozbotLink'
 import { executeWait } from '@/features/blocks/logic/wait'
-import { LinkedTypebot } from '@/providers/TypebotProvider'
+import { LinkedMozbot } from '@/providers/MozbotProvider'
 import { EdgeId, LogicState } from '@/types'
-import { LogicBlock } from '@typebot.io/schemas'
+import { LogicBlock } from '@mozbot.io/schemas'
 import { executeScript } from '@/features/blocks/logic/script/executeScript'
-import { LogicBlockType } from '@typebot.io/schemas/features/blocks/logic/constants'
+import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
 
 export const executeLogic = async (
   block: LogicBlock,
   context: LogicState
 ): Promise<{
   nextEdgeId?: EdgeId
-  linkedTypebot?: TypebotViewerProps['typebot'] | LinkedTypebot
+  linkedMozbot?: MozbotViewerProps['mozbot'] | LinkedMozbot
   blockedPopupUrl?: string
 }> => {
   switch (block.type) {
@@ -27,8 +27,8 @@ export const executeLogic = async (
       return executeRedirect(block, context)
     case LogicBlockType.SCRIPT:
       return { nextEdgeId: await executeScript(block, context) }
-    case LogicBlockType.TYPEBOT_LINK:
-      return executeTypebotLink(block, context)
+    case LogicBlockType.MOZBOT_LINK:
+      return executeMozbotLink(block, context)
     case LogicBlockType.WAIT:
       return { nextEdgeId: await executeWait(block, context) }
     default:

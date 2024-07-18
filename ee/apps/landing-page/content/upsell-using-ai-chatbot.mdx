@@ -135,7 +135,7 @@ Do this for each product, and your AI will become a walking (well, chatting) pro
 
 <Callout status="info" title="Good to know">
   For a complete guide, you can check our guide on how to [train your chatbot on
-  your own data](https://typebot.io/blog/train-chatbot-on-your-own-data)
+  your own data](https://mozbot.io/blog/train-chatbot-on-your-own-data)
 </Callout>
 
 When uploading, keep these tips in mind:
@@ -144,15 +144,15 @@ When uploading, keep these tips in mind:
 2. Include common questions and their answers. This helps your AI handle customer queries like a pro.
 3. Update regularly. As your product line changes, make sure your AI stays in the loop.
 
-With your prompt crafted and product knowledge uploaded, your OpenAI assistant is ready to roll! It's like you've just hired the world's fastest-learning sales associate. Next up, we'll connect this brainiac to a user-friendly interface with Typebot. Get ready to see your upselling game reach new heights!
+With your prompt crafted and product knowledge uploaded, your OpenAI assistant is ready to roll! It's like you've just hired the world's fastest-learning sales associate. Next up, we'll connect this brainiac to a user-friendly interface with Mozbot. Get ready to see your upselling game reach new heights!
 
-## Building a Typebot Chatbot
+## Building a Mozbot Chatbot
 
-Alright, folks, we're about to enter the Typebot playground! This is where we'll give our AI assistant a snazzy interface that'll charm the socks off your customers. Let's dive in!
+Alright, folks, we're about to enter the Mozbot playground! This is where we'll give our AI assistant a snazzy interface that'll charm the socks off your customers. Let's dive in!
 
 ### Designing Your Chatbot Flow
 
-Typebot's drag-and-drop interface is like Lego for chatbots - fun, intuitive, and surprisingly powerful. Here's how to craft a flow that'll make your customers feel like they're chatting with a friendly, all-knowing shop assistant:
+Mozbot's drag-and-drop interface is like Lego for chatbots - fun, intuitive, and surprisingly powerful. Here's how to craft a flow that'll make your customers feel like they're chatting with a friendly, all-knowing shop assistant:
 
 1. Start with a warm welcome bubble. Something like "Hey there! 👋 Spotted anything you like?"
 2. Add a button group with options like "I have a question", "Looking for recommendations", and "Just browsing".
@@ -164,7 +164,7 @@ In our case we will keep the initial flow simple. The real magic happens when we
 
 - Keep it conversational: Use casual language and throw in an emoji or two. We're going for friendly, not formal!
 - Offer easy outs: Always give users a way to start over or end the conversation.
-- Use visuals: Typebot lets you add images. Use them to showcase products or add some personality to your bot.
+- Use visuals: Mozbot lets you add images. Use them to showcase products or add some personality to your bot.
 
 ### Setting the Current Product in a Variable
 
@@ -176,18 +176,18 @@ Now, here's where it gets really cool. We want our chatbot to know which product
   width={446}
   height={558}
 />
-In Typebot, create a new variable called "Current product". Select 'Custom' in Value,
+In Mozbot, create a new variable called "Current product". Select 'Custom' in Value,
 and activate 'Execute on client'. Put this code in the field:
 
 ```jsx
 document.querySelector('h1').innerText
 ```
 
-This little bit of code tells Typebot, "Hey, the customer is looking at this product right now!"
+This little bit of code tells Mozbot, "Hey, the customer is looking at this product right now!"
 
-### Connecting Typebot with the OpenAI Assistant
+### Connecting Mozbot with the OpenAI Assistant
 
-Alright, drumroll please... 🥁 It's time to bring our AI brainiac and our sleek Typebot interface together!
+Alright, drumroll please... 🥁 It's time to bring our AI brainiac and our sleek Mozbot interface together!
 
 <Image
   src="/images/blog/upsell-using-ai-chatbot/openai-loop.jpg"
@@ -195,7 +195,7 @@ Alright, drumroll please... 🥁 It's time to bring our AI brainiac and our slee
   width={1338}
   height={872}
 />
-1. In your Typebot flow, add an "OpenAI" block where you want the AI to chime in.
+1. In your Mozbot flow, add an "OpenAI" block where you want the AI to chime in.
 2. Select "Ask assistant" in the OpenAI block settings. 3. Paste in your OpenAI Assistant
 ID (you can find this in your OpenAI dashboard). 4. In the "User message" field,
 use something like this:
@@ -213,9 +213,9 @@ Alright, fashionistas of the digital world, it's time to give your AI chatbot a 
 
 ### Theming Options for a Cohesive Look
 
-Typebot isn't just smart; it's also quite the chameleon. You've got a whole wardrobe of styling options at your fingertips. Here's how to make your chatbot strut its stuff:
+Mozbot isn't just smart; it's also quite the chameleon. You've got a whole wardrobe of styling options at your fingertips. Here's how to make your chatbot strut its stuff:
 
-1. Head over to the "Theme" tab in your Typebot dashboard. This is your bot's personal styling studio.
+1. Head over to the "Theme" tab in your Mozbot dashboard. This is your bot's personal styling studio.
 2. Start with the basics: Choose your font. Sans-serif for that modern vibe, or serif if you're feeling a bit more traditional?
 3. Now, let's talk color. You've got options for:
    - Background color (the stage for your chatbot's performance)
@@ -232,29 +232,29 @@ Typebot isn't just smart; it's also quite the chameleon. You've got a whole ward
 
 - Use your brand's color palette. If your website is decked out in blues and whites, your chatbot should follow suit.
 - Match the font to your website's typography. Consistency is key!
-- Don't be afraid to use your logo. Typebot lets you add a custom avatar for your bot. Why not use your brand mascot or logo?
+- Don't be afraid to use your logo. Mozbot lets you add a custom avatar for your bot. Why not use your brand mascot or logo?
 
 Remember, your chatbot is an extension of your brand. It should feel like it belongs on your site, not like it's crashed the party.
 
-## Connecting Typebot to Shopify
+## Connecting Mozbot to Shopify
 
 Alright, e-commerce enthusiasts, we're in the home stretch! It's time to introduce your shiny new AI chatbot to its new home on your Shopify store. Let's get this digital salesperson on the job, shall we?
 
-### Step 1: Grab Your Typebot Code
+### Step 1: Grab Your Mozbot Code
 
-First things first, we need to get the code for your Typebot. It's like getting your bot's passport for its journey to Shopify-land.
+First things first, we need to get the code for your Mozbot. It's like getting your bot's passport for its journey to Shopify-land.
 
-1. In your Typebot dashboard, head to the "Share" tab.
+1. In your Mozbot dashboard, head to the "Share" tab.
 2. Click on "Shopify" (it's where the magic happens).
 3. Select the form you want the chatbot to be
 4. You'll see a code snippet that looks something like this:
 
 ```jsx
 <script type="module">
-  import Typebot from '<https://cdn.jsdelivr.net/npm/@typebot.io/js@0.3/dist/web.js>'
+  import Mozbot from '<https://cdn.jsdelivr.net/npm/@mozbot.io/js@0.3/dist/web.js>'
 
-  Typebot.initBubble({
-    typebot: "your-typebot-id",
+  Mozbot.initBubble({
+    mozbot: "your-mozbot-id",
     theme: {
       button: { backgroundColor: "#0042DA" },
     },
@@ -267,10 +267,10 @@ First things first, we need to get the code for your Typebot. It's like getting 
 
 ```jsx
 <script type="module">
-  import Typebot from '<https://cdn.jsdelivr.net/npm/@typebot.io/js@0.3/dist/web.js>'
+  import Mozbot from '<https://cdn.jsdelivr.net/npm/@mozbot.io/js@0.3/dist/web.js>'
 
-  Typebot.initBubble({
-    typebot: "your-typebot-id",
+  Mozbot.initBubble({
+    mozbot: "your-mozbot-id",
     theme: {
       button: { backgroundColor: "#0042DA" },
     },
@@ -366,8 +366,8 @@ Now that your AI assistant is on the job, let's talk strategy. Here are some tri
 To put these strategies into action:
 
 1. Update your OpenAI assistant's knowledge base with information about bundles, upgrades, and limited-time offers.
-2. Modify your Typebot flow to include decision points where the AI can introduce these upselling opportunities.
-3. Use Typebot's conditional logic to tailor the conversation based on the customer's responses and browsing history.
+2. Modify your Mozbot flow to include decision points where the AI can introduce these upselling opportunities.
+3. Use Mozbot's conditional logic to tailor the conversation based on the customer's responses and browsing history.
 
 ### Measuring Success and Iterating
 
@@ -377,7 +377,7 @@ Your AI upselling assistant is live, but your job isn't done yet. Keep a close e
 - Conversion rate: Are customers who chat with the bot more likely to make a purchase?
 - Average order value: Has it increased since implementing the chatbot?
 
-Use Typebot's analytics and Shopify's reporting tools to track these metrics. Don't be afraid to experiment! Try different upselling approaches, tweak your bot's personality, or adjust its appearance. The beauty of AI is that it gets smarter over time, so your upselling game will only get stronger.
+Use Mozbot's analytics and Shopify's reporting tools to track these metrics. Don't be afraid to experiment! Try different upselling approaches, tweak your bot's personality, or adjust its appearance. The beauty of AI is that it gets smarter over time, so your upselling game will only get stronger.
 
 Remember, the key to successful upselling is to provide value to your customers. Your AI assistant should feel like a helpful shopping companion, not a pushy salesperson. Keep refining your approach based on customer feedback and data, and you'll be amazed at how much your AI sidekick can boost your bottom line.
 
@@ -404,7 +404,7 @@ Numbers don't lie, folks. Let's get down to the nitty-gritty of performance anal
 1. **Engagement Rate**: What percentage of visitors are actually chatting with your bot? If it's low, you might need to make your chat bubble more enticing.
 2. **Conversation Length**: Are people sticking around to chat, or bouncing after one message? Longer conversations often lead to better upselling opportunities.
 3. **Upsell Success Rate**: The big one! How often do chatbot interactions lead to additional purchases?
-4. **Customer Satisfaction**: Use Typebot's built-in feedback options to gauge how helpful customers find the bot.
+4. **Customer Satisfaction**: Use Mozbot's built-in feedback options to gauge how helpful customers find the bot.
 
 Here's a quick snapshot of what your metrics dashboard might look like:
 
@@ -424,7 +424,7 @@ Now that we've got data, let's put it to work:
 
 1. **Refine your prompts**: If customers are dropping off quickly, your opening messages might need work. Try A/B testing different greetings.
 2. **Expand product knowledge**: Are there common questions your bot can't answer? Time to beef up its knowledge base!
-3. **Personalize more**: Use Typebot's variable system to remember customer preferences and tailor future interactions.
+3. **Personalize more**: Use Mozbot's variable system to remember customer preferences and tailor future interactions.
 4. **Timing is everything**: Analyze at what point in the conversation upsells are most successful. Maybe it's after answering a product question, or right before checkout.
 
 Remember, optimization is an ongoing process. Keep tweaking, testing, and improving!
@@ -434,7 +434,7 @@ Remember, optimization is an ongoing process. Keep tweaking, testing, and improv
 Let's get scientific about our upselling game:
 
 1. **Create two versions of your chatbot**: Version A could focus on bundle deals, while Version B emphasizes product upgrades.
-2. **Split your traffic**: Use Typebot's randomization feature to direct 50% of visitors to each version.
+2. **Split your traffic**: Use Mozbot's randomization feature to direct 50% of visitors to each version.
 3. **Run the test for a significant period**: Aim for at least a few hundred interactions to get meaningful data.
 4. **Analyze the results**: Which version led to more upsells? Higher customer satisfaction? Use these insights to inform your next iteration.
 

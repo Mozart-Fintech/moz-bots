@@ -2,22 +2,22 @@ import {
   ContinueChatResponse,
   SessionState,
   Settings,
-} from '@typebot.io/schemas'
+} from '@mozbot.io/schemas'
 import {
   WhatsAppCredentials,
   WhatsAppSendingMessage,
-} from '@typebot.io/schemas/features/whatsapp'
+} from '@mozbot.io/schemas/features/whatsapp'
 import { convertMessageToWhatsAppMessage } from './convertMessageToWhatsAppMessage'
 import { sendWhatsAppMessage } from './sendWhatsAppMessage'
 import * as Sentry from '@sentry/nextjs'
 import { HTTPError } from 'ky'
 import { convertInputToWhatsAppMessages } from './convertInputToWhatsAppMessage'
-import { isNotDefined } from '@typebot.io/lib/utils'
+import { isNotDefined } from '@mozbot.io/lib/utils'
 import { computeTypingDuration } from '../computeTypingDuration'
 import { continueBotFlow } from '../continueBotFlow'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
-import { BubbleBlockType } from '@typebot.io/schemas/features/blocks/bubbles/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
+import { BubbleBlockType } from '@mozbot.io/schemas/features/blocks/bubbles/constants'
 
 // Media can take some time to be delivered. This make sure we don't send a message before the media is delivered.
 const messageAfterMediaTimeout = 5000

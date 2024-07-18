@@ -1,5 +1,5 @@
-import { Variable, Cell } from '@typebot.io/schemas'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
+import { Variable, Cell } from '@mozbot.io/schemas'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
 
 export const parseNewCellValuesObject =
   (variables: Variable[]) =>

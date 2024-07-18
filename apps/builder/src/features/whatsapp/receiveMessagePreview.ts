@@ -1,10 +1,10 @@
 import { publicProcedure } from '@/helpers/server/trpc'
-import { whatsAppWebhookRequestBodySchema } from '@typebot.io/schemas/features/whatsapp'
+import { whatsAppWebhookRequestBodySchema } from '@mozbot.io/schemas/features/whatsapp'
 import { z } from 'zod'
-import { resumeWhatsAppFlow } from '@typebot.io/bot-engine/whatsapp/resumeWhatsAppFlow'
-import { isNotDefined } from '@typebot.io/lib'
+import { resumeWhatsAppFlow } from '@mozbot.io/bot-engine/whatsapp/resumeWhatsAppFlow'
+import { isNotDefined } from '@mozbot.io/lib'
 import { TRPCError } from '@trpc/server'
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 
 export const receiveMessagePreview = publicProcedure
   .meta({

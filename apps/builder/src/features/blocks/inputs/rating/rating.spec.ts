@@ -1,8 +1,8 @@
 import test, { expect } from '@playwright/test'
-import { createTypebots } from '@typebot.io/playwright/databaseActions'
-import { parseDefaultGroupWithBlock } from '@typebot.io/playwright/databaseHelpers'
+import { createMozbots } from '@mozbot.io/playwright/databaseActions'
+import { parseDefaultGroupWithBlock } from '@mozbot.io/playwright/databaseHelpers'
 import { createId } from '@paralleldrive/cuid2'
-import { InputBlockType } from '@typebot.io/schemas/features/blocks/inputs/constants'
+import { InputBlockType } from '@mozbot.io/schemas/features/blocks/inputs/constants'
 
 const boxSvg = `<svg
     xmlns="http://www.w3.org/2000/svg"
@@ -18,17 +18,17 @@ const boxSvg = `<svg
   </svg>`
 
 test('options should work', async ({ page }) => {
-  const typebotId = createId()
-  await createTypebots([
+  const mozbotId = createId()
+  await createMozbots([
     {
-      id: typebotId,
+      id: mozbotId,
       ...parseDefaultGroupWithBlock({
         type: InputBlockType.RATING,
       }),
     },
   ])
 
-  await page.goto(`/typebots/${typebotId}/edit`)
+  await page.goto(`/mozbots/${mozbotId}/edit`)
 
   await page.click('text=Test')
   await expect(page.locator(`text=Send`)).toBeHidden()
@@ -48,6 +48,6 @@ test('options should work', async ({ page }) => {
   await page.click('text="Restart"')
   await expect(page.locator(`text=Not likely at all`)).toBeVisible()
   await expect(page.locator(`text=Extremely likely`)).toBeVisible()
-  await page.locator('typebot-standard').locator(`svg >> nth=4`).click()
-  await expect(page.locator('typebot-standard').locator(`text=5`)).toBeVisible()
+  await page.locator('mozbot-standard').locator(`svg >> nth=4`).click()
+  await expect(page.locator('mozbot-standard').locator(`text=5`)).toBeVisible()
 })

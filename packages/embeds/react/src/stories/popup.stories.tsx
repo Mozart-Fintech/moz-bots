@@ -1,6 +1,6 @@
 import { Popup } from '../Popup'
-import { open, toggle } from '@typebot.io/js'
-import { leadGenerationTypebot } from './assets/leadGenerationTypebot'
+import { open, toggle } from '@mozbot.io/js'
+import { leadGenerationMozbot } from './assets/leadGenerationMozbot'
 
 export const Default = () => {
   return (
@@ -8,7 +8,7 @@ export const Default = () => {
       <button onClick={open}>Open modal</button>
       <button onClick={toggle}>Toggle modal</button>
       <Popup
-        typebot={leadGenerationTypebot}
+        mozbot={leadGenerationMozbot}
         apiHost="http://localhost:3001"
         autoShowDelay={3000}
         theme={{

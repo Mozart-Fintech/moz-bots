@@ -1,4 +1,4 @@
-import { PopupProps } from '@typebot.io/nextjs'
+import { PopupProps } from '@mozbot.io/nextjs'
 import parserBabel from 'prettier/parser-babel'
 import prettier from 'prettier/standalone'
 import {
@@ -32,15 +32,15 @@ const parsePopupProps = ({
 }
 
 export const parseInitPopupCode = ({
-  typebot,
+  mozbot,
   apiHost,
   theme,
   autoShowDelay,
 }: PopupProps) => {
-  const botProps = parseBotProps({ typebot, apiHost })
+  const botProps = parseBotProps({ mozbot, apiHost })
   const bubbleProps = parsePopupProps({ theme, autoShowDelay })
 
-  return prettier.format(`Typebot.initPopup({${botProps}${bubbleProps}});`, {
+  return prettier.format(`Mozbot.initPopup({${botProps}${bubbleProps}});`, {
     parser: 'babel',
     plugins: [parserBabel],
   })
@@ -55,12 +55,12 @@ const parseReactThemeProp = (theme: PopupProps['theme']): string => {
 }
 
 export const parseReactPopupProps = ({
-  typebot,
+  mozbot,
   apiHost,
   theme,
   autoShowDelay,
 }: PopupProps) => {
-  const botProps = parseReactBotProps({ typebot, apiHost })
+  const botProps = parseReactBotProps({ mozbot, apiHost })
   const autoShowDelayProp = parseReactNumberOrBoolParam(
     'autoShowDelay',
     autoShowDelay

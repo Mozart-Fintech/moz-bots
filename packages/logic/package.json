@@ -1,5 +1,5 @@
 {
-  "name": "@typebot.io/logic",
+  "name": "@mozbot.io/logic",
   "version": "1.0.0",
   "description": "",
   "scripts": {},
@@ -7,12 +7,12 @@
   "author": "Baptiste Arnaud",
   "license": "AGPL-3.0-or-later",
   "dependencies": {
-    "@typebot.io/schemas": "workspace:*",
-    "@typebot.io/lib": "workspace:*",
-    "@typebot.io/variables": "workspace:*"
+    "@mozbot.io/schemas": "workspace:*",
+    "@mozbot.io/lib": "workspace:*",
+    "@mozbot.io/variables": "workspace:*"
   },
   "devDependencies": {
-    "@typebot.io/tsconfig": "workspace:*",
+    "@mozbot.io/tsconfig": "workspace:*",
     "@udecode/plate-common": "30.4.5"
   }
 }

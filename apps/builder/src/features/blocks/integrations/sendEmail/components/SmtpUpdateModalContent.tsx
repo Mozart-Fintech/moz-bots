@@ -8,13 +8,13 @@ import {
 } from '@chakra-ui/react'
 import { useUser } from '@/features/account/hooks/useUser'
 import React, { useEffect, useState } from 'react'
-import { isNotDefined } from '@typebot.io/lib'
+import { isNotDefined } from '@mozbot.io/lib'
 import { SmtpConfigForm } from './SmtpConfigForm'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { useToast } from '@/hooks/useToast'
 import { testSmtpConfig } from '../queries/testSmtpConfigQuery'
 import { trpc } from '@/lib/trpc'
-import { SmtpCredentials } from '@typebot.io/schemas/features/blocks/integrations/sendEmail/schema'
+import { SmtpCredentials } from '@mozbot.io/schemas/features/blocks/integrations/sendEmail/schema'
 
 type Props = {
   credentialsId: string

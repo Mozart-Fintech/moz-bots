@@ -1,12 +1,12 @@
-import { PixelBlock, SessionState } from '@typebot.io/schemas'
+import { PixelBlock, SessionState } from '@mozbot.io/schemas'
 import { ExecuteIntegrationResponse } from '../../../types'
-import { deepParseVariables } from '@typebot.io/variables/deepParseVariables'
+import { deepParseVariables } from '@mozbot.io/variables/deepParseVariables'
 
 export const executePixelBlock = (
   state: SessionState,
   block: PixelBlock
 ): ExecuteIntegrationResponse => {
-  const { typebot, resultId } = state.typebotsQueue[0]
+  const { mozbot, resultId } = state.mozbotsQueue[0]
   if (
     !resultId ||
     !block.options?.pixelId ||
@@ -14,7 +14,7 @@ export const executePixelBlock = (
     state.whatsApp
   )
     return { outgoingEdgeId: block.outgoingEdgeId }
-  const pixel = deepParseVariables(typebot.variables, {
+  const pixel = deepParseVariables(mozbot.variables, {
     guessCorrectTypes: true,
     removeEmptyStrings: true,
   })(block.options)

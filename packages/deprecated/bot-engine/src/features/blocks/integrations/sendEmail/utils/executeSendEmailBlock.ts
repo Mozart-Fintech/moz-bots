@@ -1,8 +1,8 @@
 import { parseVariables } from '@/features/variables'
 import { IntegrationState } from '@/types'
 import { parseLog } from '@/utils/helpers'
-import { SendEmailBlock } from '@typebot.io/schemas'
-import { sendRequest, byId } from '@typebot.io/lib'
+import { SendEmailBlock } from '@mozbot.io/schemas'
+import { sendRequest, byId } from '@mozbot.io/lib'
 
 export const executeSendEmailBlock = (
   block: SendEmailBlock,
@@ -12,7 +12,7 @@ export const executeSendEmailBlock = (
     isPreview,
     onNewLog,
     resultId,
-    typebotId,
+    mozbotId,
     resultValues,
   }: IntegrationState
 ) => {
@@ -26,7 +26,7 @@ export const executeSendEmailBlock = (
   }
   const { options } = block
   sendRequest({
-    url: `${apiHost}/api/typebots/${typebotId}/integrations/email?resultId=${resultId}`,
+    url: `${apiHost}/api/mozbots/${mozbotId}/integrations/email?resultId=${resultId}`,
     method: 'POST',
     body: {
       credentialsId: options?.credentialsId,

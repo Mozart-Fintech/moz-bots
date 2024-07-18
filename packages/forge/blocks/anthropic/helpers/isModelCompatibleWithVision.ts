@@ -1,4 +1,4 @@
-import { wildcardMatch } from '@typebot.io/lib/wildcardMatch'
+import { wildcardMatch } from '@mozbot.io/lib/wildcardMatch'
 import { modelsWithImageUrlSupport } from '../constants'
 
 export const isModelCompatibleWithVision = (model: string | undefined) =>

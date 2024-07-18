@@ -6,11 +6,11 @@ import {
   DomainVerificationStatus,
   domainResponseSchema,
   domainVerificationStatusSchema,
-} from '@typebot.io/schemas/features/customDomains'
-import prisma from '@typebot.io/lib/prisma'
+} from '@mozbot.io/schemas/features/customDomains'
+import prisma from '@mozbot.io/lib/prisma'
 import { isWriteWorkspaceForbidden } from '@/features/workspace/helpers/isWriteWorkspaceForbidden'
 import { TRPCError } from '@trpc/server'
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 
 export const verifyCustomDomain = authenticatedProcedure
   .meta({

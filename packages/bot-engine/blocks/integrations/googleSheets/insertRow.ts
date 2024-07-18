@@ -2,7 +2,7 @@ import {
   SessionState,
   GoogleSheetsInsertRowOptions,
   ChatLog,
-} from '@typebot.io/schemas'
+} from '@mozbot.io/schemas'
 import { parseNewRowObject } from './helpers/parseNewRowObject'
 import { getAuthenticatedGoogleDoc } from './helpers/getAuthenticatedGoogleDoc'
 import { ExecuteIntegrationResponse } from '../../../types'
@@ -14,7 +14,7 @@ export const insertRow = async (
     options,
   }: { outgoingEdgeId?: string; options: GoogleSheetsInsertRowOptions }
 ): Promise<ExecuteIntegrationResponse> => {
-  const { variables } = state.typebotsQueue[0].typebot
+  const { variables } = state.mozbotsQueue[0].mozbot
   if (!options.cellsToInsert || !options.sheetId) return { outgoingEdgeId }
 
   const logs: ChatLog[] = []

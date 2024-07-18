@@ -1,5 +1,5 @@
-import { env } from '@typebot.io/env'
-import { MemberInWorkspace, User } from '@typebot.io/prisma'
+import { env } from '@mozbot.io/env'
+import { MemberInWorkspace, User } from '@mozbot.io/prisma'
 
 export const isReadWorkspaceFobidden = (
   workspace: {

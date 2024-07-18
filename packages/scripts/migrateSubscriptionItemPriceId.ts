@@ -1,4 +1,4 @@
-import { PrismaClient } from '@typebot.io/prisma'
+import { PrismaClient } from '@mozbot.io/prisma'
 import { promptAndSetEnvironment } from './utils'
 import { writeFileSync } from 'fs'
 import Stripe from 'stripe'

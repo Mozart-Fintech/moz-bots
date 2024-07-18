@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { MoreInfoTooltip } from '../MoreInfoTooltip'
-import { isDefined } from '@typebot.io/lib'
+import { isDefined } from '@mozbot.io/lib'
 
 export type SwitchWithLabelProps = {
   label: string

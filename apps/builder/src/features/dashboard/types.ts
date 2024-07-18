@@ -1,5 +1,5 @@
-import { Typebot } from '@typebot.io/schemas'
+import { Mozbot } from '@mozbot.io/schemas'
 
-export type TypebotInDashboard = Pick<Typebot, 'id' | 'name' | 'icon'> & {
-  publishedTypebotId?: string
+export type MozbotInDashboard = Pick<Mozbot, 'id' | 'name' | 'icon'> & {
+  publishedmozbotId?: string
 }

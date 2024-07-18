@@ -1,5 +1,5 @@
 import { IconProps, useColorMode } from '@chakra-ui/react'
-import { ForgedBlock } from '@typebot.io/forge-repository/types'
+import { ForgedBlock } from '@mozbot.io/forge-repository/types'
 import { useForgedBlock } from './hooks/useForgedBlock'
 
 export const ForgedBlockIcon = ({

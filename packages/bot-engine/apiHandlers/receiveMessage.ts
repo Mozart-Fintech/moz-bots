@@ -1,5 +1,5 @@
-import { WhatsAppWebhookRequestBody } from '@typebot.io/schemas/features/whatsapp'
-import { isNotDefined } from '@typebot.io/lib'
+import { WhatsAppWebhookRequestBody } from '@mozbot.io/schemas/features/whatsapp'
+import { isNotDefined } from '@mozbot.io/lib'
 import { resumeWhatsAppFlow } from '../whatsapp/resumeWhatsAppFlow'
 
 type Props = {

@@ -4,7 +4,7 @@ export const showPreviewMessage = (
   proactiveMessage?: ShowMessageCommandData['message']
 ) => {
   const message: CommandData = {
-    isFromTypebot: true,
+    isFromMozbot: true,
     command: 'showPreviewMessage',
     message: proactiveMessage,
   }

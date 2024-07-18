@@ -1,6 +1,6 @@
 import { CopyIcon, TrashIcon } from '@/components/icons'
 import { headerHeight } from '@/features/editor/constants'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 import {
   HStack,
@@ -13,14 +13,14 @@ import { useRef, useState } from 'react'
 import { useGroupsStore } from '../hooks/useGroupsStore'
 import { toast } from 'sonner'
 import { createId } from '@paralleldrive/cuid2'
-import { Edge, GroupV6, Variable } from '@typebot.io/schemas'
+import { Edge, GroupV6, Variable } from '@mozbot.io/schemas'
 import { Coordinates } from '../types'
 import { useShallow } from 'zustand/react/shallow'
 import { projectMouse } from '../helpers/projectMouse'
 import {
   extractVariableIdReferencesInObject,
   extractVariableIdsFromObject,
-} from '@typebot.io/variables/extractVariablesFromObject'
+} from '@mozbot.io/variables/extractVariablesFromObject'
 
 type Props = {
   graphPosition: Coordinates & { scale: number }
@@ -36,7 +36,7 @@ export const GroupSelectionMenu = ({
   blurGroups,
 }: Props) => {
   const [mousePosition, setMousePosition] = useState<Coordinates>()
-  const { typebot, deleteGroups, pasteGroups } = useTypebot()
+  const { mozbot, deleteGroups, pasteGroups } = useMozbot()
   const ref = useRef<HTMLDivElement>(null)
 
   const groupsInClipboard = useGroupsStore(
@@ -61,15 +61,12 @@ export const GroupSelectionMenu = ({
   })
 
   const handleCopy = () => {
-    if (!typebot) return
-    const groups = typebot.groups.filter((g) => focusedGroups.includes(g.id))
-    const edges = typebot.edges.filter((edge) =>
+    if (!mozbot) return
+    const groups = mozbot.groups.filter((g) => focusedGroups.includes(g.id))
+    const edges = mozbot.edges.filter((edge) =>
       groups.find((g) => g.id === edge.to.groupId)
     )
-    const variables = extractVariablesFromCopiedGroups(
-      groups,
-      typebot.variables
-    )
+    const variables = extractVariablesFromCopiedGroups(groups, mozbot.variables)
     copyGroups({
       groups,
       edges,

@@ -1,9 +1,9 @@
-import { Result } from '@typebot.io/schemas'
-import { sendRequest } from '@typebot.io/lib'
+import { Result } from '@mozbot.io/schemas'
+import { sendRequest } from '@mozbot.io/lib'
 
-export const createResultQuery = async (typebotId: string) => {
+export const createResultQuery = async (mozbotId: string) => {
   return sendRequest<{ result: Result; hasReachedLimit: boolean }>({
-    url: `/api/typebots/${typebotId}/results`,
+    url: `/api/mozbots/${mozbotId}/results`,
     method: 'POST',
   })
 }

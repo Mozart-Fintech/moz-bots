@@ -24,7 +24,7 @@
 .bubble1,
 .bubble2,
 .bubble3 {
-  background-color: var(--typebot-host-bubble-color);
+  background-color: var(--mozbot-host-bubble-color);
   opacity: 0.5;
 }
 
@@ -105,213 +105,213 @@ pre {
 }
 
 .text-input::-webkit-input-placeholder {
-  color: var(--typebot-input-placeholder-color) !important;
+  color: var(--mozbot-input-placeholder-color) !important;
   opacity: 1 !important;
 }
 .text-input::-moz-placeholder {
-  color: var(--typebot-input-placeholder-color) !important;
+  color: var(--mozbot-input-placeholder-color) !important;
   opacity: 1 !important;
 }
 .text-input::placeholder {
-  color: var(--typebot-input-placeholder-color) !important;
+  color: var(--mozbot-input-placeholder-color) !important;
   opacity: 1 !important;
 }
 
-.typebot-container {
-  background-image: var(--typebot-container-bg-image);
-  background-color: var(--typebot-container-bg-color);
+.mozbot-container {
+  background-image: var(--mozbot-container-bg-image);
+  background-color: var(--mozbot-container-bg-color);
   background-position: center;
   background-size: cover;
-  font-family: var(--typebot-container-font-family), -apple-system,
+  font-family: var(--mozbot-container-font-family), -apple-system,
     BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   container-type: inline-size;
 }
 
-.typebot-chat-view {
-  max-width: var(--typebot-chat-container-max-width);
+.mozbot-chat-view {
+  max-width: var(--mozbot-chat-container-max-width);
   background-color: rgba(
-    var(--typebot-chat-container-bg-rgb),
-    var(--typebot-chat-container-opacity)
+    var(--mozbot-chat-container-bg-rgb),
+    var(--mozbot-chat-container-opacity)
   );
-  color: rgb(var(--typebot-chat-container-color));
+  color: rgb(var(--mozbot-chat-container-color));
   min-height: 100%;
-  backdrop-filter: blur(var(--typebot-chat-container-blur));
-  border-width: var(--typebot-chat-container-border-width);
+  backdrop-filter: blur(var(--mozbot-chat-container-blur));
+  border-width: var(--mozbot-chat-container-border-width);
   border-color: rgba(
-    var(--typebot-chat-container-border-rgb),
-    var(--typebot-chat-container-border-opacity)
+    var(--mozbot-chat-container-border-rgb),
+    var(--mozbot-chat-container-border-opacity)
   );
   padding-left: 20px;
   padding-right: 20px;
-  box-shadow: var(--typebot-chat-container-box-shadow);
+  box-shadow: var(--mozbot-chat-container-box-shadow);
 }
 
 @container (min-width: 480px) {
-  .typebot-chat-view {
-    min-height: var(--typebot-chat-container-max-height);
-    max-height: var(--typebot-chat-container-max-height);
-    border-radius: var(--typebot-chat-container-border-radius);
+  .mozbot-chat-view {
+    min-height: var(--mozbot-chat-container-max-height);
+    max-height: var(--mozbot-chat-container-max-height);
+    border-radius: var(--mozbot-chat-container-border-radius);
   }
 }
 
-.typebot-button {
-  color: var(--typebot-button-color);
+.mozbot-button {
+  color: var(--mozbot-button-color);
   background-color: rgba(
-    var(--typebot-button-bg-rgb),
-    var(--typebot-button-opacity)
+    var(--mozbot-button-bg-rgb),
+    var(--mozbot-button-opacity)
   );
-  border-width: var(--typebot-button-border-width);
+  border-width: var(--mozbot-button-border-width);
   border-color: rgba(
-    var(--typebot-button-border-rgb),
-    var(--typebot-button-border-opacity)
+    var(--mozbot-button-border-rgb),
+    var(--mozbot-button-border-opacity)
   );
-  border-radius: var(--typebot-button-border-radius);
-  box-shadow: var(--typebot-button-box-shadow);
-  backdrop-filter: blur(var(--typebot-button-blur));
+  border-radius: var(--mozbot-button-border-radius);
+  box-shadow: var(--mozbot-button-box-shadow);
+  backdrop-filter: blur(var(--mozbot-button-blur));
   transition: all 0.3s ease;
 }
 
-.typebot-selectable {
-  border-width: var(--typebot-button-border-width);
+.mozbot-selectable {
+  border-width: var(--mozbot-button-border-width);
   border-color: rgba(
-    var(--typebot-button-border-rgb),
+    var(--mozbot-button-border-rgb),
     calc(var(--selectable-alpha-ratio) * 0.25)
   );
-  border-radius: var(--typebot-button-border-radius);
-  color: rgb(var(--typebot-chat-container-color));
+  border-radius: var(--mozbot-button-border-radius);
+  color: rgb(var(--mozbot-chat-container-color));
   background-color: rgba(
-    var(--typebot-button-bg-rgb),
+    var(--mozbot-button-bg-rgb),
     calc(var(--selectable-alpha-ratio) * 0.08)
   );
   transition: all 0.3s ease;
 }
 
-.typebot-selectable:hover {
+.mozbot-selectable:hover {
   background-color: rgba(
-    var(--typebot-button-bg-rgb),
+    var(--mozbot-button-bg-rgb),
     calc(var(--selectable-alpha-ratio) * 0.12)
   );
   border-color: rgba(
-    var(--typebot-button-border-rgb),
+    var(--mozbot-button-border-rgb),
     calc(var(--selectable-alpha-ratio) * 0.3)
   );
 }
 
-.typebot-selectable.selected {
+.mozbot-selectable.selected {
   background-color: rgba(
-    var(--typebot-button-bg-rgb),
+    var(--mozbot-button-bg-rgb),
     calc(var(--selectable-alpha-ratio) * 0.18)
   );
   border-color: rgba(
-    var(--typebot-button-border-rgb),
+    var(--mozbot-button-border-rgb),
     calc(var(--selectable-alpha-ratio) * 0.35)
   );
 }
 
-.typebot-checkbox {
+.mozbot-checkbox {
   border: 1px solid
-    rgba(var(--typebot-button-bg-rgb), var(--typebot-button-opacity));
-  border-radius: var(--typebot-button-border-radius);
-  background-color: rgba(var(--typebot-checkbox-bg-rgb));
-  color: var(--typebot-button-color);
+    rgba(var(--mozbot-button-bg-rgb), var(--mozbot-button-opacity));
+  border-radius: var(--mozbot-button-border-radius);
+  background-color: rgba(var(--mozbot-checkbox-bg-rgb));
+  color: var(--mozbot-button-color);
   padding: 1px;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
 
-.typebot-checkbox.checked {
-  background-color: rgb(var(--typebot-button-bg-rgb));
+.mozbot-checkbox.checked {
+  background-color: rgb(var(--mozbot-button-bg-rgb));
 }
 
-.typebot-host-bubble {
-  color: var(--typebot-host-bubble-color);
+.mozbot-host-bubble {
+  color: var(--mozbot-host-bubble-color);
 }
 
-.typebot-host-bubble > .bubble-typing {
+.mozbot-host-bubble > .bubble-typing {
   background-color: rgba(
-    var(--typebot-host-bubble-bg-rgb),
-    var(--typebot-host-bubble-opacity)
+    var(--mozbot-host-bubble-bg-rgb),
+    var(--mozbot-host-bubble-opacity)
   );
-  border-width: var(--typebot-host-bubble-border-width);
+  border-width: var(--mozbot-host-bubble-border-width);
   border-color: rgba(
-    var(--typebot-host-bubble-border-rgb),
-    var(--typebot-host-bubble-border-opacity)
+    var(--mozbot-host-bubble-border-rgb),
+    var(--mozbot-host-bubble-border-opacity)
   );
-  border-radius: var(--typebot-host-bubble-border-radius);
-  box-shadow: var(--typebot-host-bubble-box-shadow);
-  backdrop-filter: blur(var(--typebot-host-bubble-blur));
+  border-radius: var(--mozbot-host-bubble-border-radius);
+  box-shadow: var(--mozbot-host-bubble-box-shadow);
+  backdrop-filter: blur(var(--mozbot-host-bubble-blur));
 }
 
-.typebot-host-bubble img,
-.typebot-host-bubble video,
-.typebot-host-bubble iframe {
+.mozbot-host-bubble img,
+.mozbot-host-bubble video,
+.mozbot-host-bubble iframe {
   border-radius: 6px;
 }
 
-.typebot-guest-bubble {
-  color: var(--typebot-guest-bubble-color);
+.mozbot-guest-bubble {
+  color: var(--mozbot-guest-bubble-color);
   background-color: rgba(
-    var(--typebot-guest-bubble-bg-rgb),
-    var(--typebot-guest-bubble-opacity)
+    var(--mozbot-guest-bubble-bg-rgb),
+    var(--mozbot-guest-bubble-opacity)
   );
-  border-width: var(--typebot-guest-bubble-border-width);
+  border-width: var(--mozbot-guest-bubble-border-width);
   border-color: rgba(
-    var(--typebot-guest-bubble-border-rgb),
-    var(--typebot-guest-bubble-border-opacity)
+    var(--mozbot-guest-bubble-border-rgb),
+    var(--mozbot-guest-bubble-border-opacity)
   );
-  border-radius: var(--typebot-guest-bubble-border-radius);
-  box-shadow: var(--typebot-guest-bubble-box-shadow);
-  backdrop-filter: blur(var(--typebot-guest-bubble-blur));
+  border-radius: var(--mozbot-guest-bubble-border-radius);
+  box-shadow: var(--mozbot-guest-bubble-box-shadow);
+  backdrop-filter: blur(var(--mozbot-guest-bubble-blur));
 }
 
-.typebot-guest-bubble-image-attachment {
-  border-radius: var(--typebot-guest-bubble-border-radius);
+.mozbot-guest-bubble-image-attachment {
+  border-radius: var(--mozbot-guest-bubble-border-radius);
 }
 
-.typebot-input {
-  color: var(--typebot-input-color);
+.mozbot-input {
+  color: var(--mozbot-input-color);
   background-color: rgba(
-    var(--typebot-input-bg-rgb),
-    var(--typebot-input-opacity)
+    var(--mozbot-input-bg-rgb),
+    var(--mozbot-input-opacity)
   );
-  border-width: var(--typebot-input-border-width);
+  border-width: var(--mozbot-input-border-width);
   border-color: rgba(
-    var(--typebot-input-border-rgb),
-    var(--typebot-input-border-opacity)
+    var(--mozbot-input-border-rgb),
+    var(--mozbot-input-border-opacity)
   );
-  border-radius: var(--typebot-input-border-radius);
-  box-shadow: var(--typebot-input-box-shadow);
-  backdrop-filter: blur(var(--typebot-input-blur));
+  border-radius: var(--mozbot-input-border-radius);
+  box-shadow: var(--mozbot-input-box-shadow);
+  backdrop-filter: blur(var(--mozbot-input-blur));
   transition: filter 100ms ease;
 }
 
-.typebot-input-error-message {
-  color: var(--typebot-input-color);
+.mozbot-input-error-message {
+  color: var(--mozbot-input-color);
 }
 
-.typebot-input-form .typebot-button {
-  box-shadow: var(--typebot-input-box-shadow);
+.mozbot-input-form .mozbot-button {
+  box-shadow: var(--mozbot-input-box-shadow);
 }
 
-.typebot-button > .send-icon {
-  fill: var(--typebot-button-color);
+.mozbot-button > .send-icon {
+  fill: var(--mozbot-button-color);
 }
 
 .ping span {
-  background-color: rgb(var(--typebot-button-bg-rgb));
+  background-color: rgb(var(--mozbot-button-bg-rgb));
 }
 
 .rating-icon-container svg {
   width: 42px;
   height: 42px;
-  stroke: rgb(var(--typebot-button-bg-rgb));
-  fill: var(--typebot-host-bubble-bg-color);
+  stroke: rgb(var(--mozbot-button-bg-rgb));
+  fill: var(--mozbot-host-bubble-bg-color);
   transition: fill 100ms ease-out;
 }
 
 .rating-icon-container.selected svg {
-  fill: rgb(var(--typebot-button-bg-rgb));
+  fill: rgb(var(--mozbot-button-bg-rgb));
 }
 
 .rating-icon-container:hover svg {
@@ -323,60 +323,60 @@ pre {
 }
 
 .upload-progress-bar {
-  background-color: rgb(var(--typebot-button-bg-rgb));
-  border-radius: var(--typebot-input-border-radius);
+  background-color: rgb(var(--mozbot-button-bg-rgb));
+  border-radius: var(--mozbot-input-border-radius);
 }
 
 .total-files-indicator {
-  background-color: rgb(var(--typebot-button-bg-rgb));
-  color: var(--typebot-button-color);
+  background-color: rgb(var(--mozbot-button-bg-rgb));
+  color: var(--mozbot-button-color);
   font-size: 10px;
 }
 
-.typebot-upload-input {
+.mozbot-upload-input {
   transition: border-color 100ms ease-out;
-  border-radius: var(--typebot-input-border-radius);
+  border-radius: var(--mozbot-input-border-radius);
 }
 
-.typebot-upload-input.dragging-over {
-  border-color: rgb(var(--typebot-button-bg-rgb));
+.mozbot-upload-input.dragging-over {
+  border-color: rgb(var(--mozbot-button-bg-rgb));
 }
 
 .secondary-button {
-  background-color: var(--typebot-host-bubble-bg-color);
-  color: var(--typebot-host-bubble-color);
-  border-radius: var(--typebot-button-border-radius);
+  background-color: var(--mozbot-host-bubble-bg-color);
+  color: var(--mozbot-host-bubble-color);
+  border-radius: var(--mozbot-button-border-radius);
 }
 
-.typebot-country-select {
-  color: var(--typebot-input-color);
-  background-color: var(--typebot-input-bg-color);
-  border-radius: var(--typebot-button-border-radius);
+.mozbot-country-select {
+  color: var(--mozbot-input-color);
+  background-color: var(--mozbot-input-bg-color);
+  border-radius: var(--mozbot-button-border-radius);
 }
 
-.typebot-date-input {
+.mozbot-date-input {
   color-scheme: light;
-  color: var(--typebot-input-color);
-  background-color: var(--typebot-input-bg-color);
-  border-radius: var(--typebot-input-border-radius);
+  color: var(--mozbot-input-color);
+  background-color: var(--mozbot-input-bg-color);
+  border-radius: var(--mozbot-input-border-radius);
 }
 
-.typebot-popup-blocked-toast {
-  border-radius: var(--typebot-input-border-radius);
+.mozbot-popup-blocked-toast {
+  border-radius: var(--mozbot-input-border-radius);
 }
 
-.typebot-picture-button {
-  color: var(--typebot-button-color);
-  background-color: rgb(var(--typebot-button-bg-rgb));
-  border-radius: var(--typebot-button-border-radius);
+.mozbot-picture-button {
+  color: var(--mozbot-button-color);
+  background-color: rgb(var(--mozbot-button-bg-rgb));
+  border-radius: var(--mozbot-button-border-radius);
   transition: all 0.3s ease;
   width: 236px;
 }
 
-.typebot-picture-button > img,
-.typebot-selectable-picture > img {
-  border-radius: var(--typebot-button-border-radius)
-    var(--typebot-button-border-radius) 0 0;
+.mozbot-picture-button > img,
+.mozbot-selectable-picture > img {
+  border-radius: var(--mozbot-button-border-radius)
+    var(--mozbot-button-border-radius) 0 0;
   min-width: 200px;
   width: 100%;
   max-height: 200px;
@@ -384,73 +384,73 @@ pre {
   object-fit: cover;
 }
 
-.typebot-picture-button.has-svg > img,
-.typebot-selectable-picture.has-svg > img {
+.mozbot-picture-button.has-svg > img,
+.mozbot-selectable-picture.has-svg > img {
   max-height: 128px;
   object-fit: contain;
   padding: 1rem;
 }
 
-.typebot-selectable-picture {
+.mozbot-selectable-picture {
   border: 1px solid
     rgba(
-      var(--typebot-button-bg-rgb),
+      var(--mozbot-button-bg-rgb),
       calc(var(--selectable-alpha-ratio) * 0.25)
     );
-  border-radius: var(--typebot-button-border-radius);
-  color: rgb(var(--typebot-chat-container-color));
+  border-radius: var(--mozbot-button-border-radius);
+  color: rgb(var(--mozbot-chat-container-color));
   background-color: rgba(
-    var(--typebot-button-bg-rgb),
+    var(--mozbot-button-bg-rgb),
     calc(var(--selectable-alpha-ratio) * 0.08)
   );
   transition: all 0.3s ease;
   width: 236px;
 }
 
-.typebot-selectable-picture:hover {
+.mozbot-selectable-picture:hover {
   background-color: rgba(
-    var(--typebot-button-bg-rgb),
+    var(--mozbot-button-bg-rgb),
     calc(var(--selectable-alpha-ratio) * 0.12)
   );
   border-color: rgba(
-    var(--typebot-button-bg-rgb),
+    var(--mozbot-button-bg-rgb),
     calc(var(--selectable-alpha-ratio) * 0.3)
   );
 }
 
-.typebot-selectable-picture.selected {
+.mozbot-selectable-picture.selected {
   background-color: rgba(
-    var(--typebot-button-bg-rgb),
+    var(--mozbot-button-bg-rgb),
     calc(var(--selectable-alpha-ratio) * 0.18)
   );
   border-color: rgba(
-    var(--typebot-button-bg-rgb),
+    var(--mozbot-button-bg-rgb),
     calc(var(--selectable-alpha-ratio) * 0.35)
   );
 }
 
 select option {
-  color: var(--typebot-input-color);
-  background-color: var(--typebot-input-bg-color);
+  color: var(--mozbot-input-color);
+  background-color: var(--mozbot-input-bg-color);
 }
 
-.typebot-progress-bar-container {
+.mozbot-progress-bar-container {
   background-color: rgba(
-    var(--typebot-progress-bar-bg-rgb),
+    var(--mozbot-progress-bar-bg-rgb),
     calc(var(--selectable-alpha-ratio) * 0.12)
   );
 
-  height: var(--typebot-progress-bar-height);
-  position: var(--typebot-progress-bar-position);
-  top: var(--typebot-progress-bar-top);
-  bottom: var(--typebot-progress-bar-bottom);
+  height: var(--mozbot-progress-bar-height);
+  position: var(--mozbot-progress-bar-position);
+  top: var(--mozbot-progress-bar-top);
+  bottom: var(--mozbot-progress-bar-bottom);
   left: 0;
   width: 100%;
   z-index: 42424242;
 }
 
-.typebot-progress-bar-container > .typebot-progress-bar {
-  background-color: var(--typebot-progress-bar-color);
+.mozbot-progress-bar-container > .mozbot-progress-bar {
+  background-color: var(--mozbot-progress-bar-color);
   position: absolute;
   height: 100%;
   transition: width 0.25s ease;
@@ -503,28 +503,28 @@ select option {
 }
 
 [data-scope='menu'][data-part='content'] {
-  color: var(--typebot-input-color);
+  color: var(--mozbot-input-color);
   background-color: rgba(
-    var(--typebot-input-bg-rgb),
-    var(--typebot-input-opacity)
+    var(--mozbot-input-bg-rgb),
+    var(--mozbot-input-opacity)
   );
-  border-width: var(--typebot-input-border-width);
+  border-width: var(--mozbot-input-border-width);
   border-color: rgba(
-    var(--typebot-input-border-rgb),
-    var(--typebot-input-border-opacity)
+    var(--mozbot-input-border-rgb),
+    var(--mozbot-input-border-opacity)
   );
-  border-radius: var(--typebot-input-border-radius);
-  box-shadow: var(--typebot-input-box-shadow);
-  backdrop-filter: blur(var(--typebot-input-blur));
+  border-radius: var(--mozbot-input-border-radius);
+  box-shadow: var(--mozbot-input-box-shadow);
+  backdrop-filter: blur(var(--mozbot-input-blur));
 }
 
 [data-scope='menu'][data-part='item'] {
   cursor: pointer;
   background-color: rgba(
-    var(--typebot-input-bg-rgb),
-    var(--typebot-input-opacity)
+    var(--mozbot-input-bg-rgb),
+    var(--mozbot-input-opacity)
   );
-  border-radius: var(--typebot-input-border-radius);
+  border-radius: var(--mozbot-input-border-radius);
 }
 
 [data-scope='menu'][data-part='content'][data-state='open'] {
@@ -540,13 +540,13 @@ select option {
 }
 
 [data-scope='toast'][data-part='root'] {
-  border-radius: var(--typebot-chat-container-border-radius);
-  color: var(--typebot-input-color);
+  border-radius: var(--mozbot-chat-container-border-radius);
+  color: var(--mozbot-input-color);
   background-color: rgba(
-    var(--typebot-input-bg-rgb),
-    var(--typebot-input-opacity)
+    var(--mozbot-input-bg-rgb),
+    var(--mozbot-input-opacity)
   );
-  box-shadow: var(--typebot-input-box-shadow);
+  box-shadow: var(--mozbot-input-box-shadow);
   max-width: 60vw;
   @apply flex flex-col pl-4 py-4 pr-8 gap-1;
 }

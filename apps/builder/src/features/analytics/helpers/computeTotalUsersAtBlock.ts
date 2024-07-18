@@ -1,25 +1,25 @@
-import { isNotDefined } from '@typebot.io/lib'
-import { PublicTypebotV6 } from '@typebot.io/schemas'
-import { isInputBlock } from '@typebot.io/schemas/helpers'
+import { isNotDefined } from '@mozbot.io/lib'
+import { PublicMozbotV6 } from '@mozbot.io/schemas'
+import { isInputBlock } from '@mozbot.io/schemas/helpers'
 import {
   TotalAnswers,
   TotalVisitedEdges,
-} from '@typebot.io/schemas/features/analytics'
+} from '@mozbot.io/schemas/features/analytics'
 
 export const computeTotalUsersAtBlock = (
   currentBlockId: string,
   {
-    publishedTypebot,
+    publishedMozbot,
     totalVisitedEdges,
     totalAnswers,
   }: {
-    publishedTypebot: PublicTypebotV6
+    publishedMozbot: PublicMozbotV6
     totalVisitedEdges: TotalVisitedEdges[]
     totalAnswers: TotalAnswers[]
   }
 ): number => {
   let totalUsers = 0
-  const currentGroup = publishedTypebot.groups.find((group) =>
+  const currentGroup = publishedMozbot.groups.find((group) =>
     group.blocks.find((block) => block.id === currentBlockId)
   )
   if (!currentGroup) return 0
@@ -30,7 +30,7 @@ export const computeTotalUsersAtBlock = (
   for (const block of previousBlocks.reverse()) {
     if (currentBlockId !== block.id && isInputBlock(block))
       return totalAnswers.find((t) => t.blockId === block.id)?.total ?? 0
-    const incomingEdges = publishedTypebot.edges.filter(
+    const incomingEdges = publishedMozbot.edges.filter(
       (edge) => edge.to.blockId === block.id
     )
     if (!incomingEdges.length) continue
@@ -43,7 +43,7 @@ export const computeTotalUsersAtBlock = (
       0
     )
   }
-  const edgesConnectedToGroup = publishedTypebot.edges.filter(
+  const edgesConnectedToGroup = publishedMozbot.edges.filter(
     (edge) =>
       edge.to.groupId === currentGroup.id && isNotDefined(edge.to.blockId)
   )

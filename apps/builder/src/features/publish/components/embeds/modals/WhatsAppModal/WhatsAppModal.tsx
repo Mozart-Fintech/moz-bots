@@ -23,7 +23,7 @@ import {
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { CredentialsDropdown } from '@/features/credentials/components/CredentialsDropdown'
 import { ModalProps } from '../../EmbedButton'
-import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useMozbot } from '@/features/editor/providers/MozbotProvider'
 import { WhatsAppCredentialsModal } from './WhatsAppCredentialsModal'
 import { TextLink } from '@/components/TextLink'
 import { PublishButton } from '../../../PublishButton'
@@ -31,21 +31,21 @@ import { useParentModal } from '@/features/graph/providers/ParentModalProvider'
 import { trpc } from '@/lib/trpc'
 import { SwitchWithLabel } from '@/components/inputs/SwitchWithLabel'
 import { TableList } from '@/components/TableList'
-import { Comparison } from '@typebot.io/schemas'
+import { Comparison } from '@mozbot.io/schemas'
 import { DropdownList } from '@/components/DropdownList'
 import { WhatsAppComparisonItem } from './WhatsAppComparisonItem'
 import { AlertInfo } from '@/components/AlertInfo'
 import { NumberInput } from '@/components/inputs'
-import { defaultSessionExpiryTimeout } from '@typebot.io/schemas/features/whatsapp'
+import { defaultSessionExpiryTimeout } from '@mozbot.io/schemas/features/whatsapp'
 import { SwitchWithRelatedSettings } from '@/components/SwitchWithRelatedSettings'
-import { isDefined } from '@typebot.io/lib/utils'
+import { isDefined } from '@mozbot.io/lib/utils'
 import { hasProPerks } from '@/features/billing/helpers/hasProPerks'
 import { UnlockPlanAlertInfo } from '@/components/UnlockPlanAlertInfo'
 import { PlanTag } from '@/features/billing/components/PlanTag'
-import { LogicalOperator } from '@typebot.io/schemas/features/blocks/logic/condition/constants'
+import { LogicalOperator } from '@mozbot.io/schemas/features/blocks/logic/condition/constants'
 
 export const WhatsAppModal = ({ isOpen, onClose }: ModalProps): JSX.Element => {
-  const { typebot, updateTypebot, isPublished } = useTypebot()
+  const { mozbot, updateMozbot, isPublished } = useMozbot()
   const { ref } = useParentModal()
   const { workspace } = useWorkspace()
   const {
@@ -54,26 +54,26 @@ export const WhatsAppModal = ({ isOpen, onClose }: ModalProps): JSX.Element => {
     onClose: onCredentialsModalClose,
   } = useDisclosure()
 
-  const whatsAppSettings = typebot?.settings.whatsApp
+  const whatsAppSettings = mozbot?.settings.whatsApp
 
   const { data: phoneNumberData } =
     trpc.whatsAppInternal.getPhoneNumber.useQuery(
       {
-        credentialsId: typebot?.whatsAppCredentialsId as string,
+        credentialsId: mozbot?.whatsAppCredentialsId as string,
       },
       {
-        enabled: !!typebot?.whatsAppCredentialsId,
+        enabled: !!mozbot?.whatsAppCredentialsId,
       }
     )
 
   const toggleEnableWhatsApp = (isChecked: boolean) => {
-    if (!phoneNumberData?.id || !typebot) return
-    updateTypebot({
+    if (!phoneNumberData?.id || !mozbot) return
+    updateMozbot({
       updates: {
         settings: {
-          ...typebot.settings,
+          ...mozbot.settings,
           whatsApp: {
-            ...typebot.settings.whatsApp,
+            ...mozbot.settings.whatsApp,
             isEnabled: isChecked,
           },
         },
@@ -82,8 +82,8 @@ export const WhatsAppModal = ({ isOpen, onClose }: ModalProps): JSX.Element => {
   }
 
   const updateCredentialsId = (credentialsId: string | undefined) => {
-    if (!typebot) return
-    updateTypebot({
+    if (!mozbot) return
+    updateMozbot({
       updates: {
         whatsAppCredentialsId: credentialsId,
       },
@@ -91,16 +91,16 @@ export const WhatsAppModal = ({ isOpen, onClose }: ModalProps): JSX.Element => {
   }
 
   const updateStartConditionComparisons = (comparisons: Comparison[]) => {
-    if (!typebot) return
-    updateTypebot({
+    if (!mozbot) return
+    updateMozbot({
       updates: {
         settings: {
-          ...typebot.settings,
+          ...mozbot.settings,
           whatsApp: {
-            ...typebot.settings.whatsApp,
+            ...mozbot.settings.whatsApp,
             startCondition: {
               logicalOperator:
-                typebot.settings.whatsApp?.startCondition?.logicalOperator ??
+                mozbot.settings.whatsApp?.startCondition?.logicalOperator ??
                 LogicalOperator.AND,
               comparisons,
             },
@@ -113,16 +113,16 @@ export const WhatsAppModal = ({ isOpen, onClose }: ModalProps): JSX.Element => {
   const updateStartConditionLogicalOperator = (
     logicalOperator: LogicalOperator
   ) => {
-    if (!typebot) return
-    updateTypebot({
+    if (!mozbot) return
+    updateMozbot({
       updates: {
         settings: {
-          ...typebot.settings,
+          ...mozbot.settings,
           whatsApp: {
-            ...typebot.settings.whatsApp,
+            ...mozbot.settings.whatsApp,
             startCondition: {
               comparisons:
-                typebot.settings.whatsApp?.startCondition?.comparisons ?? [],
+                mozbot.settings.whatsApp?.startCondition?.comparisons ?? [],
               logicalOperator,
             },
           },
@@ -132,13 +132,13 @@ export const WhatsAppModal = ({ isOpen, onClose }: ModalProps): JSX.Element => {
   }
 
   const updateIsStartConditionEnabled = (isEnabled: boolean) => {
-    if (!typebot) return
-    updateTypebot({
+    if (!mozbot) return
+    updateMozbot({
       updates: {
         settings: {
-          ...typebot.settings,
+          ...mozbot.settings,
           whatsApp: {
-            ...typebot.settings.whatsApp,
+            ...mozbot.settings.whatsApp,
             startCondition: !isEnabled
               ? undefined
               : {
@@ -153,17 +153,17 @@ export const WhatsAppModal = ({ isOpen, onClose }: ModalProps): JSX.Element => {
 
   const updateSessionExpiryTimeout = (sessionExpiryTimeout?: number) => {
     if (
-      !typebot ||
+      !mozbot ||
       (sessionExpiryTimeout &&
         (sessionExpiryTimeout <= 0 || sessionExpiryTimeout > 48))
     )
       return
-    updateTypebot({
+    updateMozbot({
       updates: {
         settings: {
-          ...typebot.settings,
+          ...mozbot.settings,
           whatsApp: {
-            ...typebot.settings.whatsApp,
+            ...mozbot.settings.whatsApp,
             sessionExpiryTimeout,
           },
         },
@@ -204,7 +204,7 @@ export const WhatsAppModal = ({ isOpen, onClose }: ModalProps): JSX.Element => {
                       type="whatsApp"
                       workspaceId={workspace.id}
                       currentCredentialsId={
-                        typebot?.whatsAppCredentialsId ?? undefined
+                        mozbot?.whatsAppCredentialsId ?? undefined
                       }
                       onCredentialsSelect={updateCredentialsId}
                       onCreateNewClick={onOpen}
@@ -215,7 +215,7 @@ export const WhatsAppModal = ({ isOpen, onClose }: ModalProps): JSX.Element => {
                 )}
               </HStack>
             </ListItem>
-            {typebot?.whatsAppCredentialsId && (
+            {mozbot?.whatsAppCredentialsId && (
               <>
                 <ListItem>
                   <Accordion allowToggle>
@@ -283,9 +283,7 @@ export const WhatsAppModal = ({ isOpen, onClose }: ModalProps): JSX.Element => {
                   <SwitchWithLabel
                     isDisabled={!hasProPerks(workspace)}
                     label="Enable WhatsApp integration"
-                    initialValue={
-                      typebot?.settings.whatsApp?.isEnabled ?? false
-                    }
+                    initialValue={mozbot?.settings.whatsApp?.isEnabled ?? false}
                     onCheckChange={toggleEnableWhatsApp}
                     justifyContent="flex-start"
                   />

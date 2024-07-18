@@ -9,7 +9,7 @@ import es from '../i18n/es.json'
 import ro from '../i18n/ro.json'
 import it from '../i18n/it.json'
 import el from '../i18n/el.json'
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 
 export const tolgee = Tolgee()
   .use(DevTools())

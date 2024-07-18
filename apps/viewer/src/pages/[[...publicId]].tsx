@@ -2,16 +2,16 @@ import { IncomingMessage } from 'http'
 import { ErrorPage } from '@/components/ErrorPage'
 import { NotFoundPage } from '@/components/NotFoundPage'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { isNotDefined } from '@typebot.io/lib'
-import { TypebotPageProps, TypebotPageV2 } from '@/components/TypebotPageV2'
-import { TypebotPageV3, TypebotV3PageProps } from '@/components/TypebotPageV3'
-import { env } from '@typebot.io/env'
-import prisma from '@typebot.io/lib/prisma'
-import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
+import { isNotDefined } from '@mozbot.io/lib'
+import { MozbotPageProps, MozbotPageV2 } from '@/components/MozbotPageV2'
+import { MozbotPageV3, MozbotV3PageProps } from '@/components/MozbotPageV3'
+import { env } from '@mozbot.io/env'
+import prisma from '@mozbot.io/lib/prisma'
+import { defaultSettings } from '@mozbot.io/schemas/features/mozbot/settings/constants'
 import {
   defaultBackgroundColor,
   defaultBackgroundType,
-} from '@typebot.io/schemas/features/typebot/theme/constants'
+} from '@mozbot.io/schemas/features/mozbot/theme/constants'
 
 // Browsers that doesn't support ES modules and/or web components
 const incompatibleBrowsers = [
@@ -70,13 +70,13 @@ export const getServerSideProps: GetServerSideProps = async (
     const customDomain = `${forwardedHost ?? host}${
       pathname === '/' ? '' : pathname
     }`
-    const publishedTypebot = isMatchingViewerUrl
-      ? await getTypebotFromPublicId(context.query.publicId?.toString())
-      : await getTypebotFromCustomDomain(customDomain)
+    const publishedMozbot = isMatchingViewerUrl
+      ? await getMozbotFromPublicId(context.query.publicId?.toString())
+      : await getMozbotFromCustomDomain(customDomain)
 
     return {
       props: {
-        publishedTypebot,
+        publishedMozbot,
         incompatibleBrowser,
         url: `${protocol}://${forwardedHost ?? host}${pathname}`,
       },
@@ -92,9 +92,9 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 }
 
-const getTypebotFromPublicId = async (publicId?: string) => {
-  const publishedTypebot = (await prisma.publicTypebot.findFirst({
-    where: { typebot: { publicId: publicId ?? '' } },
+const getMozbotFromPublicId = async (publicId?: string) => {
+  const publishedMozbot = (await prisma.publicMozbot.findFirst({
+    where: { mozbot: { publicId: publicId ?? '' } },
     select: {
       variables: true,
       settings: true,
@@ -102,9 +102,9 @@ const getTypebotFromPublicId = async (publicId?: string) => {
       version: true,
       groups: true,
       edges: true,
-      typebotId: true,
+      mozbotId: true,
       id: true,
-      typebot: {
+      mozbot: {
         select: {
           name: true,
           isClosed: true,
@@ -113,23 +113,23 @@ const getTypebotFromPublicId = async (publicId?: string) => {
         },
       },
     },
-  })) as TypebotPageProps['publishedTypebot'] | null
-  if (isNotDefined(publishedTypebot)) return null
-  return publishedTypebot.version
+  })) as MozbotPageProps['publishedMozbot'] | null
+  if (isNotDefined(publishedMozbot)) return null
+  return publishedMozbot.version
     ? ({
-        name: publishedTypebot.typebot.name,
-        publicId: publishedTypebot.typebot.publicId ?? null,
-        background: publishedTypebot.theme.general?.background ?? {
+        name: publishedMozbot.mozbot.name,
+        publicId: publishedMozbot.mozbot.publicId ?? null,
+        background: publishedMozbot.theme.general?.background ?? {
           type: defaultBackgroundType,
           content: defaultBackgroundColor,
         },
         isHideQueryParamsEnabled:
-          publishedTypebot.settings.general?.isHideQueryParamsEnabled ??
+          publishedMozbot.settings.general?.isHideQueryParamsEnabled ??
           defaultSettings.general.isHideQueryParamsEnabled,
-        metadata: publishedTypebot.settings.metadata ?? {},
-        font: publishedTypebot.theme.general?.font ?? null,
+        metadata: publishedMozbot.settings.metadata ?? {},
+        font: publishedMozbot.theme.general?.font ?? null,
       } satisfies Pick<
-        TypebotV3PageProps,
+        MozbotV3PageProps,
         | 'name'
         | 'publicId'
         | 'background'
@@ -137,12 +137,12 @@ const getTypebotFromPublicId = async (publicId?: string) => {
         | 'metadata'
         | 'font'
       >)
-    : publishedTypebot
+    : publishedMozbot
 }
 
-const getTypebotFromCustomDomain = async (customDomain: string) => {
-  const publishedTypebot = (await prisma.publicTypebot.findFirst({
-    where: { typebot: { customDomain } },
+const getMozbotFromCustomDomain = async (customDomain: string) => {
+  const publishedMozbot = (await prisma.publicMozbot.findFirst({
+    where: { mozbot: { customDomain } },
     select: {
       variables: true,
       settings: true,
@@ -150,9 +150,9 @@ const getTypebotFromCustomDomain = async (customDomain: string) => {
       version: true,
       groups: true,
       edges: true,
-      typebotId: true,
+      mozbotId: true,
       id: true,
-      typebot: {
+      mozbot: {
         select: {
           name: true,
           isClosed: true,
@@ -161,23 +161,23 @@ const getTypebotFromCustomDomain = async (customDomain: string) => {
         },
       },
     },
-  })) as TypebotPageProps['publishedTypebot'] | null
-  if (isNotDefined(publishedTypebot)) return null
-  return publishedTypebot.version
+  })) as MozbotPageProps['publishedMozbot'] | null
+  if (isNotDefined(publishedMozbot)) return null
+  return publishedMozbot.version
     ? ({
-        name: publishedTypebot.typebot.name,
-        publicId: publishedTypebot.typebot.publicId ?? null,
-        background: publishedTypebot.theme.general?.background ?? {
+        name: publishedMozbot.mozbot.name,
+        publicId: publishedMozbot.mozbot.publicId ?? null,
+        background: publishedMozbot.theme.general?.background ?? {
           type: defaultBackgroundType,
           content: defaultBackgroundColor,
         },
         isHideQueryParamsEnabled:
-          publishedTypebot.settings.general?.isHideQueryParamsEnabled ??
+          publishedMozbot.settings.general?.isHideQueryParamsEnabled ??
           defaultSettings.general.isHideQueryParamsEnabled,
-        metadata: publishedTypebot.settings.metadata ?? {},
-        font: publishedTypebot.theme.general?.font ?? null,
+        metadata: publishedMozbot.settings.metadata ?? {},
+        font: publishedMozbot.theme.general?.font ?? null,
       } satisfies Pick<
-        TypebotV3PageProps,
+        MozbotV3PageProps,
         | 'name'
         | 'publicId'
         | 'background'
@@ -185,7 +185,7 @@ const getTypebotFromCustomDomain = async (customDomain: string) => {
         | 'metadata'
         | 'font'
       >)
-    : publishedTypebot
+    : publishedMozbot
 }
 
 const getHost = (
@@ -196,17 +196,17 @@ const getHost = (
 })
 
 const App = ({
-  publishedTypebot,
+  publishedMozbot,
   incompatibleBrowser,
   ...props
 }: {
   isIE: boolean
   customHeadCode: string | null
   url: string
-  publishedTypebot:
-    | TypebotPageProps['publishedTypebot']
+  publishedMozbot:
+    | MozbotPageProps['publishedMozbot']
     | Pick<
-        TypebotV3PageProps,
+        MozbotV3PageProps,
         | 'name'
         | 'publicId'
         | 'background'
@@ -227,31 +227,31 @@ const App = ({
       />
     )
   if (
-    !publishedTypebot ||
-    ('typebot' in publishedTypebot && publishedTypebot.typebot.isArchived)
+    !publishedMozbot ||
+    ('mozbot' in publishedMozbot && publishedMozbot.mozbot.isArchived)
   )
     return <NotFoundPage />
-  if ('typebot' in publishedTypebot && publishedTypebot.typebot.isClosed)
+  if ('mozbot' in publishedMozbot && publishedMozbot.mozbot.isClosed)
     return <ErrorPage error={new Error('This bot is now closed')} />
-  return 'typebot' in publishedTypebot ? (
-    <TypebotPageV2 publishedTypebot={publishedTypebot} {...props} />
+  return 'mozbot' in publishedMozbot ? (
+    <MozbotPageV2 publishedMozbot={publishedMozbot} {...props} />
   ) : (
-    <TypebotPageV3
+    <MozbotPageV3
       url={props.url}
-      name={publishedTypebot.name}
-      publicId={publishedTypebot.publicId}
+      name={publishedMozbot.name}
+      publicId={publishedMozbot.publicId}
       isHideQueryParamsEnabled={
-        publishedTypebot.isHideQueryParamsEnabled ??
+        publishedMozbot.isHideQueryParamsEnabled ??
         defaultSettings.general.isHideQueryParamsEnabled
       }
       background={
-        publishedTypebot.background ?? {
+        publishedMozbot.background ?? {
           type: defaultBackgroundType,
           content: defaultBackgroundColor,
         }
       }
-      metadata={publishedTypebot.metadata ?? {}}
-      font={publishedTypebot.font}
+      metadata={publishedMozbot.metadata ?? {}}
+      font={publishedMozbot.font}
     />
   )
 }

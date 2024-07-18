@@ -4,20 +4,20 @@ import {
   Prisma,
   User,
   WorkspaceRole,
-} from '@typebot.io/prisma'
-import prisma from '@typebot.io/lib/prisma'
+} from '@mozbot.io/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { NextApiResponse } from 'next'
-import { forbidden } from '@typebot.io/lib/api'
-import { env } from '@typebot.io/env'
+import { forbidden } from '@mozbot.io/lib/api'
+import { env } from '@mozbot.io/env'
 
-export const canWriteTypebots = (
-  typebotIds: string[] | string,
+export const canWriteMozbots = (
+  mozbotIds: string[] | string,
   user: Pick<User, 'email' | 'id'>
-): Prisma.TypebotWhereInput =>
+): Prisma.MozbotWhereInput =>
   env.NEXT_PUBLIC_E2E_TEST
-    ? { id: typeof typebotIds === 'string' ? typebotIds : { in: typebotIds } }
+    ? { id: typeof mozbotIds === 'string' ? mozbotIds : { in: mozbotIds } }
     : {
-        id: typeof typebotIds === 'string' ? typebotIds : { in: typebotIds },
+        id: typeof mozbotIds === 'string' ? mozbotIds : { in: mozbotIds },
         OR: [
           {
             workspace: {
@@ -34,11 +34,11 @@ export const canWriteTypebots = (
         ],
       }
 
-export const canReadTypebots = (
-  typebotIds: string | string[],
+export const canReadMozbots = (
+  mozbotIds: string | string[],
   user: Pick<User, 'email' | 'id'>
 ) => ({
-  id: typeof typebotIds === 'string' ? typebotIds : { in: typebotIds },
+  id: typeof mozbotIds === 'string' ? mozbotIds : { in: mozbotIds },
   workspace:
     env.ADMIN_EMAIL?.some((email) => email === user.email) ||
     env.NEXT_PUBLIC_E2E_TEST
@@ -50,8 +50,8 @@ export const canReadTypebots = (
         },
 })
 
-export const canEditGuests = (user: User, typebotId: string) => ({
-  id: typebotId,
+export const canEditGuests = (user: User, mozbotId: string) => ({
+  id: mozbotId,
   workspace: {
     members: {
       some: { userId: user.id, role: { not: WorkspaceRole.GUEST } },

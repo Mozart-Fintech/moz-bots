@@ -1,14 +1,14 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
-import { logSchema } from '@typebot.io/schemas'
+import { logSchema } from '@mozbot.io/schemas'
 import { z } from 'zod'
-import { isReadTypebotForbidden } from '@/features/typebot/helpers/isReadTypebotForbidden'
+import { isReadMozbotForbidden } from '@/features/mozbot/helpers/isReadMozbotForbidden'
 
 export const getResultLogs = authenticatedProcedure
   .meta({
     openapi: {
       method: 'GET',
-      path: '/v1/typebots/{typebotId}/results/{resultId}/logs',
+      path: '/v1/mozbots/{mozbotId}/results/{resultId}/logs',
       protect: true,
       summary: 'List result logs',
       tags: ['Results'],
@@ -16,19 +16,19 @@ export const getResultLogs = authenticatedProcedure
   })
   .input(
     z.object({
-      typebotId: z
+      mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-typebotid)"
+          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
         ),
       resultId: z.string(),
     })
   )
   .output(z.object({ logs: z.array(logSchema) }))
-  .query(async ({ input: { typebotId, resultId }, ctx: { user } }) => {
-    const typebot = await prisma.typebot.findUnique({
+  .query(async ({ input: { mozbotId, resultId }, ctx: { user } }) => {
+    const mozbot = await prisma.mozbot.findUnique({
       where: {
-        id: typebotId,
+        id: mozbotId,
       },
       select: {
         id: true,
@@ -52,8 +52,8 @@ export const getResultLogs = authenticatedProcedure
         },
       },
     })
-    if (!typebot || (await isReadTypebotForbidden(typebot, user)))
-      throw new Error('Typebot not found')
+    if (!mozbot || (await isReadMozbotForbidden(mozbot, user)))
+      throw new Error('Mozbot not found')
     const logs = await prisma.log.findMany({
       where: {
         resultId,

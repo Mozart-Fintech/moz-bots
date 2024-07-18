@@ -1,6 +1,6 @@
 import { publicProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
-import { env } from '@typebot.io/env'
+import { env } from '@mozbot.io/env'
 import { z } from 'zod'
 
 export const subscribePreviewWebhook = publicProcedure

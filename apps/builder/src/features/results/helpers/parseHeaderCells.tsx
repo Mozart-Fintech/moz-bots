@@ -1,5 +1,5 @@
 import { HStack, Text } from '@chakra-ui/react'
-import { ResultHeaderCell } from '@typebot.io/schemas'
+import { ResultHeaderCell } from '@mozbot.io/schemas'
 import { HeaderIcon } from '../components/HeaderIcon'
 import { HeaderCell } from '../types'
 

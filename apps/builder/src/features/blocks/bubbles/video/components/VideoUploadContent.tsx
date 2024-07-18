@@ -1,9 +1,9 @@
 import { Stack, Text } from '@chakra-ui/react'
-import { VideoBubbleBlock } from '@typebot.io/schemas'
+import { VideoBubbleBlock } from '@mozbot.io/schemas'
 import { TextInput } from '@/components/inputs'
 import { useTranslate } from '@tolgee/react'
-import { parseVideoUrl } from '@typebot.io/schemas/features/blocks/bubbles/video/helpers'
-import { defaultVideoBubbleContent } from '@typebot.io/schemas/features/blocks/bubbles/video/constants'
+import { parseVideoUrl } from '@mozbot.io/schemas/features/blocks/bubbles/video/helpers'
+import { defaultVideoBubbleContent } from '@mozbot.io/schemas/features/blocks/bubbles/video/constants'
 import { SwitchWithLabel } from '@/components/inputs/SwitchWithLabel'
 
 type Props = {

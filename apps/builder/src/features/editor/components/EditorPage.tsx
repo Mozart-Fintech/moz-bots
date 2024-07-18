@@ -5,23 +5,23 @@ import {
   useEditor,
   RightPanel as RightPanelEnum,
 } from '../providers/EditorProvider'
-import { useTypebot } from '../providers/TypebotProvider'
+import { useMozbot } from '../providers/MozbotProvider'
 import { BlocksSideBar } from './BlocksSideBar'
 import { BoardMenuButton } from './BoardMenuButton'
 import { PreviewDrawer } from '@/features/preview/components/PreviewDrawer'
-import { TypebotHeader } from './TypebotHeader'
+import { MozbotHeader } from './MozbotHeader'
 import { Graph } from '@/features/graph/components/Graph'
 import { GraphDndProvider } from '@/features/graph/providers/GraphDndProvider'
 import { GraphProvider } from '@/features/graph/providers/GraphProvider'
 import { EventsCoordinatesProvider } from '@/features/graph/providers/EventsCoordinateProvider'
-import { TypebotNotFoundPage } from './TypebotNotFoundPage'
-import { SuspectedTypebotBanner } from './SuspectedTypebotBanner'
+import { MozbotNotFoundPage } from './MozbotNotFoundPage'
+import { SuspectedMozbotBanner } from './SuspectedMozbotBanner'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { VariablesDrawer } from '@/features/preview/components/VariablesDrawer'
 import { VideoOnboardingFloatingWindow } from '@/features/onboarding/components/VideoOnboardingFloatingWindow'
 
 export const EditorPage = () => {
-  const { typebot, currentUserMode, is404 } = useTypebot()
+  const { mozbot, currentUserMode, is404 } = useMozbot()
   const { workspace } = useWorkspace()
   const backgroundImage = useColorModeValue(
     'radial-gradient(#c6d0e1 1px, transparent 0)',
@@ -29,17 +29,17 @@ export const EditorPage = () => {
   )
   const bgColor = useColorModeValue('#f4f5f8', 'gray.850')
 
-  const isSuspicious = typebot?.riskLevel === 100 && !workspace?.isVerified
+  const isSuspicious = mozbot?.riskLevel === 100 && !workspace?.isVerified
 
-  if (is404) return <TypebotNotFoundPage />
+  if (is404) return <MozbotNotFoundPage />
 
   return (
     <EditorProvider>
-      <Seo title={typebot?.name ? `${typebot.name} | Editor` : 'Editor'} />
+      <Seo title={mozbot?.name ? `${mozbot.name} | Editor` : 'Editor'} />
       <Flex overflow="clip" h="100vh" flexDir="column" id="editor-container">
         <VideoOnboardingFloatingWindow type="editor" />
-        {isSuspicious && <SuspectedTypebotBanner typebotId={typebot.id} />}
-        <TypebotHeader />
+        {isSuspicious && <SuspectedMozbotBanner mozbotId={mozbot.id} />}
+        <MozbotHeader />
         <Flex
           flex="1"
           pos="relative"
@@ -49,7 +49,7 @@ export const EditorPage = () => {
           backgroundSize="40px 40px"
           backgroundPosition="-19px -19px"
         >
-          {typebot ? (
+          {mozbot ? (
             <GraphDndProvider>
               {currentUserMode === 'write' && <BlocksSideBar />}
               <GraphProvider
@@ -57,8 +57,8 @@ export const EditorPage = () => {
                   currentUserMode === 'read' || currentUserMode === 'guest'
                 }
               >
-                <EventsCoordinatesProvider events={typebot.events}>
-                  <Graph flex="1" typebot={typebot} key={typebot.id} />
+                <EventsCoordinatesProvider events={mozbot.events}>
+                  <Graph flex="1" mozbot={mozbot} key={mozbot.id} />
                   <BoardMenuButton
                     pos="absolute"
                     right="40px"

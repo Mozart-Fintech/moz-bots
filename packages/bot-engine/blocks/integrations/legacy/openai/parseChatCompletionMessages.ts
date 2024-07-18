@@ -1,9 +1,9 @@
-import { byId, isNotEmpty } from '@typebot.io/lib'
-import { Variable, VariableWithValue } from '@typebot.io/schemas'
-import { ChatCompletionOpenAIOptions } from '@typebot.io/schemas/features/blocks/integrations/openai'
+import { byId, isNotEmpty } from '@mozbot.io/lib'
+import { Variable, VariableWithValue } from '@mozbot.io/schemas'
+import { ChatCompletionOpenAIOptions } from '@mozbot.io/schemas/features/blocks/integrations/openai'
 import type { OpenAI } from 'openai'
-import { parseVariables } from '@typebot.io/variables/parseVariables'
-import { transformVariablesToList } from '@typebot.io/variables/transformVariablesToList'
+import { parseVariables } from '@mozbot.io/variables/parseVariables'
+import { transformVariablesToList } from '@mozbot.io/variables/transformVariablesToList'
 
 export const parseChatCompletionMessages =
   (variables: Variable[]) =>

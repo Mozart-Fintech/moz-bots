@@ -17,7 +17,7 @@ import {
   MoreVerticalIcon,
   SettingsIcon,
 } from '@/components/icons'
-import { useTypebot } from '../providers/TypebotProvider'
+import { useMozbot } from '../providers/MozbotProvider'
 import React, { useState } from 'react'
 import { EditorSettingsModal } from './EditorSettingsModal'
 import { parseDefaultPublicId } from '@/features/publish/helpers/parseDefaultPublicId'
@@ -25,21 +25,21 @@ import { useTranslate } from '@tolgee/react'
 import { RightPanel, useEditor } from '../providers/EditorProvider'
 
 export const BoardMenuButton = (props: StackProps) => {
-  const { typebot, currentUserMode } = useTypebot()
+  const { mozbot, currentUserMode } = useMozbot()
   const [isDownloading, setIsDownloading] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { t } = useTranslate()
   const { setRightPanel } = useEditor()
 
   const downloadFlow = () => {
-    assert(typebot)
+    assert(mozbot)
     setIsDownloading(true)
     const data =
       'data:application/json;charset=utf-8,' +
-      encodeURIComponent(JSON.stringify(typebot))
-    const fileName = `typebot-export-${parseDefaultPublicId(
-      typebot.name,
-      typebot.id
+      encodeURIComponent(JSON.stringify(mozbot))
+    const fileName = `mozbot-export-${parseDefaultPublicId(
+      mozbot.name,
+      mozbot.id
     )}.json`
     const linkElement = document.createElement('a')
     linkElement.setAttribute('href', data)
@@ -49,7 +49,7 @@ export const BoardMenuButton = (props: StackProps) => {
   }
 
   const redirectToDocumentation = () =>
-    window.open('https://docs.typebot.io/editor/graph', '_blank')
+    window.open('https://docs.mozbot.io/editor/graph', '_blank')
 
   return (
     <HStack rounded="md" spacing="4" {...props}>

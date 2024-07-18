@@ -1,4 +1,4 @@
-import { createBlock } from '@typebot.io/forge'
+import { createBlock } from '@mozbot.io/forge'
 import { NocodbLogo } from './logo'
 import { auth } from './auth'
 import { searchRecords } from './actions/searchRecords'
@@ -8,7 +8,7 @@ import { updateExistingRecord } from './actions/updateExistingRecord'
 export const nocodbBlock = createBlock({
   id: 'nocodb',
   name: 'NocoDB',
-  docsUrl: 'https://docs.typebot.io/forge/blocks/nocodb',
+  docsUrl: 'https://docs.mozbot.io/forge/blocks/nocodb',
   tags: ['database'],
   LightLogo: NocodbLogo,
   auth,

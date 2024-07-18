@@ -4,7 +4,7 @@ export const setPrefilledVariables = (
   variables: Record<string, string | number | boolean>
 ) => {
   const message: CommandData = {
-    isFromTypebot: true,
+    isFromMozbot: true,
     command: 'setPrefilledVariables',
     variables,
   }

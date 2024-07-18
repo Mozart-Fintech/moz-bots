@@ -5,20 +5,17 @@ import {
   User,
   Workspace,
   WorkspaceRole,
-} from '@typebot.io/prisma'
-import { createId } from '@typebot.io/lib/createId'
-import { Typebot, TypebotV6, HttpRequest } from '@typebot.io/schemas'
+} from '@mozbot.io/prisma'
+import { createId } from '@mozbot.io/lib/createId'
+import { Mozbot, MozbotV6, HttpRequest } from '@mozbot.io/schemas'
 import { readFileSync } from 'fs'
 import { proWorkspaceId, userId } from './databaseSetup'
-import {
-  parseTestTypebot,
-  parseTypebotToPublicTypebot,
-} from './databaseHelpers'
+import { parseTestMozbot, parseMozbotToPublicMozbot } from './databaseHelpers'
 
 const prisma = new PrismaClient()
 
 type CreateFakeResultsProps = {
-  typebotId: string
+  mozbotId: string
   count: number
   customResultIdPrefix?: string
   isChronological?: boolean
@@ -27,7 +24,7 @@ type CreateFakeResultsProps = {
 export const injectFakeResults = async ({
   count,
   customResultIdPrefix,
-  typebotId,
+  mozbotId,
   isChronological,
 }: CreateFakeResultsProps) => {
   const resultIdPrefix = customResultIdPrefix ?? createId()
@@ -38,7 +35,7 @@ export const injectFakeResults = async ({
         const rand = Math.random()
         return {
           id: `${resultIdPrefix}-result${idx}`,
-          typebotId,
+          mozbotId,
           createdAt: isChronological
             ? new Date(
                 today.setTime(today.getTime() + 1000 * 60 * 60 * 24 * idx)
@@ -69,27 +66,27 @@ const createAnswers = ({
   })
 }
 
-export const importTypebotInDatabase = async (
+export const importMozbotInDatabase = async (
   path: string,
-  updates?: Partial<Typebot>
+  updates?: Partial<Mozbot>
 ) => {
-  const typebotFile = JSON.parse(readFileSync(path).toString())
-  const typebot = {
+  const mozbotFile = JSON.parse(readFileSync(path).toString())
+  const mozbot = {
     events: null,
-    ...typebotFile,
+    ...mozbotFile,
     workspaceId: proWorkspaceId,
     ...updates,
   }
-  await prisma.typebot.create({
-    data: parseCreateTypebot(typebot),
+  await prisma.mozbot.create({
+    data: parseCreateMozbot(mozbot),
   })
-  return prisma.publicTypebot.create({
+  return prisma.publicMozbot.create({
     data: {
-      ...parseTypebotToPublicTypebot(
+      ...parseMozbotToPublicMozbot(
         updates?.id ? `${updates?.id}-public` : 'publicBot',
-        typebot
+        mozbot
       ),
-      events: typebot.events === null ? Prisma.DbNull : typebot.events,
+      events: mozbot.events === null ? Prisma.DbNull : mozbot.events,
     },
   })
 }
@@ -100,9 +97,9 @@ export const deleteWorkspaces = async (workspaceIds: string[]) => {
   })
 }
 
-export const deleteTypebots = async (typebotIds: string[]) => {
-  await prisma.typebot.deleteMany({
-    where: { id: { in: typebotIds } },
+export const deleteMozbots = async (mozbotIds: string[]) => {
+  await prisma.mozbot.deleteMany({
+    where: { id: { in: mozbotIds } },
   })
 }
 
@@ -151,38 +148,38 @@ export const updateUser = (data: Partial<User>) =>
     },
   })
 
-export const createTypebots = async (partialTypebots: Partial<TypebotV6>[]) => {
-  const typebotsWithId = partialTypebots.map((typebot) => {
-    const typebotId = typebot.id ?? createId()
+export const createMozbots = async (partialMozbots: Partial<MozbotV6>[]) => {
+  const mozbotsWithId = partialMozbots.map((mozbot) => {
+    const mozbotId = mozbot.id ?? createId()
     return {
-      ...typebot,
-      id: typebotId,
-      publicId: typebot.publicId ?? typebotId + '-public',
+      ...mozbot,
+      id: mozbotId,
+      publicId: mozbot.publicId ?? mozbotId + '-public',
     }
   })
-  await prisma.typebot.createMany({
-    data: typebotsWithId.map(parseTestTypebot).map(parseCreateTypebot),
+  await prisma.mozbot.createMany({
+    data: mozbotsWithId.map(parseTestMozbot).map(parseCreateMozbot),
   })
-  return prisma.publicTypebot.createMany({
-    data: typebotsWithId.map((t) => ({
-      ...parseTypebotToPublicTypebot(t.publicId, parseTestTypebot(t)),
+  return prisma.publicMozbot.createMany({
+    data: mozbotsWithId.map((t) => ({
+      ...parseMozbotToPublicMozbot(t.publicId, parseTestMozbot(t)),
     })) as any,
   })
 }
 
-export const updateTypebot = async (
-  partialTypebot: Partial<Typebot> & { id: string }
+export const updateMozbot = async (
+  partialMozbot: Partial<Mozbot> & { id: string }
 ) => {
-  await prisma.typebot.updateMany({
-    where: { id: partialTypebot.id },
-    data: parseUpdateTypebot(partialTypebot),
+  await prisma.mozbot.updateMany({
+    where: { id: partialMozbot.id },
+    data: parseUpdateMozbot(partialMozbot),
   })
-  return prisma.publicTypebot.updateMany({
-    where: { typebotId: partialTypebot.id },
+  return prisma.publicMozbot.updateMany({
+    where: { mozbotId: partialMozbot.id },
     data: {
-      ...partialTypebot,
+      ...partialMozbot,
       events:
-        partialTypebot.events === null ? Prisma.DbNull : partialTypebot.events,
+        partialMozbot.events === null ? Prisma.DbNull : partialMozbot.events,
     },
   })
 }
@@ -197,20 +194,20 @@ export const updateWorkspace = async (
   })
 }
 
-export const parseCreateTypebot = (typebot: Typebot) => ({
-  ...typebot,
+export const parseCreateMozbot = (mozbot: Mozbot) => ({
+  ...mozbot,
   resultsTablePreferences:
-    typebot.resultsTablePreferences === null
+    mozbot.resultsTablePreferences === null
       ? Prisma.DbNull
-      : typebot.resultsTablePreferences,
-  events: typebot.events === null ? Prisma.DbNull : typebot.events,
+      : mozbot.resultsTablePreferences,
+  events: mozbot.events === null ? Prisma.DbNull : mozbot.events,
 })
 
-const parseUpdateTypebot = (typebot: Partial<Typebot>) => ({
-  ...typebot,
+const parseUpdateMozbot = (mozbot: Partial<Mozbot>) => ({
+  ...mozbot,
   resultsTablePreferences:
-    typebot.resultsTablePreferences === null
+    mozbot.resultsTablePreferences === null
       ? Prisma.DbNull
-      : typebot.resultsTablePreferences,
-  events: typebot.events === null ? Prisma.DbNull : typebot.events,
+      : mozbot.resultsTablePreferences,
+  events: mozbot.events === null ? Prisma.DbNull : mozbot.events,
 })

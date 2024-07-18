@@ -1,10 +1,10 @@
 import { TRPCError } from '@trpc/server'
-import { isReadWorkspaceFobidden } from '@typebot.io/db-rules/isReadWorkspaceFobidden'
-import { env } from '@typebot.io/env'
-import prisma from '@typebot.io/lib/prisma'
-import { User } from '@typebot.io/prisma'
+import { isReadWorkspaceFobidden } from '@mozbot.io/db-rules/isReadWorkspaceFobidden'
+import { env } from '@mozbot.io/env'
+import prisma from '@mozbot.io/lib/prisma'
+import { User } from '@mozbot.io/prisma'
 import Stripe from 'stripe'
-import { subscriptionSchema } from '@typebot.io/schemas/features/billing/subscription'
+import { subscriptionSchema } from '@mozbot.io/schemas/features/billing/subscription'
 
 type Props = {
   workspaceId: string

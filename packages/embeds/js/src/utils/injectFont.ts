@@ -1,9 +1,9 @@
-import { isNotEmpty } from '@typebot.io/lib'
-import { Font } from '@typebot.io/schemas'
-import { defaultFontFamily } from '@typebot.io/schemas/features/typebot/theme/constants'
+import { isNotEmpty } from '@mozbot.io/lib'
+import { Font } from '@mozbot.io/schemas'
+import { defaultFontFamily } from '@mozbot.io/schemas/features/mozbot/theme/constants'
 
 const googleFontCdnBaseUrl = 'https://fonts.bunny.net/css2'
-const elementId = 'typebot-font'
+const elementId = 'mozbot-font'
 
 export const injectFont = (font: Font) => {
   const existingFont = document.getElementById(elementId)

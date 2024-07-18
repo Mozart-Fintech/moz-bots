@@ -1,9 +1,9 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 import { authenticatedProcedure } from '@/helpers/server/trpc'
 import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
 import { isWriteWorkspaceForbidden } from '@/features/workspace/helpers/isWriteWorkspaceForbidden'
-import { decrypt } from '@typebot.io/lib/api/encryption/decrypt'
+import { decrypt } from '@mozbot.io/lib/api/encryption/decrypt'
 
 export const getCredentials = authenticatedProcedure
   .meta({

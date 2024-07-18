@@ -1,5 +1,5 @@
 import { Text } from '@chakra-ui/react'
-import { MakeComBlock } from '@typebot.io/schemas'
+import { MakeComBlock } from '@mozbot.io/schemas'
 
 type Props = {
   block: MakeComBlock

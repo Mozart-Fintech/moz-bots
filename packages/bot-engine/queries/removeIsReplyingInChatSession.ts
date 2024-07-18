@@ -1,4 +1,4 @@
-import prisma from '@typebot.io/lib/prisma'
+import prisma from '@mozbot.io/lib/prisma'
 
 export const removeIsReplyingInChatSession = async (id: string) =>
   prisma.chatSession.updateMany({
