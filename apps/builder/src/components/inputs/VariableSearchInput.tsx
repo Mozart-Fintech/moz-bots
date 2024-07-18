@@ -80,7 +80,10 @@ export const VariableSearchInput = ({
 
   useOutsideClick({
     ref: dropdownRef,
-    handler: onClose,
+    handler: () => {
+      onClose()
+      setInputValue(variables.find(byId(initialVariableId))?.name ?? '')
+    },
     isEnabled: isOpen,
   })
 
