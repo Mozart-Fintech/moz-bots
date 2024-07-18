@@ -6,6 +6,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import FacebookProvider from 'next-auth/providers/facebook'
 import AzureADProvider from 'next-auth/providers/azure-ad'
 import KeycloakProvider from 'next-auth/providers/keycloak'
+import Auth0Provider from 'next-auth/providers/auth0'
 import prisma from '@mozbot.io/lib/prisma'
 import { Provider } from 'next-auth/providers'
 import { NextApiRequest, NextApiResponse } from 'next'
@@ -136,6 +137,15 @@ if (
     })
   )
 }
+if (env.AUTH0_CLIENT_ID && env.AUTH0_CLIENT_SECRET && env.AUTH0_BASE_URL) {
+  providers.push(
+    Auth0Provider({
+      clientId: env.AUTH0_CLIENT_ID,
+      clientSecret: env.AUTH0_CLIENT_SECRET,
+      issuer: env.AUTH0_BASE_URL,
+    })
+  )
+}
 
 if (env.CUSTOM_OAUTH_WELL_KNOWN_URL) {
   providers.push({
@@ -213,7 +223,7 @@ export const getAuthOptions = ({
           return false
       }
       if (
-        env.DISABLE_SIGNUP &&
+        env.NEXT_PUBLIC_DISABLE_SIGNUP &&
         isNewUser &&
         user.email &&
         !env.ADMIN_EMAIL?.includes(user.email)

@@ -22,7 +22,7 @@ export function customAdapter(p: PrismaClient): Adapter {
         user.email
       )
       if (
-        env.DISABLE_SIGNUP &&
+        env.NEXT_PUBLIC_DISABLE_SIGNUP &&
         env.ADMIN_EMAIL?.every((email) => email !== user.email) &&
         invitations.length === 0 &&
         workspaceInvitations.length === 0

@@ -17,6 +17,7 @@ import { FacebookLogo } from '@/components/logos/FacebookLogo'
 import { GitlabLogo } from '@/components/logos/GitlabLogo'
 import { useTranslate } from '@tolgee/react'
 import { KeycloackLogo } from '@/components/logos/KeycloakLogo'
+import { Auth0Logo } from '@/components/logos/Auth0Logo'
 
 type Props = {
   providers:
@@ -54,6 +55,8 @@ export const SocialLoginButtons = ({ providers }: Props) => {
   const handleCustomOAuthClick = () => handleSignIn('custom-oauth')
 
   const handleKeyCloackClick = () => handleSignIn('keycloak')
+
+  const handleAuth0Click = () => handleSignIn('auth0')
 
   return (
     <Stack>
@@ -157,6 +160,20 @@ export const SocialLoginButtons = ({ providers }: Props) => {
           variant="outline"
         >
           {t('auth.socialLogin.keycloakButton.label')}
+        </Button>
+      )}
+      {providers?.auth0 && (
+        <Button
+          leftIcon={<Auth0Logo />}
+          onClick={handleAuth0Click}
+          data-testid="auth0"
+          isLoading={
+            ['loading', 'authenticated'].includes(status) ||
+            authLoading === 'auth0'
+          }
+          variant="outline"
+        >
+          {t('auth.socialLogin.auth0Button.label')}
         </Button>
       )}
     </Stack>

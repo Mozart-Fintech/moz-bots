@@ -62,6 +62,7 @@
   "auth.socialLogin.gitlabButton.label": "Continue with {gitlabProviderName}",
   "auth.socialLogin.googleButton.label": "Continue with Google",
   "auth.socialLogin.keycloakButton.label": "Continue with Keycloack",
+  "auth.socialLogin.auth0Button.label": "Continue with Auth0",
   "back": "Back",
   "billing.billingPortalButton.label": "Billing portal",
   "billing.contribution.link": "Learn more.",

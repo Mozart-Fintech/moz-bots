@@ -68,7 +68,6 @@ const baseEnv = {
       guessNextAuthUrlForVercelPreview,
       z.string().url()
     ),
-    DISABLE_SIGNUP: boolean.optional().default('false'),
     ADMIN_EMAIL: z
       .string()
       .min(1)
@@ -116,6 +115,7 @@ const baseEnv = {
     NEXT_PUBLIC_ONBOARDING_MOZBOT_ID: z.string().min(1).optional(),
     NEXT_PUBLIC_BOT_FILE_UPLOAD_MAX_SIZE: z.coerce.number().optional(),
     NEXT_PUBLIC_CHAT_API_URL: z.string().url().optional(),
+    NEXT_PUBLIC_DISABLE_SIGNUP: boolean.optional().default('false'),
     // To remove to deploy chat API for all mozbots
     NEXT_PUBLIC_USE_EXPERIMENTAL_CHAT_API_ON: z
       .string()
@@ -140,6 +140,9 @@ const baseEnv = {
       'NEXT_PUBLIC_BOT_FILE_UPLOAD_MAX_SIZE'
     ),
     NEXT_PUBLIC_CHAT_API_URL: getRuntimeVariable('NEXT_PUBLIC_CHAT_API_URL'),
+    NEXT_PUBLIC_DISABLE_SIGNUP: getRuntimeVariable(
+      'NEXT_PUBLIC_DISABLE_SIGNUP'
+    ),
     NEXT_PUBLIC_USE_EXPERIMENTAL_CHAT_API_ON: getRuntimeVariable(
       'NEXT_PUBLIC_USE_EXPERIMENTAL_CHAT_API_ON'
     ),
@@ -412,6 +415,14 @@ const keycloakEnv = {
   },
 }
 
+const auth0Env = {
+  server: {
+    AUTH0_CLIENT_ID: z.string().min(1).optional(),
+    AUTH0_CLIENT_SECRET: z.string().min(1).optional(),
+    AUTH0_BASE_URL: z.string().url().optional(),
+  },
+}
+
 export const env = createEnv({
   server: {
     ...baseEnv.server,
@@ -431,6 +442,7 @@ export const env = createEnv({
     ...sentryEnv.server,
     ...telemetryEnv.server,
     ...keycloakEnv.server,
+    ...auth0Env.server,
   },
   client: {
     ...baseEnv.client,

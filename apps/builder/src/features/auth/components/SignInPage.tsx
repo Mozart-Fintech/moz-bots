@@ -13,6 +13,7 @@ type Props = {
 export const SignInPage = ({ type }: Props) => {
   const { t } = useTranslate()
   const { query } = useRouter()
+  const disabled = process.env.NEXT_PUBLIC_DISABLE_SIGNUP || false
 
   return (
     <VStack spacing={4} h="100vh" justifyContent="center">
@@ -24,21 +25,23 @@ export const SignInPage = ({ type }: Props) => {
         }
       />
       <Heading
-        onClick={() => {
-          throw new Error('Sentry is working')
-        }}
+      /* onClick={() => {
+        throw new Error('Sentry is working')
+      }} */
       >
         {type === 'signin'
           ? t('auth.signin.heading')
           : t('auth.register.heading')}
       </Heading>
       {type === 'signin' ? (
-        <Text>
-          {t('auth.signin.noAccountLabel.preLink')}{' '}
-          <TextLink href="/register">
-            {t('auth.signin.noAccountLabel.link')}
-          </TextLink>
-        </Text>
+        disabled ? null : (
+          <Text>
+            {t('auth.signin.noAccountLabel.preLink')}{' '}
+            <TextLink href="/register">
+              {t('auth.signin.noAccountLabel.link')}
+            </TextLink>
+          </Text>
+        )
       ) : (
         <Text>
           {t('auth.register.alreadyHaveAccountLabel.preLink')}{' '}

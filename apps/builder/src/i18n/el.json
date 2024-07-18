@@ -62,6 +62,7 @@
   "auth.socialLogin.gitlabButton.label": "Συνεχίστε με {gitlabProviderName}",
   "auth.socialLogin.googleButton.label": "Συνεχίστε με Google",
   "auth.socialLogin.keycloakButton.label": "Συνέχεια με το Keycloak",
+  "auth.socialLogin.auth0Button.label": "Συνέχεια με το Auth0",
   "back": "Πίσω",
   "billing.billingPortalButton.label": "Πύλη χρέωσης",
   "billing.contribution.link": "Μάθετε περισσότερα.",
