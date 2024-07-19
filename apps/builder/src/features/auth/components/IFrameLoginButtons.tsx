@@ -1,42 +1,70 @@
-import { Stack, Spinner } from '@chakra-ui/react'
-import { LiteralUnion, signIn, useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
-import { stringify } from 'qs'
+import { Stack, Button } from '@chakra-ui/react'
+import { ClientSafeProvider, LiteralUnion, useSession } from 'next-auth/react'
+import React, { useEffect } from 'react'
 import { BuiltInProviderType } from 'next-auth/providers'
-import { omit } from '@mozbot.io/lib'
+import { useTranslate } from '@tolgee/react'
+import router from 'next/router'
+import { MozartLogo } from '@/components/logos/MozartLogo'
 
-export const IFrameLoginButtons = () => {
-  const { query } = useRouter()
+type Props = {
+  providers:
+    | Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider>
+    | undefined
+}
+
+export const IFrameLoginButtons = ({ providers }: Props) => {
+  const { t } = useTranslate()
   const { status } = useSession()
-  const [authLoading, setAuthLoading] =
-    useState<LiteralUnion<BuiltInProviderType, string>>()
 
-  const handleSignIn = async () => {
-    const provider = 'auth0'
-    setAuthLoading(provider)
-    await signIn(provider, {
-      callbackUrl:
-        query.callbackUrl?.toString() ??
-        `/mozbots?${stringify(omit(query, 'error', 'callbackUrl'))}`,
-    })
-    setTimeout(() => setAuthLoading(undefined), 3000)
+  const popupCenter = (url: string, title: string) => {
+    const dualScreenLeft = window.screenLeft ?? window.screenX
+    const dualScreenTop = window.screenTop ?? window.screenY
+
+    const width =
+      window.innerWidth ?? document.documentElement.clientWidth ?? screen.width
+
+    const height =
+      window.innerHeight ??
+      document.documentElement.clientHeight ??
+      screen.height
+
+    const systemZoom = width / window.screen.availWidth
+
+    const left = (width - 500) / 2 / systemZoom + dualScreenLeft
+    const top = (height - 550) / 2 / systemZoom + dualScreenTop
+
+    const newWindow = window.open(
+      url,
+      title,
+      `width=${500 / systemZoom},height=${
+        550 / systemZoom
+      },top=${top},left=${left}`
+    )
+
+    newWindow?.focus()
   }
 
-  const handleAuth0Click = () => handleSignIn()
+  const handleAuth0Click = () => popupCenter('/iframe-login', 'Login')
 
   useEffect(() => {
-    if (
-      ['loading', 'authenticated'].includes(status) ||
-      authLoading === 'auth0'
-    )
-      handleAuth0Click()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authLoading, status])
+    if (status === 'authenticated') {
+      router.push('/mozbots')
+    }
+  })
 
   return (
     <Stack>
-      <Spinner />
+      {providers?.auth0 && (
+        <Button
+          leftIcon={<MozartLogo />}
+          onClick={handleAuth0Click}
+          data-testid="auth0"
+          isLoading={['loading', 'authenticated'].includes(status)}
+          variant="outline"
+        >
+          {t('auth.socialLogin.mozartButton.label')}
+        </Button>
+      )}
     </Stack>
   )
 }

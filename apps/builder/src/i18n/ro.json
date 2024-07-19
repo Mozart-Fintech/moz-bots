@@ -62,6 +62,7 @@
   "auth.socialLogin.googleButton.label": "Continuați cu Google",
   "auth.socialLogin.keycloakButton.label": "Continuă cu Keycloak",
   "auth.socialLogin.auth0Button.label": "Continuă cu Auth0",
+  "auth.socialLogin.mozartButton.label": "Continuă cu Mozart",
   "back": "Înapoi",
   "billing.billingPortalButton.label": "Portalul de facturare",
   "billing.contribution.link": "Află mai multe.",

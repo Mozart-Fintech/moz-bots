@@ -63,6 +63,7 @@
   "auth.socialLogin.googleButton.label": "Continue with Google",
   "auth.socialLogin.keycloakButton.label": "Continue with Keycloack",
   "auth.socialLogin.auth0Button.label": "Continue with Auth0",
+  "auth.socialLogin.mozartButton.label": "Continue with Mozart",
   "back": "Back",
   "billing.billingPortalButton.label": "Billing portal",
   "billing.contribution.link": "Learn more.",

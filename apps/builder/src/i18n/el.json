@@ -63,6 +63,7 @@
   "auth.socialLogin.googleButton.label": "Συνεχίστε με Google",
   "auth.socialLogin.keycloakButton.label": "Συνέχεια με το Keycloak",
   "auth.socialLogin.auth0Button.label": "Συνέχεια με το Auth0",
+  "auth.socialLogin.mozartButton.label": "Συνέχεια με το Mozart",
   "back": "Πίσω",
   "billing.billingPortalButton.label": "Πύλη χρέωσης",
   "billing.contribution.link": "Μάθετε περισσότερα.",

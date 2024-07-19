@@ -67,9 +67,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (!router.isReady) return
     if (status === 'loading') return
-    const isSignInPath = ['/signin', '/register', '/iframe'].includes(
-      router.pathname
-    )
+    const isSignInPath = [
+      '/signin',
+      '/register',
+      '/iframe',
+      '/iframe-login',
+    ].includes(router.pathname)
     const isPathPublicFriendly = /\/mozbots\/.+\/(edit|theme|settings)/.test(
       router.pathname
     )

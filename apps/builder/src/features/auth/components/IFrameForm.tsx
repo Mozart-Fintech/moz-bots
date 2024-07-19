@@ -83,7 +83,7 @@ export const IFrameForm = () => {
     <Stack spacing="4" w="330px">
       {!isMagicLinkSent && (
         <>
-          <IFrameLoginButtons />
+          <IFrameLoginButtons providers={providers} />
         </>
       )}
       {router.query.error && (
