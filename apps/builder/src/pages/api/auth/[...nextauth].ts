@@ -137,6 +137,7 @@ if (
     })
   )
 }
+
 if (env.AUTH0_CLIENT_ID && env.AUTH0_CLIENT_SECRET && env.AUTH0_BASE_URL) {
   providers.push(
     Auth0Provider({
