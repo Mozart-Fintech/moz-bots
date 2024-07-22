@@ -14,14 +14,11 @@ import { openAIBlock } from '@mozbot.io/openai-block'
 import { openAICredentialsSchema } from '@mozbot.io/openai-block/schemas'
 import { togetherAiBlock } from '@mozbot.io/together-ai-block'
 import { togetherAiCredentialsSchema } from '@mozbot.io/together-ai-block/schemas'
-import { zemanticAiBlock } from '@mozbot.io/zemantic-ai-block'
-import { zemanticAiCredentialsSchema } from '@mozbot.io/zemantic-ai-block/schemas'
 import { nocodbBlock } from '@mozbot.io/nocodb-block'
 import { nocodbCredentialsSchema } from '@mozbot.io/nocodb-block/schemas'
 
 export const forgedCredentialsSchemas = {
   [openAIBlock.id]: openAICredentialsSchema,
-  [zemanticAiBlock.id]: zemanticAiCredentialsSchema,
   [chatNodeBlock.id]: chatNodeCredentialsSchema,
   [difyAiBlock.id]: difyAiCredentialsSchema,
   [mistralBlock.id]: mistralCredentialsSchema,

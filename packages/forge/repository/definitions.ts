@@ -8,13 +8,11 @@ import { mistralBlock } from '@mozbot.io/mistral-block'
 import { qrCodeBlock } from '@mozbot.io/qrcode-block'
 import { chatNodeBlock } from '@mozbot.io/chat-node-block'
 import { calComBlock } from '@mozbot.io/cal-com-block'
-import { zemanticAiBlock } from '@mozbot.io/zemantic-ai-block'
 import { openAIBlock } from '@mozbot.io/openai-block'
 import { nocodbBlock } from '@mozbot.io/nocodb-block'
 
 export const forgedBlocks = {
   [openAIBlock.id]: openAIBlock,
-  [zemanticAiBlock.id]: zemanticAiBlock,
   [calComBlock.id]: calComBlock,
   [chatNodeBlock.id]: chatNodeBlock,
   [qrCodeBlock.id]: qrCodeBlock,

@@ -27,10 +27,7 @@ import { useDebouncedCallback } from 'use-debounce'
 import { forgedBlockIds } from '@mozbot.io/forge-repository/constants'
 
 // Integration blocks migrated to forged blocks
-const legacyIntegrationBlocks = [
-  IntegrationBlockType.OPEN_AI,
-  IntegrationBlockType.ZEMANTIC_AI,
-]
+const legacyIntegrationBlocks = [IntegrationBlockType.OPEN_AI]
 
 export const BlocksSideBar = () => {
   const { t } = useTranslate()

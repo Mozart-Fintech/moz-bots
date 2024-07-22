@@ -19,14 +19,11 @@ import { qrCodeBlock } from '@mozbot.io/qrcode-block'
 import { qrCodeBlockSchema } from '@mozbot.io/qrcode-block/schemas'
 import { togetherAiBlock } from '@mozbot.io/together-ai-block'
 import { togetherAiBlockSchema } from '@mozbot.io/together-ai-block/schemas'
-import { zemanticAiBlock } from '@mozbot.io/zemantic-ai-block'
-import { zemanticAiBlockSchema } from '@mozbot.io/zemantic-ai-block/schemas'
 import { nocodbBlock } from '@mozbot.io/nocodb-block'
 import { nocodbBlockSchema } from '@mozbot.io/nocodb-block/schemas'
 
 export const forgedBlockSchemas = {
   [openAIBlock.id]: openAIBlockSchema,
-  [zemanticAiBlock.id]: zemanticAiBlockSchema,
   [calComBlock.id]: calComBlockSchema,
   [chatNodeBlock.id]: chatNodeBlockSchema,
   [qrCodeBlock.id]: qrCodeBlockSchema,

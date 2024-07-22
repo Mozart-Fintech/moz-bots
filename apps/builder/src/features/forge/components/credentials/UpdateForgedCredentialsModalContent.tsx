@@ -14,7 +14,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import { ZodObjectLayout } from '../zodLayouts/ZodObjectLayout'
 import { ForgedBlockDefinition } from '@mozbot.io/forge-repository/types'
-import { CredentialsWithoutLegacy } from '@mozbot.io/schemas'
+import { Credentials } from '@mozbot.io/schemas'
 
 type Props = {
   credentialsId: string
@@ -76,7 +76,7 @@ export const UpdateForgedCredentialsModalContent = ({
         workspaceId: workspace.id,
         name,
         data,
-      } as CredentialsWithoutLegacy,
+      } as Credentials,
     })
   }
 

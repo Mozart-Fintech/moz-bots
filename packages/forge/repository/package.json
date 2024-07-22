@@ -8,7 +8,6 @@
   "devDependencies": {
     "@mozbot.io/forge": "workspace:*",
     "@mozbot.io/openai-block": "workspace:*",
-    "@mozbot.io/zemantic-ai-block": "workspace:*",
     "@mozbot.io/cal-com-block": "workspace:*",
     "@mozbot.io/chat-node-block": "workspace:*",
     "@mozbot.io/qrcode-block": "workspace:*",
