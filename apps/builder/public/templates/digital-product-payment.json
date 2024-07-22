@@ -1,7 +1,7 @@
 {
   "version": "6",
   "id": "cloo0oket000d1aortnxzuslp",
-  "name": "Digital Product Payment",
+  "name": "Pago de Producto Digital",
   "events": [
     {
       "id": "cl3u43cht00044z1adg20ffni",
@@ -13,16 +13,14 @@
   "groups": [
     {
       "id": "cl3u4431400042e6go5nd0euq",
-      "title": "Name",
+      "title": "Nombre",
       "graphCoordinates": { "x": 257.86, "y": 0.85 },
       "blocks": [
         {
           "id": "cl3u4431500052e6gruhlxklx",
           "type": "text",
           "content": {
-            "richText": [
-              { "type": "p", "children": [{ "text": "Hi there 👋" }] }
-            ]
+            "richText": [{ "type": "p", "children": [{ "text": "Hola 👋" }] }]
           }
         },
         {
@@ -30,7 +28,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "¿Cómo te llamas?" }] }
             ]
           }
         },
@@ -39,7 +37,7 @@
           "outgoingEdgeId": "cl3u45j0n000c2e6go4nnaavg",
           "type": "text input",
           "options": {
-            "labels": { "placeholder": "Type your name..." },
+            "labels": { "placeholder": "Escribe tu nombre..." },
             "variableId": "vcl3u45hek000b2e6gkl05z1da"
           }
         }
@@ -47,7 +45,7 @@
     },
     {
       "id": "cl3u45dib00092e6g4q2tdkpu",
-      "title": "Product demo",
+      "title": "Demo de Producto",
       "graphCoordinates": { "x": 613.7, "y": 1.82 },
       "blocks": [
         {
@@ -57,7 +55,9 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Cool, nice to meet you {{Name}}" }]
+                "children": [
+                  { "text": "Genial, un placer conocerte {{Nombre}}" }
+                ]
               }
             ]
           }
@@ -71,7 +71,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "I've been working on a Notion template for the last 3 months to help you Grow your business."
+                    "text": "He estado trabajando en una plantilla de Notion durante los últimos 3 meses para ayudarte a crecer tu negocio."
                   }
                 ]
               }
@@ -86,7 +86,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "It is based on the Bullseye Growth Framework" }
+                  { "text": "Está basada en el Bullseye Growth Framework" }
                 ]
               }
             ]
@@ -105,7 +105,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "It's yours for $9" }] }
+              { "type": "p", "children": [{ "text": "Es tuya por $9" }] }
             ]
           }
         },
@@ -118,7 +118,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Are you interested in receive a copy of this template?"
+                    "text": "¿Estás interesado en recibir una copia de esta plantilla?"
                   }
                 ]
               }
@@ -132,12 +132,12 @@
             {
               "id": "cl3u4id67000m2e6g3x3do8kd",
               "outgoingEdgeId": "cl3u4l4do00102e6ghd9s5p3f",
-              "content": "Hell yes!"
+              "content": "¡Sí, claro!"
             },
             {
               "id": "cl3u4iexy000o2e6gbagmrxcc",
               "outgoingEdgeId": "cl3u4jxq2000v2e6gkpwko0uo",
-              "content": "I'm ok, thanks."
+              "content": "Estoy bien, gracias."
             }
           ]
         }
@@ -145,7 +145,7 @@
     },
     {
       "id": "cl3u4iw28000s2e6gdmukl6qb",
-      "title": "Bye",
+      "title": "Adiós",
       "graphCoordinates": { "x": 795.34, "y": 877.43 },
       "blocks": [
         {
@@ -157,7 +157,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Oh ok, feel free to come back when you feel ready {{Name}}!"
+                    "text": "Oh, está bien, ¡vuelve cuando te sientas listo {{Nombre}}!"
                   }
                 ]
               }
@@ -175,7 +175,7 @@
     },
     {
       "id": "cl3u4kblb000w2e6gfflsq56p",
-      "title": "Email",
+      "title": "Correo electrónico",
       "graphCoordinates": { "x": 992.42, "y": 342.36 },
       "blocks": [
         {
@@ -183,7 +183,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "That's awesome!" }] }
+              { "type": "p", "children": [{ "text": "¡Eso es increíble!" }] }
             ]
           }
         },
@@ -196,7 +196,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "What's the email address where you want to receive the link?"
+                    "text": "¿Cuál es la dirección de correo electrónico donde quieres recibir el enlace?"
                   }
                 ]
               }
@@ -215,7 +215,7 @@
     },
     {
       "id": "cl3u4leig00112e6gxbk65r7y",
-      "title": "Payment",
+      "title": "Pago",
       "graphCoordinates": { "x": 1338.38, "y": 343.48 },
       "blocks": [
         {
@@ -223,7 +223,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Sounds good." }] }
+              { "type": "p", "children": [{ "text": "Suena bien." }] }
             ]
           }
         },
@@ -236,7 +236,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You're a step away from implementing proven growth systems to your business 🚀"
+                    "text": "Estás a un paso de implementar sistemas de crecimiento probados en tu negocio 🚀"
                   }
                 ]
               }
@@ -249,7 +249,7 @@
           "type": "payment input",
           "options": {
             "additionalInformation": {
-              "name": "{{Name}}",
+              "name": "{{Nombre}}",
               "email": "{{Email}}"
             },
             "amount": "9"
@@ -259,7 +259,7 @@
     },
     {
       "id": "cl3u4vnth00182e6g2hh0gewl",
-      "title": "Send email",
+      "title": "Enviar correo",
       "graphCoordinates": { "x": 1683.86, "y": 346.93 },
       "blocks": [
         {
@@ -275,8 +275,8 @@
           "options": {
             "isCustomBody": true,
             "recipients": ["{{Email}}"],
-            "subject": "Here is your Bullseye Framework template 🎉",
-            "body": "Hey {{Name}},\n\nThank you again for buying the template.\n\nHere is the link where you can duplicate it:\n\nhttps://baptistearno.notion.site/Growth-Framework-Bullseye-c2166e03d99340daa1aa87e4356bdc83\n\nFeel free to tell me what I can improve.\n\nBaptiste."
+            "subject": "Aquí tienes tu plantilla del Bullseye Framework 🎉",
+            "body": "Hola {{Nombre}},\n\nGracias nuevamente por comprar la plantilla.\n\nAquí está el enlace donde puedes duplicarla:\n\nhttps://baptistearno.notion.site/Growth-Framework-Bullseye-c2166e03d99340daa1aa87e4356bdc83\n\nNo dudes en decirme qué puedo mejorar.\n\nBaptiste."
           }
         },
         {
@@ -288,7 +288,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "It's all good, you should have received the email!"
+                    "text": "Todo está bien, ¡deberías haber recibido el correo!"
                   }
                 ]
               }
@@ -302,7 +302,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Thanks again for your visit." }]
+                "children": [{ "text": "Gracias de nuevo por tu visita." }]
               }
             ]
           }
@@ -311,7 +311,7 @@
           "id": "cl3u51z0o001f2e6gbl96p7bi",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Bye 👋" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "Adiós 👋" }] }]
           }
         }
       ]
@@ -330,7 +330,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You need to add your Stripe credentials in the next Payment block."
+                    "text": "Debes agregar tus credenciales de Stripe en el siguiente bloque de Pago."
                   }
                 ]
               }
@@ -346,7 +346,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Once it's done, you can remove this group and connect the email input to the \"Payment\" group 🪄"
+                    "text": "Una vez hecho esto, puedes eliminar este grupo y conectar el input de correo electrónico al grupo de \"Pago\" 🪄"
                   }
                 ]
               }
@@ -400,12 +400,12 @@
   "variables": [
     {
       "id": "vcl3u45hek000b2e6gkl05z1da",
-      "name": "Name",
+      "name": "Nombre",
       "isSessionVariable": true
     },
     {
       "id": "vcl3u4n1vk00162e6gs6x59o2k",
-      "name": "Email",
+      "name": "Correo electrónico",
       "isSessionVariable": true
     }
   ],

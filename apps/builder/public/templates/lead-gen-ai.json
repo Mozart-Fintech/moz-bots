@@ -1,7 +1,7 @@
 {
   "version": "6",
   "id": "clon6cteb000i1avnrdaj92au",
-  "name": "Lead Gen with AI",
+  "name": "Generación de leads con IA",
   "events": [
     {
       "id": "i6xofskq0vdlnfyvf28hzcle",
@@ -13,14 +13,14 @@
   "groups": [
     {
       "id": "nmlij3lrk42cymsu1tj6b9nv",
-      "title": "Welcome",
+      "title": "Bienvenido",
       "graphCoordinates": { "x": 1, "y": 148 },
       "blocks": [
         {
           "id": "sc1y8VwDabNJgiVTBi4qtif",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Hey 👋" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "Hola 👋" }] }]
           }
         },
         {
@@ -39,7 +39,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Thank you for your interest in our marketing services."
+                    "text": "Gracias por tu interés en nuestros servicios de marketing."
                   }
                 ]
               }
@@ -55,7 +55,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Let's have a quick chat about your current situation 🙏"
+                    "text": "Hablemos rápidamente sobre tu situación actual 🙏"
                   }
                 ]
               }
@@ -66,20 +66,20 @@
           "id": "vw9s76hgwu749gw15bqk4vd3",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Ready?" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "¿Listo?" }] }]
           }
         },
         {
           "id": "sbjZWLJGVkHAkDqS4JQeGow",
           "outgoingEdgeId": "vgi4r3yjle17balwlhpas25t",
           "type": "choice input",
-          "items": [{ "id": "hQw2zbp7FDX7XYK9cFpbgC", "content": "Yes!" }]
+          "items": [{ "id": "hQw2zbp7FDX7XYK9cFpbgC", "content": "¡Sí!" }]
         }
       ]
     },
     {
       "id": "vrv6xoriyl74wcz34gqlvc0q",
-      "title": "Email",
+      "title": "Correo electrónico",
       "graphCoordinates": { "x": 666.07421875, "y": 141 },
       "blocks": [
         {
@@ -90,7 +90,9 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "What's the best email we can reach you at?" }
+                  {
+                    "text": "¿Cuál es el mejor correo electrónico para contactarte?"
+                  }
                 ]
               }
             ]
@@ -108,7 +110,7 @@
     },
     {
       "id": "wlcaalj5zej2sl1t9kkq55se",
-      "title": "Company",
+      "title": "Empresa",
       "graphCoordinates": { "x": 325.22265625, "y": 144.37890625 },
       "blocks": [
         {
@@ -118,7 +120,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "What company do you work for?" }]
+                "children": [{ "text": "¿Para qué empresa trabajas?" }]
               }
             ]
           }
@@ -129,8 +131,8 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your answer...",
-              "button": "Send"
+              "placeholder": "Escribe tu respuesta...",
+              "button": "Enviar"
             },
             "variableId": "giiLFGw5xXBCHzvp1qAbdX"
           }
@@ -139,7 +141,7 @@
     },
     {
       "id": "trcslng32mdxkjmrw8zxpnpj",
-      "title": "Services",
+      "title": "Servicios",
       "graphCoordinates": { "x": 999.90625, "y": 143.7578125 },
       "blocks": [
         {
@@ -149,7 +151,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "What services are you interested in?" }]
+                "children": [{ "text": "¿Qué servicios te interesan?" }]
               }
             ]
           }
@@ -159,10 +161,16 @@
           "outgoingEdgeId": "wtw2lm86g46ehgvp43fcfks6",
           "type": "choice input",
           "items": [
-            { "id": "fnLCBF4NdraSwcubnBhk8H", "content": "Website dev" },
-            { "id": "a782h8ynMouY84QjH7XSnR", "content": "Content Marketing" },
-            { "id": "jGvh94zBByvVFpSS3w97zY", "content": "Social Media" },
-            { "id": "6PRLbKUezuFmwWtLVbvAQ7", "content": "UI / UX Design" }
+            {
+              "id": "fnLCBF4NdraSwcubnBhk8H",
+              "content": "Desarrollo de sitios web"
+            },
+            {
+              "id": "a782h8ynMouY84QjH7XSnR",
+              "content": "Marketing de contenidos"
+            },
+            { "id": "jGvh94zBByvVFpSS3w97zY", "content": "Redes sociales" },
+            { "id": "6PRLbKUezuFmwWtLVbvAQ7", "content": "Diseño UI / UX" }
           ],
           "options": {
             "variableId": "vi0mmx9o2m4s8z9cccsjcvpj5",
@@ -173,7 +181,7 @@
     },
     {
       "id": "m4oxxhg9wfv3wc6n8rhzy6ga",
-      "title": "[AI] Additional information",
+      "title": "[IA] Información adicional",
       "graphCoordinates": { "x": 1340.59, "y": 41.79 },
       "blocks": [
         {
@@ -200,18 +208,18 @@
           "id": "dc58mxvcstc2rdwnlg4yd2aa",
           "type": "OpenAI",
           "options": {
-            "task": "Create chat completion",
+            "task": "Crear conversación de chat",
             "model": "gpt-3.5-turbo",
             "messages": [
               {
                 "id": "i522qy1dzn42qy7rkw79uk9n",
                 "role": "user",
-                "content": "You are a marketing agency, and I am a prospect.\n\nAsk simple questions to understand my needs."
+                "content": "Eres una agencia de marketing y yo soy un prospecto.\n\nHaz preguntas simples para entender mis necesidades."
               },
               {
                 "id": "d6a2qfsdo251q0iopi77gtpd",
                 "role": "assistant",
-                "content": "What company do you work for?"
+                "content": "¿Para qué empresa trabajas?"
               },
               {
                 "id": "ba3objkk8jp8piyxlbe9diu6",
@@ -221,7 +229,7 @@
               {
                 "id": "bqqgavh96n76l9ma987km87y",
                 "role": "assistant",
-                "content": "What services are you interested in?"
+                "content": "¿Qué servicios te interesan?"
               },
               {
                 "id": "zdsbh8wrmhqop24kg3t9b08f",
@@ -238,7 +246,7 @@
             "responseMapping": [
               {
                 "id": "krixyhr7qw5ow52yf3i11y3a",
-                "valueToExtract": "Message content",
+                "valueToExtract": "Contenido del mensaje",
                 "variableId": "vpvkbogoj3rmogz0ssh5odmnn"
               }
             ],
@@ -251,7 +259,7 @@
           "options": {
             "variableId": "vi5ta5lktses2h6skf5ky2zs0",
             "type": "Append value(s)",
-            "item": "{{AI reply}}"
+            "item": "{{Respuesta de IA}}"
           }
         },
         {
@@ -259,7 +267,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "{{AI reply}}" }] }
+              { "type": "p", "children": [{ "text": "{{Respuesta de IA}}" }] }
             ]
           }
         },
@@ -268,8 +276,8 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your answer...",
-              "button": "Send"
+              "placeholder": "Escribe tu respuesta...",
+              "button": "Enviar"
             },
             "variableId": "vhp0ymgwq4id82l97g0kliglf"
           }
@@ -281,21 +289,23 @@
           "options": {
             "variableId": "vi5ta5lktses2h6skf5ky2zs0",
             "type": "Append value(s)",
-            "item": "{{Additional information}}"
+            "item": "{{Información adicional}}"
           }
         }
       ]
     },
     {
       "id": "gjahzyusg4mlpvpaeov0awtm",
-      "title": "Bye",
+      "title": "Adiós",
       "graphCoordinates": { "x": 1676.6171875, "y": 142.7109375 },
       "blocks": [
         {
           "id": "seLegenCgUwMopRFeAefqZ7",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Perfect!" }] }]
+            "richText": [
+              { "type": "p", "children": [{ "text": "¡Perfecto!" }] }
+            ]
           }
         },
         {
@@ -305,7 +315,9 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "We'll get back to you at {{Email}}" }]
+                "children": [
+                  { "text": "Nos pondremos en contacto contigo en {{Email}}" }
+                ]
               }
             ]
           }
@@ -326,7 +338,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You need to add your OpenAI credentials to make this bot work. 🪄"
+                    "text": "Necesitas agregar tus credenciales de OpenAI para que este bot funcione. 🪄"
                   }
                 ]
               }
@@ -342,11 +354,11 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Once it's done, delete this group and connect the "
+                    "text": "Una vez hecho esto, elimina este grupo y conecta el "
                   },
-                  { "bold": true, "text": "Services" },
-                  { "text": " group with " },
-                  { "bold": true, "text": "[AI] Additional Information" },
+                  { "bold": true, "text": "Servicios" },
+                  { "text": " grupo con " },
+                  { "bold": true, "text": "[IA] Información Adicional" },
                   { "text": " 🚀" }
                 ]
               }
@@ -402,32 +414,32 @@
   "variables": [
     {
       "id": "giiLFGw5xXBCHzvp1qAbdX",
-      "name": "Company",
+      "name": "Empresa",
       "isSessionVariable": true
     },
     {
       "id": "v3VFChNVSCXQ2rXv4DrJ8Ah",
-      "name": "Email",
+      "name": "Correo electrónico",
       "isSessionVariable": true
     },
     {
       "id": "vi0mmx9o2m4s8z9cccsjcvpj5",
-      "name": "Services",
+      "name": "Servicios",
       "isSessionVariable": true
     },
     {
       "id": "vpvkbogoj3rmogz0ssh5odmnn",
-      "name": "AI reply",
+      "name": "Respuesta de IA",
       "isSessionVariable": true
     },
     {
       "id": "vhp0ymgwq4id82l97g0kliglf",
-      "name": "Additional information",
+      "name": "Información adicional",
       "isSessionVariable": true
     },
     {
       "id": "vi5ta5lktses2h6skf5ky2zs0",
-      "name": "AI Dialogue",
+      "name": "Diálogo de IA",
       "isSessionVariable": true
     }
   ],

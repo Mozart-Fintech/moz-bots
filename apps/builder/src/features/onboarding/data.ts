@@ -1,5 +1,5 @@
 import { Block } from '@mozbot.io/schemas'
-import { IntegrationBlockType } from '@mozbot.io/schemas/features/blocks/integrations/constants'
+// import { IntegrationBlockType } from '@mozbot.io/schemas/features/blocks/integrations/constants'
 
 type Feature = 'editor' | Block['type']
 
@@ -14,7 +14,7 @@ export const onboardingVideos: Partial<
     | undefined
   >
 > = {
-  editor: {
+  /*   editor: {
     key: 'editor',
     youtubeId: 'jp3ggg_42-M',
     deployedAt: new Date('2024-06-04'),
@@ -28,5 +28,5 @@ export const onboardingVideos: Partial<
     key: IntegrationBlockType.MAKE_COM,
     youtubeId: 'V-y1Orys_kY',
     deployedAt: new Date('2024-06-04'),
-  },
+  }, */
 }

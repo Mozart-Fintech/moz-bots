@@ -1,20 +1,20 @@
 import prisma from '@mozbot.io/lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser'
+//import { getAuthenticatedUser } from '@/features/auth/helpers/getAuthenticatedUser'
 import {
   methodNotAllowed,
-  notAuthenticated,
+  //notAuthenticated,
   notFound,
 } from '@mozbot.io/lib/api'
-import { isReadWorkspaceFobidden } from '@/features/workspace/helpers/isReadWorkspaceFobidden'
+//import { isReadWorkspaceFobidden } from '@/features/workspace/helpers/isReadWorkspaceFobidden'
 import { WhatsAppCredentials } from '@mozbot.io/schemas/features/whatsapp'
 import { decrypt } from '@mozbot.io/lib/api/encryption/decrypt'
 import { downloadMedia } from '@mozbot.io/bot-engine/whatsapp/downloadMedia'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
-    const user = await getAuthenticatedUser(req, res)
-    if (!user) return notAuthenticated(res)
+    //const user = await getAuthenticatedUser(req, res)
+    //if (!user) return notAuthenticated(res)
 
     const mozbotId = req.query.mozbotId as string
 
@@ -41,8 +41,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     })
 
-    if (!mozbot?.workspace || isReadWorkspaceFobidden(mozbot.workspace, user))
-      return notFound(res, 'Workspace not found')
+    //if (!mozbot?.workspace || isReadWorkspaceFobidden(mozbot.workspace, user))
+    //  return notFound(res, 'Workspace not found')
 
     if (!mozbot) return notFound(res, 'Mozbot not found')
 

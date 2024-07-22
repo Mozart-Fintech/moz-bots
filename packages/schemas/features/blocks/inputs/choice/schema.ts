@@ -9,14 +9,19 @@ export const choiceInputOptionsSchema = optionBaseSchema.merge(
     isMultipleChoice: z.boolean().optional(),
     buttonLabel: z.string().optional(),
     dynamicVariableId: z.string().optional(),
+    listHeader: z.string().optional(),
     isSearchable: z.boolean().optional(),
     searchInputPlaceholder: z.string().optional(),
+    retryMessageContentId: z.string().optional(),
+    withFirstChoice: z.boolean().optional(),
+    withLastChoice: z.boolean().optional(),
   })
 )
 
 export const buttonItemSchemas = {
   v5: itemBaseSchemas.v5.extend({
     content: z.string().optional(),
+    description: z.string().optional(),
     displayCondition: z
       .object({
         isEnabled: z.boolean().optional(),
@@ -26,6 +31,7 @@ export const buttonItemSchemas = {
   }),
   v6: itemBaseSchemas.v6.extend({
     content: z.string().optional(),
+    description: z.string().optional(),
     displayCondition: z
       .object({
         isEnabled: z.boolean().optional(),

@@ -1,7 +1,7 @@
 {
   "version": "6",
   "id": "clonzza7600031aorlgsreya0",
-  "name": "Insurance offer",
+  "name": "Oferta de seguro",
   "events": [
     {
       "id": "f4ef28wxteh0wdjgubtojnkr",
@@ -13,7 +13,7 @@
   "groups": [
     {
       "id": "av0jzkh3qhgdyjrouvl2zywe",
-      "title": "Welcome",
+      "title": "Bienvenido",
       "graphCoordinates": { "x": 68.4296875, "y": 176.178531769944 },
       "blocks": [
         {
@@ -28,7 +28,7 @@
           "id": "wza92in5v03w0oiaa1y3k68x",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Hey 👋" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "Hola 👋" }] }]
           }
         },
         {
@@ -36,7 +36,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "I'm John from Dogz" }] }
+              { "type": "p", "children": [{ "text": "Soy John de Dogz" }] }
             ]
           }
         },
@@ -49,7 +49,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Let's determine what would be the best insurance offer you can have for your dog 🐶"
+                    "text": "Vamos a determinar cuál sería la mejor oferta de seguro que puedes tener para tu perro 🐶"
                   }
                 ]
               }
@@ -63,7 +63,7 @@
             {
               "id": "m7l8u4y5vmwozvdtsmhq3q49",
               "outgoingEdgeId": "vl23l0ak8w2qxj9wrgxhznz3",
-              "content": "Let's go!"
+              "content": "¡Vamos allá!"
             }
           ]
         }
@@ -71,7 +71,7 @@
     },
     {
       "id": "dh3wz001jaclg8ifc1vhovlq",
-      "title": "Breed",
+      "title": "Raza",
       "graphCoordinates": { "x": 431.756656769944, "y": 177.60546875 },
       "blocks": [
         {
@@ -81,7 +81,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "What breed is your dog?" }]
+                "children": [{ "text": "¿Cuál es la raza de tu perro?" }]
               }
             ]
           }
@@ -91,19 +91,19 @@
           "outgoingEdgeId": "moj9ezfl6bvpr4aj76cztkiu",
           "type": "choice input",
           "items": [
-            { "id": "q7ydcwda7rsfn1w5ep9ur4y3", "content": "Crossbreed" },
+            { "id": "q7ydcwda7rsfn1w5ep9ur4y3", "content": "Cruza" },
             { "id": "q33qu26t8uhtp63rl7th4p0u", "content": "Labrador" },
             { "id": "c9fy5o23cuanywze536ie071", "content": "Golden Retriever" },
             { "id": "xmozt619ao4pn3lcovs6e1wp", "content": "Jack Russel" },
             { "id": "qhc245vs9s3vhq8oz9sur4jy", "content": "Husky" },
-            { "id": "bqt7o8aotn5wwye98vw2u8is", "content": "Other" }
+            { "id": "bqt7o8aotn5wwye98vw2u8is", "content": "Otra" }
           ]
         }
       ]
     },
     {
       "id": "ynt0ya95bvuqj8mf39e938k4",
-      "title": "Sex",
+      "title": "Sexo",
       "graphCoordinates": { "x": 786.06640625, "y": 173.0310202976334 },
       "blocks": [
         {
@@ -113,7 +113,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Is it a male or a female?" }]
+                "children": [{ "text": "¿Es macho o hembra?" }]
               }
             ]
           }
@@ -125,12 +125,12 @@
             {
               "id": "mrca2ini7z81ik4k1o9g3a1s",
               "outgoingEdgeId": "wciafstvwt3m4lhrejlgl0s0",
-              "content": "♂️ Male"
+              "content": "♂️ Macho"
             },
             {
               "id": "ymxxgoxxbfcmnhudwmerfgbx",
               "outgoingEdgeId": "f60ldz2g58kfkvsfmnf39fjb",
-              "content": "♀️ Female"
+              "content": "♀️ Hembra"
             }
           ]
         }
@@ -155,7 +155,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's his name?" }] }
+              { "type": "p", "children": [{ "text": "¿Cómo se llama él?" }] }
             ]
           }
         }
@@ -180,7 +180,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's her name?" }] }
+              { "type": "p", "children": [{ "text": "¿Cómo se llama ella?" }] }
             ]
           }
         }
@@ -188,7 +188,7 @@
     },
     {
       "id": "eq1tnkdfxxf8q08vxckl3md6",
-      "title": "Name",
+      "title": "Nombre",
       "graphCoordinates": { "x": 1501.890625, "y": 169.65234375 },
       "blocks": [
         {
@@ -203,7 +203,7 @@
     },
     {
       "id": "xgulc4hfxlmjmr288ghillwz",
-      "title": "Age",
+      "title": "Edad",
       "graphCoordinates": { "x": 1846.419374527324, "y": 168.0560932773236 },
       "blocks": [
         {
@@ -211,7 +211,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "How cute 😊" }] }
+              { "type": "p", "children": [{ "text": "Qué lindo 😊" }] }
             ]
           }
         },
@@ -220,7 +220,10 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "How old is {{Name}}?" }] }
+              {
+                "type": "p",
+                "children": [{ "text": "¿Qué edad tiene {{Name}}?" }]
+              }
             ]
           }
         },
@@ -232,25 +235,25 @@
               "id": "vliolql8p4vo58pvsz7olf5w",
               "outgoingEdgeId": "pehpu3fo38ofsgh6b9dli0i4",
               "pictureSrc": "https://images.unsplash.com/photo-1592924728350-f7d4fd5d1655?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MjU2MDR8MHwxfHNlYXJjaHwxNXx8cHVwcHl8ZW58MHwwfHx8MTY4MzIyNDMxOA&ixlib=rb-4.0.3&q=80&w=1080",
-              "title": "Less than 1 year"
+              "title": "Menos de 1 año"
             },
             {
               "id": "b3ci3fpppgsu312gsl4hs6au",
               "outgoingEdgeId": "ilvu55d6cmembesg0askzgzh",
               "pictureSrc": "https://images.unsplash.com/photo-1672363340663-37526fffa24d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MjU2MDR8MHwxfHNlYXJjaHwxMHx8eW91bmclMjBkb2d8ZW58MHwwfHx8MTY4MzIyNDM0OA&ixlib=rb-4.0.3&q=80&w=1080",
-              "title": "1-5 years"
+              "title": "1-5 años"
             },
             {
               "id": "asi8dmhlwnysvm4tmvoipglz",
               "outgoingEdgeId": "kvlz0ly8o4h99997ijiejwe8",
               "pictureSrc": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MjU2MDR8MHwxfHNlYXJjaHwzfHxkb2d8ZW58MHwwfHx8MTY4MzIyNDEwNg&ixlib=rb-4.0.3&q=80&w=1080",
-              "title": "5-10 years"
+              "title": "5-10 años"
             },
             {
               "id": "w9eeiclycv7nm0ennaxbxo1d",
               "outgoingEdgeId": "y8v7vkh236e4o4f2latpb7mr",
               "pictureSrc": "https://images.unsplash.com/photo-1553531009-7e4b807a0673?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0MjU2MDR8MHwxfHNlYXJjaHw4fHxvbGQlMjBkb2d8ZW58MHwwfHx8MTY4MzIyNDQxNw&ixlib=rb-4.0.3&q=80&w=1080",
-              "title": "Above 10 years"
+              "title": "Más de 10 años"
             }
           ]
         }
@@ -258,7 +261,7 @@
     },
     {
       "id": "s4cccw69brg5ipyakvsoaioo",
-      "title": "Spayed",
+      "title": "Castrado",
       "graphCoordinates": { "x": 2535.586058093481, "y": 164.2060504876776 },
       "blocks": [
         {
@@ -268,7 +271,9 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Is {{Pronoun}} spayed or neutered" }]
+                "children": [
+                  { "text": "¿Está {{Pronoun}} castrado o esterilizado?" }
+                ]
               }
             ]
           }
@@ -285,7 +290,7 @@
             {
               "id": "jp5k0mx1drijt7k1v4a2z6t8",
               "outgoingEdgeId": "igwjs895n7q48h47xhpc90wc",
-              "content": "✅ Yes"
+              "content": "✅ Sí"
             }
           ]
         }
@@ -293,7 +298,7 @@
     },
     {
       "id": "j19dlmdh2ojntwk1lzqemo7a",
-      "title": "Email",
+      "title": "Correo electrónico",
       "graphCoordinates": { "x": 2989.53096827949, "y": 367.6582890794456 },
       "blocks": [
         {
@@ -303,7 +308,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Thank you for all this information." }]
+                "children": [{ "text": "Gracias por toda esta información." }]
               }
             ]
           }
@@ -317,7 +322,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "We can provide the best insurance for {{Name}} 👍"
+                    "text": "Podemos ofrecer el mejor seguro para {{Name}} 👍"
                   }
                 ]
               }
@@ -332,7 +337,9 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "On what email should we send the offer?" }
+                  {
+                    "text": "¿A qué correo electrónico deberíamos enviar la oferta?"
+                  }
                 ]
               }
             ]
@@ -430,7 +437,7 @@
     },
     {
       "id": "lmrd5falh8nkdizqy9obpeqi",
-      "title": "Bye",
+      "title": "Adiós",
       "graphCoordinates": { "x": 3340.474508360785, "y": 365.6627012838016 },
       "blocks": [
         {
@@ -438,7 +445,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Perfect 👌" }] }
+              { "type": "p", "children": [{ "text": "Perfecto 👌" }] }
             ]
           }
         },
@@ -451,7 +458,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "In the mean time feel free to check out what other services we are offering at Dogz"
+                    "text": "Mientras tanto, siéntete libre de ver qué otros servicios ofrecemos en Dogz"
                   }
                 ]
               }
@@ -593,22 +600,22 @@
   "variables": [
     {
       "id": "vgl2m65vej3cjwqvkawnpih2l",
-      "name": "Name",
+      "name": "Nombre",
       "isSessionVariable": true
     },
     {
       "id": "vhl1s7qoksnw7r8b1soocxwsd",
-      "name": "Pronoun",
+      "name": "Pronombre",
       "isSessionVariable": true
     },
     {
       "id": "vq61f8ykwadq1pj8389qf9h91",
-      "name": "Estimated price",
+      "name": "Precio estimado",
       "isSessionVariable": true
     },
     {
       "id": "vzhkagzjqqa0amfc78jekl2gz",
-      "name": "Email",
+      "name": "Correo electrónico",
       "isSessionVariable": true
     }
   ],

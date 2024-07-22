@@ -1,7 +1,7 @@
 {
   "version": "6",
   "id": "cloo0gjvx00091aoryw72ns37",
-  "name": "Onboarding copy",
+  "name": "Copia de incorporación",
   "events": [
     {
       "id": "yp9qsayuwzhihxc7gzt68osm",
@@ -13,7 +13,7 @@
   "groups": [
     {
       "id": "az9nafw4tu9b6dyh3cvutlek",
-      "title": "Name",
+      "title": "Nombre",
       "graphCoordinates": { "x": 247.01, "y": 1.45 },
       "blocks": [
         {
@@ -21,7 +21,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Welcome 👋" }] }
+              { "type": "p", "children": [{ "text": "Bienvenido 👋" }] }
             ]
           }
         },
@@ -30,7 +30,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "¿Cuál es tu nombre?" }] }
             ]
           }
         },
@@ -46,7 +46,7 @@
     },
     {
       "id": "s3hgjtmb1bzq6ip2bm9w1r53",
-      "title": "Company",
+      "title": "Empresa",
       "graphCoordinates": { "x": 603.62, "y": 1.09 },
       "blocks": [
         {
@@ -54,7 +54,10 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Welcome {{Name}} 👋" }] }
+              {
+                "type": "p",
+                "children": [{ "text": "Bienvenido {{Nombre}} 👋" }]
+              }
             ]
           }
         },
@@ -67,7 +70,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "I'm super pumped that you've decided to try out Mozbot 😍"
+                    "text": "Estoy muy emocionado de que hayas decidido probar Mozbot 😍"
                   }
                 ]
               }
@@ -83,7 +86,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You are small steps away from meaningful, hyper-personalized experience for your users"
+                    "text": "Estás a pocos pasos de una experiencia significativa e hiperpersonalizada para tus usuarios"
                   }
                 ]
               }
@@ -98,7 +101,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Let's get you set up for your Mozbot journey." }
+                  { "text": "Vamos a configurarte para tu viaje con Mozbot." }
                 ]
               }
             ]
@@ -111,7 +114,9 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Do you work for a specific company?" }]
+                "children": [
+                  { "text": "¿Trabajas para alguna empresa en específico?" }
+                ]
               }
             ]
           }
@@ -120,7 +125,7 @@
           "id": "cl126jb2q000r2e6dgqlnxnt8",
           "type": "choice input",
           "items": [
-            { "id": "cl126jb2q000s2e6dm60yq5p2", "content": "Yes" },
+            { "id": "cl126jb2q000s2e6dm60yq5p2", "content": "Sí" },
             {
               "id": "cl126jc5a000t2e6dqv91w7j6",
               "outgoingEdgeId": "dhva247te6v1cwfbte78bx4v",
@@ -134,7 +139,7 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type the company name..."
+              "placeholder": "Escribe el nombre de la empresa..."
             },
             "variableId": "cl126jqww000w2e6dq9yv4ifq"
           }
@@ -143,7 +148,7 @@
     },
     {
       "id": "m8k3pv1rjckh3arxgitwo43i",
-      "title": "Bot category",
+      "title": "Categoría de bots",
       "graphCoordinates": { "x": 972.94, "y": -0.07 },
       "blocks": [
         {
@@ -155,7 +160,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "What type of bots are you planning to build with Mozbot?"
+                    "text": "¿Qué tipo de bots planeas construir con Mozbot?"
                   }
                 ]
               }
@@ -168,24 +173,27 @@
           "items": [
             {
               "id": "cl126onz9001g2e6dk0nbjeu6",
-              "content": "Lead qualification"
+              "content": "Cualificación de leads"
             },
             {
               "id": "cl126lm6c00172e6d1pfvdiju",
-              "content": "Customer support"
+              "content": "Soporte al cliente"
             },
             {
               "id": "cl126orr2001h2e6d0fqs7737",
-              "content": "Customer research"
+              "content": "Investigación de clientes"
             },
-            { "id": "cl126oudu001i2e6dktwi7qwv", "content": "User onboarding" },
-            { "id": "cl126luv500192e6dl317ssyr", "content": "Quizzes" },
+            {
+              "id": "cl126oudu001i2e6dktwi7qwv",
+              "content": "Onboarding de usuarios"
+            },
+            { "id": "cl126luv500192e6dl317ssyr", "content": "Cuestionarios" },
             {
               "id": "cl126lz8q001a2e6d8b9lb3b5",
-              "content": "Content distribution"
+              "content": "Distribución de contenido"
             },
             { "id": "cl126nf7k001d2e6dg2zczjgz", "content": "FAQ" },
-            { "id": "cl126ngy8001e2e6ddfo5s9fm", "content": "Other" }
+            { "id": "cl126ngy8001e2e6ddfo5s9fm", "content": "Otro" }
           ],
           "options": {
             "variableId": "cl126mo3t001b2e6dvyi16bkd",
@@ -206,7 +214,7 @@
                     "id": "cl1278irq002y2e6dv4965diw",
                     "variableId": "cl126mo3t001b2e6dvyi16bkd",
                     "comparisonOperator": "Contains",
-                    "value": "Other"
+                    "value": "Otro"
                   }
                 ]
               }
@@ -217,7 +225,7 @@
     },
     {
       "id": "cnf2ljrlt875d005783ju7hc",
-      "title": "Bye",
+      "title": "Adiós",
       "graphCoordinates": { "x": 1522.31, "y": 220.27 },
       "blocks": [
         {
@@ -228,7 +236,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Thank you for answering those questions!" }
+                  { "text": "¡Gracias por responder esas preguntas!" }
                 ]
               }
             ]
@@ -246,7 +254,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "See you soon 🚀" }] }
+              { "type": "p", "children": [{ "text": "¡Hasta pronto 🚀" }] }
             ]
           }
         }
@@ -254,16 +262,14 @@
     },
     {
       "id": "hduy797g246pj8qnhsxy5kt5",
-      "title": "Other category",
+      "title": "Otra categoría",
       "graphCoordinates": { "x": 1310.68, "y": -6.8 },
       "blocks": [
         {
           "id": "cl127yxym000b2e6d9hksxo6h",
           "type": "text",
           "content": {
-            "richText": [
-              { "type": "p", "children": [{ "text": "What else?" }] }
-            ]
+            "richText": [{ "type": "p", "children": [{ "text": "¿Qué más?" }] }]
           }
         },
         {
@@ -323,22 +329,22 @@
   "variables": [
     {
       "id": "cl126f4hf000i2e6d8zvzc3t1",
-      "name": "Name",
+      "name": "Nombre",
       "isSessionVariable": true
     },
     {
       "id": "cl126jqww000w2e6dq9yv4ifq",
-      "name": "Company",
+      "name": "Empresa",
       "isSessionVariable": true
     },
     {
       "id": "cl126mo3t001b2e6dvyi16bkd",
-      "name": "Categories",
+      "name": "Categorías",
       "isSessionVariable": true
     },
     {
       "id": "cl126q38p001q2e6d0hj23f6b",
-      "name": "Other categories",
+      "name": "Otras categorías",
       "isSessionVariable": true
     }
   ],

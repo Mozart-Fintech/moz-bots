@@ -2943,26 +2943,70 @@
                                               ]
                                             },
                                             "interactive": {
-                                              "type": "object",
-                                              "properties": {
-                                                "button_reply": {
+                                              "oneOf": [
+                                                {
                                                   "type": "object",
                                                   "properties": {
-                                                    "id": {
-                                                      "type": "string"
+                                                    "type": {
+                                                      "type": "string",
+                                                      "enum": [
+                                                        "button_reply"
+                                                      ]
                                                     },
-                                                    "title": {
-                                                      "type": "string"
+                                                    "button_reply": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "id": {
+                                                          "type": "string"
+                                                        },
+                                                        "title": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "id",
+                                                        "title"
+                                                      ]
                                                     }
                                                   },
                                                   "required": [
-                                                    "id",
-                                                    "title"
+                                                    "type",
+                                                    "button_reply"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "type": {
+                                                      "type": "string",
+                                                      "enum": [
+                                                        "list_reply"
+                                                      ]
+                                                    },
+                                                    "list_reply": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "id": {
+                                                          "type": "string"
+                                                        },
+                                                        "title": {
+                                                          "type": "string"
+                                                        },
+                                                        "description": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "id",
+                                                        "title"
+                                                      ]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "type",
+                                                    "list_reply"
                                                   ]
                                                 }
-                                              },
-                                              "required": [
-                                                "button_reply"
                                               ]
                                             },
                                             "timestamp": {
@@ -6050,6 +6094,9 @@
                 "content": {
                   "type": "string"
                 },
+                "description": {
+                  "type": "string"
+                },
                 "displayCondition": {
                   "type": "object",
                   "properties": {
@@ -6128,11 +6175,23 @@
               "dynamicVariableId": {
                 "type": "string"
               },
+              "listHeader": {
+                "type": "string"
+              },
               "isSearchable": {
                 "type": "boolean"
               },
               "searchInputPlaceholder": {
                 "type": "string"
+              },
+              "retryMessageContentId": {
+                "type": "string"
+              },
+              "withFirstChoice": {
+                "type": "boolean"
+              },
+              "withLastChoice": {
+                "type": "boolean"
               }
             }
           }
@@ -12761,6 +12820,9 @@
                 "content": {
                   "type": "string"
                 },
+                "description": {
+                  "type": "string"
+                },
                 "displayCondition": {
                   "type": "object",
                   "properties": {
@@ -12839,11 +12901,23 @@
               "dynamicVariableId": {
                 "type": "string"
               },
+              "listHeader": {
+                "type": "string"
+              },
               "isSearchable": {
                 "type": "boolean"
               },
               "searchInputPlaceholder": {
                 "type": "string"
+              },
+              "retryMessageContentId": {
+                "type": "string"
+              },
+              "withFirstChoice": {
+                "type": "boolean"
+              },
+              "withLastChoice": {
+                "type": "boolean"
               }
             }
           }

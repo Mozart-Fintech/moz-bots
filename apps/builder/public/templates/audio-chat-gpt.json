@@ -13,7 +13,7 @@
   "groups": [
     {
       "id": "qfrz5nwm63g12dajsjxothb5",
-      "title": "User input",
+      "title": "Entrada del Usuario",
       "graphCoordinates": { "x": 105.17, "y": -56.29 },
       "blocks": [
         {
@@ -35,7 +35,7 @@
     },
     {
       "id": "a6ymhjwtkqwp8t127plz8qmk",
-      "title": "ChatGPT reply",
+      "title": "Respuesta de ChatGPT",
       "graphCoordinates": { "x": 445.12, "y": -56.2 },
       "blocks": [
         {
@@ -88,14 +88,14 @@
     },
     {
       "id": "c5f00f3oclwi1srcz10jjt9u",
-      "title": "Intro",
+      "title": "Introducción",
       "graphCoordinates": { "x": -222.61, "y": -54.39 },
       "blocks": [
         {
           "id": "yuiyeh0czhpymzwuzrm3af5r",
           "type": "openai",
           "options": {
-            "input": "Hi there! How can I help?",
+            "input": "¡Hola! ¿En qué puedo ayudarte?",
             "voice": "alloy",
             "action": "Create speech",
             "credentialsId": "clpjnjrbt00051aliw6610w1z",
@@ -124,7 +124,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You need to add your OpenAI credentials to make this bot work. 🪄"
+                    "text": "Necesitas agregar tus credenciales de OpenAI para que este bot funcione. 🪄"
                   }
                 ]
               }
@@ -140,11 +140,11 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Once it's done, delete this group and connect the "
+                    "text": "Una vez hecho, elimina este grupo y conecta el "
                   },
-                  { "bold": true, "text": "Start" },
-                  { "text": " event with " },
-                  { "bold": true, "text": "Intro" },
+                  { "bold": true, "text": "Inicio" },
+                  { "text": " evento con " },
+                  { "bold": true, "text": "Introducción" },
                   { "text": " 🚀\n" }
                 ]
               }
@@ -179,27 +179,27 @@
   "variables": [
     {
       "id": "vni6kwbch8zlq92dclgcivzyr",
-      "name": "Assistant Message",
+      "name": "Mensaje del asistente",
       "isSessionVariable": true
     },
     {
       "id": "vudksu3zyrat6s1bq6qne0rx3",
-      "name": "User Message",
+      "name": "Mensaje del usuario",
       "isSessionVariable": true
     },
     {
       "id": "vabkycu0qqff5d6ar2ama16pf",
-      "name": "Chat history",
+      "name": "Historial de chat",
       "isSessionVariable": true
     },
     {
       "id": "vxw4quja426402hvhtm33tsp3",
-      "name": "Welcome audio",
+      "name": "Audio de bienvenida",
       "isSessionVariable": true
     },
     {
       "id": "vgr0iwg95npp7pztkmdyn89m1",
-      "name": "Assistant audio message",
+      "name": "Mensaje de audio del asistente",
       "isSessionVariable": true
     }
   ],

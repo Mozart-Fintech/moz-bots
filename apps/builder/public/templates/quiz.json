@@ -1,7 +1,7 @@
 {
   "version": "6",
   "id": "clon582of00031avnefkrpwrl",
-  "name": "Digital Marketing Quiz",
+  "name": "Cuestionario de Marketing Digital",
   "events": [
     {
       "id": "cl1qz4lui00017w1a505z15p0",
@@ -31,7 +31,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "What does SEO stand for?" }]
+                "children": [{ "text": "¿Qué significa SEO?" }]
               }
             ]
           }
@@ -77,7 +77,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Well done!" }] }
+              { "type": "p", "children": [{ "text": "¡Bien hecho!" }] }
             ]
           }
         },
@@ -86,7 +86,10 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What is anchor text?" }] }
+              {
+                "type": "p",
+                "children": [{ "text": "¿Qué es el texto ancla?" }]
+              }
             ]
           }
         },
@@ -98,19 +101,19 @@
             {
               "id": "cl1r0b3x5000s2e6dyq6bklbf",
               "outgoingEdgeId": "cl1r0i4dj001r2e6dgb96tx9q",
-              "content": "The visible text that is hyperlinked to another page"
+              "content": "El texto visible que está hipervinculado a otra página"
             },
             {
               "id": "cl1r0b6jd000t2e6dkp3dxpp9",
-              "content": "The text in the top left of a webpage"
+              "content": "El texto en la esquina superior izquierda de una página web"
             },
             {
               "id": "cl1r0b835000u2e6d22rw2gb5",
-              "content": "The most prominent text on a page, used by search engines to assign a title to the page"
+              "content": "El texto más prominente de una página, utilizado por los motores de búsqueda para asignar un título a la página"
             },
             {
               "id": "cl1r0b9tl000v2e6dkligryj3",
-              "content": "A slogan that sticks in a consumer’s mind"
+              "content": "Un eslogan que se queda en la mente del consumidor"
             }
           ]
         }
@@ -134,7 +137,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Well done!" }] }
+              { "type": "p", "children": [{ "text": "¡Bien hecho!" }] }
             ]
           }
         },
@@ -143,7 +146,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What is a persona ?" }] }
+              { "type": "p", "children": [{ "text": "¿Qué es una persona?" }] }
             ]
           }
         },
@@ -154,20 +157,20 @@
           "items": [
             {
               "id": "cl1r0erim001g2e6d5zzn8q22",
-              "content": "Your target audience"
+              "content": "Tu audiencia objetivo"
             },
             {
               "id": "cl1r0erim001h2e6dnwtiturl",
-              "content": "Someone who joins your mailing list"
+              "content": "Alguien que se une a tu lista de correo"
             },
             {
               "id": "cl1r0erim001i2e6dbfhck09o",
-              "content": "A repeat customer"
+              "content": "Un cliente recurrente"
             },
             {
               "id": "cl1r0erim001j2e6d2waa3374",
               "outgoingEdgeId": "cl1r0k27y00262e6dflgcp3wa",
-              "content": "A fictional representation of a group of customers"
+              "content": "Una representación ficticia de un grupo de clientes"
             }
           ]
         }
@@ -191,7 +194,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Well done!" }] }
+              { "type": "p", "children": [{ "text": "¡Bien hecho!" }] }
             ]
           }
         },
@@ -202,7 +205,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "What does CTA stand for?" }]
+                "children": [{ "text": "¿Qué significa CTA?" }]
               }
             ]
           }
@@ -235,14 +238,16 @@
     },
     {
       "id": "cl1r0c85100102e6d7uohf0cu",
-      "title": "Q1 - Wrong",
+      "title": "Q1 - Incorrecto",
       "graphCoordinates": { "x": 79.08, "y": 821.49 },
       "blocks": [
         {
           "id": "cl1r0c85i00112e6d8iwtrpvb",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "WRONG!" }] }]
+            "richText": [
+              { "type": "p", "children": [{ "text": "¡INCORRECTO!" }] }
+            ]
           }
         },
         {
@@ -254,7 +259,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "SEO stands for Search Engine Optimization" }
+                  { "text": "SEO significa Search Engine Optimization" }
                 ]
               }
             ]
@@ -264,14 +269,16 @@
     },
     {
       "id": "cl1r0exdi001l2e6drdwj3u96",
-      "title": "Q2 - Wrong",
+      "title": "Q2 - Incorrecto",
       "graphCoordinates": { "x": 542.94, "y": 996.75 },
       "blocks": [
         {
           "id": "cl1r0exdi001m2e6d7kge562x",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "WRONG!" }] }]
+            "richText": [
+              { "type": "p", "children": [{ "text": "¡INCORRECTO!" }] }
+            ]
           }
         },
         {
@@ -284,7 +291,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Anchor text is the visible text that is hyperlinked to another page"
+                    "text": "El texto ancla es el texto visible que está hipervinculado a otra página"
                   }
                 ]
               }
@@ -295,14 +302,16 @@
     },
     {
       "id": "cl1r0k3tq00272e6d1fwyajjx",
-      "title": "Q3 - Wrong",
+      "title": "Q3 - Incorrecto",
       "graphCoordinates": { "x": 916.73, "y": 925.61 },
       "blocks": [
         {
           "id": "cl1r0k3tq00282e6dl0av81kz",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "WRONG!" }] }]
+            "richText": [
+              { "type": "p", "children": [{ "text": "¡INCORRECTO!" }] }
+            ]
           }
         },
         {
@@ -315,7 +324,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "A persona is a fictional representation of a group of customers"
+                    "text": "Una persona es una representación ficticia de un grupo de clientes"
                   }
                 ]
               }
@@ -326,14 +335,16 @@
     },
     {
       "id": "cl1r0kqof002d2e6doqhpnuqy",
-      "title": "Q4 - Wrong",
+      "title": "Q4 - Incorrecto",
       "graphCoordinates": { "x": 1316.88, "y": 861.75 },
       "blocks": [
         {
           "id": "cl1r0kqof002e2e6dzjcw0kvs",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "WRONG!" }] }]
+            "richText": [
+              { "type": "p", "children": [{ "text": "¡INCORRECTO!" }] }
+            ]
           }
         },
         {
@@ -346,7 +357,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Anchor text is the visible text that is hyperlinked to another page"
+                    "text": "El texto ancla es el texto visible que está hipervinculado a otra página"
                   }
                 ]
               }
@@ -357,7 +368,7 @@
     },
     {
       "id": "cl1r0lfb5002k2e6dd6as5kj5",
-      "title": "Filter",
+      "title": "Filtro",
       "graphCoordinates": { "x": 1647.16, "y": 167.69 },
       "blocks": [
         {
@@ -415,7 +426,7 @@
     },
     {
       "id": "cl1r0mn2p002p2e6dijqbjzlh",
-      "title": "Result",
+      "title": "Resultado",
       "graphCoordinates": { "x": 2508.594129051806, "y": 405.664166830421 },
       "blocks": [
         {
@@ -425,7 +436,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Your score is {{Score}}/20." }]
+                "children": [{ "text": "Tu puntuación es {{Score}}/20." }]
               }
             ]
           }
@@ -435,7 +446,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Try again?" }] }
+              { "type": "p", "children": [{ "text": "¿Intentar de nuevo?" }] }
             ]
           }
         },
@@ -446,16 +457,16 @@
             {
               "id": "cl1r0nt85002t2e6dvb7si7ny",
               "outgoingEdgeId": "cl1r15gko005i2e6dn6rhifwe",
-              "content": "Yes!"
+              "content": "¡Sí!"
             },
-            { "id": "cl1r0nveb002u2e6dotjk6nuf", "content": "No, bye!" }
+            { "id": "cl1r0nveb002u2e6dotjk6nuf", "content": "No, ¡adiós!" }
           ]
         }
       ]
     },
     {
       "id": "cl1r0rgex00382e6dkayjbys6",
-      "title": "Great score",
+      "title": "Gran puntuación",
       "graphCoordinates": { "x": 1999.325745846056, "y": 159.3910979368924 },
       "blocks": [
         {
@@ -464,7 +475,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Well done 👏" }] }
+              { "type": "p", "children": [{ "text": "Bien hecho 👏" }] }
             ]
           }
         }
@@ -472,7 +483,7 @@
     },
     {
       "id": "cl1r0rvak003b2e6dejcdrooq",
-      "title": "Medium score",
+      "title": "Puntuación media",
       "graphCoordinates": { "x": 2008.44697061989, "y": 315.9721232210492 },
       "blocks": [
         {
@@ -484,7 +495,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "You could do better but that's alright!" }
+                  { "text": "Podrías hacerlo mejor pero está bien." }
                 ]
               }
             ]
@@ -494,7 +505,7 @@
     },
     {
       "id": "cl1r0seuj003h2e6dandwc43r",
-      "title": "Bad score",
+      "title": "Mala puntuación",
       "graphCoordinates": { "x": 2009.967174748862, "y": 499.9168228267089 },
       "blocks": [
         {
@@ -507,7 +518,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Aouch, you need to improve your Digital Marketing game."
+                    "text": "Aouch, necesitas mejorar tu juego de Marketing Digital."
                   }
                 ]
               }
@@ -518,7 +529,7 @@
     },
     {
       "id": "cl1r15f68005f2e6dvdtal7cp",
-      "title": "Restart",
+      "title": "Reiniciar",
       "graphCoordinates": { "x": 2850.766985281865, "y": 609.1892251509271 },
       "blocks": [
         {
@@ -534,14 +545,14 @@
     },
     {
       "id": "cl1r15w3o005s2e6dr5l7csao",
-      "title": "Welcome",
+      "title": "Bienvenido",
       "graphCoordinates": { "x": -361.5512664480758, "y": 166.9921185817542 },
       "blocks": [
         {
           "id": "cl1r16nes005z2e6d3aj23kfz",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Hi there!" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "¡Hola!" }] }]
           }
         },
         {
@@ -553,7 +564,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You're about to answer a Quiz about Digital Marketing"
+                    "text": "Estás a punto de responder un cuestionario sobre Marketing Digital."
                   }
                 ]
               }
@@ -567,7 +578,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "It is composed of only 4 questions." }]
+                "children": [{ "text": "Está compuesto de solo 4 preguntas." }]
               }
             ]
           }
@@ -577,7 +588,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "bold": true, "text": "Ready?" }] }
+              { "type": "p", "children": [{ "bold": true, "text": "¿Listo?" }] }
             ]
           }
         },
@@ -588,7 +599,7 @@
             {
               "id": "cl1r176e9006a2e6dpvp0974z",
               "outgoingEdgeId": "cl1r17pzv006n2e6dpibxp9th",
-              "content": "Go!"
+              "content": "¡Vamos!"
             }
           ]
         }
@@ -741,7 +752,7 @@
   "variables": [
     {
       "id": "vcl1r0bxdj000z2e6d65u7n41b",
-      "name": "Score",
+      "name": "Puntaje",
       "isSessionVariable": true
     }
   ],

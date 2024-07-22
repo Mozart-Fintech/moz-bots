@@ -1,7 +1,7 @@
 {
   "version": "6",
   "id": "cloo0bge500071aorb4dadsju",
-  "name": "NPS Survey",
+  "name": "Encuesta NPS",
   "events": [
     {
       "id": "yu8qfeteutmum1ghb0wqshu9",
@@ -13,14 +13,14 @@
   "groups": [
     {
       "id": "g7l1tc86ty1r6x0yn0r2g1xo",
-      "title": "Intro",
+      "title": "Introducción",
       "graphCoordinates": { "x": 10.99, "y": 85.96 },
       "blocks": [
         {
           "id": "vep990mmfbe64nqczp66xebw",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Hey! 👋" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "¡Hola! 👋" }] }]
           }
         },
         {
@@ -32,9 +32,9 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Since you are part of our daily users, can I ask you "
+                    "text": "Como eres parte de nuestros usuarios diarios, ¿puedo hacerte "
                   },
-                  { "bold": true, "text": "2 questions" },
+                  { "bold": true, "text": "2 preguntas" },
                   { "text": "?" }
                 ]
               }
@@ -48,7 +48,7 @@
             {
               "id": "wvjhc2vrkqy8512y0wvmciex",
               "outgoingEdgeId": "sjeyoptun1yu805ry37je1ni",
-              "content": "Sure!"
+              "content": "¡Claro!"
             }
           ]
         }
@@ -56,7 +56,7 @@
     },
     {
       "id": "xgqei015z6d58gefpviz8053",
-      "title": "Recommendation",
+      "title": "Recomendación",
       "graphCoordinates": { "x": 360.5, "y": 86.64 },
       "blocks": [
         {
@@ -67,9 +67,11 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "How likely will you recommend our product" },
+                  {
+                    "text": "¿Qué tan probable es que recomiendes nuestro producto"
+                  },
                   { "bold": true, "text": " " },
-                  { "text": "to a friend or colleague?" }
+                  { "text": "a un amigo o colega?" }
                 ]
               }
             ]
@@ -81,8 +83,8 @@
           "options": {
             "variableId": "vwqc8tzl0380h30vxh07fekmm",
             "labels": {
-              "left": "Very unlikely",
-              "right": "Very likely"
+              "left": "Muy improbable",
+              "right": "Muy probable"
             },
             "isOneClickSubmitEnabled": true
           }
@@ -126,7 +128,7 @@
     },
     {
       "id": "rp2r31gn1w5t1aeej96bhjj3",
-      "title": "Good",
+      "title": "Bueno",
       "graphCoordinates": { "x": 1078.85, "y": 292.9 },
       "blocks": [
         {
@@ -136,7 +138,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "I'm glad to hear that 😍" }]
+                "children": [{ "text": "¡Me alegra oír eso! 😍" }]
               }
             ]
           }
@@ -149,7 +151,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Could you tell us why?" }]
+                "children": [{ "text": "¿Podrías decirnos por qué?" }]
               }
             ]
           }
@@ -158,7 +160,7 @@
     },
     {
       "id": "sk1n3wpfit3uvfrh42fgcykm",
-      "title": "Why?",
+      "title": "¿Por qué?",
       "graphCoordinates": { "x": 1425.22, "y": 445.48 },
       "blocks": [
         {
@@ -173,7 +175,7 @@
     },
     {
       "id": "qj9qgsbfv6u1f5oe1bjnwnu9",
-      "title": "Bad",
+      "title": "Malo",
       "graphCoordinates": { "x": 1067.22, "y": 575.86 },
       "blocks": [
         {
@@ -184,7 +186,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Could you tell us what went wrong?" }]
+                "children": [{ "text": "¿Podrías decirnos qué salió mal?" }]
               }
             ]
           }
@@ -193,7 +195,7 @@
     },
     {
       "id": "tavt0nuh54ck1hvq74kt74vf",
-      "title": "Set type",
+      "title": "Establecer tipo",
       "graphCoordinates": { "x": 726.83, "y": 234.02 },
       "blocks": [
         {
@@ -202,14 +204,14 @@
           "type": "Set variable",
           "options": {
             "variableId": "vcgkjbh8intf2cql1oteyj4mu",
-            "expressionToEvaluate": "Promoter"
+            "expressionToEvaluate": "Promotor"
           }
         }
       ]
     },
     {
       "id": "e887eoxfamv45hj8bz47jize",
-      "title": "Set type",
+      "title": "Establecer tipo",
       "graphCoordinates": { "x": 722.39, "y": 399.91 },
       "blocks": [
         {
@@ -225,7 +227,7 @@
     },
     {
       "id": "z4qtvedlz3mzcj4jdnfet2dc",
-      "title": "Set type",
+      "title": "Establecer tipo",
       "graphCoordinates": { "x": 722.56, "y": 566.11 },
       "blocks": [
         {
@@ -241,7 +243,7 @@
     },
     {
       "id": "l7fupza0yi6os0ix6heyd7jz",
-      "title": "Final segmentation",
+      "title": "Segmentación final",
       "graphCoordinates": { "x": 1777.5859375, "y": 396.8453917968819 },
       "blocks": [
         {
@@ -257,7 +259,7 @@
                     "id": "gclfcip3hr0p4vzk5o8n60ru",
                     "variableId": "vcgkjbh8intf2cql1oteyj4mu",
                     "comparisonOperator": "Equal to",
-                    "value": "Promoter"
+                    "value": "Promotor"
                   }
                 ]
               }
@@ -296,7 +298,7 @@
     },
     {
       "id": "pp1ncsdaki07pfq5pjl53v6r",
-      "title": "Capterra?",
+      "title": "¿Capterra?",
       "graphCoordinates": { "x": 2160.71875, "y": 69.58984375 },
       "blocks": [
         {
@@ -304,7 +306,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Thank you! 🙏" }] }
+              { "type": "p", "children": [{ "text": "¡Gracias! 🙏" }] }
             ]
           }
         },
@@ -316,7 +318,9 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Would you be ok to leave a review on Capterra?" }
+                  {
+                    "text": "¿Estarías dispuesto a dejar una reseña en Capterra?"
+                  }
                 ]
               }
             ]
@@ -329,12 +333,12 @@
             {
               "id": "y34d4iij8y9qrt28y240x7vm",
               "outgoingEdgeId": "lw33kviri91z1mvxb87kaew0",
-              "content": "Sure!"
+              "content": "¡Claro!"
             },
             {
               "id": "l7txnq6jtm0niynklcpzb21u",
               "outgoingEdgeId": "wjcvbnj1drs6if1p21a8yokf",
-              "content": "Maybe later"
+              "content": "Tal vez más tarde"
             }
           ]
         }
@@ -342,7 +346,7 @@
     },
     {
       "id": "znljx8q0q2ggih0ipu28ryby",
-      "title": "Bye cheerful",
+      "title": "Adiós animado",
       "graphCoordinates": { "x": 2167.570274174784, "y": 543.712381679639 },
       "blocks": [
         {
@@ -353,7 +357,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Thank you for taking the time to answer!" }
+                  { "text": "¡Gracias por tomarte el tiempo para responder!" }
                 ]
               }
             ]
@@ -364,7 +368,10 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Have a beautiful day!" }] }
+              {
+                "type": "p",
+                "children": [{ "text": "¡Que tengas un hermoso día!" }]
+              }
             ]
           }
         },
@@ -379,7 +386,7 @@
     },
     {
       "id": "vvbtgh5ptk49shyjn3zn6d71",
-      "title": "Bye sad",
+      "title": "Adiós triste",
       "graphCoordinates": { "x": 2173.366603864535, "y": 949.7063235658585 },
       "blocks": [
         {
@@ -391,7 +398,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Sorry that your experience hasn't been amazing 🙁"
+                    "text": "Lo siento que tu experiencia no haya sido increíble 🙁"
                   }
                 ]
               }
@@ -407,7 +414,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Here is a promo code if you'd like to give our product another chance: "
+                    "text": "Aquí tienes un código promocional por si te gustaría darle otra oportunidad a nuestro producto: "
                   },
                   { "bold": true, "text": "PROMO123" }
                 ]
@@ -426,7 +433,7 @@
     },
     {
       "id": "mwfu8ot0z37zfq2fbo5rcyrl",
-      "title": "Redirect Capterra",
+      "title": "Redirigir a Capterra",
       "graphCoordinates": { "x": 2531.28515625, "y": 300.828125 },
       "blocks": [
         {
@@ -434,7 +441,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Amazing 🤩" }] }
+              { "type": "p", "children": [{ "text": "¡Increíble!" }] }
             ]
           }
         },
@@ -445,7 +452,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Let me take you there..." }]
+                "children": [{ "text": "Déjame llevarte allí..." }]
               }
             ]
           }
@@ -577,7 +584,7 @@
   "variables": [
     {
       "id": "vwqc8tzl0380h30vxh07fekmm",
-      "name": "Recommend rate",
+      "name": "Tasa de recomendación",
       "isSessionVariable": true
     },
     {

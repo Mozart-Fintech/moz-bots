@@ -1,7 +1,7 @@
 {
   "version": "6",
   "id": "clpnu4plq00051abo2487q86h",
-  "name": "ChatGPT condition",
+  "name": "Condición ChatGPT",
   "events": [
     {
       "id": "ewnfbo0exlu7ihfu2lu2lusm",
@@ -13,7 +13,7 @@
   "groups": [
     {
       "id": "qfrz5nwm63g12dajsjxothb5",
-      "title": "User input",
+      "title": "Entrada del Usuario",
       "graphCoordinates": { "x": -107.01, "y": -53.23 },
       "blocks": [
         {
@@ -21,7 +21,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "How can we help?" }] }
+              { "type": "p", "children": [{ "text": "¿Cómo podemos ayudar?" }] }
             ]
           }
         },
@@ -35,29 +35,29 @@
     },
     {
       "id": "bh3uva3254p0jgp46gj92way",
-      "title": "Condition 🧠",
+      "title": "Condición 🧠",
       "graphCoordinates": { "x": 228.67, "y": -50.67 },
       "blocks": [
         {
           "id": "ufwpq6z392ebsu5tda0md77a",
           "type": "openai",
           "options": {
-            "action": "Create chat completion",
+            "action": "Crear conclusión de chat",
             "messages": [
               {
                 "role": "system",
-                "content": "You are helpful assistant doing customer support for a software called Mozbot.\n\nIf the user is asking a question about his account, please say \"ACCOUNT\".\n\nIf the user wants to talk to a human, please say \"HUMAN\".\n\nOtherwise, say \"OK\""
+                "content": "Eres un asistente servicial que hace soporte al cliente para un software llamado Mozbot.\n\nSi el usuario hace una pregunta sobre su cuenta, por favor di \"CUENTA\".\n\nSi el usuario quiere hablar con un humano, por favor di \"HUMANO\".\n\nDe lo contrario, di \"OK\""
               },
-              { "role": "user", "content": "Can I talk to a human?" },
-              { "role": "assistant", "content": "HUMAN" },
-              { "role": "user", "content": "I need to check my account" },
-              { "role": "assistant", "content": "ACCOUNT" },
-              { "role": "user", "content": "{{User Message}}" }
+              { "role": "user", "content": "¿Puedo hablar con un humano?" },
+              { "role": "assistant", "content": "HUMANO" },
+              { "role": "user", "content": "Necesito revisar mi cuenta" },
+              { "role": "assistant", "content": "CUENTA" },
+              { "role": "user", "content": "{{Mensaje del Usuario}}" }
             ],
             "credentialsId": "clpjnjrbt00051aliw6610w1z",
             "responseMapping": [
               {
-                "item": "Message content",
+                "item": "Contenido del mensaje",
                 "variableId": "vni6kwbch8zlq92dclgcivzyr"
               }
             ]
@@ -77,7 +77,7 @@
                     "id": "iiv6h6ssgusrfza4vped0iqe",
                     "variableId": "vni6kwbch8zlq92dclgcivzyr",
                     "comparisonOperator": "Contains",
-                    "value": "ACCOUNT"
+                    "value": "CUENTA"
                   }
                 ]
               }
@@ -91,7 +91,7 @@
                     "id": "qekpq2av325h7rkmnrvtumxn",
                     "variableId": "vni6kwbch8zlq92dclgcivzyr",
                     "comparisonOperator": "Contains",
-                    "value": "HUMAN"
+                    "value": "HUMANO"
                   }
                 ]
               }
@@ -102,7 +102,7 @@
     },
     {
       "id": "flt2vtb4pb6mvlvyrrxonzwf",
-      "title": "Account",
+      "title": "Cuenta",
       "graphCoordinates": { "x": 585.48, "y": -214.13 },
       "blocks": [
         {
@@ -113,7 +113,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Ok feel free to check your account here" }
+                  { "text": "Ok, siéntase libre de revisar su cuenta aquí" }
                 ]
               }
             ]
@@ -122,7 +122,7 @@
         {
           "id": "fn0s0ezabail96c5n0xs24aq",
           "type": "choice input",
-          "items": [{ "id": "tslv59v8oqbfpnd21la8qnz4", "content": "Account" }]
+          "items": [{ "id": "tslv59v8oqbfpnd21la8qnz4", "content": "Cuenta" }]
         },
         {
           "id": "r16g3avw7mwzi12srqisuex0",
@@ -133,7 +133,7 @@
     },
     {
       "id": "jn9w80afa6a66czzjfto8tmt",
-      "title": "Human",
+      "title": "Humano",
       "graphCoordinates": { "x": 586.68, "y": 153.73 },
       "blocks": [
         {
@@ -141,7 +141,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "I'm a human" }] }
+              { "type": "p", "children": [{ "text": "Soy un humano" }] }
             ]
           }
         }
@@ -149,14 +149,14 @@
     },
     {
       "id": "el01d0j1db9kp6v8wlrk9dob",
-      "title": "Else",
+      "title": "Otra Cosa",
       "graphCoordinates": { "x": 581.46, "y": 315.66 },
       "blocks": [
         {
           "id": "tpy9wjrwmhw16xjgs8htao04",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Else" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "Otra Cosa" }] }]
           }
         }
       ]
@@ -175,7 +175,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You need to add your OpenAI credentials to make this bot work. 🪄\n"
+                    "text": "Necesitas agregar tus credenciales de OpenAI para que este bot funcione. 🪄\n"
                   }
                 ]
               }
@@ -191,11 +191,11 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Once it's done, delete this group and connect the "
+                    "text": "Una vez hecho, elimina este grupo y conecta el "
                   },
-                  { "bold": true, "text": "Start" },
-                  { "text": " event with " },
-                  { "bold": true, "text": "Intro" },
+                  { "bold": true, "text": "Inicio" },
+                  { "text": " evento con " },
+                  { "bold": true, "text": "Introducción" },
                   { "text": " 🚀\n" }
                 ]
               }
@@ -251,12 +251,12 @@
   "variables": [
     {
       "id": "vni6kwbch8zlq92dclgcivzyr",
-      "name": "Assistant Message",
+      "name": "Mensaje del Asistente",
       "isSessionVariable": true
     },
     {
       "id": "vudksu3zyrat6s1bq6qne0rx3",
-      "name": "User Message",
+      "name": "Mensaje del Usuario",
       "isSessionVariable": true
     }
   ],

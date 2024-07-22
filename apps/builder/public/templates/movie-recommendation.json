@@ -1,7 +1,7 @@
 {
   "version": "6",
   "id": "cloo0wet7000h1aor38uwjxjw",
-  "name": "Movie recommendation",
+  "name": "Recomendación de películas",
   "events": [
     {
       "id": "u6lpjibfjhyoqij5wjf9kvnl",
@@ -13,7 +13,7 @@
   "groups": [
     {
       "id": "mjnkukpkpvf4ha2g4n5m804v",
-      "title": "Menu",
+      "title": "Menú",
       "graphCoordinates": { "x": 243.1, "y": 12.32 },
       "blocks": [
         {
@@ -32,7 +32,9 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Welcome to our film recommendation bot 👋" }
+                  {
+                    "text": "Bienvenido a nuestro bot de recomendación de películas 👋"
+                  }
                 ]
               }
             ]
@@ -52,7 +54,9 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "It is powered by The Movie DB API 🚀" }]
+                "children": [
+                  { "text": "Está impulsado por The Movie DB API 🚀" }
+                ]
               }
             ]
           }
@@ -69,7 +73,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "How can I we help?" }] }
+              { "type": "p", "children": [{ "text": "¿Cómo podemos ayudar?" }] }
             ]
           }
         },
@@ -80,12 +84,12 @@
             {
               "id": "kaimvzg9igdtktgou5m3s1bw",
               "outgoingEdgeId": "t8qyjpigrz7cdl8gxl1wxlwj",
-              "content": "Select a genre 💅"
+              "content": "Selecciona un género 💅"
             },
             {
               "id": "i8ls2f8inq2ovuijj6l7rbcq",
               "outgoingEdgeId": "tjn2ljosqyd4aj9dk8mnifsu",
-              "content": "See what's trending 🔝"
+              "content": "Ver qué es tendencia 🔝"
             }
           ]
         }
@@ -93,14 +97,14 @@
     },
     {
       "id": "kq1g5z6pz4buot7sawqdrr3s",
-      "title": "Genre",
+      "title": "Género",
       "graphCoordinates": { "x": 607.85, "y": 295.32 },
       "blocks": [
         {
           "id": "ecwz96cghzp4ji3lyx7taxt1",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Sure!" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "¡Claro!" }] }]
           }
         },
         {
@@ -147,7 +151,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Select your desired genre 👇" }]
+                "children": [{ "text": "Selecciona el género deseado 👇" }]
               }
             ]
           }
@@ -181,14 +185,14 @@
     },
     {
       "id": "d6v9lh83c7zuwrhf2mmo6nxo",
-      "title": "Trending",
+      "title": "Tendencias",
       "graphCoordinates": { "x": 599.83, "y": 880.98 },
       "blocks": [
         {
           "id": "edokvbp15ubqeuydw9n7wf4w",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Sure!" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "¡Claro!" }] }]
           }
         },
         {
@@ -235,7 +239,11 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Here are popular movies this week 👇" }]
+                "children": [
+                  {
+                    "text": "Aquí están las películas populares de esta semana 👇"
+                  }
+                ]
               }
             ]
           }
@@ -269,7 +277,7 @@
     },
     {
       "id": "v35sky44jzz9fkwwul2qxufl",
-      "title": "Movies by genre",
+      "title": "Películas por género",
       "graphCoordinates": { "x": 952.84, "y": 294.85 },
       "blocks": [
         {
@@ -281,7 +289,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Here are trending movies for the {{Selected genre}} genre"
+                    "text": "Aquí están las películas de tendencia para el género {{Selected genre}}"
                   }
                 ]
               }
@@ -364,7 +372,7 @@
     },
     {
       "id": "uozlg88loeb8xegu6y4le6k8",
-      "title": "Movie details",
+      "title": "Detalles de la película",
       "graphCoordinates": { "x": 1151.05, "y": 913.34 },
       "blocks": [
         {
@@ -372,7 +380,10 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Excellent choice 🔥" }] }
+              {
+                "type": "p",
+                "children": [{ "text": "¡Excelente elección 🔥" }]
+              }
             ]
           }
         },
@@ -452,12 +463,12 @@
             {
               "id": "n4818dnrb4arw1xh5v0ot8vz",
               "outgoingEdgeId": "fteu5frsbj8wejfhhwzuv8t1",
-              "content": "Watch the movie"
+              "content": "Ver la película"
             },
             {
               "id": "j9d1pf2tndax0itezys7t73c",
               "outgoingEdgeId": "zb79atxs2itliks4d00e35uy",
-              "content": "Find something else"
+              "content": "Buscar otra cosa"
             }
           ]
         }
@@ -465,7 +476,7 @@
     },
     {
       "id": "x4d8cdsyzoqz6vzsurnb8twc",
-      "title": "Redirect to IMDB",
+      "title": "Redirigir a IMDB",
       "graphCoordinates": { "x": 1523.21, "y": 1433.33 },
       "blocks": [
         {

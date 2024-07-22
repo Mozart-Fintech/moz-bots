@@ -13,7 +13,7 @@
   "groups": [
     {
       "id": "cl96ns9qr00043b6ii07bo25o",
-      "title": "Menu",
+      "title": "Menú",
       "graphCoordinates": { "x": 385.68, "y": 86.92 },
       "blocks": [
         {
@@ -25,7 +25,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "If you have a question about our product, you're in the right place 😊"
+                    "text": "Si tienes una pregunta sobre nuestro producto, estás en el lugar correcto 😊"
                   }
                 ]
               }
@@ -39,22 +39,22 @@
             {
               "id": "cl96nv877000c3b6idyepv694",
               "outgoingEdgeId": "cl96o2u6h000t3b6izmh4pguj",
-              "content": "What's Analyzr?"
+              "content": "¿Qué es Analyzr?"
             },
             {
               "id": "cl96nvcwi000d3b6ipyfzcyaw",
               "outgoingEdgeId": "cl96o6hxh00173b6ix83nn581",
-              "content": "Can I use your tool for free?"
+              "content": "¿Puedo usar su herramienta de forma gratuita?"
             },
             {
               "id": "cl96obwgy001k3b6ir1a8qk5w",
               "outgoingEdgeId": "cl96ofn4s001q3b6i482xx6jp",
-              "content": "Tell me about the company"
+              "content": "Cuéntame sobre la compañía"
             },
             {
               "id": "cl96nvstv000e3b6itm8cj1s5",
               "outgoingEdgeId": "cl96ogaa0001x3b6izae2alxq",
-              "content": "I have another question"
+              "content": "Tengo otra pregunta"
             }
           ]
         }
@@ -62,16 +62,14 @@
     },
     {
       "id": "cl96nt9ob00063b6ii2pktlxq",
-      "title": "Welcom",
+      "title": "Bienvenida",
       "graphCoordinates": { "x": 43.5, "y": 89.92 },
       "blocks": [
         {
           "id": "cl96nt9ob00073b6ionlvakha",
           "type": "text",
           "content": {
-            "richText": [
-              { "type": "p", "children": [{ "text": "Hey there 👋" }] }
-            ]
+            "richText": [{ "type": "p", "children": [{ "text": "Hola 👋" }] }]
           }
         },
         {
@@ -84,7 +82,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "I'm John, head of the customer success Team at Analyzr"
+                    "text": "Soy John, jefe del equipo de éxito del cliente en Analyzr"
                   }
                 ]
               }
@@ -95,7 +93,7 @@
     },
     {
       "id": "cl96o2cgi000r3b6iljr1iwdl",
-      "title": "What's Analyzr",
+      "title": "¿Qué es Analyzr?",
       "graphCoordinates": { "x": 774.53, "y": -513.14 },
       "blocks": [
         {
@@ -107,7 +105,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Analyzr is a simple and privacy-friendly analytics tool for your website"
+                    "text": "Analyzr es una herramienta de análisis sencilla y respetuosa con la privacidad para tu sitio web"
                   }
                 ]
               }
@@ -119,12 +117,12 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "It is:" }] },
-              { "type": "p", "children": [{ "text": "✅ Lightweight" }] },
-              { "type": "p", "children": [{ "text": "✅ Open-source" }] },
+              { "type": "p", "children": [{ "text": "Es:" }] },
+              { "type": "p", "children": [{ "text": "✅ Ligera" }] },
+              { "type": "p", "children": [{ "text": "✅ Código abierto" }] },
               {
                 "type": "p",
-                "children": [{ "text": "✅ Fully compliant with GDPR" }]
+                "children": [{ "text": "✅ Totalmente compatible con el GDPR" }]
               }
             ]
           }
@@ -133,7 +131,7 @@
           "id": "cl96o55z3000x3b6ikq14g2tu",
           "type": "choice input",
           "items": [
-            { "id": "cl96o55z3000y3b6idpn54byw", "content": "Sounds good!" }
+            { "id": "cl96o55z3000y3b6idpn54byw", "content": "¡Suena bien!" }
           ]
         },
         {
@@ -148,14 +146,14 @@
     },
     {
       "id": "cl96o6a2700123b6ie4efb6bb",
-      "title": "Use for free",
+      "title": "Usar gratis",
       "graphCoordinates": { "x": 775.05, "y": 7.42 },
       "blocks": [
         {
           "id": "cl96o6a2700133b6ii5n027h2",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "You can!" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "¡Puedes!" }] }]
           }
         },
         {
@@ -167,7 +165,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Analyzr has a generous free plan that allows you to store 1,000,000 events/mo 🚀"
+                    "text": "Analyzr tiene un plan gratuito generoso que te permite almacenar 1,000,000 eventos/mes 🚀"
                   }
                 ]
               }
@@ -181,12 +179,12 @@
             {
               "id": "cl96o6a2700163b6i818ywnqv",
               "outgoingEdgeId": "n4rgj2fmqrmnkvo9m9ebzak7",
-              "content": "Awesome!"
+              "content": "¡Genial!"
             },
             {
               "id": "cl96o83lo00183b6igen42ivq",
               "outgoingEdgeId": "cl96oa83f001h3b6i81wodnjx",
-              "content": "What's an event?"
+              "content": "¿Qué es un evento?"
             }
           ]
         }
@@ -194,7 +192,7 @@
     },
     {
       "id": "cl96o8eym001a3b6i3lxh7kw0",
-      "title": "User event",
+      "title": "Evento de usuario",
       "graphCoordinates": { "x": 1158.01, "y": 322.44 },
       "blocks": [
         {
@@ -205,7 +203,9 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "An event is a user event on your website." }
+                  {
+                    "text": "Un evento es un evento de usuario en tu sitio web."
+                  }
                 ]
               }
             ]
@@ -220,7 +220,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "It can be \"User visited this URL\" or \"User clicked on this button\""
+                    "text": "Puede ser \"Usuario visitó esta URL\" o \"Usuario hizo clic en este botón\""
                   }
                 ]
               }
@@ -231,7 +231,7 @@
           "id": "cl96o9xba001d3b6i9004l33e",
           "type": "choice input",
           "items": [
-            { "id": "cl96o9xbd001e3b6i6ag5ooo7", "content": "Ok, got it!" }
+            { "id": "cl96o9xbd001e3b6i6ag5ooo7", "content": "¡Entendido!" }
           ]
         },
         {
@@ -246,7 +246,7 @@
     },
     {
       "id": "cl96oc274001m3b6ig3beli9v",
-      "title": "Company",
+      "title": "Compañía",
       "graphCoordinates": { "x": 772.59, "y": 432 },
       "blocks": [
         {
@@ -257,7 +257,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "The company was founded in 2020 by Josh Corn" }
+                  { "text": "La compañía fue fundada en 2020 por Josh Corn" }
                 ]
               }
             ]
@@ -270,7 +270,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "We are now a team of 15" }]
+                "children": [{ "text": "Ahora somos un equipo de 15" }]
               }
             ]
           }
@@ -280,13 +280,16 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Our core values are:" }] },
-              { "type": "p", "children": [{ "text": "" }] },
-              { "type": "p", "children": [{ "text": "🔍 Transparency" }] },
-              { "type": "p", "children": [{ "text": "⚡ Ship fast" }] },
               {
                 "type": "p",
-                "children": [{ "text": "💙 Awesome customer support" }]
+                "children": [{ "text": "Nuestros valores principales son:" }]
+              },
+              { "type": "p", "children": [{ "text": "" }] },
+              { "type": "p", "children": [{ "text": "🔍 Transparencia" }] },
+              { "type": "p", "children": [{ "text": "⚡ Entregar rápido" }] },
+              {
+                "type": "p",
+                "children": [{ "text": "💙 Soporte al cliente increíble" }]
               }
             ]
           }
@@ -294,7 +297,9 @@
         {
           "id": "cl96oftnv001r3b6ixen8g0bv",
           "type": "choice input",
-          "items": [{ "id": "cl96oftnv001s3b6i7kjyq7me", "content": "Cool!" }]
+          "items": [
+            { "id": "cl96oftnv001s3b6i7kjyq7me", "content": "¡Genial!" }
+          ]
         },
         {
           "id": "js5pbqj76g67yvs6wz99rcbm",
@@ -308,7 +313,7 @@
     },
     {
       "id": "cl96og2yr001v3b6ivhzb1x34",
-      "title": "Question",
+      "title": "Pregunta",
       "graphCoordinates": { "x": 773.69, "y": 1020.26 },
       "blocks": [
         {
@@ -316,7 +321,10 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Sure, no problem!" }] }
+              {
+                "type": "p",
+                "children": [{ "text": "¡Claro, no hay problema!" }]
+              }
             ]
           }
         },
@@ -326,7 +334,7 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your question..."
+              "placeholder": "Escribe tu pregunta..."
             },
             "isLong": true
           }
@@ -335,7 +343,7 @@
     },
     {
       "id": "cl96oh3mn001z3b6i2b0no81w",
-      "title": "Bye",
+      "title": "Adiós",
       "graphCoordinates": { "x": 1174.378083740756, "y": 1049.08556420999 },
       "blocks": [
         {
@@ -347,7 +355,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Alright, we'll reach out to you very soon. Thank you so much 💙"
+                    "text": "De acuerdo, nos pondremos en contacto contigo muy pronto. Muchas gracias 💙"
                   }
                 ]
               }

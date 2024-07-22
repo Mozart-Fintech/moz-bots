@@ -217,8 +217,18 @@ const getIncomingMessageContent = async ({
         break
       }
       case 'interactive': {
-        if (text !== '') text += `\n\n${message.interactive.button_reply.id}`
-        else text = message.interactive.button_reply.id
+        if (
+          message.interactive.type === 'list_reply' &&
+          message.interactive.list_reply
+        )
+          if (text !== '') text += `\n\n${message.interactive.list_reply.id}`
+          else text = message.interactive.list_reply.id
+        if (
+          message.interactive.type === 'button_reply' &&
+          message.interactive.button_reply
+        )
+          if (text !== '') text += `\n\n${message.interactive.button_reply.id}`
+          else text = message.interactive.button_reply.id
         break
       }
       case 'document':

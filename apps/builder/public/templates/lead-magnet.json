@@ -13,16 +13,14 @@
   "groups": [
     {
       "id": "gr9wedxcqxie11ki9yss1h5o",
-      "title": "Intro",
+      "title": "Introducción",
       "graphCoordinates": { "x": 209.12109375, "y": 176.5703125 },
       "blocks": [
         {
           "id": "uaks8b01ec3fln8g5iq9gnv7",
           "type": "text",
           "content": {
-            "richText": [
-              { "type": "p", "children": [{ "text": "Hi there! 👋" }] }
-            ]
+            "richText": [{ "type": "p", "children": [{ "text": "¡Hola! 👋" }] }]
           }
         },
         {
@@ -33,10 +31,10 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Sign up for the newsletter and " },
+                  { "text": "Suscríbete al boletín y " },
                   {
                     "bold": true,
-                    "text": "get free access to our exclusive 'Community Bundle'."
+                    "text": "obtén acceso gratuito a nuestro exclusivo 'Paquete Comunitario'."
                   }
                 ]
               }
@@ -52,7 +50,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "This bundle helps you create the best Community possible for your project."
+                    "text": "Este paquete te ayuda a crear la mejor comunidad posible para tu proyecto."
                   }
                 ]
               }
@@ -64,7 +62,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "¿Cuál es tu nombre?" }] }
             ]
           }
         },
@@ -73,7 +71,7 @@
           "outgoingEdgeId": "rczh7k3r065okzax6za00lvh",
           "type": "text input",
           "options": {
-            "labels": { "placeholder": "Your first name" },
+            "labels": { "placeholder": "Tu primer nombre" },
             "variableId": "vyu4paeim4jcjgmxr26bdk286"
           }
         }
@@ -93,7 +91,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Ok, {{Name}}. What email would you like to sign up with?"
+                    "text": "Ok, {{Name}}. ¿Con qué correo te gustaría registrarte?"
                   }
                 ]
               }
@@ -111,7 +109,7 @@
     },
     {
       "id": "tp9r95ay5vm9zlgzw8twtxn3",
-      "title": "Goal",
+      "title": "Meta",
       "graphCoordinates": { "x": 1243.07421875, "y": 172.2421875 },
       "blocks": [
         {
@@ -121,7 +119,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "What's your goal with the community?" }]
+                "children": [{ "text": "¿Cuál es tu meta con la comunidad?" }]
               }
             ]
           }
@@ -131,13 +129,16 @@
           "outgoingEdgeId": "on3al6xuczmckpu3roboo9te",
           "type": "choice input",
           "items": [
-            { "id": "ux0ly8ocxfm8i8ivdbwjnmnt", "content": "Win loyal fans" },
+            {
+              "id": "ux0ly8ocxfm8i8ivdbwjnmnt",
+              "content": "Ganar fans leales"
+            },
             {
               "id": "izz0nwo2iy2kmlif5fav2oc5",
-              "content": "Competitive advantage"
+              "content": "Ventaja competitiva"
             },
-            { "id": "jtkx9v5uqjw84hapq3umqlb5", "content": "Better product" },
-            { "id": "k7a7rkpoigrtrulilap7q6fw", "content": "Support" }
+            { "id": "jtkx9v5uqjw84hapq3umqlb5", "content": "Mejor producto" },
+            { "id": "k7a7rkpoigrtrulilap7q6fw", "content": "Soporte" }
           ],
           "options": {
             "variableId": "vf49immob0ih3kxn5b0nraqkq"
@@ -147,7 +148,7 @@
     },
     {
       "id": "cszciavjonb2qp0ga0pladoj",
-      "title": "Goal",
+      "title": "Meta",
       "graphCoordinates": { "x": 1590.85546875, "y": 164.02734375 },
       "blocks": [
         {
@@ -159,7 +160,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Perfect, your bundle will be emailed to you right away 🚀"
+                    "text": "Perfecto, tu paquete será enviado a tu correo de inmediato 🚀"
                   }
                 ]
               }
@@ -179,7 +180,7 @@
                     "id": "nt0c7o7w0elbbrfde8nned76",
                     "variableId": "vf49immob0ih3kxn5b0nraqkq",
                     "comparisonOperator": "Equal to",
-                    "value": "Win loyal fans"
+                    "value": "Ganar fans leales"
                   }
                 ]
               }
@@ -193,7 +194,7 @@
                     "id": "yf6asq9i97ap9y2jxibmjylv",
                     "variableId": "vf49immob0ih3kxn5b0nraqkq",
                     "comparisonOperator": "Equal to",
-                    "value": "Competitive advantage"
+                    "value": "Ventaja competitiva"
                   }
                 ]
               }
@@ -207,7 +208,7 @@
                     "id": "x7tbo8q47r1wdlg6w3c48mru",
                     "variableId": "vf49immob0ih3kxn5b0nraqkq",
                     "comparisonOperator": "Equal to",
-                    "value": "Better product"
+                    "value": "Mejor producto"
                   }
                 ]
               }
@@ -221,7 +222,7 @@
                     "id": "hkb9qy6un3yrhhxtm0s6c8rg",
                     "variableId": "vf49immob0ih3kxn5b0nraqkq",
                     "comparisonOperator": "Equal to",
-                    "value": "Support"
+                    "value": "Soporte"
                   }
                 ]
               }
@@ -232,7 +233,7 @@
     },
     {
       "id": "vvlecgglxadq0x2eg7ozr535",
-      "title": "Send bundle",
+      "title": "Enviar paquete",
       "graphCoordinates": { "x": 901.6953125, "y": 180.0546875 },
       "blocks": [
         {
@@ -242,15 +243,15 @@
           "options": {
             "isCustomBody": true,
             "recipients": ["{{Email}}"],
-            "subject": "Here is your community bundle ✨",
-            "body": "Hey {{Name}},\n\nHere is a link to download the community bundle:\n\nhttps://mozbot.io\n\nI hope it will help you create the right community for your project 🚀\n\nBest,\nMozbot team."
+            "subject": "Aquí tienes tu paquete comunitario ✨",
+            "body": "Hola {{Name}},\n\nAquí tienes un enlace para descargar el paquete comunitario:\n\nhttps://mozbot.io\n\nEspero que te ayude a crear la comunidad adecuada para tu proyecto 🚀\n\nSaludos,\nEquipo de Mozbot."
           }
         }
       ]
     },
     {
       "id": "k2sbuizycrpuyf44v9eebebr",
-      "title": "Win loyal fans video",
+      "title": "Vídeo: Ganar fans leales",
       "graphCoordinates": { "x": 1969.18359375, "y": -205.76171875 },
       "blocks": [
         {
@@ -260,7 +261,9 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Want to know how to win loyal fans?" }]
+                "children": [
+                  { "text": "¿Quieres saber cómo ganar fans leales?" }
+                ]
               }
             ]
           }
@@ -270,7 +273,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Check out this video:" }] }
+              { "type": "p", "children": [{ "text": "Mira este vídeo:" }] }
             ]
           }
         },
@@ -278,7 +281,7 @@
           "id": "z3ffqugex7gipsb4ke6ov874",
           "type": "video",
           "content": {
-            "url": "https://www.youtube.com/watch?v=jp3ggg_42-M&t=22s",
+            "url": "https://www.youtube.com/watch?v=fvKvq4I8ozI",
             "id": "jp3ggg_42-M",
             "type": "youtube"
           }
@@ -287,7 +290,7 @@
     },
     {
       "id": "v6s5yza7kgretdmbke7lg5u7",
-      "title": "Competitive advantage video",
+      "title": "Vídeo: Ventaja competitiva",
       "graphCoordinates": { "x": 1968.1484375, "y": 181.5703125 },
       "blocks": [
         {
@@ -299,7 +302,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Want to know how to have a great competitive advantage with your community?"
+                    "text": "¿Quieres saber cómo tener una gran ventaja competitiva con tu comunidad?"
                   }
                 ]
               }
@@ -311,7 +314,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Check out this video:" }] }
+              { "type": "p", "children": [{ "text": "Mira este vídeo:" }] }
             ]
           }
         },
@@ -319,7 +322,7 @@
           "id": "rvdh4tk0ebg7t9tdga9aw8ao",
           "type": "video",
           "content": {
-            "url": "https://www.youtube.com/watch?v=jp3ggg_42-M&t=22s",
+            "url": "https://www.youtube.com/watch?v=fvKvq4I8ozI",
             "id": "jp3ggg_42-M",
             "type": "youtube"
           }
@@ -328,7 +331,7 @@
     },
     {
       "id": "l3pc0992zp0hw8ea83b7aky3",
-      "title": "Better product",
+      "title": "Mejor producto",
       "graphCoordinates": { "x": 1968.703125, "y": 600.07421875 },
       "blocks": [
         {
@@ -340,7 +343,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Want to know how to improve your product by leveraging a community?"
+                    "text": "¿Quieres saber cómo mejorar tu producto aprovechando una comunidad?"
                   }
                 ]
               }
@@ -352,7 +355,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Check out this video:" }] }
+              { "type": "p", "children": [{ "text": "Mira este vídeo:" }] }
             ]
           }
         },
@@ -360,7 +363,7 @@
           "id": "jiz2uvo89456jpy081hazkd4",
           "type": "video",
           "content": {
-            "url": "https://www.youtube.com/watch?v=jp3ggg_42-M&t=22s",
+            "url": "https://www.youtube.com/watch?v=fvKvq4I8ozI",
             "id": "jp3ggg_42-M",
             "type": "youtube"
           }
@@ -369,7 +372,7 @@
     },
     {
       "id": "f4hlh2oq8viwxrpl9ppq5d42",
-      "title": "Support",
+      "title": "Soporte",
       "graphCoordinates": { "x": 1970.0234375, "y": 1025.99609375 },
       "blocks": [
         {
@@ -380,7 +383,9 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Want to offer better support with a community?" }
+                  {
+                    "text": "¿Quieres ofrecer mejor soporte con una comunidad?"
+                  }
                 ]
               }
             ]
@@ -391,7 +396,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Check out this video:" }] }
+              { "type": "p", "children": [{ "text": "Mira este vídeo:" }] }
             ]
           }
         },
@@ -399,7 +404,7 @@
           "id": "e3tlj1y4vyhtwcabzifv63q2",
           "type": "video",
           "content": {
-            "url": "https://www.youtube.com/watch?v=jp3ggg_42-M&t=22s",
+            "url": "https://www.youtube.com/watch?v=fvKvq4I8ozI",
             "id": "jp3ggg_42-M",
             "type": "youtube"
           }
@@ -472,17 +477,17 @@
   "variables": [
     {
       "id": "vyu4paeim4jcjgmxr26bdk286",
-      "name": "Name",
+      "name": "Nombre",
       "isSessionVariable": true
     },
     {
       "id": "vf49immob0ih3kxn5b0nraqkq",
-      "name": "Goal",
+      "name": "Objetivo",
       "isSessionVariable": true
     },
     {
       "id": "vrhd0bug6b6dzgijevfoonvo2",
-      "name": "Email",
+      "name": "Correo Electrónico",
       "isSessionVariable": true
     }
   ],

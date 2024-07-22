@@ -8,6 +8,7 @@ import {
   SessionState,
   SetVariableHistoryItem,
   Variable,
+  VariableWithValue,
 } from '@mozbot.io/schemas'
 import { byId, isDefined } from '@mozbot.io/lib'
 import { isInputBlock } from '@mozbot.io/schemas/helpers'
@@ -367,7 +368,7 @@ const parseRetryMessage =
     block: InputBlock,
     textBubbleContentFormat: 'richText' | 'markdown'
   ): Promise<Pick<ContinueChatResponse, 'messages' | 'input'>> => {
-    const retryMessage =
+    let retryMessage =
       block.options &&
       'retryMessageContent' in block.options &&
       block.options.retryMessageContent
@@ -375,6 +376,19 @@ const parseRetryMessage =
             block.options.retryMessageContent
           )
         : parseDefaultRetryMessage(block)
+    if (
+      block.options &&
+      block.type === InputBlockType.CHOICE &&
+      'retryMessageContentId' in block.options &&
+      block.options.retryMessageContentId
+    ) {
+      let variable = state.mozbotsQueue[0].mozbot.variables.find(
+        (variable) =>
+          variable.id === block.options?.retryMessageContentId &&
+          isDefined(variable.value)
+      ) as VariableWithValue
+      if (variable && variable.value) retryMessage = variable.value as string
+    }
     return {
       messages: [
         {
@@ -403,7 +417,7 @@ const parseDefaultRetryMessage = (block: InputBlock): string => {
     case InputBlockType.PAYMENT:
       return defaultPaymentInputOptions.retryMessageContent
     default:
-      return 'Invalid message. Please, try again.'
+      return 'Mensaje no válido. Por favor inténtelo de nuevo.'
   }
 }
 

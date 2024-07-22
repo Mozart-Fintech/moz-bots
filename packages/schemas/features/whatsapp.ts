@@ -30,12 +30,29 @@ const bodySchema = z.object({
 })
 
 const actionSchema = z.object({
-  buttons: z.array(
-    z.object({
-      type: z.literal('reply'),
-      reply: z.object({ id: z.string(), title: z.string() }),
-    })
-  ),
+  button: z.string().optional(),
+  buttons: z
+    .array(
+      z.object({
+        type: z.literal('reply'),
+        reply: z.object({ id: z.string(), title: z.string() }),
+      })
+    )
+    .optional(),
+  sections: z
+    .array(
+      z.object({
+        title: z.string().optional(),
+        rows: z.array(
+          z.object({
+            id: z.string(),
+            title: z.string(),
+            description: z.string().optional(),
+          })
+        ),
+      })
+    )
+    .optional(),
 })
 
 const templateSchema = z.object({
@@ -46,7 +63,7 @@ const templateSchema = z.object({
 })
 
 const interactiveSchema = z.object({
-  type: z.literal('button'),
+  type: z.enum(['button', 'list']),
   header: headerSchema.optional(),
   body: bodySchema.optional(),
   action: actionSchema,
@@ -60,6 +77,7 @@ const sendingMessageSchema = z.discriminatedUnion('type', [
       body: z.string(),
       preview_url: z.boolean().optional(),
     }),
+    preview_url: z.boolean().optional(),
   }),
   z.object({
     type: z.literal('image'),
@@ -104,12 +122,23 @@ export const incomingMessageSchema = z.discriminatedUnion('type', [
   z.object({
     from: z.string(),
     type: z.literal('interactive'),
-    interactive: z.object({
-      button_reply: z.object({
-        id: z.string(),
-        title: z.string(),
+    interactive: z.discriminatedUnion('type', [
+      z.object({
+        type: z.literal('button_reply'),
+        button_reply: z.object({
+          id: z.string(),
+          title: z.string(),
+        }),
       }),
-    }),
+      z.object({
+        type: z.literal('list_reply'),
+        list_reply: z.object({
+          id: z.string(),
+          title: z.string(),
+          description: z.string().optional(),
+        }),
+      }),
+    ]),
     timestamp: z.string(),
   }),
   z.object({

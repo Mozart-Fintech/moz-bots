@@ -1,7 +1,7 @@
 {
   "version": "6",
   "id": "clon5zh7w000e1avnec16apet",
-  "name": "Product recommendation",
+  "name": "Recomendación de productos",
   "events": [
     {
       "id": "af8ny8rpbejnlkitr2s29ro1",
@@ -13,7 +13,7 @@
   "groups": [
     {
       "id": "buk5exhk13g3npkaiaw87tvs",
-      "title": "Continent",
+      "title": "Continente",
       "graphCoordinates": { "x": 367.8151290581508, "y": 175.39453125 },
       "blocks": [
         {
@@ -21,7 +21,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Ok {{Name}}" }] }
+              { "type": "p", "children": [{ "text": "Ok {{Nombre}}" }] }
             ]
           }
         },
@@ -34,7 +34,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Because all products are not available everywhere, I need to know..."
+                    "text": "Porque no todos los productos están disponibles en todos lados, necesito saber..."
                   }
                 ]
               }
@@ -46,7 +46,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Where do you live?" }] }
+              { "type": "p", "children": [{ "text": "¿Dónde vives?" }] }
             ]
           }
         },
@@ -55,8 +55,8 @@
           "outgoingEdgeId": "zlab2pp5tfih56jcw6vtjs03",
           "type": "choice input",
           "items": [
-            { "id": "b6mg694wlrmx4k1fgc46co57", "content": "North America" },
-            { "id": "fpey0ohbvgvg7b86y4ol8wr7", "content": "Europe" }
+            { "id": "b6mg694wlrmx4k1fgc46co57", "content": "Norteamérica" },
+            { "id": "fpey0ohbvgvg7b86y4ol8wr7", "content": "Europa" }
           ],
           "options": {
             "variableId": "vma96g9rw8oaosc0ei2iacqig"
@@ -66,7 +66,7 @@
     },
     {
       "id": "gafkgilrandk3cwydpzq21oy",
-      "title": "Name",
+      "title": "Nombre",
       "graphCoordinates": { "x": 21.63671875, "y": 176.3203125 },
       "blocks": [
         {
@@ -78,7 +78,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Let's determine what Näak's products suit you best. 💪"
+                    "text": "Determinaré qué productos de Näak te vienen mejor. 💪"
                   }
                 ]
               }
@@ -90,7 +90,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "¿Cuál es tu nombre?" }] }
             ]
           }
         },
@@ -106,7 +106,7 @@
     },
     {
       "id": "z40ynhndj5r4038u3ha39c14",
-      "title": "Sport",
+      "title": "Deporte",
       "graphCoordinates": { "x": 721.140625, "y": 173.953125 },
       "blocks": [
         {
@@ -114,7 +114,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your sport?" }] }
+              { "type": "p", "children": [{ "text": "¿Cuál es tu deporte?" }] }
             ]
           }
         },
@@ -149,14 +149,16 @@
     },
     {
       "id": "mncr0l180vs07gc1difaovjx",
-      "title": "Gender",
+      "title": "Género",
       "graphCoordinates": { "x": 1071, "y": 173.953125 },
       "blocks": [
         {
           "id": "ahuasm8oa058gl4np96qadox",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Nice! 😎" }] }]
+            "richText": [
+              { "type": "p", "children": [{ "text": "¡Genial! 😎" }] }
+            ]
           }
         },
         {
@@ -164,7 +166,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your gender?" }] }
+              { "type": "p", "children": [{ "text": "¿Cuál es tu género?" }] }
             ]
           }
         },
@@ -175,17 +177,17 @@
           "items": [
             {
               "id": "zv2np66vgqoruntfh9h9vidx",
-              "content": "♂️ Men"
+              "content": "♂️ Hombres"
             },
-            { "id": "w5e2h4n10u1l2pap1vtm68ma", "content": "♀️ Women" },
-            { "id": "m1t9qrfs4z998ogqd4ttueus", "content": "Other" }
+            { "id": "w5e2h4n10u1l2pap1vtm68ma", "content": "♀️ Mujeres" },
+            { "id": "m1t9qrfs4z998ogqd4ttueus", "content": "Otro" }
           ]
         }
       ]
     },
     {
       "id": "mqt2qcyld5du8ecmbphjxpwu",
-      "title": "Goals",
+      "title": "Metas",
       "graphCoordinates": { "x": 1412.34375, "y": 174.76953125 },
       "blocks": [
         {
@@ -196,7 +198,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "How can Näak help you achieve your goals?" }
+                  { "text": "¿Cómo puede Näak ayudarte a alcanzar tus metas?" }
                 ]
               }
             ]
@@ -210,17 +212,17 @@
             {
               "id": "fmhwukhd2112743tgrmv85st",
               "pictureSrc": "https://images.unsplash.com/photo-1615845522103-82f98cd2a9de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0MjU2MDR8MHwxfHNlYXJjaHw5fHxlbmR1cmFuY2V8ZW58MHwwfHx8MTY4NTM2MzY3Nnww&ixlib=rb-4.0.3&q=80&w=1080",
-              "title": "Energy"
+              "title": "Energía"
             },
             {
               "id": "hkzoroc6mf9tt9g2uxppweay",
               "pictureSrc": "https://images.unsplash.com/photo-1536044635785-467d51fc5880?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0MjU2MDR8MHwxfHNlYXJjaHwxMnx8ZHJpbmslMjBzcG9ydHxlbnwwfDB8fHwxNjg1MzYzNzIxfDA&ixlib=rb-4.0.3&q=80&w=1080",
-              "title": "Hydration"
+              "title": "Hidratación"
             },
             {
               "id": "nn5629jaux41qo0fhl1yj3zi",
               "pictureSrc": "https://images.unsplash.com/photo-1531403939386-c08a16cd7eef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0MjU2MDR8MHwxfHNlYXJjaHw3fHxzdHJldGNofGVufDB8MHx8fDE2ODUzNjM2OTl8MA&ixlib=rb-4.0.3&q=80&w=1080",
-              "title": "Recovery"
+              "title": "Recuperación"
             }
           ],
           "options": {
@@ -232,7 +234,7 @@
     },
     {
       "id": "n3zqahk50kb05th7zbycin5w",
-      "title": "Protein source",
+      "title": "Fuente de proteína",
       "graphCoordinates": { "x": 1745.61328125, "y": 183.87109375 },
       "blocks": [
         {
@@ -243,7 +245,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "What protein source are you interested in?" }
+                  { "text": "¿En qué fuente de proteína estás interesado?" }
                 ]
               }
             ]
@@ -254,8 +256,11 @@
           "outgoingEdgeId": "umuilo9l4t27kcpnx5ybnr08",
           "type": "choice input",
           "items": [
-            { "id": "exj60v3j83wx9yjbdsm8gwzj", "content": "Cricket-based" },
-            { "id": "kvqeznudz85jbqwxzfpwz8z8", "content": "Plant-based" }
+            {
+              "id": "exj60v3j83wx9yjbdsm8gwzj",
+              "content": "A base de grillos"
+            },
+            { "id": "kvqeznudz85jbqwxzfpwz8z8", "content": "A base de plantas" }
           ],
           "options": {
             "variableId": "vlgo7i0r514jkd9a9f24otm4m",
@@ -266,7 +271,7 @@
     },
     {
       "id": "y2jfx62oea6q0rxjby9tzqi6",
-      "title": "Flavours",
+      "title": "Sabores",
       "graphCoordinates": { "x": 2077.765625, "y": 182.74609375 },
       "blocks": [
         {
@@ -276,7 +281,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "What are flavors do you enjoy?" }]
+                "children": [{ "text": "¿Qué sabores disfrutas?" }]
               }
             ]
           }
@@ -290,26 +295,29 @@
               "id": "t7fkowjzn7eygfn6q1r4a8l9",
               "content": "Chocolate"
             },
-            { "id": "b1a0qlhtirnxqaqudskc4hnb", "content": "Vanilla" },
-            { "id": "vef4uodxrj05lp2i5k3uhdd5", "content": "Berries" },
-            { "id": "oyyx5j4j5fee37rc47adb5m8", "content": "Caramel" },
-            { "id": "myapux2pojdtbdy0gyc47rhq", "content": "Nuts" },
-            { "id": "aegltvuw163qqx88rwzjrg3v", "content": "Coffee" },
-            { "id": "zql5o66rry2ab3ofxa1y8kll", "content": "Lime" },
-            { "id": "ecvbkdakesh18zn5bfkylvt1", "content": "Watermelon" },
-            { "id": "b1xcrk5tv1b1rkjy40uhp44d", "content": "Maple Syrup" }
+            { "id": "b1a0qlhtirnxqaqudskc4hnb", "content": "Vainilla" },
+            {
+              "id": "vef4uodxrj05lp2i5k3uhdd5",
+              "content": "Frutas del bosque"
+            },
+            { "id": "oyyx5j4j5fee37rc47adb5m8", "content": "Caramelo" },
+            { "id": "myapux2pojdtbdy0gyc47rhq", "content": "Nueces" },
+            { "id": "aegltvuw163qqx88rwzjrg3v", "content": "Café" },
+            { "id": "zql5o66rry2ab3ofxa1y8kll", "content": "Lima" },
+            { "id": "ecvbkdakesh18zn5bfkylvt1", "content": "Sandía" },
+            { "id": "b1xcrk5tv1b1rkjy40uhp44d", "content": "Jarabe de arce" }
           ],
           "options": {
             "variableId": "vhbd5800sc98l1lk8wf7fe742",
             "isMultipleChoice": true,
-            "buttonLabel": "Next"
+            "buttonLabel": "Siguiente"
           }
         }
       ]
     },
     {
       "id": "x14lejru0gv2c7afc68nuezy",
-      "title": "Diet restrictions",
+      "title": "Restricciones dietarias",
       "graphCoordinates": { "x": 2424.828125, "y": 184.4765625 },
       "blocks": [
         {
@@ -317,7 +325,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Great choice 😋" }] }
+              { "type": "p", "children": [{ "text": "Gran elección 😋" }] }
             ]
           }
         },
@@ -328,9 +336,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [
-                  { "text": "Do you have any dietary restrictions?" }
-                ]
+                "children": [{ "text": "¿Tienes alguna restricción dietaria?" }]
               }
             ]
           }
@@ -340,10 +346,13 @@
           "outgoingEdgeId": "erx9wo3svpfxs2cteknbhfaz",
           "type": "choice input",
           "items": [
-            { "id": "u9gi0gnaza6ottid74l82wlm", "content": "Non GMO" },
-            { "id": "yr7q8fcyi6l1sw83t37fjosj", "content": "No palm oil" },
-            { "id": "gckqnnt2but4d6wwsfia3035", "content": "Gluten free" },
-            { "id": "m3qdwzep7uugpejvga0yqorg", "content": "Nut free" }
+            { "id": "u9gi0gnaza6ottid74l82wlm", "content": "No OGM" },
+            {
+              "id": "yr7q8fcyi6l1sw83t37fjosj",
+              "content": "Sin aceite de palma"
+            },
+            { "id": "gckqnnt2but4d6wwsfia3035", "content": "Sin gluten" },
+            { "id": "m3qdwzep7uugpejvga0yqorg", "content": "Sin nueces" }
           ],
           "options": {
             "variableId": "vz4fqc40gkk99h0qeus2tjwhx"
@@ -353,7 +362,7 @@
     },
     {
       "id": "q9z4xrzf9z7sgl69rrrhiyoh",
-      "title": "Email",
+      "title": "Correo Electrónico",
       "graphCoordinates": { "x": 2765.89453125, "y": 187.64453125 },
       "blocks": [
         {
@@ -365,7 +374,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Alright {{Name}}, I think we know exactly what you need."
+                    "text": "Vale {{Nombre}}, creo que sabemos exactamente lo que necesitas."
                   }
                 ]
               }
@@ -381,7 +390,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Sign up to our email list to receive a copy of your product recommendations."
+                    "text": "Regístrate en nuestra lista de correo para recibir una copia de tus recomendaciones de productos."
                   }
                 ]
               }
@@ -395,7 +404,9 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "We will also send a little gift 🎁" }]
+                "children": [
+                  { "text": "También enviaremos un pequeño regalo 🎁" }
+                ]
               }
             ]
           }
@@ -443,7 +454,7 @@
     },
     {
       "id": "qjoc17kdjrpkaoxesoeqzmjt",
-      "title": "No cricket in Europe",
+      "title": "No hay grillos en Europa",
       "graphCoordinates": { "x": 3452.45703125, "y": 113.35546875 },
       "blocks": [
         {
@@ -455,7 +466,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Unfortunately, cricket-based products are not available in Europe. 😢"
+                    "text": "Desafortunadamente, los productos a base de grillos no están disponibles en Europa. 😢"
                   }
                 ]
               }
@@ -472,7 +483,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "We'll make sure to let you know once it's available!"
+                    "text": "¡Te avisaremos cuando estén disponibles!"
                   }
                 ]
               }
@@ -483,7 +494,7 @@
     },
     {
       "id": "b94nqmbqp0ezfazu0kekqioa",
-      "title": "If Energy",
+      "title": "Si es energia",
       "graphCoordinates": { "x": 3646.396113301624, "y": 447.8859463616741 },
       "blocks": [
         {
@@ -511,7 +522,7 @@
     },
     {
       "id": "co7gxaoxtf1xukmgbby73u6v",
-      "title": "If hydration",
+      "title": "Si es hidratación",
       "graphCoordinates": { "x": 4165.908336104726, "y": 568.072108305734 },
       "blocks": [
         {
@@ -539,7 +550,7 @@
     },
     {
       "id": "rcr9zqm4lnevx5dqf9k23m5u",
-      "title": "If recovery",
+      "title": "Si esa recuperación",
       "graphCoordinates": { "x": 4634.078450031568, "y": 886.3561931535737 },
       "blocks": [
         {
@@ -566,7 +577,7 @@
     },
     {
       "id": "ho2hskojxz8ac631driot5kh",
-      "title": "Energy",
+      "title": "Energía",
       "graphCoordinates": { "x": 4001.801919721875, "y": -860.9371698075208 },
       "blocks": [
         {
@@ -577,8 +588,8 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Let's talk about " },
-                  { "bold": true, "text": "Energy. ⚡" }
+                  { "text": "Hablemos de " },
+                  { "bold": true, "text": "Energía. ⚡" }
                 ]
               }
             ]
@@ -593,7 +604,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Here is a selection for you based on your answers."
+                    "text": "Aquí tienes una selección para ti basada en tus respuestas."
                   }
                 ]
               }
@@ -620,31 +631,31 @@
                     "id": "j7sune97lh32xukeil8poeif",
                     "variableId": "vhbd5800sc98l1lk8wf7fe742",
                     "comparisonOperator": "Contains",
-                    "value": "Berries"
+                    "value": "Frutas del bosque"
                   },
                   {
                     "id": "tsrm85u8demtuc95aootakrj",
                     "variableId": "vhbd5800sc98l1lk8wf7fe742",
                     "comparisonOperator": "Contains",
-                    "value": "Caramel"
+                    "value": "Caramelo"
                   },
                   {
                     "id": "gfqvik3txgrinlslj0jvs9gt",
                     "variableId": "vhbd5800sc98l1lk8wf7fe742",
                     "comparisonOperator": "Contains",
-                    "value": "Nuts"
+                    "value": "Nueces"
                   },
                   {
                     "id": "yv3jre55h7w9qp55t5m8ax2p",
                     "variableId": "vhbd5800sc98l1lk8wf7fe742",
                     "comparisonOperator": "Contains",
-                    "value": "Coffee"
+                    "value": "Café"
                   },
                   {
                     "id": "xksf2b1la2h8yy9lvn96yqo1",
                     "variableId": "vhbd5800sc98l1lk8wf7fe742",
                     "comparisonOperator": "Contains",
-                    "value": "Vanilla"
+                    "value": "Vainilla"
                   }
                 ]
               }
@@ -655,7 +666,7 @@
     },
     {
       "id": "w3f8ya4hmkuab55dh2ogsvtz",
-      "title": "Hydration",
+      "title": "Hidratación",
       "graphCoordinates": { "x": 4604.393180386735, "y": 102.6192979908871 },
       "blocks": [
         {
@@ -666,8 +677,8 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "About " },
-                  { "bold": true, "text": "Hydration. 💧" }
+                  { "text": "Sobre " },
+                  { "bold": true, "text": "Hidratación. 💧" }
                 ]
               }
             ]
@@ -682,7 +693,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Here is a selection for you based on your answers."
+                    "text": "Aquí tienes una selección para ti basada en tus respuestas."
                   }
                 ]
               }
@@ -697,8 +708,8 @@
             {
               "id": "pkv4omwvnr338lkhwh6jglh6",
               "pictureSrc": "https://www.naak.com/cdn/shop/files/naak-energy-drink-mix-energy-drink-mix-lime-42434407891248_600x.png?v=1692717400",
-              "title": "Lime Energy Drink Mix",
-              "description": "- 250 calories: get all your calories in a liquid form\n- 55g carbohydrates: simple and complex natural carbohydrates\n- 650mg electrolytes: replenish minerals lost in sweat\n- 1300mg BCAAs: prevent muscle breakdown during exercise\n- 8g protein: all essential amino acids to reduce muscle fatigue",
+              "title": "Mezcla de bebida energética de lima",
+              "description": "- 250 calorías: obtén todas tus calorías en forma líquida\n- 55 g de carbohidratos: carbohidratos naturales simples y complejos\n- 650 mg de electrolitos: repone los minerales perdidos en el sudor\n- 1300 mg de BCAA: previene la descomposición muscular durante el ejercicio\n- 8 g de proteína: todos los aminoácidos esenciales para reducir la fatiga muscular",
               "displayCondition": {
                 "isEnabled": true,
                 "condition": {
@@ -716,20 +727,20 @@
             {
               "id": "s6nx86xyuclsjtqmr53ijea1",
               "pictureSrc": "https://eu.naak.com/cdn/shop/files/NewDrinkMixWatermelonBulk-Front_5_600x.png?v=1692716818",
-              "title": "Watermelon Energy Drink Mix",
-              "description": "- 250 calories: get all your calories in a liquid form\n- 55g carbohydrates: simple and complex natural carbohydrates\n- 650mg electrolytes: replenish minerals lost in sweat\n- 1300mg BCAAs: prevent muscle breakdown during exercise\n- 8g protein: all essential amino acids to reduce muscle fatigue"
+              "title": "Mezcla de bebida energética de sandía",
+              "description": "- 250 calorías: obtén todas tus calorías en forma líquida\n- 55 g de carbohidratos: carbohidratos naturales simples y complejos\n- 650 mg de electrolitos: repone los minerales perdidos en el sudor\n- 1300 mg de BCAA: previene la descomposición muscular durante el ejercicio\n- 8 g de proteína: todos los aminoácidos esenciales para reducir la fatiga muscular"
             }
           ],
           "options": {
             "isMultipleChoice": true,
-            "buttonLabel": "Next"
+            "buttonLabel": "Siguiente"
           }
         }
       ]
     },
     {
       "id": "jdd417tfj6hdu4pj6bkksgwa",
-      "title": "Recovery",
+      "title": "Recuperación",
       "graphCoordinates": { "x": 5092.137492973015, "y": 286.5579598199387 },
       "blocks": [
         {
@@ -740,9 +751,9 @@
               {
                 "type": "p",
                 "children": [
-                  { "bold": true, "text": "Recovery 🧘‍♂️ " },
+                  { "bold": true, "text": "Recuperación 🧘‍♂️ " },
                   {
-                    "text": "is crucial to perform at your highest level on the field."
+                    "text": "es crucial para rendir al máximo nivel en el campo."
                   }
                 ]
               }
@@ -758,7 +769,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Here is a selection for you based on your answers."
+                    "text": "Aquí tienes una selección para ti basada en tus respuestas."
                   }
                 ]
               }
@@ -772,8 +783,8 @@
             {
               "id": "s9nop23fmq55jilo9mntgpn8",
               "pictureSrc": "https://cdn.shopify.com/s/files/1/0704/1744/9254/products/naak-breakfast-340g-protein-nut-butter-peanut-40637318365488_600x.png?v=1678033822",
-              "title": "Protein Nut Butter",
-              "description": "- 500mg super fats: promote heart and gut health\n- 640mg BCAAs: reduce muscle damage & soreness\n- 120mg electrolytes: replenish minerals lost in sweat\n- 4.3g protein: build & repair muscle post-workout",
+              "title": "Crema de Proteína de Nueces",
+              "description": "- 500mg super grasas: promueven la salud del corazón y el intestino\n- 640mg BCAA: reducen el daño y dolor muscular\n- 120mg electrolitos: reponen minerales perdidos en el sudor\n- 4.3g proteína: construye y repara músculo después del entrenamiento",
               "displayCondition": {
                 "isEnabled": true,
                 "condition": {
@@ -797,8 +808,8 @@
             {
               "id": "snr3wam9c0p1f191rf2587wz",
               "pictureSrc": "https://cdn.shopify.com/s/files/1/0704/1744/9254/products/naak-protein-powder-1-bag-2-75-serving-protein-powder-vanilla-29774755954774_600x.png?v=1677355777",
-              "title": "Vanilla Protein Powder",
-              "description": "- 25g complete protein: build & repair muscle post-workout\n- 4g BCAAs: reduce muscle damage & soreness\n- 430mg electrolytes: replenish minerals lost in sweat\n- 1g carbohydrates: no added sugar"
+              "title": "Proteína de Vainilla en Polvo",
+              "description": "- 25g de proteína completa: construye y repara músculo después del entrenamiento\n- 4g BCAA: reducen el daño y dolor muscular\n- 430mg electrolitos: reponen minerales perdidos en el sudor\n- 1g carbohidratos: sin azúcar añadida"
             }
           ],
           "options": {
@@ -821,7 +832,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Since you like all these flavors you could try our discovery packs"
+                    "text": "Ya que te gustan todos estos sabores, podrías probar nuestros paquetes de descubrimiento"
                   }
                 ]
               }
@@ -836,14 +847,14 @@
             {
               "id": "smabu9g31qcovytdu2yyi86n",
               "pictureSrc": "https://cdn.shopify.com/s/files/1/0704/1744/9254/products/PACKS_8_600x.png?v=1680032168",
-              "title": "Bars - Variety pack",
-              "description": "- 180 calories: long-lasting energy with no sugar crash\n- 65mg caffeine: increase focus and stamina\n- 29g carbohydrates: simple and complex natural carbohydrates\n- 480mg electrolytes: replenish minerals lost in sweat\n- 7g protein: essential amino acids to reduce muscle fatigue"
+              "title": "Barras - Paquete variado",
+              "description": "- 180 calorías: energía duradera sin caída de azúcar\n- 65mg cafeína: aumenta el enfoque y la resistencia\n- 29g carbohidratos: carbohidratos naturales simples y complejos\n- 480mg electrolitos: reponer los minerales perdidos en el sudor\n- 7g proteínas: aminoácidos esenciales para reducir la fatiga muscular"
             },
             {
               "id": "f8rm4b7ic73nq92u52717th5",
               "pictureSrc": "https://cdn.shopify.com/s/files/1/0704/1744/9254/products/PACKS_7_600x.png?v=1680032183",
-              "title": "Waffle - Variety pack",
-              "description": "- 140 calories: quick energy boost from high-quality ingredients\n- 16g carbohydrates: simple and complex natural carbohydrates\n- 200mg electrolytes: replenish minerals lost in sweat\n- 3g protein: all essential amino acids to reduce muscle fatigue"
+              "title": "Gofre - Paquete variado",
+              "description": "- 140 calorías: impulso rápido de energía de ingredientes de alta calidad\n- 16g carbohidratos: carbohidratos naturales simples y complejos\n- 200mg electrolitos: reponer los minerales perdidos en el sudor\n- 3g proteínas: todos los aminoácidos esenciales para reducir la fatiga muscular"
             }
           ],
           "options": {
@@ -865,8 +876,8 @@
             {
               "id": "zc1c5ahukxhalbu9p6oqz4tw",
               "pictureSrc": "https://cdn.shopify.com/s/files/1/0704/1744/9254/products/naak-energy-waffle-energy-waffle-chocolate-40633672728880_600x.png?v=1677355844",
-              "title": "Chocolate Energy Waffle",
-              "description": "- 140 calories: quick energy boost from high-quality ingredients\n- 17g carbohydrates: simple and complex natural carbohydrates\n- 200mg electrolytes: replenish minerals lost in sweat\n- 3g protein: all essential amino acids to reduce muscle fatigue",
+              "title": "Gofre Energético de Chocolate",
+              "description": "- 140 calorías: impulso rápido de energía de ingredientes de alta calidad\n- 17g carbohidratos: carbohidratos naturales simples y complejos\n- 200mg electrolitos: reponer los minerales perdidos en el sudor\n- 3g proteínas: todos los aminoácidos esenciales para reducir la fatiga muscular",
               "displayCondition": {
                 "isEnabled": true,
                 "condition": {
@@ -884,8 +895,8 @@
             {
               "id": "j953heg9dx2xzdhwk773fha0",
               "pictureSrc": "https://cdn.shopify.com/s/files/1/0704/1744/9254/products/naak-energy-waffle-energy-waffle-vanilla-40633799246128_600x.png?v=1677355758",
-              "title": "Vanilla Energy Waffle",
-              "description": "- 140 calories: quick energy boost from high-quality ingredients\n- 16g carbohydrates: simple and complex natural carbohydrates\n- 210mg electrolytes: replenish minerals lost in sweat\n- 4g protein: all essential amino acids to reduce muscle fatigue",
+              "title": "Gofre Energético de Vainilla",
+              "description": "- 140 calorías: impulso rápido de energía de ingredientes de alta calidad\n- 16g carbohidratos: carbohidratos naturales simples y complejos\n- 210mg electrolitos: reponer los minerales perdidos en el sudor\n- 4g proteínas: todos los aminoácidos esenciales para reducir la fatiga muscular",
               "displayCondition": {
                 "isEnabled": true,
                 "condition": {
@@ -903,8 +914,8 @@
             {
               "id": "z8brrxkvbxfxfwryit6bjqb9",
               "pictureSrc": "https://cdn.shopify.com/s/files/1/0704/1744/9254/products/naak-energy-waffle-energy-waffle-maple-syrup-40633783877936_600x.png?v=1678034628",
-              "title": "Maple Syrup Energy Waffle",
-              "description": "- 140 calories: quick energy boost from high-quality ingredients\n- 16g carbohydrates: simple and complex natural carbohydrates\n- 210mg electrolytes: replenish minerals lost in sweat\n- 4g protein: all essential amino acids to reduce muscle fatigue",
+              "title": "Gofre Energético de Sirope de Arce",
+              "description": "- 140 calorías: impulso rápido de energía de ingredientes de alta calidad\n- 16g carbohidratos: carbohidratos naturales simples y complejos\n- 210mg electrolitos: reponer los minerales perdidos en el sudor\n- 4g proteínas: todos los aminoácidos esenciales para reducir la fatiga muscular",
               "displayCondition": {
                 "isEnabled": true,
                 "condition": {
@@ -922,8 +933,8 @@
             {
               "id": "ex1l3ynwk2iiz6wmavsr3l8y",
               "pictureSrc": "https://cdn.shopify.com/s/files/1/0704/1744/9254/products/PACKS_600x.png?v=1678223153",
-              "title": "Peanut Butter & Chocolate Bar",
-              "description": "- 200 calories: long-lasting energy with no sugar crash\n- 27g carbohydrates: simple and complex natural carbohydrates\n- 445mg electrolytes: replenish minerals lost in sweat\n- 7g protein: essential amino acids to reduce muscle fatigue",
+              "title": "Barra de Mantequilla de Maní y Chocolate",
+              "description": "- 200 calorías: energía duradera sin caída de azúcar\n- 27g carbohidratos: carbohidratos naturales simples y complejos\n- 445mg electrolitos: reponer los minerales perdidos en el sudor\n- 7g proteínas: aminoácidos esenciales para reducir la fatiga muscular",
               "displayCondition": {
                 "isEnabled": true,
                 "condition": {
@@ -947,8 +958,8 @@
             {
               "id": "x2octz0rxe0s8ach4zdf2gch",
               "pictureSrc": "https://cdn.shopify.com/s/files/1/0704/1744/9254/products/98_600x.png?v=1678223518",
-              "title": "Mocha Energy Bar",
-              "description": "- 180 calories: long-lasting energy with no sugar crash\n- 65mg caffeine: increase focus and stamina\n- 29g carbohydrates: simple and complex natural carbohydrates\n- 480mg electrolytes: replenish minerals lost in sweat\n- 7g protein: essential amino acids to reduce muscle fatigue",
+              "title": "Barra Energética de Mocha",
+              "description": "- 180 calorías: energía duradera sin caída de azúcar\n- 65mg cafeína: aumenta el enfoque y la resistencia\n- 29g carbohidratos: carbohidratos naturales simples y complejos\n- 480mg electrolitos: reponer los minerales perdidos en el sudor\n- 7g proteínas: aminoácidos esenciales para reducir la fatiga muscular",
               "displayCondition": {
                 "isEnabled": true,
                 "condition": {
@@ -966,8 +977,8 @@
             {
               "id": "hxcd05xn9rzhrvreh9bjqdbr",
               "pictureSrc": "https://cdn.shopify.com/s/files/1/0704/1744/9254/products/101_600x.png?v=1678223652",
-              "title": "Caramel Macchiato Bar",
-              "description": "- 180 calories: long-lasting energy with no sugar crash\n- 65mg caffeine: increase focus and stamina\n- 29g carbohydrates: simple and complex natural carbohydrates\n- 480mg electrolytes: replenish minerals lost in sweat\n- 7g protein: essential amino acids to reduce muscle fatigue",
+              "title": "Barra de Caramelo Macchiato",
+              "description": "- 180 calorías: energía duradera sin caída de azúcar\n- 65mg cafeína: aumenta el enfoque y la resistencia\n- 29g carbohidratos: carbohidratos naturales simples y complejos\n- 480mg electrolitos: reponer los minerales perdidos en el sudor\n- 7g proteínas: aminoácidos esenciales para reducir la fatiga muscular",
               "displayCondition": {
                 "isEnabled": true,
                 "condition": {
@@ -985,8 +996,8 @@
             {
               "id": "qw9p8xrmvli4xsn019cddxbh",
               "pictureSrc": "https://cdn.shopify.com/s/files/1/0704/1744/9254/products/92_600x.png?v=1678222928",
-              "title": "Berries & Nuts Bar",
-              "description": "- 200 calories: long-lasting energy with no sugar crash\n- 28g carbohydrates: simple and complex natural carbohydrates\n- 405mg electrolytes: replenish minerals lost in sweat\n- 7g protein: essential amino acids to reduce muscle fatigue",
+              "title": "Barra de Bayas y Nueces",
+              "description": "- 200 calorías: energía duradera sin caída de azúcar\n- 28g carbohidratos: carbohidratos naturales simples y complejos\n- 405mg electrolitos: reponer los minerales perdidos en el sudor\n- 7g proteínas: aminoácidos esenciales para reducir la fatiga muscular",
               "displayCondition": {
                 "isEnabled": true,
                 "condition": {
@@ -1150,32 +1161,32 @@
   "variables": [
     {
       "id": "vp1r2yrb6xgmi2aq3x6x73vaz",
-      "name": "Name",
+      "name": "Nombre",
       "isSessionVariable": true
     },
     {
       "id": "vhbd5800sc98l1lk8wf7fe742",
-      "name": "Flavour",
+      "name": "Sabor",
       "isSessionVariable": true
     },
     {
       "id": "vma96g9rw8oaosc0ei2iacqig",
-      "name": "Continent",
+      "name": "Continente",
       "isSessionVariable": true
     },
     {
       "id": "vlgo7i0r514jkd9a9f24otm4m",
-      "name": "Protein source",
+      "name": "Fuente de proteína",
       "isSessionVariable": true
     },
     {
       "id": "vgz8fr5u7q0p4jdef1krz2vm3",
-      "name": "Goals",
+      "name": "Metas",
       "isSessionVariable": true
     },
     {
       "id": "vz4fqc40gkk99h0qeus2tjwhx",
-      "name": "Diet restrictions",
+      "name": "Restricciones dietéticas",
       "isSessionVariable": true
     }
   ],

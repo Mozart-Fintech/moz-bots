@@ -1,7 +1,7 @@
 {
   "version": "6",
   "id": "clvqu4l5j00015bxibaf44slo",
-  "name": "OpenAI Assistant Chat",
+  "name": "Chat de Asistente de OpenAI",
   "events": [
     {
       "id": "rjtz087ma51znox79ztbl24d",
@@ -13,7 +13,7 @@
   "groups": [
     {
       "id": "cokban593khtw85h0edk89ty",
-      "title": "AI loop",
+      "title": "Bucle de AI",
       "graphCoordinates": { "x": 287.4, "y": 316.89 },
       "blocks": [
         {
@@ -26,9 +26,9 @@
           "type": "openai",
           "options": {
             "credentialsId": "clvqq3hey0007pub4almxnhk2",
-            "action": "Ask Assistant",
+            "action": "Preguntar al Asistente",
             "threadVariableId": "vf5gxmpqddsy4qugev6o0qs5c",
-            "message": "{{User last message}}",
+            "message": "{{Último mensaje del usuario}}",
             "responseMapping": [{ "variableId": "vn8h1gigkjwv40godw2hrgclh" }]
           }
         },
@@ -40,7 +40,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "{{Assistant last message}}" }]
+                "children": [{ "text": "{{Último mensaje del asistente}}" }]
               }
             ]
           }
@@ -61,7 +61,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You need to add your OpenAI credentials and select your Assistant to make this bot work. 🪄"
+                    "text": "Necesitas agregar tus credenciales de OpenAI y seleccionar tu Asistente para que este bot funcione. 🪄"
                   }
                 ]
               }
@@ -78,11 +78,11 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Once it's done, delete this group and connect the "
+                    "text": "Una vez hecho esto, elimina este grupo y conecta el "
                   },
-                  { "bold": true, "text": "Start" },
-                  { "text": " event with " },
-                  { "bold": true, "text": "AI loop" },
+                  { "bold": true, "text": "Evento de Inicio" },
+                  { "text": " con " },
+                  { "bold": true, "text": "Bucle de AI" },
                   { "text": " 🚀" }
                 ]
               }
@@ -110,17 +110,17 @@
   "variables": [
     {
       "id": "vamyvpkzwn8v0713jkkcmj91j",
-      "name": "User last message",
+      "name": "Último mensaje del usuario",
       "isSessionVariable": true
     },
     {
       "id": "vf5gxmpqddsy4qugev6o0qs5c",
-      "name": "Thread ID",
+      "name": "ID del hilo",
       "isSessionVariable": true
     },
     {
       "id": "vn8h1gigkjwv40godw2hrgclh",
-      "name": "Assistant last message",
+      "name": "Último mensaje del asistente",
       "isSessionVariable": true
     }
   ],

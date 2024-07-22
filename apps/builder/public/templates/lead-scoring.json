@@ -13,14 +13,14 @@
   "groups": [
     {
       "id": "cl1sep1c5001w2e6e77bb1uwb",
-      "title": "Welcome",
+      "title": "Bienvenido",
       "graphCoordinates": { "x": 0, "y": 171 },
       "blocks": [
         {
           "id": "cl1sep1cc001x2e6eikrwf9jy",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Hi! 👋" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "¡Hola! 👋" }] }]
           }
         },
         {
@@ -31,7 +31,9 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "I'm glad you are intersted in our services." }
+                  {
+                    "text": "Estoy encantado de que estés interesado en nuestros servicios."
+                  }
                 ]
               }
             ]
@@ -44,9 +46,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [
-                  { "text": "I'll need to know a little more about you" }
-                ]
+                "children": [{ "text": "Necesito saber un poco más sobre ti." }]
               }
             ]
           }
@@ -64,7 +64,7 @@
     },
     {
       "id": "cl1sern8w00202e6ez69l190j",
-      "title": "Q1",
+      "title": "P1",
       "graphCoordinates": { "x": 377, "y": 166 },
       "blocks": [
         {
@@ -74,7 +74,9 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Do you work with a specific company?" }]
+                "children": [
+                  { "text": "¿Trabajas con una empresa específica?" }
+                ]
               }
             ]
           }
@@ -86,7 +88,7 @@
             {
               "id": "cl1ses31100232e6eq3nnp2mm",
               "outgoingEdgeId": "cl1sezo4z00292e6ean8s487x",
-              "content": "Yes"
+              "content": "Si"
             },
             {
               "id": "cl1ses3y400242e6e1qjwkhq4",
@@ -99,7 +101,7 @@
     },
     {
       "id": "cl1sez6zd00262e6ebh59k1bs",
-      "title": "Company",
+      "title": "Empresa",
       "graphCoordinates": { "x": 748, "y": 135 },
       "blocks": [
         {
@@ -115,7 +117,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Which company?" }] }
+              { "type": "p", "children": [{ "text": "¿Cuál empresa?" }] }
             ]
           }
         },
@@ -131,7 +133,7 @@
     },
     {
       "id": "cl1sf0ogu002d2e6edyhcuu6f",
-      "title": "Q2",
+      "title": "P2",
       "graphCoordinates": { "x": 1096, "y": -62 },
       "blocks": [
         {
@@ -142,7 +144,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "How many employees is your team composed of?" }
+                  { "text": "¿De cuántos empleados se compone tu equipo?" }
                 ]
               }
             ]
@@ -199,7 +201,7 @@
     },
     {
       "id": "cl1sf2wnu002r2e6ehdp859qv",
-      "title": "Add 20",
+      "title": "Agregar 20",
       "graphCoordinates": { "x": 1458, "y": -72 },
       "blocks": [
         {
@@ -215,7 +217,7 @@
     },
     {
       "id": "cl1sf36ia002u2e6e16ifow0z",
-      "title": "Add 10",
+      "title": "Agregar 10",
       "graphCoordinates": { "x": 1458, "y": 88 },
       "blocks": [
         {
@@ -231,7 +233,7 @@
     },
     {
       "id": "cl1sf4qk500332e6e8gs5mn3t",
-      "title": "Q4",
+      "title": "P4",
       "graphCoordinates": { "x": 2442.929831215626, "y": 391 },
       "blocks": [
         {
@@ -239,7 +241,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Where are you based?" }] }
+              { "type": "p", "children": [{ "text": "¿Dónde estás ubicado?" }] }
             ]
           }
         },
@@ -247,9 +249,7 @@
           "id": "cl1sf4z8n00352e6ejypaeinl",
           "type": "text input",
           "options": {
-            "labels": {
-              "placeholder": "Type your country..."
-            },
+            "labels": { "placeholder": "Escribe tu país..." },
             "variableId": "vcl1sf525q00362e6eoyosycte"
           }
         },
@@ -278,7 +278,7 @@
     },
     {
       "id": "cl1sf7jbi003f2e6euy48woy4",
-      "title": "Add 10",
+      "title": "Agregar 10",
       "graphCoordinates": { "x": 2765.429799608067, "y": 386.7142676528225 },
       "blocks": [
         {
@@ -294,7 +294,7 @@
     },
     {
       "id": "cl1sf85am003i2e6e1yq8eoa7",
-      "title": "Filtering",
+      "title": "Filtrado",
       "graphCoordinates": { "x": 2953.786585751312, "y": 570.3154133255522 },
       "blocks": [
         {
@@ -305,7 +305,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Thank you for answering these questions" }
+                  { "text": "Gracias por responder estas preguntas." }
                 ]
               }
             ]
@@ -336,7 +336,7 @@
     },
     {
       "id": "cl1sfbbv0003s2e6eheyhv7ke",
-      "title": "Q3",
+      "title": "P3",
       "graphCoordinates": { "x": 1632.857386686895, "y": 465.7855110942534 },
       "blocks": [
         {
@@ -344,7 +344,10 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your job role?" }] }
+              {
+                "type": "p",
+                "children": [{ "text": "¿Cuál es tu rol de trabajo?" }]
+              }
             ]
           }
         },
@@ -353,17 +356,20 @@
           "outgoingEdgeId": "cl1sfek9r004e2e6elkh3h7a2",
           "type": "choice input",
           "items": [
-            { "id": "cl1sfbbw3003u2e6e7luhj0n1", "content": "UI/UX Designer" },
-            { "id": "cl1sfbq6z003v2e6egnctk2n2", "content": "Product Owner" },
+            { "id": "cl1sfbbw3003u2e6e7luhj0n1", "content": "Diseñador UI/UX" },
+            {
+              "id": "cl1sfbq6z003v2e6egnctk2n2",
+              "content": "Propietario del Producto"
+            },
             {
               "id": "cl1sfbtz8003w2e6eodbt4ogs",
               "outgoingEdgeId": "cl1sfebs9004a2e6ere0zokyo",
-              "content": "Marketing Officer"
+              "content": "Director de Marketing"
             },
             {
               "id": "cl1sfc545003x2e6e833juo6m",
               "outgoingEdgeId": "cl1sfedcd004b2e6eerh8hz33",
-              "content": "Developer"
+              "content": "Desarrollador"
             }
           ]
         }
@@ -371,7 +377,7 @@
     },
     {
       "id": "cl1sfdroa00452e6e5o458z9h",
-      "title": "Add 20",
+      "title": "Agregar 20",
       "graphCoordinates": { "x": 1983.143182249194, "y": 82.85612238447435 },
       "blocks": [
         {
@@ -387,7 +393,7 @@
     },
     {
       "id": "cl1sfe2kn00472e6ead4qs2d9",
-      "title": "Add 10",
+      "title": "Agregar 10",
       "graphCoordinates": { "x": 1984.285605916936, "y": 240.8562488147158 },
       "blocks": [
         {
@@ -403,7 +409,7 @@
     },
     {
       "id": "cl1sffxet004j2e6ec6gfbffh",
-      "title": "Conclusion - Qualified",
+      "title": "Conclusión - Calificado",
       "graphCoordinates": { "x": 3350.087494027719, "y": 509.7735663944507 },
       "blocks": [
         {
@@ -415,7 +421,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Our service is specifically designed for your situation."
+                    "text": "Nuestro servicio está diseñado específicamente para tu situación."
                   }
                 ]
               }
@@ -429,7 +435,11 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "We'll get back to you ASAP. 👋" }]
+                "children": [
+                  {
+                    "text": "Nos pondremos en contacto contigo lo antes posible. 👋"
+                  }
+                ]
               }
             ]
           }
@@ -438,7 +448,7 @@
     },
     {
       "id": "cl1sfgjlr004l2e6erykli1ud",
-      "title": "Conclusion - Not qualified",
+      "title": "Conclusión - No calificado",
       "graphCoordinates": { "x": 3352.894339234574, "y": 786.5865419115444 },
       "blocks": [
         {
@@ -449,7 +459,9 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Our service doesn't seem to suit your need." }
+                  {
+                    "text": "Nuestro servicio no parece adecuarse a tu necesidad."
+                  }
                 ]
               }
             ]
@@ -463,7 +475,9 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "We'll still send you valuable content by email." }
+                  {
+                    "text": "Aún así, te enviaremos contenido valioso por correo electrónico."
+                  }
                 ]
               }
             ]
@@ -473,9 +487,7 @@
           "id": "cl1sfitz4004r2e6e3ge4x7uy",
           "type": "text",
           "content": {
-            "richText": [
-              { "type": "p", "children": [{ "text": "Bye bye 👋" }] }
-            ]
+            "richText": [{ "type": "p", "children": [{ "text": "Adiós 👋" }] }]
           }
         }
       ]
@@ -610,22 +622,22 @@
   "variables": [
     {
       "id": "vcl1sezzln002b2e6e6ssxh9bf",
-      "name": "Lead Score",
+      "name": "Puntuación de Lead",
       "isSessionVariable": true
     },
     {
       "id": "vcl1sf1ko5002g2e6egjmyb16v",
-      "name": "Team size",
+      "name": "Tamaño del equipo",
       "isSessionVariable": true
     },
     {
       "id": "vcl1sf525q00362e6eoyosycte",
-      "name": "Country",
+      "name": "País",
       "isSessionVariable": true
     },
     {
       "id": "vcl1sf93s2003l2e6eojomb66g",
-      "name": "Company",
+      "name": "Compañía",
       "isSessionVariable": true
     }
   ],

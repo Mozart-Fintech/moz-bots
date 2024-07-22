@@ -110,28 +110,178 @@ export const convertInputToWhatsAppMessages = (
             },
           },
         ]
-      const items = groupArrayByArraySize(
-        input.items.filter((item) => isDefined(item.content)),
-        env.WHATSAPP_INTERACTIVE_GROUP_SIZE
-      ) as ButtonItem[][]
-      return items.map((items, idx) => ({
-        type: 'interactive',
-        interactive: {
-          type: 'button',
-          body: {
-            text: idx === 0 ? lastMessageText ?? '...' : '...',
+      if (input.items.length <= 3) {
+        const items = groupArrayByArraySize(
+          input.items.filter((item) => isDefined(item.content)),
+          env.WHATSAPP_INTERACTIVE_GROUP_SIZE
+        ) as ButtonItem[][]
+        return items.map((items, idx) => ({
+          type: 'interactive',
+          interactive: {
+            type: 'button',
+            body: {
+              text: idx === 0 ? lastMessageText ?? '...' : '...',
+            },
+            action: {
+              buttons: items.map((item) => ({
+                type: 'reply',
+                reply: {
+                  id: item.id,
+                  title: trimTextTo20Chars(item.content as string),
+                },
+              })),
+            },
           },
-          action: {
-            buttons: items.map((item) => ({
-              type: 'reply',
-              reply: {
-                id: item.id,
-                title: trimTextTo20Chars(item.content as string),
+        }))
+      } else {
+        const items = groupArrayByArraySize(
+          input.items.filter((item) => isDefined(item.content)),
+          10
+        ) as ButtonItem[][]
+        if (input.options?.withFirstChoice && !input.options?.withLastChoice) {
+          return items.map((items, idx) => ({
+            type: 'interactive',
+            interactive: {
+              type: 'list',
+              body: {
+                text: idx === 0 ? lastMessageText ?? '...' : '...',
               },
-            })),
+              action: {
+                button: 'Ver opciones',
+                sections: [
+                  {
+                    title: 'Mas opciones',
+                    rows: items.slice(0, 1).map((item) => ({
+                      id: item.id,
+                      title: trimTextTo20Chars(item.content as string),
+                      description: item.description
+                        ? trimTextTo20Chars(item.description)
+                        : undefined,
+                    })),
+                  },
+                  {
+                    title: 'Opciones',
+                    rows: items.slice(1).map((item) => ({
+                      id: item.id,
+                      title: trimTextTo20Chars(item.content as string),
+                      description: item.description
+                        ? trimTextTo20Chars(item.description)
+                        : undefined,
+                    })),
+                  },
+                ],
+              },
+            },
+          }))
+        }
+        if (!input.options?.withFirstChoice && input.options?.withLastChoice) {
+          return items.map((items, idx) => ({
+            type: 'interactive',
+            interactive: {
+              type: 'list',
+              body: {
+                text: idx === 0 ? lastMessageText ?? '...' : '...',
+              },
+              action: {
+                button: 'Ver opciones',
+                sections: [
+                  {
+                    title: 'Opciones',
+                    rows: items.slice(0, -1).map((item) => ({
+                      id: item.id,
+                      title: trimTextTo20Chars(item.content as string),
+                      description: item.description
+                        ? trimTextTo20Chars(item.description)
+                        : undefined,
+                    })),
+                  },
+                  {
+                    title: 'Mas opciones',
+                    rows: items.slice(-1).map((item) => ({
+                      id: item.id,
+                      title: trimTextTo20Chars(item.content as string),
+                      description: item.description
+                        ? trimTextTo20Chars(item.description)
+                        : undefined,
+                    })),
+                  },
+                ],
+              },
+            },
+          }))
+        }
+        if (input.options?.withFirstChoice && input.options?.withLastChoice) {
+          return items.map((items, idx) => ({
+            type: 'interactive',
+            interactive: {
+              type: 'list',
+              body: {
+                text: idx === 0 ? lastMessageText ?? '...' : '...',
+              },
+              action: {
+                button: 'Ver opciones',
+                sections: [
+                  {
+                    title: 'Atrás',
+                    rows: items.slice(0, 1).map((item) => ({
+                      id: item.id,
+                      title: trimTextTo20Chars(item.content as string),
+                      description: item.description
+                        ? trimTextTo20Chars(item.description)
+                        : undefined,
+                    })),
+                  },
+                  {
+                    title: 'Opciones',
+                    rows: items.slice(1, -1).map((item) => ({
+                      id: item.id,
+                      title: trimTextTo20Chars(item.content as string),
+                      description: item.description
+                        ? trimTextTo20Chars(item.description)
+                        : undefined,
+                    })),
+                  },
+                  {
+                    title: 'Siguiente',
+                    rows: items.slice(-1).map((item) => ({
+                      id: item.id,
+                      title: trimTextTo20Chars(item.content as string),
+                      description: item.description
+                        ? trimTextTo20Chars(item.description)
+                        : undefined,
+                    })),
+                  },
+                ],
+              },
+            },
+          }))
+        }
+        return items.map((items, idx) => ({
+          type: 'interactive',
+          interactive: {
+            type: 'list',
+            body: {
+              text: idx === 0 ? lastMessageText ?? '...' : '...',
+            },
+            action: {
+              button: input.options?.listHeader
+                ? trimTextTo20Chars(input.options.listHeader as string)
+                : 'Ver opciones',
+              sections: [
+                {
+                  rows: items.map((item) => ({
+                    id: item.id,
+                    title: trimTextTo20Chars(item.content as string),
+                    description: item.description
+                      ? trimTextTo20Chars(item.description)
+                      : undefined,
+                  })),
+                },
+              ],
+            },
           },
-        },
-      }))
+        }))
+      }
     }
   }
 }

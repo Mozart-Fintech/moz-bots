@@ -122,46 +122,20 @@ export const useTemplates = (): TemplateProps[] => {
       description: t('templates.modal.other.openAiConditions.description'),
     },
     {
-      name: 'High ticket lead follow-up',
+      name: t('templates.modal.marketing.highTicketLeadFollowUp.name'),
       emoji: '📞',
       isNew: true,
       fileName: 'high-ticket-lead-follow-up.json',
       category: 'marketing',
-      description:
-        'Simulates a bot that could be triggered after a high ticket lead just downloaded a lead magnet. This bot asks questions about the prospect business and their needs. Every question are powered with AI blocks to make the conversation more engaging and human-like.',
+      description: t(
+        'templates.modal.marketing.highTicketLeadFollowUp.description'
+      ),
     },
     {
-      name: 'Quick Carb Calculator',
-      emoji: '🏃‍♂️',
-      isNew: true,
-      fileName: 'quick-carb-calculator.json',
-      category: 'marketing',
-      description:
-        'Designed specifically for athlete fueling brands looking to attract and engage active audiences, this chatbot serves as an effective lead magnet by providing instant, customized carbohydrate intake recommendations based on user input.',
-    },
-    {
-      name: 'Skin Typology',
-      emoji: '💆‍♀️',
-      isNew: true,
-      fileName: 'skin-typology.json',
-      category: 'marketing',
-      description:
-        "A skin typology expert chatbot! Designed as a lead magnet for Typology, this bot asks a series of personalized questions to determine the user's unique skin type. He then receives a detailed diagnosis and tailored skincare AI-based recommendations.",
-    },
-    {
-      name: 'OpenAI Assistant Chat',
+      name: t('templates.modal.other.openAiAssistantChat.name'),
       emoji: '🤖',
       fileName: 'openai-assistant-chat.json',
-      description: 'A simple conversation with your OpenAI assistant.',
-    },
-    {
-      name: 'Savings Estimator',
-      emoji: '💰',
-      fileName: 'savings-estimator.json',
-      isNew: true,
-      category: 'marketing',
-      description:
-        "This bot works for INGA, a commerce that sells reusable sponges and paper towels. It asks simple question to estimate the user's potential savings if he decides to buy INGA products.",
+      description: t('templates.modal.other.openAiAssistantChat.description'),
     },
   ]
 }
