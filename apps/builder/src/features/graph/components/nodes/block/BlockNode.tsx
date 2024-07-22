@@ -4,7 +4,7 @@ import {
   Popover,
   PopoverTrigger,
   useColorModeValue,
-  // useDisclosure,
+  useDisclosure,
 } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import {
@@ -22,7 +22,7 @@ import {
   isTextBubbleBlock,
 } from '@mozbot.io/schemas/helpers'
 import { BlockNodeContent } from './BlockNodeContent'
-// import { BlockSettings, SettingsPopoverContent } from './SettingsPopoverContent'
+import { BlockSettings, SettingsPopoverContent } from './SettingsPopoverContent'
 import { BlockNodeContextMenu } from './BlockNodeContextMenu'
 import { BlockSourceEndpoint } from '../../endpoints/BlockSourceEndpoint'
 import { useRouter } from 'next/router'
@@ -37,11 +37,11 @@ import {
   useDragDistance,
 } from '@/features/graph/providers/GraphDndProvider'
 import { useGraph } from '@/features/graph/providers/GraphProvider'
-// import { ParentModalProvider } from '@/features/graph/providers/ParentModalProvider'
+import { ParentModalProvider } from '@/features/graph/providers/ParentModalProvider'
 import { hasDefaultConnector } from '@/features/mozbot/helpers/hasDefaultConnector'
 import { setMultipleRefs } from '@/helpers/setMultipleRefs'
 import { TargetEndpoint } from '../../endpoints/TargetEndpoint'
-// import { SettingsModal } from './SettingsModal'
+import { SettingsModal } from './SettingsModal'
 import { TElement } from '@udecode/plate-common'
 import { LogicBlockType } from '@mozbot.io/schemas/features/blocks/logic/constants'
 import { useGroupsStore } from '@/features/graph/hooks/useGroupsStore'
@@ -102,11 +102,11 @@ export const BlockNode = ({
     deps: [openedBlockId],
   })
 
-  // const {
-  //   isOpen: isModalOpen,
-  //   onOpen: onModalOpen,
-  //   onClose: onModalClose,
-  // } = useDisclosure()
+  const {
+    isOpen: isModalOpen,
+    onOpen: onModalOpen,
+    onClose: onModalClose,
+  } = useDisclosure()
 
   useEffect(() => {
     if (query.blockId?.toString() === block.id) setOpenedBlockId(block.id)
@@ -119,10 +119,10 @@ export const BlockNode = ({
     )
   }, [connectingIds, block.id, groupId])
 
-  // const handleModalClose = () => {
-  //   updateBlock(indices, { ...block })
-  //   onModalClose()
-  // }
+  const handleModalClose = () => {
+    updateBlock(indices, { ...block })
+    onModalClose()
+  }
 
   const handleMouseEnter = () => {
     if (isReadOnly) return
@@ -159,13 +159,13 @@ export const BlockNode = ({
     setOpenedBlockId(block.id)
   }
 
-  // const handleExpandClick = () => {
-  //   setOpenedBlockId(undefined)
-  //   onModalOpen()
-  // }
+  const handleExpandClick = () => {
+    setOpenedBlockId(undefined)
+    onModalOpen()
+  }
 
-  // const handleBlockUpdate = (updates: Partial<Block>) =>
-  //  updateBlock(indices, { ...block, ...updates })
+  const handleBlockUpdate = (updates: Partial<Block>) =>
+    updateBlock(indices, { ...block, ...updates })
 
   const handleContentChange = (content: BubbleBlockContent) =>
     updateBlock(indices, { ...block, content } as Block)
@@ -319,7 +319,7 @@ export const BlockNode = ({
           </PopoverTrigger>
           {hasSettingsPopover(block) && (
             <>
-              {/* <SettingsPopoverContent
+              <SettingsPopoverContent
                 block={block}
                 groupId={groupId}
                 onExpandClick={handleExpandClick}
@@ -333,7 +333,7 @@ export const BlockNode = ({
                     onBlockChange={handleBlockUpdate}
                   />
                 </SettingsModal>
-              </ParentModalProvider> */}
+              </ParentModalProvider>
             </>
           )}
           {mozbot && isMediaBubbleBlock(block) && (
