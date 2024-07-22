@@ -162,8 +162,7 @@ export const startSession = async ({
       mozbot: {
         id: mozbot.id,
         settings: deepParseVariables(
-          initialState.mozbotsQueue[0].mozbot.variables,
-          { removeEmptyStrings: true }
+          initialState.mozbotsQueue[0].mozbot.variables
         )(mozbot.settings),
         theme: sanitizeAndParseTheme(mozbot.theme, {
           variables: initialState.mozbotsQueue[0].mozbot.variables,
@@ -274,8 +273,7 @@ export const startSession = async ({
       mozbot: {
         id: mozbot.id,
         settings: deepParseVariables(
-          newSessionState.mozbotsQueue[0].mozbot.variables,
-          { removeEmptyStrings: true }
+          newSessionState.mozbotsQueue[0].mozbot.variables
         )(mozbot.settings),
         theme: sanitizeAndParseTheme(mozbot.theme, {
           variables: initialState.mozbotsQueue[0].mozbot.variables,
@@ -293,8 +291,7 @@ export const startSession = async ({
     mozbot: {
       id: mozbot.id,
       settings: deepParseVariables(
-        newSessionState.mozbotsQueue[0].mozbot.variables,
-        { removeEmptyStrings: true }
+        newSessionState.mozbotsQueue[0].mozbot.variables
       )(mozbot.settings),
       theme: sanitizeAndParseTheme(mozbot.theme, {
         variables: initialState.mozbotsQueue[0].mozbot.variables,
@@ -472,11 +469,9 @@ const sanitizeAndParseTheme = (
   { variables }: { variables: Variable[] }
 ): Theme => ({
   general: theme.general
-    ? deepParseVariables(variables, { removeEmptyStrings: true })(theme.general)
+    ? deepParseVariables(variables)(theme.general)
     : undefined,
-  chat: theme.chat
-    ? deepParseVariables(variables, { removeEmptyStrings: true })(theme.chat)
-    : undefined,
+  chat: theme.chat ? deepParseVariables(variables)(theme.chat) : undefined,
   customCss: theme.customCss
     ? removeLiteBadgeCss(parseVariables(variables)(theme.customCss))
     : undefined,

@@ -298,8 +298,7 @@ export const parseInput =
       }
       case InputBlockType.NUMBER: {
         const parsedBlock = deepParseVariables(
-          state.mozbotsQueue[0].mozbot.variables,
-          { removeEmptyStrings: true }
+          state.mozbotsQueue[0].mozbot.variables
         )({
           ...block,
           prefilledValue: getPrefilledInputValue(
@@ -327,8 +326,7 @@ export const parseInput =
       }
       case InputBlockType.RATING: {
         const parsedBlock = deepParseVariables(
-          state.mozbotsQueue[0].mozbot.variables,
-          { removeEmptyStrings: true }
+          state.mozbotsQueue[0].mozbot.variables
         )({
           ...block,
           prefilledValue: getPrefilledInputValue(
@@ -346,9 +344,7 @@ export const parseInput =
         }
       }
       default: {
-        return deepParseVariables(state.mozbotsQueue[0].mozbot.variables, {
-          removeEmptyStrings: true,
-        })({
+        return deepParseVariables(state.mozbotsQueue[0].mozbot.variables)({
           ...block,
           runtimeOptions: await computeRuntimeOptions(state)(block),
           prefilledValue: getPrefilledInputValue(
