@@ -38,6 +38,15 @@ export const OpenAINodeBody = ({ options }: Props) => {
             variableId={options.saveUrlInVariableId}
           />
         )}
+      {mozbot &&
+        options &&
+        'saveTextInVariableId' in options &&
+        options.saveTextInVariableId && (
+          <SetVariableLabel
+            variables={mozbot.variables}
+            variableId={options.saveTextInVariableId}
+          />
+        )}
     </Stack>
   )
 }
