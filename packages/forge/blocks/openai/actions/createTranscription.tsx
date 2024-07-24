@@ -51,6 +51,7 @@ export const createTranscription = createAction({
         const openai = new OpenAI(config)
 
         const models = await openai.models.list()
+        console.log(models)
 
         return (
           models.data
@@ -84,16 +85,18 @@ export const createTranscription = createAction({
 
       const model = options.model ?? defaultOpenAIOptions.transcriptModel
 
-      const file = await toFile(
-        await getFileFromBucket({
-          url: variables.parse(options.url),
-        })
-      )
+      const fetchUrl = await fetch(variables.get(options.url) as string)
+
+      const blob = await fetchUrl.blob()
+
+      const buffer = await blob.arrayBuffer()
+
+      const file = await toFile(buffer)
 
       const transcriptionText = (await openai.audio.transcriptions.create({
         file,
         model,
-      }))
+      })).text
 
       variables.set(options.saveTextInVariableId, transcriptionText)
     },

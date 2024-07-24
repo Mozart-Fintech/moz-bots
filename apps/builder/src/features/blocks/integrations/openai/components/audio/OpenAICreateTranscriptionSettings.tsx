@@ -2,7 +2,6 @@ import { CreateTranscriptionOpenAIOptions } from '@mozbot.io/schemas/features/bl
 import { FormControl, FormLabel, Stack, Text } from '@chakra-ui/react'
 import { TextLink } from '@/components/TextLink'
 import { ModelsDropdown } from '../ModelsDropdown'
-import { Textarea } from '@/components/inputs'
 import { VariableSearchInput } from '@/components/inputs/VariableSearchInput'
 import { Variable } from '@mozbot.io/schemas'
 
@@ -25,10 +24,10 @@ export const OpenAICreateTranscriptionSettings = ({
     })
   }
 
-  const updateURL = (url: string | undefined) => {
+  const updateURL = (variable: Pick<Variable, 'id' | 'name'> | undefined) => {
     onOptionsChange({
       ...options,
-      url,
+      url: variable?.id,
     })
   }
 
@@ -60,11 +59,13 @@ export const OpenAICreateTranscriptionSettings = ({
             type="whisper"
             onChange={updateModel}
           />
-          <Textarea
-            defaultValue={options.url}
-            onChange={updateURL}
-            label="Url:"
-          />
+          <FormControl>
+            <FormLabel>Url:</FormLabel>
+            <VariableSearchInput
+              initialVariableId={options.url}
+              onSelectVariable={updateURL}
+            />
+          </FormControl>
           <FormControl>
             <FormLabel>Save Text:</FormLabel>
             <VariableSearchInput
