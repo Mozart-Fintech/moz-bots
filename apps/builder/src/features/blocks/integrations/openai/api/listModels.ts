@@ -16,7 +16,7 @@ export const listModels = authenticatedProcedure
       workspaceId: z.string(),
       baseUrl: z.string(),
       apiVersion: z.string().optional(),
-      type: z.enum(['gpt', 'tts']),
+      type: z.enum(['gpt', 'tts', 'whisper']),
     })
   )
   .query(

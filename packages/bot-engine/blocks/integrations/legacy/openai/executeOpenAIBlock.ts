@@ -3,6 +3,7 @@ import { OpenAIBlock } from '@mozbot.io/schemas/features/blocks/integrations/ope
 import { createChatCompletionOpenAI } from './createChatCompletionOpenAI'
 import { ExecuteIntegrationResponse } from '../../../../types'
 import { createSpeechOpenAI } from './audio/createSpeechOpenAI'
+import { createTranscriptionOpenAI } from './audio/createTranscriptionOpenAI'
 
 export const executeOpenAIBlock = async (
   state: SessionState,
@@ -17,6 +18,11 @@ export const executeOpenAIBlock = async (
       })
     case 'Create speech':
       return createSpeechOpenAI(state, {
+        options: block.options,
+        outgoingEdgeId: block.outgoingEdgeId,
+      })
+    case 'Create transcription':
+      return createTranscriptionOpenAI(state, {
         options: block.options,
         outgoingEdgeId: block.outgoingEdgeId,
       })

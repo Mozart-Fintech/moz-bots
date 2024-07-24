@@ -2,6 +2,7 @@ export const openAITasks = [
   'Create chat completion',
   'Create speech',
   'Create image',
+  'Create transcription',
 ] as const
 
 export const chatCompletionMessageRoles = [

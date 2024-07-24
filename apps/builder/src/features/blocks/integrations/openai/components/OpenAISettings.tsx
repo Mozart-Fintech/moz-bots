@@ -14,6 +14,7 @@ import {
   ChatCompletionOpenAIOptions,
   CreateImageOpenAIOptions,
   CreateSpeechOpenAIOptions,
+  CreateTranscriptionOpenAIOptions,
   OpenAIBlock,
 } from '@mozbot.io/schemas/features/blocks/integrations/openai'
 import { OpenAICredentialsModal } from './OpenAICredentialsModal'
@@ -26,6 +27,7 @@ import {
   openAITasks,
 } from '@mozbot.io/schemas/features/blocks/integrations/openai/constants'
 import { OpenAICreateSpeechSettings } from './audio/OpenAICreateSpeechSettings'
+import { OpenAICreateTranscriptionSettings } from './audio/OpenAICreateTranscriptionSettings'
 
 type OpenAITask = (typeof openAITasks)[number]
 
@@ -143,6 +145,7 @@ const OpenAITaskSettings = ({
     | ChatCompletionOpenAIOptions
     | CreateImageOpenAIOptions
     | CreateSpeechOpenAIOptions
+    | CreateTranscriptionOpenAIOptions
   onOptionsChange: (options: OpenAIBlock['options']) => void
 }): JSX.Element | null => {
   switch (options.task) {
@@ -157,6 +160,14 @@ const OpenAITaskSettings = ({
     case 'Create speech': {
       return (
         <OpenAICreateSpeechSettings
+          options={options}
+          onOptionsChange={onOptionsChange}
+        />
+      )
+    }
+    case 'Create transcription': {
+      return (
+        <OpenAICreateTranscriptionSettings
           options={options}
           onOptionsChange={onOptionsChange}
         />

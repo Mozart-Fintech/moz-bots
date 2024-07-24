@@ -9,7 +9,7 @@ type Props = {
   apiVersion?: string
   credentialsId: string
   defaultValue?: string
-  type: 'gpt' | 'tts'
+  type: 'gpt' | 'tts' | 'whisper'
   onChange: (model: string | undefined) => void
 }
 

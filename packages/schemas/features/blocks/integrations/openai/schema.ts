@@ -113,6 +113,16 @@ export type CreateSpeechOpenAIOptions = z.infer<
   typeof createSpeechOptionsSchema
 >
 
+const createTranscriptionOptionsSchema = openAIBaseOptionsSchema.extend({
+  task: z.literal(openAITasks[3]),
+  model: z.string().optional(),
+  url: z.string().optional(),
+  saveTextInVariableId: z.string().optional(),
+})
+export type CreateTranscriptionOpenAIOptions = z.infer<
+  typeof createTranscriptionOptionsSchema
+>
+
 export const openAIBlockSchema = blockBaseSchema.merge(
   z.object({
     type: z.enum([IntegrationBlockType.OPEN_AI]),
@@ -122,6 +132,7 @@ export const openAIBlockSchema = blockBaseSchema.merge(
         chatCompletionOptionsSchema,
         createImageOptionsSchema,
         createSpeechOptionsSchema,
+        createTranscriptionOptionsSchema,
       ])
       .optional(),
   })
