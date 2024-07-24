@@ -1,5 +1,5 @@
 import { option, createAction } from '@mozbot.io/forge'
-import { defaultOpenAIOptions, openAIVoices } from '../constants'
+import { defaultOpenAIOptions } from '../constants'
 import OpenAI, { ClientOptions, toFile } from 'openai'
 import { isNotEmpty } from '@mozbot.io/lib'
 import { getFileFromBucket } from '@mozbot.io/lib/s3/getFileFromBucket'
@@ -17,8 +17,8 @@ export const createTranscription = createAction({
       placeholder: 'Select a model',
     }),
     url: option.string.layout({
+      inputType: 'variableDropdown',
       label: 'Url',
-      inputType: 'textarea',
     }),
     saveTextInVariableId: option.string.layout({
       inputType: 'variableDropdown',
