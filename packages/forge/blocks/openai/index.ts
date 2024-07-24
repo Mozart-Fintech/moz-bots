@@ -1,6 +1,7 @@
 import { OpenAILightLogo, OpenAIDarkLogo } from './logo'
 import { createChatCompletion } from './actions/createChatCompletion'
 import { createSpeech } from './actions/createSpeech'
+import { createTranscription } from './actions/createTranscription'
 import { createBlock } from '@mozbot.io/forge'
 import { auth } from './auth'
 import { baseOptions } from './baseOptions'
@@ -20,6 +21,7 @@ export const openAIBlock = createBlock({
     askAssistant,
     generateVariables,
     createSpeech,
+    createTranscription,
   ],
   docsUrl: 'https://docs.mozbot.io/forge/blocks/openai',
 })
