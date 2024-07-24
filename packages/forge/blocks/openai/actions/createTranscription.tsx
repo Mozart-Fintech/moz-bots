@@ -3,8 +3,7 @@ import { defaultOpenAIOptions } from '../constants'
 import OpenAI, { ClientOptions, toFile } from 'openai'
 import { isNotEmpty } from '@mozbot.io/lib'
 import { Readable, Writable } from 'stream';
-import ffmpeg from "fluent-ffmpeg"
-import ffmpegStatic from "ffmpeg-static"
+import audioDecode from 'audio-decode';
 import { auth } from '../auth'
 import { baseOptions } from '../baseOptions'
 
@@ -65,7 +64,6 @@ export const createTranscription = createAction({
   ],
   run: {
     server: async ({ credentials: { apiKey }, options, variables, logs }) => {
-      if (ffmpegStatic === null) return logs.add('ffmpeg-static not found')
       if (!options.url) return logs.add('Create transcription url is empty')
       if (!options.saveTextInVariableId)
         return logs.add('Create transcription save variable is empty')
@@ -84,30 +82,71 @@ export const createTranscription = createAction({
       } satisfies ClientOptions
 
       const convertToWav = async (inputBuffer: ArrayBuffer): Promise<Buffer> => {
-        return new Promise((resolve, reject) => {
-          const readStream = new Readable({
-            read() { }
-          })
-          readStream.push(inputBuffer)
-          readStream.push(null)
+        try {
+          const audioBuffer = await audioDecode(inputBuffer)
+          const wavBuffer = audioBufferToWav(audioBuffer)
+          return Buffer.from(wavBuffer)
+        } catch (error) {
+          throw new Error(`Error decoding audio: ${error}`)
+        }
+      }
 
-          let chunks: any[] = []
-          const writeStream = new Writable({
-            write(chunk, _encoding, next) {
-              chunks.push(chunk)
-              next()
-            }
-          })
+      const audioBufferToWav = (audioBuffer: AudioBuffer): ArrayBuffer => {
+        const numOfChan = audioBuffer.numberOfChannels,
+          length = audioBuffer.length * numOfChan * 2 + 44,
+          buffer = new ArrayBuffer(length),
+          view = new DataView(buffer),
+          channels = [],
+          sampleRate = audioBuffer.sampleRate,
+          bitDepth = 16
 
-          ffmpeg(readStream)
-            .setFfmpegPath(ffmpegStatic!)
-            .toFormat('wav')
-            .on('error', (err) => reject(err))
-            .on('end', () => {
-              resolve(Buffer.concat(chunks))
-            })
-            .pipe(writeStream, { end: true })
-        })
+        let offset = 0
+
+        writeString(view, offset, 'RIFF'); offset += 4
+        view.setUint32(offset, 36 + audioBuffer.length * numOfChan * 2, true); offset += 4
+        writeString(view, offset, 'WAVE'); offset += 4
+        writeString(view, offset, 'fmt '); offset += 4
+        view.setUint32(offset, 16, true); offset += 4
+        view.setUint16(offset, 1, true); offset += 2
+        view.setUint16(offset, numOfChan, true); offset += 2
+        view.setUint32(offset, sampleRate, true); offset += 4
+        view.setUint32(offset, sampleRate * numOfChan * 2, true); offset += 4
+        view.setUint16(offset, numOfChan * 2, true); offset += 2
+        view.setUint16(offset, bitDepth, true); offset += 2
+        writeString(view, offset, 'data'); offset += 4
+        view.setUint32(offset, audioBuffer.length * numOfChan * 2, true); offset += 4
+
+        for (let i = 0; i < audioBuffer.numberOfChannels; i++) {
+          channels.push(audioBuffer.getChannelData(i))
+        }
+
+        let interleaved = interleave(channels)
+
+        for (let i = 0; i < interleaved.length; i++, offset += 2) {
+          view.setInt16(offset, interleaved[i] * 0x7FFF, true)
+        }
+
+        return buffer
+      }
+
+      const writeString = (view: DataView, offset: number, string: string) => {
+        for (let i = 0; i < string.length; i++) {
+          view.setUint8(offset + i, string.charCodeAt(i))
+        }
+      }
+
+      const interleave = (channels: Float32Array[]) => {
+        let length = channels[0].length
+        let result = new Float32Array(length * channels.length)
+        let index = 0, inputIndex = 0
+
+        while (index < result.length) {
+          for (let i = 0; i < channels.length; i++) {
+            result[index++] = channels[i][inputIndex]
+          }
+          inputIndex++
+        }
+        return result
       }
 
       const openai = new OpenAI(config)
@@ -120,7 +159,7 @@ export const createTranscription = createAction({
 
       const buffer = await blob.arrayBuffer()
 
-      const wavBuffer = await convertToWav(buffer);
+      const wavBuffer = await convertToWav(buffer)
 
       const file = await toFile(wavBuffer, Math.floor(Math.random() * 99999999999) + '.wav')
 
