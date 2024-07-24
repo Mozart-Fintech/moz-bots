@@ -2,7 +2,9 @@ import { option, createAction } from '@mozbot.io/forge'
 import { defaultOpenAIOptions } from '../constants'
 import OpenAI, { ClientOptions, toFile } from 'openai'
 import { isNotEmpty } from '@mozbot.io/lib'
-import { getFileFromBucket } from '@mozbot.io/lib/s3/getFileFromBucket'
+import { Readable, Writable } from 'stream';
+import ffmpeg from "fluent-ffmpeg"
+import ffmpegStatic from "ffmpeg-static"
 import { auth } from '../auth'
 import { baseOptions } from '../baseOptions'
 
@@ -51,7 +53,6 @@ export const createTranscription = createAction({
         const openai = new OpenAI(config)
 
         const models = await openai.models.list()
-        console.log(models)
 
         return (
           models.data
@@ -64,6 +65,7 @@ export const createTranscription = createAction({
   ],
   run: {
     server: async ({ credentials: { apiKey }, options, variables, logs }) => {
+      if (ffmpegStatic === null) return logs.add('ffmpeg-static not found')
       if (!options.url) return logs.add('Create transcription url is empty')
       if (!options.saveTextInVariableId)
         return logs.add('Create transcription save variable is empty')
@@ -81,6 +83,33 @@ export const createTranscription = createAction({
           : undefined,
       } satisfies ClientOptions
 
+      const convertToWav = async (inputBuffer: ArrayBuffer): Promise<Buffer> => {
+        return new Promise((resolve, reject) => {
+          const readStream = new Readable({
+            read() { }
+          })
+          readStream.push(inputBuffer)
+          readStream.push(null)
+
+          let chunks: any[] = []
+          const writeStream = new Writable({
+            write(chunk, _encoding, next) {
+              chunks.push(chunk)
+              next()
+            }
+          })
+
+          ffmpeg(readStream)
+            .setFfmpegPath(ffmpegStatic!)
+            .toFormat('wav')
+            .on('error', (err) => reject(err))
+            .on('end', () => {
+              resolve(Buffer.concat(chunks))
+            })
+            .pipe(writeStream, { end: true })
+        })
+      }
+
       const openai = new OpenAI(config)
 
       const model = options.model ?? defaultOpenAIOptions.transcriptModel
@@ -91,7 +120,9 @@ export const createTranscription = createAction({
 
       const buffer = await blob.arrayBuffer()
 
-      const file = await toFile(buffer)
+      const wavBuffer = await convertToWav(buffer);
+
+      const file = await toFile(wavBuffer, Math.floor(Math.random() * 99999999999) + '.wav')
 
       const transcriptionText = (await openai.audio.transcriptions.create({
         file,
