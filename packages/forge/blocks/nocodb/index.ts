@@ -8,7 +8,7 @@ import { updateExistingRecord } from './actions/updateExistingRecord'
 export const nocodbBlock = createBlock({
   id: 'nocodb',
   name: 'NocoDB',
-  docsUrl: 'https://docs.mozbot.io/forge/blocks/nocodb',
+  docsUrl: 'https://mozdocs.mozartfintech.com/forge/blocks/nocodb',
   tags: ['database'],
   LightLogo: NocodbLogo,
   auth,

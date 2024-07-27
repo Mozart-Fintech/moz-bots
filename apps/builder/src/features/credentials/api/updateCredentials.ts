@@ -25,7 +25,7 @@ export const updateCredentials = authenticatedProcedure
       method: 'PATCH',
       path: '/v1/credentials/{credentialsId}',
       protect: true,
-      summary: 'Create credentials',
+      summary: 'Actualizar credenciales',
       tags: ['Credentials'],
     },
   })
@@ -62,7 +62,7 @@ export const updateCredentials = authenticatedProcedure
       if (!workspace || isWriteWorkspaceForbidden(workspace, user))
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Workspace not found',
+          message: 'Espacio de trabajo no encontrado',
         })
 
       const { encryptedData, iv } = await encrypt(credentials.data)

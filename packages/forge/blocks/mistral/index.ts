@@ -11,5 +11,5 @@ export const mistralBlock = createBlock({
   LightLogo: MistralLogo,
   auth,
   actions: [createChatCompletion, generateVariables],
-  docsUrl: 'https://docs.mozbot.io/forge/blocks/mistral',
+  docsUrl: 'https://mozdocs.mozartfintech.com/forge/blocks/mistral',
 })

@@ -13,7 +13,7 @@ export const unsubscribeWebhook = authenticatedProcedure
       method: 'POST',
       path: '/v1/mozbots/{mozbotId}/webhookBlocks/{blockId}/unsubscribe',
       protect: true,
-      summary: 'Unsubscribe from webhook block',
+      summary: 'Darse de baja del bloque de webhook',
       tags: ['Webhook'],
     },
   })
@@ -39,7 +39,10 @@ export const unsubscribeWebhook = authenticatedProcedure
     })
 
     if (!mozbot)
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Mozbot no encontrado',
+      })
 
     const groups = parseGroups(mozbot.groups, {
       mozbotVersion: mozbot.version,
@@ -52,7 +55,7 @@ export const unsubscribeWebhook = authenticatedProcedure
     if (!webhookBlock || !isWebhookBlock(webhookBlock))
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Webhook block not found',
+        message: 'Bloque de webhook no encontrado',
       })
 
     if (webhookBlock.options?.webhook || mozbot.version === '6') {
@@ -92,7 +95,7 @@ export const unsubscribeWebhook = authenticatedProcedure
       else
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Webhook block not found',
+          message: 'Bloque de webhook no encontrado',
         })
     }
 

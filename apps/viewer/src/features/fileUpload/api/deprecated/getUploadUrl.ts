@@ -20,8 +20,9 @@ export const getUploadUrl = publicProcedure
     openapi: {
       method: 'GET',
       path: '/v1/mozbots/{mozbotId}/blocks/{blockId}/storage/upload-url',
-      summary: 'Get upload URL for a file',
-      description: 'Used for the web client to get the bucket upload file.',
+      summary: 'Obtener la URL de carga de un archivo',
+      description:
+        'Se utiliza para que el cliente web obtenga el archivo de carga del depósito.',
       deprecated: true,
       tags: ['Deprecated'],
     },
@@ -45,7 +46,7 @@ export const getUploadUrl = publicProcedure
       throw new TRPCError({
         code: 'INTERNAL_SERVER_ERROR',
         message:
-          'S3 not properly configured. Missing one of those variables: S3_ENDPOINT, S3_ACCESS_KEY, S3_SECRET_KEY',
+          'S3 no está configurado correctamente. Falta una de esas variables: S3_ENDPOINT, S3_ACCESS_KEY, S3_SECRET_KEY',
       })
 
     const publicMozbot = await prisma.publicMozbot.findFirst({
@@ -60,7 +61,7 @@ export const getUploadUrl = publicProcedure
     if (!publicMozbot)
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: 'Mozbot not found',
+        message: 'Mozbot no encontrado',
       })
 
     const fileUploadBlock = await getFileUploadBlock(publicMozbot, blockId)
@@ -68,7 +69,7 @@ export const getUploadUrl = publicProcedure
     if (!fileUploadBlock)
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: 'File upload block not found',
+        message: 'Bloque de carga de archivos no encontrado',
       })
 
     const presignedUrl = await generatePresignedUrl({

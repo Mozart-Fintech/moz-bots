@@ -1,84 +1,82 @@
 ---
-title: Script block
+title: Bloque de Script
 icon: code
 ---
 
-The "Script" block allows you to execute Javascript code.
+El bloque "Script" te permite ejecutar código Javascript.
 
-<Info>This block doesn't allow you to create a custom visual block</Info>
+<Info>Este bloque no te permite crear un bloque visual personalizado</Info>
 
 <Frame>
-  <img src="/images/blocks/logic/code.png" width="600" alt="Code block" />
+  <img src="/images/blocks/logic/code.png" width="600" alt="Bloque de código" />
 </Frame>
 
 <Info>
-Variables in script are not parsed, they are evaluated. So it should be treated as if it were real javascript variables.
+Las variables en el script no se analizan, se evalúan. Por lo tanto, deben tratarse como si fueran variables reales de Javascript.
 
-You need to write `console.log({{My variable}})` instead of `console.log("{{My variable}}")`
+Debes escribir `console.log({{Mi variable}})` en lugar de `console.log("{{Mi variable}}")`
 
 </Info>
 
-## `setVariable` function
+## Función `setVariable`
 
-If you want to set a variable value with Javascript, the [Set variable block](./set-variable) is more appropriate for most cases.
+Si deseas establecer el valor de una variable con Javascript, el [bloque de Establecer variable](./set-variable) es más apropiado en la mayoría de los casos.
 
-However, if you'd like to set variables in a Script block, you can use the `setVariable` function in your script:
+Sin embargo, si deseas establecer variables en un bloque de Script, puedes usar la función `setVariable` en tu script:
 
 ```js
-if({{My variable}} === 'foo') {
-  setVariable('My variable', 'bar')
+if({{Mi variable}} === 'foo') {
+  setVariable('Mi variable', 'bar')
 } else {
-  setVariable('My variable', 'other')
+  setVariable('Mi variable', 'otro')
 }
 ```
 
-The `setVariable` function is only available in script executed on the server, so it won't work if the `Execute on client?` is checked.
+La función `setVariable` solo está disponible en scripts ejecutados en el servidor, por lo que no funcionará si la opción `¿Ejecutar en el cliente?` está marcada.
 
-## Limitations on scripts executed on server
+## Limitaciones en scripts ejecutados en el servidor
 
-Because the script is executed on a isolated and secured environment, there are some limitations.
+Debido a que el script se ejecuta en un entorno aislado y seguro, existen algunas limitaciones.
 
-- Global functions like `console.log`, `setTimeout`, `setInterval`, etc. are not available
-- The `fetch` function behavior is slightly different from the native `fetch` function. You just have to skip the `await response.text()` or `await response.json()` part.
+- Funciones globales como `console.log`, `setTimeout`, `setInterval`, etc. no están disponibles
+- El comportamiento de la función `fetch` es ligeramente diferente de la función `fetch` nativa. Solo tienes que omitir la parte `await response.text()` o `await response.json()`.
 
   ```js
-  // ❌ This throws an error
+  // ❌ Esto lanza un error
   const response = await fetch('https://jsonplaceholder.typicode.com/todos/1')
   const data = await response.text()
 
-  // ✅ This works
+  // ✅ Esto funciona
   const data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
   ```
 
-  `response` will always be a `string` even if the the request returns a JSON object. If you know that the response is a JSON object, you can parse it using `JSON.parse(response)`.
+  `response` siempre será una `string` incluso si la solicitud devuelve un objeto JSON. Si sabes que la respuesta es un objeto JSON, puedes analizarlo usando `JSON.parse(response)`.
 
   ```js
-  // ❌ This throws an error
+  // ❌ Esto lanza un error
   const response = await fetch('https://jsonplaceholder.typicode.com/todos/1')
   const data = await response.json()
 
-  // ✅ This works
+  // ✅ Esto funciona
   const response = await fetch('https://jsonplaceholder.typicode.com/todos/1')
   const data = JSON.parse(response)
   ```
 
-- You can't use `import` or `require` to import external libraries
-- You don't have access to browser APIs like `window`, `document`, `localStorage`, etc. If you need to use browser APIs, you should check the `Execute on client?` option so that the script is executed on the user's browser.
+- No puedes usar `import` o `require` para importar bibliotecas externas
+- No tienes acceso a las APIs del navegador como `window`, `document`, `localStorage`, etc. Si necesitas usar las APIs del navegador, debes marcar la opción `¿Ejecutar en el cliente?` para que el script se ejecute en el navegador del usuario.
 
-## Examples
+## Ejemplos
 
-### Reload page
+### Recargar página
 
 ```js
 window.location.reload()
 ```
 
-### Redirect if a variable has a specific value
+### Redirigir si una variable tiene un valor específico
 
 ```js
-if({{Category}} === 'qualified') {
-  window.location.href = 'https://my-site.com'
+if({{Categoría}} === 'calificado') {
+  window.location.href = 'https://mi-sitio.com'
 }
 ```
-
-Do you need to do something but you're not sure how to? [Join the Discord server](https://mozbot.io/discord) and get instant help!

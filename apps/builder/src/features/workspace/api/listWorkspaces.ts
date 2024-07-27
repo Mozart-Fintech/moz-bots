@@ -10,7 +10,7 @@ export const listWorkspaces = authenticatedProcedure
       method: 'GET',
       path: '/v1/workspaces',
       protect: true,
-      summary: 'List workspaces',
+      summary: 'Listar espacios de trabajo',
       tags: ['Workspace'],
     },
   })
@@ -29,7 +29,10 @@ export const listWorkspaces = authenticatedProcedure
     })
 
     if (!workspaces)
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'No workspaces found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontraron espacios de trabajo',
+      })
 
     return { workspaces }
   })

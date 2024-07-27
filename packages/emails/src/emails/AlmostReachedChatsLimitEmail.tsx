@@ -53,7 +53,7 @@ export const AlmostReachedChatsLimitEmail = ({
               settings.
             </Text>
             <Text>
-              Check out the <a href="https://mozbot.io/pricing">pricing page</a>{' '}
+              Check out the <a href="https://mozbot.mozartfintech.com/pricing">pricing page</a>{' '}
               for information about the pay as you go tiers.
             </Text>
             <Text>

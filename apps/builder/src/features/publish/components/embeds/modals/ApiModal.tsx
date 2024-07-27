@@ -87,7 +87,7 @@ export const ApiModal = ({
           <Text fontSize="sm" colorScheme="gray">
             Check out the{' '}
             <TextLink
-              href="https://docs.mozbot.io/api-reference/chat/start-chat"
+              href="https://mozdocs.mozartfintech.com/api-reference/chat/start-chat"
               isExternal
             >
               API reference

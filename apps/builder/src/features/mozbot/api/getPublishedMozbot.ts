@@ -26,7 +26,7 @@ export const getPublishedMozbot = authenticatedProcedure
       mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
+          '[¿Dónde encontrar el ID de mi bot?](../how-to#how-to-find-my-mozbotId)'
         ),
       migrateToLatestVersion: z
         .boolean()
@@ -47,7 +47,7 @@ export const getPublishedMozbot = authenticatedProcedure
         ])
         .optional()
         .describe(
-          'Provides the version the published bot was migrated from if `migrateToLatestVersion` is set to `true`.'
+          'Proporciona la versión desde la que se migró el bot publicado si `migrateToLatestVersion` está configurado en `true`.'
         ),
     })
   )
@@ -77,7 +77,10 @@ export const getPublishedMozbot = authenticatedProcedure
         !existingMozbot?.id ||
         (await isReadMozbotForbidden(existingMozbot, user))
       )
-        throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Mozbot no encontrado',
+        })
 
       if (!existingMozbot.publishedMozbot)
         return {
@@ -100,7 +103,7 @@ export const getPublishedMozbot = authenticatedProcedure
       } catch (err) {
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to parse published mozbot',
+          message: 'No se pudo analizar el mozbot publicado',
           cause: err,
         })
       }

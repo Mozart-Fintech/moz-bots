@@ -73,7 +73,7 @@ const sessionStateSchemaV2 = z.object({
     .number()
     .min(1)
     .optional()
-    .describe('Expiry timeout in milliseconds'),
+    .describe('Tiempo de expiración en milisegundos'),
   typingEmulation: settingsSchema.shape.typingEmulation.optional(),
   currentVisitedEdgeIndex: z.number().optional(),
   progressMetadata: z

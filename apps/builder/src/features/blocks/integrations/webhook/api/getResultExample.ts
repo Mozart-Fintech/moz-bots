@@ -14,9 +14,9 @@ export const getResultExample = authenticatedProcedure
       method: 'GET',
       path: '/v1/mozbots/{mozbotId}/webhookBlocks/{blockId}/getResultExample',
       protect: true,
-      summary: 'Get result example',
+      summary: 'Obtener ejemplo de resultado',
       description:
-        'Returns "fake" result for webhook block to help you anticipate how the webhook will behave.',
+        'Devuelve un resultado "falso" para el bloque de webhook para ayudarle a anticipar cómo se comportará el webhook.',
       tags: ['Webhook'],
     },
   })
@@ -28,7 +28,9 @@ export const getResultExample = authenticatedProcedure
   )
   .output(
     z.object({
-      resultExample: z.record(z.any()).describe('Can contain any fields.'),
+      resultExample: z
+        .record(z.any())
+        .describe('Puede contener cualquier campo.'),
     })
   )
   .query(async ({ input: { mozbotId, blockId }, ctx: { user } }) => {
@@ -43,12 +45,18 @@ export const getResultExample = authenticatedProcedure
     })) as Pick<Mozbot, 'groups' | 'edges' | 'variables' | 'events'> | null
 
     if (!mozbot)
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Mozbot no encontrado',
+      })
 
     const { group } = getBlockById(blockId, mozbot.groups)
 
     if (!group)
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Block not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Bloque no encontrado',
+      })
 
     const linkedMozbots = await fetchLinkedMozbots(mozbot, user)
 

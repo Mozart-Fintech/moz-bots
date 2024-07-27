@@ -83,7 +83,7 @@ This plugin relies on Mozbot which is a tool that allows you to create conversat
 * Fix flow not proceeding on unknown domains
 
 = 3.0.0 =
-* Complete rework of the plugin. You are now required to generate a code snippet on https://app.mozbot.io
+* Complete rework of the plugin. You are now required to generate a code snippet on https://mozbot.mozartfintech.com
 
 = 2.1.9 =
 * Fix standard embed when window is already loaded

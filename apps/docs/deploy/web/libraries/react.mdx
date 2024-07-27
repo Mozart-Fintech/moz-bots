@@ -2,16 +2,16 @@
 title: React
 ---
 
-## Install
+## Instalar
 
 ```bash
-npm install @mozbot.io/js @mozbot.io/react
+npm install @mozbot/js @mozbot/react
 ```
 
-## Standard
+## Estándar
 
 ```tsx
-import { Standard } from '@mozbot.io/react'
+import { Standard } from '@mozbot/react'
 
 const App = () => {
   return (
@@ -23,31 +23,31 @@ const App = () => {
 }
 ```
 
-This code is creating a container with a 100% width (will match parent width) and 600px height.
+Este código está creando un contenedor con un ancho del 100% (coincidirá con el ancho del padre) y una altura de 600px.
 
 ## Popup
 
 ```tsx
-import { Popup } from '@mozbot.io/react'
+import { Popup } from '@mozbot/react'
 
 const App = () => {
   return <Popup mozbot="lead-generation-copy-3luzm6b" autoShowDelay={3000} />
 }
 ```
 
-This code will automatically trigger the popup window after 3 seconds.
+Este código activará automáticamente la ventana emergente después de 3 segundos.
 
-## Bubble
+## Burbuja
 
 ```tsx
-import { Bubble } from '@mozbot.io/react'
+import { Bubble } from '@mozbot/react'
 
 const App = () => {
   return (
     <Bubble
       mozbot="lead-generation-copy-3luzm6b"
       previewMessage={{
-        message: 'I have a question for you!',
+        message: '¡Tengo una pregunta para ti!',
         autoShowDelay: 5000,
         avatarUrl: 'https://avatars.githubusercontent.com/u/16015833?v=4',
       }}
@@ -60,14 +60,14 @@ const App = () => {
 }
 ```
 
-This code will show the bubble and let a preview message appear after 5 seconds.
+Este código mostrará la burbuja y permitirá que aparezca un mensaje de vista previa después de 5 segundos.
 
-## Additional configuration
+## Configuración adicional
 
-You can prefill the bot variable values in your embed code by adding the `prefilledVariables` option. Here is an example:
+Puedes prellenar los valores de las variables del bot en tu código incrustado añadiendo la opción `prefilledVariables`. Aquí tienes un ejemplo:
 
 ```tsx
-import { Standard } from '@mozbot.io/react'
+import { Standard } from '@mozbot/react'
 
 const App = () => {
   return (
@@ -83,6 +83,6 @@ const App = () => {
 }
 ```
 
-It will prefill the `Current URL` variable with "https://my-site/account" and the `User name` variable with "John Doe". More info about variables: [here](/editor/variables).
+Prefillará la variable `Current URL` con "https://my-site/account" y la variable `User name` con "John Doe". Más información sobre variables: [aquí](/editor/variables).
 
-Note that if your site URL contains query params (i.e. https://mozbot.io?User%20name=John%20Doe), the variables will automatically be injected to the mozbot. So you don't need to manually transfer query params to the bot embed configuration.
+Ten en cuenta que si la URL de tu sitio contiene parámetros de consulta (por ejemplo, https://mozbot?User%20name=John%20Doe), las variables se inyectarán automáticamente en el mozbot. Así que no necesitas transferir manualmente los parámetros de consulta a la configuración de incrustación del bot.

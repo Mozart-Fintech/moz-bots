@@ -1,16 +1,16 @@
 ---
-title: Date
+title: Fecha
 icon: calendar
 ---
 
-The Date input block allows you to ask your user for a date. You can ask for a specific date or range and include time:
+El bloque de entrada de Fecha te permite pedirle a tu usuario una fecha. Puedes pedir una fecha específica o un rango e incluir la hora:
 
 <Tabs>
-  <Tab title="Flow">
+  <Tab title="Flujo">
     <Frame>
       <img
         src="/images/blocks/inputs/date-flow.png"
-        alt="Date input in flow"
+        alt="Entrada de fecha en el flujo"
         className="rounded-lg"
       />
     </Frame>
@@ -19,27 +19,27 @@ The Date input block allows you to ask your user for a date. You can ask for a s
     <Frame>
       <img
         src="/images/blocks/inputs/date-bot.png"
-        alt="Date input in bot"
+        alt="Entrada de fecha en el bot"
         className="rounded-lg"
       />
     </Frame>
   </Tab>
 </Tabs>
 
-The input will use the native date picker depending on the device and browser used to answer the bot. For example on Firefox it looks like this:
+La entrada usará el selector de fecha nativo dependiendo del dispositivo y navegador utilizado para responder al bot. Por ejemplo, en Firefox se ve así:
 
 <Frame style={{ maxWidth: '400px' }}>
   <img
     src="/images/blocks/inputs/date-native-picker.png"
-    alt="Date native picker"
+    alt="Selector de fecha nativo"
   />
 </Frame>
 
-## Format
+## Formato
 
-The `Format` setting lets you customize the picked date format. Under the hood, it is done using the [date-fns](https://date-fns.org/) library. You can use any of the [formatting tokens](https://date-fns.org/docs/format) supported by the library.
+La configuración de `Formato` te permite personalizar el formato de la fecha seleccionada. En el fondo, se realiza utilizando la biblioteca [date-fns](https://date-fns.org/). Puedes usar cualquiera de los [tokens de formato](https://date-fns.org/docs/format) soportados por la biblioteca.
 
-Here are some examples:
+Aquí hay algunos ejemplos:
 
 ```text
 yyyy-MM-dd

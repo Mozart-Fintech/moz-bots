@@ -43,11 +43,11 @@ export const publicMozbotSchema = z.preprocess(
   z.discriminatedUnion('version', [
     publicMozbotSchemaV6.openapi({
       ref: 'publicMozbotV6',
-      title: 'Public Mozbot V6',
+      title: 'Mozbot público V6',
     }),
     publicMozbotSchemaV5._def.schema.openapi({
       ref: 'publicMozbotV5',
-      title: 'Public Mozbot V5',
+      title: 'Mozbot público V5',
     }),
   ])
 )

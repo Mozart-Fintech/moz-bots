@@ -1,43 +1,46 @@
 ---
-sidebarTitle: Overview
-title: Results
+sidebarTitle: Descripción General
+title: Resultados
 icon: table
 ---
 
-Once your bot is [published](/editor/publish) you start to collect results from your users. You can see all the results in the `Results` tab of your bot.
+Una vez que tu bot esté [publicado](/editor/publish), comenzarás a recopilar resultados de tus usuarios. Puedes ver todos los resultados en la pestaña `Resultados` de tu bot.
 
 <Note>
-  You might be surprised to see partially filled results. This is normal and
-  expected. Your mozbot collects the answers as soon as they are filled by the
-  user, even if the user doesn't complete the whole conversation. This is useful
-  to understand where users are dropping off and to improve your bot. This is
-  one of Mozbot's greatest features.
+  Podrías sorprenderte al ver resultados parcialmente llenados. Esto es normal y
+  esperado. Tu mozbot recopila las respuestas tan pronto como son llenadas por
+  el usuario, incluso si el usuario no completa toda la conversación. Esto es
+  útil para entender dónde los usuarios están abandonando y para mejorar tu bot.
+  Esta es una de las mejores características de Mozbot.
 </Note>
 
-## More options menu
+## Menú de más opciones
 
 <Frame>
-  <img src="/images/results/more-options.png" alt="More options menu" />
+  <img src="/images/results/more-options.png" alt="Menú de más opciones" />
 </Frame>
 
-### Export all results to a CSV file
+### Exportar todos los resultados a un archivo CSV
 
-You can export all results to a CSV file. This will download a CSV file with all the results from the current bot.
+Puedes exportar todos los resultados a un archivo CSV. Esto descargará un archivo CSV con todos los resultados del bot actual.
 
-The `Include deleted blocks` option, if enabled, will include answers from blocks that doesn't exist any more (was part of a previous version of your bot).
+La opción `Incluir bloques eliminados`, si está habilitada, incluirá respuestas de bloques que ya no existen (eran parte de una versión anterior de tu bot).
 
-### Re-arrange and hide specific columns
+### Reorganizar y ocultar columnas específicas
 
-To make your result table more readable, you can re-arrange and hide specific columns.
+Para hacer tu tabla de resultados más legible, puedes reorganizar y ocultar columnas específicas.
 
 <Frame style={{ maxWidth: '300px' }}>
-  <img src="/images/results/columns-settings.png" alt="Column settings" />
+  <img
+    src="/images/results/columns-settings.png"
+    alt="Configuración de columnas"
+  />
 </Frame>
 
-## Logs
+## Registros
 
-For each result, you'll find a "See logs" button that can show you what went wrong while executing an integration such as Send email, Google Sheets, or a Webhook call:
+Para cada resultado, encontrarás un botón "Ver registros" que puede mostrarte qué salió mal al ejecutar una integración como Enviar correo electrónico, Google Sheets o una llamada Webhook:
 
 <Frame>
-  <img src="/images/results/logs-button.png" alt="See logs buttons" />
+  <img src="/images/results/logs-button.png" alt="Botones de ver registros" />
 </Frame>

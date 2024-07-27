@@ -22,7 +22,7 @@ export const listMozbots = authenticatedProcedure
       workspaceId: z
         .string()
         .describe(
-          '[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)'
+          '[¿Dónde encontrar el ID de mi espacio de trabajo?](../how-to#how-to-find-my-workspaceid)'
         ),
       folderId: z.string().optional(),
     })
@@ -47,7 +47,10 @@ export const listMozbots = authenticatedProcedure
     })
     const userRole = getUserRoleInWorkspace(user.id, workspace?.members)
     if (userRole === undefined)
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Workspace not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Espacio de trabajo no encontrado',
+      })
     const mozbots = (await prisma.mozbot.findMany({
       where: {
         isArchived: { not: true },
@@ -75,7 +78,10 @@ export const listMozbots = authenticatedProcedure
     })[]
 
     if (!mozbots)
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'No mozbots found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontraron mozbots',
+      })
 
     return {
       mozbots: mozbots.map((mozbot) => ({

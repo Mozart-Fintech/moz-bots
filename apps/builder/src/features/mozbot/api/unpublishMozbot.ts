@@ -19,7 +19,7 @@ export const unpublishMozbot = authenticatedProcedure
       mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
+          '[¿Dónde encontrar el ID de mi bot?](../how-to#how-to-find-my-mozbotId)'
         ),
     })
   )
@@ -53,14 +53,17 @@ export const unpublishMozbot = authenticatedProcedure
     if (!existingMozbot?.publishedMozbot)
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Published mozbot not found',
+        message: 'Mozbot publicado no encontrado',
       })
 
     if (
       !existingMozbot.id ||
       (await isWriteMozbotForbidden(existingMozbot, user))
     )
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Mozbot no encontrado',
+      })
 
     await prisma.publicMozbot.deleteMany({
       where: {

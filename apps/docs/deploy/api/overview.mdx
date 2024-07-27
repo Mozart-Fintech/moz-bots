@@ -1,35 +1,35 @@
 ---
-sidebarTitle: Overview
+sidebarTitle: Descripción general
 title: API
 ---
 
-Your bot can also be executed with HTTP requests. This is useful if you want to integrate your bot with another service or if you want to use it in a different programming language.
+Tu bot también puede ejecutarse con solicitudes HTTP. Esto es útil si deseas integrar tu bot con otro servicio o si deseas usarlo en un lenguaje de programación diferente.
 
-## Test
+## Prueba
 
-1. All your requests need to be authenticated with an API token. [See instructions](/api-reference/authentication).
-2. To start the chat, send a POST request to `https://mozbot.io/api/v1/mozbots/<mozbot ID>/preview/startChat` The first response will contain a sessionId that you will need for subsequent requests.
-3. To send replies, send POST requests to `https://mozbot.io/api/v1/sessions/<session ID>/continueChat`
-   With the following JSON body:
-
-   ```json
-   {
-     "message": "This is my reply"
-   }
-   ```
-
-Check out the [Start preview chat API reference](/api-reference/chat/start-preview-chat) for more information
-
-## Live
-
-1. To start the chat, send a POST request to `https://mozbot.io/api/v1/mozbots/<public ID>/startChat` The first response will contain a sessionId that you will need for subsequent requests.
-2. To send replies, send POST requests to `https://mozbot.io/api/v1/sessions/<session ID>/continueChat`
-   With the following JSON body:
+1. Todas tus solicitudes deben estar autenticadas con un token de API. [Ver instrucciones](/api-reference/authentication).
+2. Para iniciar el chat, envía una solicitud POST a `https://mozbot.mozartfintech.com/api/v1/mozbots/<mozbot ID>/preview/startChat`. La primera respuesta contendrá un sessionId que necesitarás para solicitudes posteriores.
+3. Para enviar respuestas, envía solicitudes POST a `https://mozbot.mozartfintech.com/api/v1/sessions/<session ID>/continueChat`
+   con el siguiente cuerpo JSON:
 
    ```json
    {
-     "message": "This is my reply"
+     "message": "Esta es mi respuesta"
    }
    ```
 
-Check out the [Start chat API reference](/api-reference/chat/start-chat) for more information
+Consulta la [Referencia de la API para iniciar el chat de vista previa](/api-reference/chat/start-preview-chat) para más información.
+
+## En Vivo
+
+1. Para iniciar el chat, envía una solicitud POST a `https://mozbot.mozartfintech.com/api/v1/mozbots/<public ID>/startChat`. La primera respuesta contendrá un sessionId que necesitarás para solicitudes posteriores.
+2. Para enviar respuestas, envía solicitudes POST a `https://mozbot.mozartfintech.com/api/v1/sessions/<session ID>/continueChat`
+   con el siguiente cuerpo JSON:
+
+   ```json
+   {
+     "message": "Esta es mi respuesta"
+   }
+   ```
+
+Consulta la [Referencia de la API para iniciar el chat](/api-reference/chat/start-chat) para más información.

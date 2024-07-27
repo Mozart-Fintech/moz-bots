@@ -671,7 +671,7 @@ The Google Sheets block config was updated and its configuration changed.
 1. The Google Picker API needs to be enabled in the Google Cloud console. You also need to enable it in your `NEXT_PUBLIC_GOOGLE_API_KEY`.
 2. Add the `drive.file` OAuth scope.
 
-For more info, see the new requirements: <https://docs.mozbot.io/self-hosting/configuration#google-auth-sheets-fonts>
+For more info, see the new requirements: <https://mozdocs.mozartfintech.com/self-hosting/configuration#google-auth-sheets-fonts>
 
 ### Added
 
@@ -1134,7 +1134,7 @@ If your viewer app do not have the required `NEXTAUTH_URL` env variable, you nee
 
 ## What's new?
 
-WhatsApp integration is now available 🥳. If you are self-hosting Mozbot, refer to the configuration doc (<https://docs.mozbot.io/self-hosting/configuration#whatsapp-preview>)
+WhatsApp integration is now available 🥳. If you are self-hosting Mozbot, refer to the configuration doc (<https://mozdocs.mozartfintech.com/self-hosting/configuration#whatsapp-preview>)
 
 Mozbot validation has been improved. We make sure that your mozbot is valid before storing it in the database, it allows us to avoid unexpected errors.
 

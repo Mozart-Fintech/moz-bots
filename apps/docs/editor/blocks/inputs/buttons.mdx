@@ -1,22 +1,22 @@
 ---
-title: Buttons
+title: Botones
 icon: arrow-pointer
 ---
 
-The Buttons input block allows you to offer your user predefined choices, either single choice options or multiple choices
+El bloque de entrada de Botones te permite ofrecer a tu usuario opciones predefinidas, ya sea opciones de una sola elección o múltiples elecciones.
 
-## Single choice
+## Elección única
 
-Single choice input allows you to directly split your flow depending on what the user selects by linking any choice to a specific path in your flow.
+La entrada de elección única te permite dividir directamente tu flujo dependiendo de lo que el usuario seleccione al vincular cualquier opción a un camino específico en tu flujo.
 
-Link the "Default" item to determine the default path independent of what the user chooses.
+Vincula el elemento "Predeterminado" para determinar el camino predeterminado independientemente de lo que el usuario elija.
 
 <Tabs>
-  <Tab title="Flow">
+  <Tab title="Flujo">
     <Frame>
       <img
         src="/images/blocks/inputs/single-choice-flow.png"
-        alt="Buttons input in flow"
+        alt="Entrada de botones en el flujo"
         className="rounded-lg"
       />
     </Frame>
@@ -25,21 +25,21 @@ Link the "Default" item to determine the default path independent of what the us
     <Frame>
       <img
         src="/images/blocks/inputs/single-choice-bot.png"
-        alt="Buttons input in bot"
+        alt="Entrada de botones en el bot"
         className="rounded-lg"
       />
     </Frame>
   </Tab>
 </Tabs>
 
-## Multiple choices
+## Múltiples elecciones
 
 <Tabs>
-  <Tab title="Flow">
+  <Tab title="Flujo">
     <Frame>
       <img
         src="/images/blocks/inputs/multiple-choices-flow.png"
-        alt="Multiple choices in flow"
+        alt="Múltiples elecciones en el flujo"
         className="rounded-lg"
       />
     </Frame>
@@ -54,45 +54,48 @@ Link the "Default" item to determine the default path independent of what the us
   </Tab>
 </Tabs>
 
-## Dynamic items
+## Elementos dinámicos
 
-Instead of adding items manually, you can also display a dynamic list of items based on a variable.
+En lugar de agregar elementos manualmente, también puedes mostrar una lista dinámica de elementos basada en una variable.
 
 <Frame>
   <img
     src="/images/blocks/inputs/buttons-dynamic.png"
-    alt="Dynamic items list"
+    alt="Lista de elementos dinámicos"
   />
 </Frame>
 
-This is useful when you want to display a list of items from another data source. For this to work, you first need to make sure the variable you are using contains a list of values. This list can be extracted from an integration block like Google Sheets.
+Esto es útil cuando deseas mostrar una lista de elementos de otra fuente de datos. Para que esto funcione, primero debes asegurarte de que la variable que estás usando contenga una lista de valores. Esta lista puede ser extraída de un bloque de integración como Google Sheets.
 
-## How to
+## Cómo hacerlo
 
-### Add a "Other" button
+### Agregar un botón "Otro"
 
-Sometimes you want to allow your user to enter a value that is not in the predefined choices. You can do this by adding a "Other" button and connect it to a "Text" input block.
+A veces deseas permitir que tu usuario ingrese un valor que no está en las opciones predefinidas. Puedes hacer esto agregando un botón "Otro" y conectándolo a un bloque de entrada de "Texto".
 
 <Frame>
-  <img src="/images/blocks/inputs/buttons-other.png" alt="Other button flow" />
+  <img
+    src="/images/blocks/inputs/buttons-other.png"
+    alt="Flujo de botón Otro"
+  />
 </Frame>
 
-### Different replies based on multiple choices
+### Respuestas diferentes basadas en múltiples elecciones
 
-If you'd like to have different replies based on the multiple choices the user selects. You will need to
+Si deseas tener respuestas diferentes basadas en las múltiples elecciones que el usuario selecciona, necesitarás:
 
-1. Save the answer into a variable.
-2. Add a "Condition" block
-3. Add comparisons based on the value of this variable
+1. Guardar la respuesta en una variable.
+2. Agregar un bloque de "Condición".
+3. Agregar comparaciones basadas en el valor de esta variable.
 
 <Frame>
   <img
     src="/images/blocks/inputs/buttons-condition.png"
-    alt="Condition multiple button flow"
+    alt="Flujo de condición de múltiples botones"
   />
 </Frame>
 
-### Conditionally display a certain button
+### Mostrar condicionalmente un botón específico
 
 <div className="relative" style={{ paddingBottom: '64.5933014354067%' }}>
   <iframe

@@ -11,7 +11,7 @@ export const listMembersInWorkspace = authenticatedProcedure
       method: 'GET',
       path: '/v1/workspaces/{workspaceId}/members',
       protect: true,
-      summary: 'List members in workspace',
+      summary: 'Listar miembros en el espacio de trabajo',
       tags: ['Workspace'],
     },
   })
@@ -20,7 +20,7 @@ export const listMembersInWorkspace = authenticatedProcedure
       workspaceId: z
         .string()
         .describe(
-          '[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)'
+          '[¿Dónde encontrar el ID de mi espacio de trabajo?](../how-to#how-to-find-my-workspaceid)'
         ),
     })
   )
@@ -42,7 +42,10 @@ export const listMembersInWorkspace = authenticatedProcedure
     })
 
     if (!workspace || isReadWorkspaceFobidden(workspace, user))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'No workspaces found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontraron espacios de trabajo',
+      })
 
     return {
       members: workspace.members.map((member) => ({

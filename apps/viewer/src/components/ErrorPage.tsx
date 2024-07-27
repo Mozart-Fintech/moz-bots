@@ -20,8 +20,8 @@ export const ErrorPage = ({ error }: { error: Error }) => {
           </h1>
           <h2>
             Make sure to configure the app properly (
-            <a href="https://docs.mozbot.io/self-hosting/configuration">
-              https://docs.mozbot.io/self-hosting/configuration
+            <a href="https://mozdocs.mozartfintech.com/self-hosting/configuration">
+              https://mozdocs.mozartfintech.com/self-hosting/configuration
             </a>
             )
           </h2>

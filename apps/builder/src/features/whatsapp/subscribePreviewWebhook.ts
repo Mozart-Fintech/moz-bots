@@ -8,7 +8,7 @@ export const subscribePreviewWebhook = publicProcedure
     openapi: {
       method: 'GET',
       path: '/v1/whatsapp/preview/webhook',
-      summary: 'Subscribe webhook',
+      summary: 'Suscribir webhook',
       tags: ['WhatsApp'],
     },
   })
@@ -24,7 +24,7 @@ export const subscribePreviewWebhook = publicProcedure
       input: { 'hub.challenge': challenge, 'hub.verify_token': token },
     }) => {
       if (token !== env.ENCRYPTION_SECRET)
-        throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Unauthorized' })
+        throw new TRPCError({ code: 'UNAUTHORIZED', message: 'No autorizado' })
       return Number(challenge)
     }
   )

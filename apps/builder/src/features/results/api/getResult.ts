@@ -11,7 +11,7 @@ export const getResult = authenticatedProcedure
       method: 'GET',
       path: '/v1/mozbots/{mozbotId}/results/{resultId}',
       protect: true,
-      summary: 'Get result by id',
+      summary: 'Obtener resultado por id',
       tags: ['Results'],
     },
   })
@@ -20,12 +20,12 @@ export const getResult = authenticatedProcedure
       mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
+          '[¿Dónde encontrar el ID de mi bot?](../how-to#how-to-find-my-mozbotId)'
         ),
       resultId: z
         .string()
         .describe(
-          'The `resultId` is returned by the /startChat endpoint or you can find it by listing results with `/results` endpoint'
+          'El `resultId` lo devuelve el punto final /startChat o puedes encontrarlo enumerando los resultados con el punto final `/results`'
         ),
     })
   )
@@ -62,7 +62,10 @@ export const getResult = authenticatedProcedure
       },
     })
     if (!mozbot || (await isReadMozbotForbidden(mozbot, user)))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Mozbot no encontrado',
+      })
     const results = await prisma.result.findMany({
       where: {
         id: input.resultId,
@@ -90,7 +93,10 @@ export const getResult = authenticatedProcedure
     })
 
     if (results.length === 0)
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Result not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Resultado no encontrado',
+      })
 
     const { answers, answersV2, ...result } = results[0]
 

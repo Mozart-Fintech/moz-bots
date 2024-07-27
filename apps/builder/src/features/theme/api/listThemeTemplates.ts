@@ -12,7 +12,7 @@ export const listThemeTemplates = authenticatedProcedure
       method: 'GET',
       path: '/v1/themeTemplates',
       protect: true,
-      summary: 'List theme templates',
+      summary: 'Listar plantillas de temas',
       tags: ['Theme template'],
     },
   })
@@ -37,7 +37,10 @@ export const listThemeTemplates = authenticatedProcedure
     })
     const userRole = getUserRoleInWorkspace(user.id, workspace?.members)
     if (userRole === undefined || userRole === WorkspaceRole.GUEST)
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Workspace not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Espacio de trabajo no encontrado',
+      })
     const themeTemplates = (await prisma.themeTemplate.findMany({
       where: {
         workspaceId,

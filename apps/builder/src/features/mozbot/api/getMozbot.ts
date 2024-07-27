@@ -23,14 +23,14 @@ export const getMozbot = publicProcedure
       mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
+          '[¿Dónde encontrar el ID de mi bot?](../how-to#how-to-find-my-mozbotId)'
         ),
       migrateToLatestVersion: z
         .boolean()
         .optional()
         .default(false)
         .describe(
-          'If enabled, the mozbot will be converted to the latest schema version'
+          'Si está habilitado, el mozbot se convertirá a la última versión del esquema.'
         ),
     })
   )
@@ -65,7 +65,10 @@ export const getMozbot = publicProcedure
         !existingMozbot?.id ||
         (await isReadMozbotForbidden(existingMozbot, user))
       )
-        throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Mozbot no encontrado',
+        })
 
       try {
         const parsedMozbot = migrateToLatestVersion
@@ -79,7 +82,7 @@ export const getMozbot = publicProcedure
       } catch (err) {
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to parse mozbot',
+          message: 'No se pudo analizar el mozbot',
           cause: err,
         })
       }

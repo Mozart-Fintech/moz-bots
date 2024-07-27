@@ -7,7 +7,7 @@ describe('initBubble', () => {
 
   it('should initialize a bubble embed', () => {
     expect.assertions(2)
-    Mozbot.initBubble({ url: 'https://mozbot.io/mozbot-id' })
+    Mozbot.initBubble({ url: 'https://mozbot.mozartfintech.com/mozbot-id' })
     const bubbleElement = document.getElementById('mozbot-bubble')
     const frame = document.getElementsByTagName('iframe')[0]
     expect(frame).toBeDefined()
@@ -17,20 +17,22 @@ describe('initBubble', () => {
   it('should overwrite bubble if exists', () => {
     expect.assertions(2)
     Mozbot.initBubble({
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
       hiddenVariables: { var1: 'test' },
     })
-    Mozbot.initBubble({ url: 'https://mozbot.io/mozbot-id2' })
+    Mozbot.initBubble({ url: 'https://mozbot.mozartfintech.com/mozbot-id2' })
     const frames = document.getElementsByTagName('iframe')
     expect(frames).toHaveLength(1)
-    expect(frames[0].dataset.src).toBe('https://mozbot.io/mozbot-id2')
+    expect(frames[0].dataset.src).toBe(
+      'https://mozbot.mozartfintech.com/mozbot-id2'
+    )
   })
 
   it('show open after the corresponding delay', async () => {
     expect.assertions(3)
     Mozbot.initBubble({
       autoOpenDelay: 1000,
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
     })
     const bubble = document.querySelector('#mozbot-bubble') as HTMLDivElement
     expect(bubble.classList.contains('iframe-opened')).toBe(false)
@@ -47,7 +49,7 @@ describe('initBubble', () => {
     localStorage.setItem(Mozbot.localStorageKeys.rememberClose, 'true')
     Mozbot.initBubble({
       autoOpenDelay: 1000,
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
     })
     const bubble = document.querySelector('#mozbot-bubble') as HTMLDivElement
     await new Promise((r) => setTimeout(r, 1500))

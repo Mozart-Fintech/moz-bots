@@ -1,16 +1,16 @@
 ---
-title: File upload
+title: Carga de archivos
 icon: upload
 ---
 
-The File upload input block allows you to collect files from your user.
+El bloque de entrada de Carga de archivos te permite recopilar archivos de tu usuario.
 
 <Tabs>
-  <Tab title="Flow">
+  <Tab title="Flujo">
     <Frame>
       <img
         src="/images/blocks/inputs/file-upload-flow.png"
-        alt="File upload input in flow"
+        alt="Entrada de carga de archivos en el flujo"
         className="rounded-lg"
       />
     </Frame>
@@ -19,23 +19,23 @@ The File upload input block allows you to collect files from your user.
     <Frame>
       <img
         src="/images/blocks/inputs/file-upload-bot.png"
-        alt="File upload input in bot"
+        alt="Entrada de carga de archivos en el bot"
         className="rounded-lg"
       />
     </Frame>
   </Tab>
 </Tabs>
 
-The placeholder accepts [HTML](https://en.wikipedia.org/wiki/HTML).
+El marcador de posición acepta [HTML](https://es.wikipedia.org/wiki/HTML).
 
-## Size limit
+## Límite de tamaño
 
-There is a 10MB fixed limit per uploaded file. If you want your respondents to upload larger files, you should ask them to upload their files to a cloud storage service (e.g. Google Drive, Dropbox, etc.) and share the link with you.
+Hay un límite fijo de 10MB por archivo cargado. Si deseas que tus encuestados carguen archivos más grandes, deberías pedirles que suban sus archivos a un servicio de almacenamiento en la nube (por ejemplo, Google Drive, Dropbox, etc.) y compartan el enlace contigo.
 
-## Visibility
+## Visibilidad
 
-This option allows you to choose between generating public URLs for the uploaded files or keeping them private. If you choose to keep the files private, you will be able to see the file only if you are logged in to your Mozbot account.
+Esta opción te permite elegir entre generar URLs públicas para los archivos cargados o mantenerlos privados. Si eliges mantener los archivos privados, podrás ver el archivo solo si has iniciado sesión en tu cuenta de Mozbot.
 
-Note that if you choose to keep the files private, you will not be able to use the file URL with other blocks like Attachment in the Send email block or others. These services won't be able to read the files.
+Ten en cuenta que si eliges mantener los archivos privados, no podrás usar la URL del archivo con otros bloques como el de Adjuntar en el bloque de Enviar correo electrónico u otros. Estos servicios no podrán leer los archivos.
 
-By default, this option is set to `Auto`. This means that the files will be public if uploaded from the web runtime but private if uploaded from the WhatsApp runtime.
+Por defecto, esta opción está configurada en `Auto`. Esto significa que los archivos serán públicos si se cargan desde el entorno web, pero privados si se cargan desde el entorno de WhatsApp.

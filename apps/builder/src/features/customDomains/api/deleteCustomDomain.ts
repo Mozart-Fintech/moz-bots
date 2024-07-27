@@ -12,7 +12,7 @@ export const deleteCustomDomain = authenticatedProcedure
       method: 'DELETE',
       path: '/v1/custom-domains/{name}',
       protect: true,
-      summary: 'Delete custom domain',
+      summary: 'Eliminar dominio personalizado',
       tags: ['Custom domains'],
     },
   })
@@ -41,7 +41,10 @@ export const deleteCustomDomain = authenticatedProcedure
     })
 
     if (!workspace || isWriteWorkspaceForbidden(workspace, user))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'No workspaces found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontraron espacios de trabajo',
+      })
 
     try {
       await deleteDomainOnVercel(name)
@@ -50,13 +53,13 @@ export const deleteCustomDomain = authenticatedProcedure
       if (error instanceof HTTPError)
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to delete domain on Vercel',
+          message: 'No se pudo eliminar el dominio en Vercel',
           cause: await error.response.text(),
         })
       else
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to delete domain on Vercel',
+          message: 'No se pudo eliminar el dominio en Vercel',
         })
     }
     await prisma.customDomain.deleteMany({

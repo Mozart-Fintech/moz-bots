@@ -72,7 +72,7 @@ export const IFrameForm = () => {
       <Text>
         {t('auth.noProvider.preLink')}{' '}
         <TextLink
-          href="https://docs.mozbot.io/self-hosting/configuration"
+          href="https://mozdocs.mozartfintech.com/self-hosting/configuration"
           isExternal
         >
           {t('auth.noProvider.link')}

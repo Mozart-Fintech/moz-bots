@@ -1,12 +1,12 @@
 ---
-title: 'Generate upload URL'
+title: 'Generar URL de carga'
 openapi: POST /v2/generate-upload-url
 ---
 
-The `presignedUrl` and `formData` fields can be then used to upload the file to the S3 bucket, directly from the browser if necessary. Here is an example:
+Los campos `presignedUrl` y `formData` pueden ser utilizados para subir el archivo al bucket de S3, directamente desde el navegador si es necesario. Aquí tienes un ejemplo:
 
 ```js
-// data contains the presignedUrl and formData fields from the response
+// los datos contienen los campos presignedUrl y formData de la respuesta
 
 const formData = new FormData()
 Object.entries(data.formData).forEach(([key, value]) => {

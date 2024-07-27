@@ -27,7 +27,7 @@ export default function Page() {
         <Text>
           We detected that one of your mozbots does not comply with our{' '}
           <TextLink
-            href="https://mozbot.io/terms-of-service#scam-mozbots"
+            href="https://mozbot.mozartfintech.com/terms-of-service#scam-mozbots"
             isExternal
           >
             terms of service

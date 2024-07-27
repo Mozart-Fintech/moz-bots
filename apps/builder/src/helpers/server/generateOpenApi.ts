@@ -5,8 +5,8 @@ import { publicRouter } from './routers/publicRouter'
 const openApiDocument = generateOpenApiDocument(publicRouter, {
   title: 'Builder API',
   version: '1.0.0',
-  baseUrl: 'https://app.mozbot.io/api',
-  docsUrl: 'https://docs.mozbot.io/api-reference',
+  baseUrl: 'https://mozbot.mozartfintech.com/api',
+  docsUrl: 'https://mozdocs.mozartfintech.com/api-reference',
 })
 
 writeFileSync(

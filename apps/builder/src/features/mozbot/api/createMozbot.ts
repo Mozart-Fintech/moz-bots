@@ -38,7 +38,7 @@ export const createMozbot = authenticatedProcedure
       method: 'POST',
       path: '/v1/mozbots',
       protect: true,
-      summary: 'Create a mozbot',
+      summary: 'Crear un mozbot',
       tags: ['Mozbot'],
     },
   })
@@ -64,7 +64,10 @@ export const createMozbot = authenticatedProcedure
       userRole === WorkspaceRole.GUEST ||
       !workspace
     )
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Workspace not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Espacio de trabajo no encontrado',
+      })
 
     if (
       mozbot.customDomain &&
@@ -75,13 +78,13 @@ export const createMozbot = authenticatedProcedure
     )
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: 'Custom domain not available',
+        message: 'Dominio personalizado no disponible',
       })
 
     if (mozbot.publicId && (await isPublicIdNotAvailable(mozbot.publicId)))
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: 'Public id not available',
+        message: 'Identificación pública no disponible',
       })
 
     if (mozbot.folderId) {
@@ -100,7 +103,7 @@ export const createMozbot = authenticatedProcedure
       data: {
         version: '6',
         workspaceId,
-        name: mozbot.name ?? 'My mozbot',
+        name: mozbot.name ?? 'Mi mozbot',
         icon: mozbot.icon,
         selectedThemeTemplateId: mozbot.selectedThemeTemplateId,
         groups,

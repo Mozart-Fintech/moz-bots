@@ -12,7 +12,7 @@ export const deleteResults = authenticatedProcedure
       method: 'DELETE',
       path: '/v1/mozbots/{mozbotId}/results',
       protect: true,
-      summary: 'Delete results',
+      summary: 'Eliminar resultados',
       tags: ['Results'],
     },
   })
@@ -21,12 +21,12 @@ export const deleteResults = authenticatedProcedure
       mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
+          '[¿Dónde encontrar el ID de mi bot?](../how-to#how-to-find-my-mozbotId)'
         ),
       resultIds: z
         .string()
         .describe(
-          'Comma separated list of ids. If not provided, all results will be deleted. ⚠️'
+          'Lista de identificadores separados por comas. Si no se proporciona, se eliminarán todos los resultados. ⚠️'
         )
         .optional(),
     })
@@ -62,7 +62,10 @@ export const deleteResults = authenticatedProcedure
       },
     })
     if (!mozbot || (await isWriteMozbotForbidden(mozbot, user)))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Mozbot no encontrado',
+      })
     const { success } = await archiveResults(prisma)({
       mozbot: {
         groups: mozbot.groups,
@@ -76,6 +79,6 @@ export const deleteResults = authenticatedProcedure
     if (!success)
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Mozbot not found',
+        message: 'Mozbot no encontrado',
       })
   })

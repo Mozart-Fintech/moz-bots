@@ -33,7 +33,7 @@ export const ratingInputBlockSchema = blockBaseSchema
     })
   )
   .openapi({
-    title: 'Rating',
+    title: 'Clasificación',
     ref: 'rating',
   })
 

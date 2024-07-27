@@ -22,7 +22,7 @@ export const listCredentials = authenticatedProcedure
       method: 'GET',
       path: '/v1/credentials',
       protect: true,
-      summary: 'List workspace credentials',
+      summary: 'Listar las credenciales del espacio de trabajo',
       tags: ['Credentials'],
     },
   })
@@ -58,7 +58,10 @@ export const listCredentials = authenticatedProcedure
       },
     })
     if (!workspace || isReadWorkspaceFobidden(workspace, user))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Workspace not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Espacio de trabajo no encontrado',
+      })
 
     return {
       credentials: outputCredentialsSchema.parse(

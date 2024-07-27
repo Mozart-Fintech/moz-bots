@@ -17,7 +17,7 @@ export const startWhatsAppPreview = authenticatedProcedure
     openapi: {
       method: 'POST',
       path: '/v1/mozbots/{mozbotId}/whatsapp/start-preview',
-      summary: 'Start preview',
+      summary: 'Iniciar prueba',
       tags: ['WhatsApp'],
       protect: true,
     },
@@ -48,7 +48,7 @@ export const startWhatsAppPreview = authenticatedProcedure
       throw new TRPCError({
         code: 'BAD_REQUEST',
         message:
-          'Missing WHATSAPP_PREVIEW_FROM_PHONE_NUMBER_ID or META_SYSTEM_USER_TOKEN or WHATSAPP_PREVIEW_TEMPLATE_NAME env variables',
+          'Faltan variables de entorno WHATSAPP_PREVIEW_FROM_PHONE_NUMBER_ID o META_SYSTEM_USER_TOKEN o WHATSAPP_PREVIEW_TEMPLATE_NAME',
       })
 
     const existingMozbot = await prisma.mozbot.findFirst({
@@ -79,7 +79,10 @@ export const startWhatsAppPreview = authenticatedProcedure
       !existingMozbot?.id ||
       (await isReadMozbotForbidden(existingMozbot, user))
     )
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Mozbot no encontrado',
+      })
 
     const sessionId = `wa-preview-${to}`
 
@@ -174,7 +177,8 @@ export const startWhatsAppPreview = authenticatedProcedure
         if (err instanceof HTTPError) console.log(await err.response.text())
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
-          message: 'Request to Meta to send preview message failed',
+          message:
+            'Error en la solicitud a Meta para enviar un mensaje de prueba',
           cause: err,
         })
       }

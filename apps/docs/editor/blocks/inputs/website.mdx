@@ -1,16 +1,16 @@
 ---
-title: Website
+title: Sitio web
 icon: link
 ---
 
-The Website input block allows you to ask your user for a URL. It will check if it is properly formatted.
+El bloque de entrada de Sitio web te permite pedirle a tu usuario una URL. Verificará si está correctamente formateada.
 
 <Tabs>
-  <Tab title="Flow">
+  <Tab title="Flujo">
     <Frame>
       <img
         src="/images/blocks/inputs/website-flow.png"
-        alt="Website input in flow"
+        alt="Entrada de sitio web en el flujo"
         className="rounded-lg"
       />
     </Frame>
@@ -19,13 +19,13 @@ The Website input block allows you to ask your user for a URL. It will check if 
     <Frame>
       <img
         src="/images/blocks/inputs/website-bot.png"
-        alt="Website input in bot"
+        alt="Entrada de sitio web en el bot"
         className="rounded-lg"
       />
     </Frame>
   </Tab>
 </Tabs>
 
-The retry message will be displayed whenever Mozbot detected that the email is not properly formatted.
+El mensaje de reintento se mostrará cada vez que Mozbot detecte que la URL no está correctamente formateada.
 
-It won't check if the email address is **valid**. To do that, you will have to trigger a [Webhook block](/editor/blocks/integrations/webhook) and call an email validation service API.
+No verificará si la dirección de correo electrónico es **válida**. Para hacer eso, tendrás que activar un [bloque Webhook](/editor/blocks/integrations/webhook) y llamar a una API de servicio de validación de correos electrónicos.

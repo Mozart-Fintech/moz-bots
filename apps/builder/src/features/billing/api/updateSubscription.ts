@@ -10,7 +10,7 @@ export const updateSubscription = authenticatedProcedure
       method: 'PATCH',
       path: '/v1/billing/subscription',
       protect: true,
-      summary: 'Update subscription',
+      summary: 'Suscripción de actualización',
       tags: ['Billing'],
     },
   })

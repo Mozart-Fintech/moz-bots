@@ -49,7 +49,7 @@ export const BoardMenuButton = (props: StackProps) => {
   }
 
   const redirectToDocumentation = () =>
-    window.open('https://docs.mozbot.io/editor/graph', '_blank')
+    window.open('https://mozdocs.mozartfintech.com/editor/graph', '_blank')
 
   return (
     <HStack rounded="md" spacing="4" {...props}>

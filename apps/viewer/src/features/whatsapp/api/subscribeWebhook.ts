@@ -8,7 +8,7 @@ export const subscribeWebhook = publicProcedure
     openapi: {
       method: 'GET',
       path: '/v1/workspaces/{workspaceId}/whatsapp/{credentialsId}/webhook',
-      summary: 'Subscribe webhook',
+      summary: 'Suscribir webhook',
       tags: ['WhatsApp'],
       protect: true,
     },
@@ -34,7 +34,7 @@ export const subscribeWebhook = publicProcedure
       if (!verificationToken)
         throw new TRPCError({
           code: 'UNAUTHORIZED',
-          message: 'Unauthorized',
+          message: 'No autorizado',
         })
       await prisma.verificationToken.delete({
         where: {

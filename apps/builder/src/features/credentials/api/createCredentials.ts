@@ -28,7 +28,7 @@ export const createCredentials = authenticatedProcedure
       method: 'POST',
       path: '/v1/credentials',
       protect: true,
-      summary: 'Create credentials',
+      summary: 'Crear credenciales',
       tags: ['Credentials'],
     },
   })
@@ -61,7 +61,7 @@ export const createCredentials = authenticatedProcedure
     )
       throw new TRPCError({
         code: 'CONFLICT',
-        message: 'Credentials already exist.',
+        message: 'Las credenciales ya existen.',
       })
     const workspace = await prisma.workspace.findFirst({
       where: {
@@ -70,7 +70,10 @@ export const createCredentials = authenticatedProcedure
       select: { id: true, members: { select: { userId: true, role: true } } },
     })
     if (!workspace || isWriteWorkspaceForbidden(workspace, user))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Workspace not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Espacio de trabajo no encontrado',
+      })
 
     const { encryptedData, iv } = await encrypt(credentials.data)
     const createdCredentials = await prisma.credentials.create({

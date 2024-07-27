@@ -11,7 +11,7 @@ export const getCollaborators = authenticatedProcedure
       method: 'GET',
       path: '/v1/mozbots/{mozbotId}/collaborators',
       protect: true,
-      summary: 'Get collaborators',
+      summary: 'Obtener colaboradores',
       tags: ['Collaborators'],
     },
   })
@@ -49,7 +49,10 @@ export const getCollaborators = authenticatedProcedure
       !existingMozbot?.id ||
       (await isReadMozbotForbidden(existingMozbot, user))
     )
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Mozbot no encontrado',
+      })
 
     return {
       collaborators: existingMozbot.collaborators,

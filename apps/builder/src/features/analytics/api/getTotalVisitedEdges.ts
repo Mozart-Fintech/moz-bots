@@ -16,7 +16,7 @@ export const getTotalVisitedEdges = authenticatedProcedure
       method: 'GET',
       path: '/v1/mozbots/{mozbotId}/analytics/totalVisitedEdges',
       protect: true,
-      summary: 'List total edges used in results',
+      summary: 'Enumerar los bordes totales utilizados en los resultados',
       tags: ['Analytics'],
     },
   })
@@ -41,7 +41,7 @@ export const getTotalVisitedEdges = authenticatedProcedure
       if (!mozbot?.id)
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Published mozbot not found',
+          message: 'Mozbot publicado no encontrado',
         })
 
       const fromDate = parseFromDateFromTimeFilter(timeFilter, timeZone)

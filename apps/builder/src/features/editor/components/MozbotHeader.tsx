@@ -49,7 +49,10 @@ export const MozbotHeader = () => {
   const handleHelpClick = () => {
     isCloudProdInstance() && workspace?.plan && workspace.plan !== Plan.FREE
       ? onOpen()
-      : window.open('https://docs.mozbot.io/guides/how-to-get-help', '_blank')
+      : window.open(
+          'https://mozdocs.mozartfintech.com/guides/how-to-get-help',
+          '_blank'
+        )
   }
 
   if (currentUserMode === 'guest') return <GuestMozbotHeader />

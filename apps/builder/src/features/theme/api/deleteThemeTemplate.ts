@@ -12,7 +12,7 @@ export const deleteThemeTemplate = authenticatedProcedure
       method: 'DELETE',
       path: '/v1/themeTemplates/{themeTemplateId}',
       protect: true,
-      summary: 'Delete a theme template',
+      summary: 'Eliminar una plantilla de tema',
       tags: ['Theme template'],
     },
   })
@@ -39,7 +39,7 @@ export const deleteThemeTemplate = authenticatedProcedure
       if (userRole === undefined || userRole === WorkspaceRole.GUEST)
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Workspace not found',
+          message: 'Espacio de trabajo no encontrado',
         })
 
       const themeTemplate = (await prisma.themeTemplate.delete({

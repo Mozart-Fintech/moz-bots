@@ -12,7 +12,7 @@ export const updateFolder = authenticatedProcedure
       method: 'PATCH',
       path: '/v1/folders/{folderId}',
       protect: true,
-      summary: 'Update a folder',
+      summary: 'Actualizar una carpeta',
       tags: ['Folder'],
     },
   })
@@ -47,13 +47,13 @@ export const updateFolder = authenticatedProcedure
       )
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Workspace not found',
+          message: 'Espacio de trabajo no encontrado',
         })
 
       if (workspace.plan === Plan.FREE)
         throw new TRPCError({
           code: 'FORBIDDEN',
-          message: 'You need to upgrade to a paid plan to update folders',
+          message: 'Necesita actualizar a un plan pago para crear carpetas',
         })
 
       const updatedFolder = await prisma.dashboardFolder.update({

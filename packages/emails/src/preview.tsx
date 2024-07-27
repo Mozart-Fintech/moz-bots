@@ -23,7 +23,7 @@ const createHtmlFile = () => {
       <GuestInvitationEmail
         workspaceName={'Mozbot'}
         mozbotName={'Lead Generation'}
-        url={'https://app.mozbot.io'}
+        url={'https://mozbot.mozartfintech.com'}
         hostEmail={'host@mozbot.io'}
         guestEmail={'guest@mozbot.io'}
       />
@@ -34,7 +34,7 @@ const createHtmlFile = () => {
     render(
       <WorkspaceMemberInvitation
         workspaceName={'Mozbot'}
-        url={'https://app.mozbot.io'}
+        url={'https://mozbot.mozartfintech.com'}
         hostEmail={'host@mozbot.io'}
         guestEmail={'guest@mozbot.io'}
       />
@@ -54,7 +54,7 @@ const createHtmlFile = () => {
     path.resolve(__dirname, 'dist', 'defaultBotNotification.html'),
     render(
       <DefaultBotNotificationEmail
-        resultsUrl={'https://app.mozbot.io'}
+        resultsUrl={'https://mozbot.mozartfintech.com'}
         answers={{
           'Group #1': 'Answer #1',
           Name: 'Baptiste',
@@ -65,7 +65,7 @@ const createHtmlFile = () => {
   )
   fs.writeFileSync(
     path.resolve(__dirname, 'dist', 'magicLink.html'),
-    render(<MagicLinkEmail url={'https://app.mozbot.io'} />).html
+    render(<MagicLinkEmail url={'https://mozbot.mozartfintech.com'} />).html
   )
 }
 

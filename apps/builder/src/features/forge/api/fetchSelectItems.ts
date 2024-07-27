@@ -47,7 +47,7 @@ export const fetchSelectItems = authenticatedProcedure
       if (!workspace || isReadWorkspaceFobidden(workspace, user))
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'No workspace found',
+          message: 'No se encontró ningún espacio de trabajo',
         })
 
       const credentials = workspace.credentials?.at(0)

@@ -20,7 +20,7 @@ export const getPhoneNumber = authenticatedProcedure
     if (!credentials)
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Credentials not found',
+        message: 'Credenciales no encontradas',
       })
     const { display_phone_number } = await ky
       .get(`${env.WHATSAPP_CLOUD_API_URL}/v17.0/${credentials.phoneNumberId}`, {

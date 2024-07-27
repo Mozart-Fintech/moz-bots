@@ -321,7 +321,7 @@ const Requirements = () => (
     <Text>
       Make sure you have{' '}
       <TextLink
-        href="https://docs.mozbot.io/deploy/whatsapp/create-meta-app"
+        href="https://mozdocs.mozartfintech.com/deploy/whatsapp/create-meta-app"
         isExternal
       >
         created a WhatsApp Meta app

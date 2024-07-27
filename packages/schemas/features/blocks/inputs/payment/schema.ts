@@ -62,7 +62,7 @@ export const paymentInputSchema = blockBaseSchema
     })
   )
   .openapi({
-    title: 'Payment',
+    title: 'Pago',
     ref: 'paymentInput',
   })
 

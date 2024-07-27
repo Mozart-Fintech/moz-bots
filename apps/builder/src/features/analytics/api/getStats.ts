@@ -16,7 +16,7 @@ export const getStats = authenticatedProcedure
       method: 'GET',
       path: '/v1/mozbots/{mozbotId}/analytics/stats',
       protect: true,
-      summary: 'Get results stats',
+      summary: 'Obtener estadísticas de resultados',
       tags: ['Analytics'],
     },
   })
@@ -37,7 +37,7 @@ export const getStats = authenticatedProcedure
       if (!mozbot?.publishedMozbot)
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Published mozbot not found',
+          message: 'Mozbot publicado no encontrado',
         })
 
       const fromDate = parseFromDateFromTimeFilter(timeFilter, timeZone)

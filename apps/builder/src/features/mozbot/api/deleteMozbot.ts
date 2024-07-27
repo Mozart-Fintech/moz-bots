@@ -12,7 +12,7 @@ export const deleteMozbot = authenticatedProcedure
       method: 'DELETE',
       path: '/v1/mozbots/{mozbotId}',
       protect: true,
-      summary: 'Delete a mozbot',
+      summary: 'Eliminar un mozbot',
       tags: ['Mozbot'],
     },
   })
@@ -21,7 +21,7 @@ export const deleteMozbot = authenticatedProcedure
       mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
+          '[¿Dónde encontrar el ID de mi bot?](../how-to#how-to-find-my-mozbotId)'
         ),
     })
   )

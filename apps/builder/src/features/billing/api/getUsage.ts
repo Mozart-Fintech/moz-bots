@@ -8,7 +8,7 @@ export const getUsage = authenticatedProcedure
       method: 'GET',
       path: '/v1/billing/usage',
       protect: true,
-      summary: 'Get current plan usage',
+      summary: 'Obtener el uso actual del plan',
       tags: ['Billing'],
     },
   })
@@ -17,7 +17,7 @@ export const getUsage = authenticatedProcedure
       workspaceId: z
         .string()
         .describe(
-          '[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)'
+          '[¿Dónde encontrar mi ID de espacio de trabajo?](../how-to#how-to-find-my-workspaceid)'
         ),
     })
   )

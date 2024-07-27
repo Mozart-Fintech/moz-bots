@@ -11,7 +11,7 @@ export const getWorkspace = authenticatedProcedure
       method: 'GET',
       path: '/v1/workspaces/{workspaceId}',
       protect: true,
-      summary: 'Get workspace',
+      summary: 'Obtener espacio de trabajo',
       tags: ['Workspace'],
     },
   })
@@ -20,7 +20,7 @@ export const getWorkspace = authenticatedProcedure
       workspaceId: z
         .string()
         .describe(
-          '[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)'
+          '[¿Dónde encontrar el ID de mi espacio de trabajo?](../how-to#how-to-find-my-workspaceid)'
         ),
     })
   )
@@ -45,7 +45,10 @@ export const getWorkspace = authenticatedProcedure
     })
 
     if (!workspace || isReadWorkspaceFobidden(workspace, user))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'No workspaces found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontraron espacios de trabajo',
+      })
 
     return {
       workspace,

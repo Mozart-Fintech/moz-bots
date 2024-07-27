@@ -16,7 +16,7 @@ describe('initContainer', () => {
     const containerId = 'container-id'
     document.body.innerHTML = `<div id="${containerId}"></div>`
     const iframe = initContainer(containerId, {
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
     })
     const container = document.getElementById(containerId)
     expect(container?.children).toHaveLength(1)
@@ -28,7 +28,7 @@ describe('initContainer', () => {
     expect.assertions(1)
     const containerId = 'container-id'
     const iframe = initContainer(containerId, {
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
     })
     expect(iframe).toBeUndefined()
   })
@@ -38,10 +38,10 @@ describe('initContainer', () => {
     const containerId = 'container-id'
     document.body.innerHTML = `<div id="${containerId}"></div>`
     const iframe1 = initContainer(containerId, {
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
     })
     const iframe2 = initContainer(containerId, {
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
     })
     expect(iframe1?.id).toBe(iframe2?.id)
   })
@@ -52,13 +52,13 @@ describe('initContainer', () => {
     const secondId = 'container-2'
     document.body.innerHTML = `<div id="${firstId}"></div><div id="${secondId}"></div>`
     const firstIframeElement = initContainer(firstId, {
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
     })
     const secondIframeElement = initContainer(firstId, {
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
     })
     const thirdIframeElement = initContainer(secondId, {
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
     })
     expect(firstIframeElement).toBeDefined()
     expect(secondIframeElement).toBeDefined()
@@ -72,7 +72,7 @@ describe('initContainer', () => {
     const containerId = 'container'
     document.body.innerHTML = `<div id="${containerId}"></div>`
     const iframe = initContainer(containerId, {
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
     }) as HTMLIFrameElement
     expect(iframe.dataset.src).toBeDefined()
     expect(iframe.src).toBeFalsy()
@@ -83,7 +83,7 @@ describe('initContainer', () => {
     const containerId = 'container'
     document.body.innerHTML = `<div id="${containerId}"></div>`
     const iframe = initContainer(containerId, {
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
       loadWhenVisible: false,
     }) as HTMLIFrameElement
     expect(iframe.dataset.src).toBeUndefined()

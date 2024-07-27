@@ -48,13 +48,13 @@ export const generateUploadUrl = authenticatedProcedure
       throw new TRPCError({
         code: 'INTERNAL_SERVER_ERROR',
         message:
-          'S3 not properly configured. Missing one of those variables: S3_ENDPOINT, S3_ACCESS_KEY, S3_SECRET_KEY',
+          'S3 no está configurado correctamente. Falta una de esas variables: S3_ENDPOINT, S3_ACCESS_KEY, S3_SECRET_KEY',
       })
 
     if ('resultId' in filePathProps && !user)
       throw new TRPCError({
         code: 'UNAUTHORIZED',
-        message: 'You must be logged in to upload a file',
+        message: 'Debes iniciar sesión para cargar un archivo',
       })
 
     const filePath = await parseFilePath({
@@ -88,20 +88,20 @@ const parseFilePath = async ({
   if (!authenticatedUserId)
     throw new TRPCError({
       code: 'UNAUTHORIZED',
-      message: 'You must be logged in to upload this type of file',
+      message: 'Debes iniciar sesión para cargar este tipo de archivo',
     })
   if ('userId' in input) {
     if (input.userId !== authenticatedUserId)
       throw new TRPCError({
         code: 'UNAUTHORIZED',
-        message: 'You are not authorized to upload a file for this user',
+        message: 'No estás autorizado a cargar un archivo para este usuario.',
       })
     return `public/users/${input.userId}/${input.fileName}`
   }
   if (!('workspaceId' in input))
     throw new TRPCError({
       code: 'BAD_REQUEST',
-      message: 'workspaceId is missing',
+      message: 'Falta el workspaceId',
     })
   if (!('mozbotId' in input)) {
     const workspace = await prisma.workspace.findUnique({
@@ -123,7 +123,7 @@ const parseFilePath = async ({
     )
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Workspace not found',
+        message: 'Espacio de trabajo no encontrado',
       })
     return `public/workspaces/${input.workspaceId}/${input.fileName}`
   }
@@ -161,7 +161,7 @@ const parseFilePath = async ({
   )
     throw new TRPCError({
       code: 'NOT_FOUND',
-      message: 'Mozbot not found',
+      message: 'Mozbot no encontrado',
     })
   if (!('blockId' in input)) {
     return `public/workspaces/${input.workspaceId}/mozbots/${input.mozbotId}/${input.fileName}`

@@ -118,9 +118,11 @@
                 "children": [
                   { "text": "👉 " },
                   {
-                    "url": "https://app.mozbot.io/feedback",
+                    "url": "https://mozbot.mozartfintech.com/feedback",
                     "type": "a",
-                    "children": [{ "text": "https://app.mozbot.io/feedback" }]
+                    "children": [
+                      { "text": "https://mozbot.mozartfintech.com/feedback" }
+                    ]
                   },
                   { "text": "" }
                 ]
@@ -166,7 +168,7 @@
                 "children": [
                   { "text": "Primero, no olvides revisar la " },
                   {
-                    "url": "https://docs.mozbot.io/",
+                    "url": "https://mozdocs.mozartfintech.com/",
                     "type": "a",
                     "children": [{ "text": "Documentación 🙏" }]
                   }

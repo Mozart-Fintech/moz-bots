@@ -39,7 +39,7 @@ export const messageSchema = z.preprocess(
         .array(z.string())
         .optional()
         .describe(
-          'Can only be provided if current input block is a text input block that allows attachments'
+          'Solo se puede proporcionar si el bloque de entrada actual es un bloque de entrada de texto que permite archivos adjuntos'
         ),
     }),
   ])
@@ -55,7 +55,7 @@ const chatSessionSchema = z.object({
     .boolean()
     .nullable()
     .describe(
-      'Used in WhatsApp runtime to avoid concurrent replies from the bot'
+      'Se usa en el tiempo de ejecución de WhatsApp para evitar respuestas concurrentes del bot'
     ),
 }) satisfies z.ZodType<ChatSessionFromPrisma, z.ZodTypeDef, unknown>
 export type ChatSession = z.infer<typeof chatSessionSchema>
@@ -75,7 +75,7 @@ const textMessageSchema = z
     ]),
   })
   .openapi({
-    title: 'Text',
+    title: 'Texto',
     ref: 'textMessage',
   })
 
@@ -85,7 +85,7 @@ const imageMessageSchema = z
     content: imageBubbleContentSchema,
   })
   .openapi({
-    title: 'Image',
+    title: 'Imagen',
     ref: 'imageMessage',
   })
 
@@ -119,7 +119,7 @@ const embedMessageSchema = z
       .merge(z.object({ height: z.number().optional() })),
   })
   .openapi({
-    title: 'Embed',
+    title: 'Incrustar',
     ref: 'embedMessage',
   })
 
@@ -142,7 +142,7 @@ const customEmbedSchema = z
     content: displayEmbedBubbleSchema,
   })
   .openapi({
-    title: 'Custom embed',
+    title: 'Incrustación personalizada',
     ref: 'customEmbedMessage',
   })
 export type CustomEmbedBubble = z.infer<typeof customEmbedSchema>
@@ -198,36 +198,36 @@ export const startChatInputSchema = z.object({
   publicId: z
     .string()
     .describe(
-      "[Where to find my bot's public ID?](../how-to#how-to-find-my-publicid)"
+      '[¿Dónde encontrar el ID público de mi bot?](../how-to#how-to-find-my-publicid)'
     ),
   message: messageSchema
     .optional()
     .describe(
-      "Only provide it if your flow starts with an input block and you'd like to directly provide an answer to it."
+      'Solo proporciónelo si su flujo comienza con un bloque de entrada y le gustaría proporcionar una respuesta directamente.'
     ),
   isStreamEnabled: z
     .boolean()
     .optional()
     .default(false)
     .describe(
-      'If enabled, you will be required to stream OpenAI completions on a client and send the generated response back to the API.'
+      'Si está habilitado, se le pedirá que transmita las completaciones de OpenAI en un cliente y envíe la respuesta generada de vuelta a la API.'
     ),
   resultId: z
     .string()
     .optional()
-    .describe("Provide it if you'd like to overwrite an existing result."),
+    .describe('Proporciónelo si desea sobrescribir un resultado existente.'),
   isOnlyRegistering: z
     .boolean()
     .optional()
     .default(false)
     .describe(
-      'If set to `true`, it will only register the session and not start the bot. This is used for 3rd party chat platforms as it can require a session to be registered before sending the first message.'
+      'Si se establece en `true`, solo registrará la sesión y no iniciará el bot. Esto se usa para plataformas de chat de terceros, ya que puede requerir que se registre una sesión antes de enviar el primer mensaje.'
     ),
   prefilledVariables: z
     .record(z.unknown())
     .optional()
     .describe(
-      '[More info about prefilled variables.](../../editor/variables#prefilled-variables)'
+      '[Más información sobre variables prellenadas.](../../editor/variables#prefilled-variables)'
     )
     .openapi({
       example: {
@@ -255,7 +255,7 @@ export const startPreviewChatInputSchema = z.object({
   mozbotId: z
     .string()
     .describe(
-      "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
+      '[¿Dónde encontrar el ID de mi bot?](../how-to#how-to-find-my-mozbotId)'
     ),
   isStreamEnabled: z.boolean().optional().default(false),
   message: messageSchema.optional(),
@@ -263,20 +263,20 @@ export const startPreviewChatInputSchema = z.object({
     .boolean()
     .optional()
     .describe(
-      'If set to `true`, it will only register the session and not start the bot. This is used for 3rd party chat platforms as it can require a session to be registered before sending the first message.'
+      'Si se establece en `true`, solo registrará la sesión y no iniciará el bot. Esto se usa para plataformas de chat de terceros, ya que puede requerir que se registre una sesión antes de enviar el primer mensaje.'
     )
     .default(false),
   mozbot: startMozbotSchema
     .optional()
     .describe(
-      'If set, it will override the mozbot that is used to start the chat.'
+      'Si se establece, sobrescribirá el mozbot que se usa para iniciar el chat.'
     ),
   startFrom: startFromSchema.optional(),
   prefilledVariables: z
     .record(z.unknown())
     .optional()
     .describe(
-      '[More info about prefilled variables.](../../editor/variables#prefilled-variables)'
+      '[Más información sobre variables prellenadas.](../../editor/variables#prefilled-variables)'
     )
     .openapi({
       example: {
@@ -288,7 +288,7 @@ export const startPreviewChatInputSchema = z.object({
     .string()
     .optional()
     .describe(
-      'If provided, will be used as the session ID and will overwrite any existing session with the same ID.'
+      'Si se proporciona, se usará como el ID de la sesión y sobrescribirá cualquier sesión existente con el mismo ID.'
     ),
   textBubbleContentFormat: z.enum(['richText', 'markdown']).default('richText'),
 })
@@ -319,7 +319,7 @@ const chatResponseBaseSchema = z.object({
     .string()
     .optional()
     .describe(
-      'The sent message is validated and formatted on the backend. For example, if for a date input you replied something like `tomorrow`, the backend will convert it to a date string. This field returns the formatted message.'
+      'El mensaje enviado es validado y formateado en el backend. Por ejemplo, si para una entrada de fecha respondiste algo como `tomorrow`, el backend lo convertirá a una cadena de fecha. Este campo devuelve el mensaje formateado.'
     ),
   messages: z.array(chatMessageSchema),
   input: z
@@ -353,21 +353,21 @@ const chatResponseBaseSchema = z.object({
   clientSideActions: z
     .array(clientSideActionSchema)
     .optional()
-    .describe('Actions to execute on the client side'),
+    .describe('Acciones a ejecutar en el lado del cliente'),
   logs: z
     .array(chatLogSchema)
     .optional()
-    .describe('Logs that were saved during the last execution'),
+    .describe('Registros que se guardaron durante la última ejecución'),
   dynamicTheme: dynamicThemeSchema
     .optional()
     .describe(
-      'If the mozbot contains dynamic avatars, dynamicTheme returns the new avatar URLs whenever their variables are updated.'
+      'Si el mozbot contiene avatares dinámicos, dynamicTheme devuelve las nuevas URL de los avatares cada vez que se actualizan sus variables.'
     ),
   progress: z
     .number()
     .optional()
     .describe(
-      'If progress bar is enabled, this field will return a number between 0 and 100 indicating the current progress based on the longest remaining path of the flow.'
+      'Si la barra de progreso está habilitada, este campo devolverá un número entre 0 y 100 que indica el progreso actual basado en el camino más largo restante del flujo.'
     ),
 })
 
@@ -375,7 +375,7 @@ export const startChatResponseSchema = z
   .object({
     sessionId: z
       .string()
-      .describe('To save and use for /continueChat requests.'),
+      .describe('Para guardar y usar en solicitudes /continueChat.'),
     resultId: z.string().optional(),
     mozbot: z.object({
       id: z.string(),

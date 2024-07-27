@@ -13,7 +13,7 @@ export const deleteWorkspace = authenticatedProcedure
       method: 'DELETE',
       path: '/v1/workspaces/{workspaceId}',
       protect: true,
-      summary: 'Delete workspace',
+      summary: 'Eliminar espacio de trabajo',
       tags: ['Workspace'],
     },
   })
@@ -22,7 +22,7 @@ export const deleteWorkspace = authenticatedProcedure
       workspaceId: z
         .string()
         .describe(
-          '[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)'
+          '[¿Dónde encontrar el ID de mi espacio de trabajo?](../how-to#how-to-find-my-workspaceid)'
         ),
     })
   )
@@ -38,7 +38,10 @@ export const deleteWorkspace = authenticatedProcedure
     })
 
     if (!workspace || isAdminWriteWorkspaceForbidden(workspace, user))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'No workspaces found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontraron espacios de trabajo',
+      })
 
     await prisma.workspace.deleteMany({
       where: { id: workspaceId },
@@ -59,6 +62,6 @@ export const deleteWorkspace = authenticatedProcedure
     }
 
     return {
-      message: 'Workspace deleted',
+      message: 'Espacio de trabajo eliminado',
     }
   })

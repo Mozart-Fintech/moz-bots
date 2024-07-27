@@ -18,7 +18,7 @@ export const verifyCustomDomain = authenticatedProcedure
       method: 'GET',
       path: '/v1/custom-domains/{name}/verify',
       protect: true,
-      summary: 'Verify domain config',
+      summary: 'Verificar la configuración del dominio',
       tags: ['Custom domains'],
     },
   })
@@ -48,7 +48,10 @@ export const verifyCustomDomain = authenticatedProcedure
     })
 
     if (!workspace || isWriteWorkspaceForbidden(workspace, user))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'No workspaces found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontraron espacios de trabajo',
+      })
 
     let status: DomainVerificationStatus = 'Valid Configuration'
 

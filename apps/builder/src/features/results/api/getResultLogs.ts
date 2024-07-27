@@ -10,7 +10,7 @@ export const getResultLogs = authenticatedProcedure
       method: 'GET',
       path: '/v1/mozbots/{mozbotId}/results/{resultId}/logs',
       protect: true,
-      summary: 'List result logs',
+      summary: 'Listar registros de resultados',
       tags: ['Results'],
     },
   })
@@ -19,7 +19,7 @@ export const getResultLogs = authenticatedProcedure
       mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
+          '[¿Dónde encontrar el ID de mi bot?](../how-to#how-to-find-my-mozbotId)'
         ),
       resultId: z.string(),
     })
@@ -53,7 +53,7 @@ export const getResultLogs = authenticatedProcedure
       },
     })
     if (!mozbot || (await isReadMozbotForbidden(mozbot, user)))
-      throw new Error('Mozbot not found')
+      throw new Error('Mozbot no encontrado')
     const logs = await prisma.log.findMany({
       where: {
         resultId,

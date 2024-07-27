@@ -1,16 +1,16 @@
 ---
-title: Email
+title: Correo Electrónico
 icon: at
 ---
 
-The Email input block allows you to ask your user for an email. It will check if it is properly formatted.
+El bloque de entrada de Correo Electrónico te permite pedirle a tu usuario un correo electrónico. Verificará si está correctamente formateado.
 
 <Tabs>
-  <Tab title="Flow">
+  <Tab title="Flujo">
     <Frame>
       <img
         src="/images/blocks/inputs/email-flow.png"
-        alt="Email input in flow"
+        alt="Entrada de correo electrónico en el flujo"
         className="rounded-lg"
       />
     </Frame>
@@ -19,13 +19,13 @@ The Email input block allows you to ask your user for an email. It will check if
     <Frame>
       <img
         src="/images/blocks/inputs/email-bot.png"
-        alt="Email input in bot"
+        alt="Entrada de correo electrónico en el bot"
         className="rounded-lg"
       />
     </Frame>
   </Tab>
 </Tabs>
 
-The retry message will be displayed whenever Mozbot detected that the email is not properly formatted.
+El mensaje de reintento se mostrará siempre que Mozbot detecte que el correo electrónico no está correctamente formateado.
 
-It won't check if the email address is **valid**. To do that, you will have to trigger a [Webhook block](/editor/blocks/integrations/webhook) and call an email validation service API.
+No verificará si la dirección de correo electrónico es **válida**. Para hacer eso, tendrás que activar un [bloque de Webhook](/editor/blocks/integrations/webhook) y llamar a una API de servicio de validación de correo electrónico.

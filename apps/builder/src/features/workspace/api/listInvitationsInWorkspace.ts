@@ -11,7 +11,7 @@ export const listInvitationsInWorkspace = authenticatedProcedure
       method: 'GET',
       path: '/v1/workspaces/{workspaceId}/invitations',
       protect: true,
-      summary: 'List invitations in workspace',
+      summary: 'Listar invitaciones en el espacio de trabajo',
       tags: ['Workspace'],
     },
   })
@@ -20,7 +20,7 @@ export const listInvitationsInWorkspace = authenticatedProcedure
       workspaceId: z
         .string()
         .describe(
-          '[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)'
+          '[¿Dónde encontrar el ID de mi espacio de trabajo?](../how-to#how-to-find-my-workspaceid)'
         ),
     })
   )
@@ -36,7 +36,10 @@ export const listInvitationsInWorkspace = authenticatedProcedure
     })
 
     if (!workspace || isReadWorkspaceFobidden(workspace, user))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'No workspaces found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontraron espacios de trabajo',
+      })
 
     return { invitations: workspace.invitations }
   })

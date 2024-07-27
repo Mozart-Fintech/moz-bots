@@ -10,7 +10,7 @@ export const startChat = publicProcedure
     openapi: {
       method: 'POST',
       path: '/v1/mozbots/{publicId}/startChat',
-      summary: 'Start chat',
+      summary: 'Comenzar chat',
     },
   })
   .input(startChatInputSchema)

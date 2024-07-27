@@ -14,7 +14,7 @@ export const createCustomDomain = authenticatedProcedure
       method: 'POST',
       path: '/v1/custom-domains',
       protect: true,
-      summary: 'Create custom domain',
+      summary: 'Crear dominio personalizado',
       tags: ['Custom domains'],
     },
   })
@@ -46,7 +46,10 @@ export const createCustomDomain = authenticatedProcedure
     })
 
     if (!workspace || isWriteWorkspaceForbidden(workspace, user))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'No workspaces found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontraron espacios de trabajo',
+      })
 
     const existingCustomDomain = await prisma.customDomain.findFirst({
       where: { name },
@@ -55,7 +58,7 @@ export const createCustomDomain = authenticatedProcedure
     if (existingCustomDomain)
       throw new TRPCError({
         code: 'CONFLICT',
-        message: 'Custom domain already registered',
+        message: 'Dominio personalizado ya registrado',
       })
 
     try {
@@ -64,7 +67,7 @@ export const createCustomDomain = authenticatedProcedure
       if (err instanceof HTTPError && err.response.status !== 409) {
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to create custom domain on Vercel',
+          message: 'No se pudo crear un dominio personalizado en Vercel',
           cause: await err.response.text(),
         })
       }

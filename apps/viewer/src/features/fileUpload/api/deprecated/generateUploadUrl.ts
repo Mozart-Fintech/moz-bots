@@ -14,8 +14,9 @@ export const generateUploadUrl = publicProcedure
     openapi: {
       method: 'POST',
       path: '/v1/generate-upload-url',
-      summary: 'Generate upload URL',
-      description: 'Used to upload anything from the client to S3 bucket',
+      summary: 'Generar URL de carga',
+      description:
+        'Se utiliza para cargar cualquier cosa desde el cliente al depósito S3.',
     },
   })
   .input(
@@ -48,7 +49,7 @@ export const generateUploadUrl = publicProcedure
       throw new TRPCError({
         code: 'INTERNAL_SERVER_ERROR',
         message:
-          'S3 not properly configured. Missing one of those variables: S3_ENDPOINT, S3_ACCESS_KEY, S3_SECRET_KEY',
+          'S3 no está configurado correctamente. Falta una de esas variables: S3_ENDPOINT, S3_ACCESS_KEY, S3_SECRET_KEY',
       })
 
     if ('mozbotId' in filePathProps) {
@@ -72,7 +73,7 @@ export const generateUploadUrl = publicProcedure
       if (!workspaceId)
         throw new TRPCError({
           code: 'BAD_REQUEST',
-          message: "Can't find workspaceId",
+          message: 'No puedo encontrar el workspaceId',
         })
 
       const filePath = `public/workspaces/${workspaceId}/mozbots/${filePathProps.mozbotId}/results/${filePathProps.resultId}/${filePathProps.fileName}`
@@ -86,7 +87,7 @@ export const generateUploadUrl = publicProcedure
       if (fileUploadBlock?.type !== InputBlockType.FILE)
         throw new TRPCError({
           code: 'BAD_REQUEST',
-          message: "Can't find file upload block",
+          message: 'No puedo encontrar el bloque de carga de archivos',
         })
 
       const presignedPostPolicy = await generatePresignedPostPolicy({
@@ -111,7 +112,7 @@ export const generateUploadUrl = publicProcedure
     if (!session)
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: "Can't find session",
+        message: 'No puedo encontrar la sesión',
       })
 
     const mozbotId = session.state.mozbotsQueue[0].mozbot.id
@@ -136,13 +137,13 @@ export const generateUploadUrl = publicProcedure
     if (!workspaceId)
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: "Can't find workspaceId",
+        message: 'No puedo encontrar el workspaceId',
       })
 
     if (session.state.currentBlockId === undefined)
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: "Can't find currentBlockId in session state",
+        message: 'No puedo encontrar currentBlockId en el estado de sesión',
       })
 
     const { block: fileUploadBlock } = getBlockById(
@@ -155,7 +156,7 @@ export const generateUploadUrl = publicProcedure
     if (fileUploadBlock?.type !== InputBlockType.FILE)
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: "Can't find file upload block",
+        message: 'No puedo encontrar el bloque de carga de archivos',
       })
 
     const resultId = session.state.mozbotsQueue[0].resultId

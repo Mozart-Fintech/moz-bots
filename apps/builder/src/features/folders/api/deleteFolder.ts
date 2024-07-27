@@ -12,7 +12,7 @@ export const deleteFolder = authenticatedProcedure
       method: 'DELETE',
       path: '/v1/folders/{folderId}',
       protect: true,
-      summary: 'Delete a folder',
+      summary: 'Eliminar una carpeta',
       tags: ['Folder'],
     },
   })
@@ -40,7 +40,7 @@ export const deleteFolder = authenticatedProcedure
     )
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Workspace not found',
+        message: 'Espacio de trabajo no encontrado',
       })
 
     const folder = await prisma.dashboardFolder.delete({

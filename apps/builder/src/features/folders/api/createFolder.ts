@@ -13,7 +13,7 @@ export const createFolder = authenticatedProcedure
       method: 'POST',
       path: '/v1/folders',
       protect: true,
-      summary: 'Create a folder',
+      summary: 'Crear una carpeta',
       tags: ['Folder'],
     },
   })
@@ -46,13 +46,13 @@ export const createFolder = authenticatedProcedure
       )
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Workspace not found',
+          message: 'Espacio de trabajo no encontrado',
         })
 
       if (workspace.plan === Plan.FREE)
         throw new TRPCError({
           code: 'FORBIDDEN',
-          message: 'You need to upgrade to a paid plan to create folders',
+          message: 'Necesita actualizar a un plan pago para crear carpetas',
         })
 
       const newFolder = await prisma.dashboardFolder.create({

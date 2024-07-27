@@ -51,7 +51,7 @@ export const settingsSchema = z
       .optional(),
   })
   .openapi({
-    title: 'Settings',
+    title: 'Ajustes',
     ref: 'settings',
   })
 

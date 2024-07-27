@@ -11,7 +11,7 @@ export const updateWorkspace = authenticatedProcedure
       method: 'PATCH',
       path: '/v1/workspaces/{workspaceId}',
       protect: true,
-      summary: 'Update workspace',
+      summary: 'Actualizar espacio de trabajo',
       tags: ['Workspace'],
     },
   })
@@ -22,7 +22,7 @@ export const updateWorkspace = authenticatedProcedure
       workspaceId: z
         .string()
         .describe(
-          '[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)'
+          '[¿Dónde encontrar el ID de mi espacio de trabajo?](../how-to#how-to-find-my-workspaceid)'
         ),
     })
   )
@@ -43,12 +43,15 @@ export const updateWorkspace = authenticatedProcedure
     })
 
     if (!workspace)
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Workspace not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontraron espacios de trabajo',
+      })
 
     if (isAdminWriteWorkspaceForbidden(workspace, user))
       throw new TRPCError({
         code: 'FORBIDDEN',
-        message: 'You are not allowed to update this workspace',
+        message: 'No tienes permiso para actualizar este espacio de trabajo.',
       })
 
     return {

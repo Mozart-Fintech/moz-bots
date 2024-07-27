@@ -9,7 +9,7 @@ export const listInvoices = authenticatedProcedure
       method: 'GET',
       path: '/v1/billing/invoices',
       protect: true,
-      summary: 'List invoices',
+      summary: 'Listar facturas',
       tags: ['Billing'],
     },
   })
@@ -18,7 +18,7 @@ export const listInvoices = authenticatedProcedure
       workspaceId: z
         .string()
         .describe(
-          '[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)'
+          '[¿Dónde encontrar mi ID de espacio de trabajo?](../how-to#how-to-find-my-workspaceid)'
         ),
     })
   )

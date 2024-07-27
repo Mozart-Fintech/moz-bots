@@ -7,7 +7,7 @@ import { publicRouter } from '@/helpers/server/routers/publicRouter'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await cors(req, res, {
-    origin: ['https://docs.mozbot.io', 'http://localhost:3000'],
+    origin: ['https://mozdocs.mozartfintech.com', 'http://localhost:3000'],
   })
 
   return createOpenApiNextHandler({
@@ -16,7 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     onError({ error }) {
       if (error.code === 'INTERNAL_SERVER_ERROR') {
         Sentry.captureException(error)
-        console.error('Something went wrong', error)
+        console.error('Algo salió mal', error)
       }
     },
   })(req, res)

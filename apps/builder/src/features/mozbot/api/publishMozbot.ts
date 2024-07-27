@@ -33,7 +33,7 @@ export const publishMozbot = authenticatedProcedure
       mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
+          '[¿Dónde encontrar el ID de mi bot?](../how-to#how-to-find-my-mozbotId)'
         ),
     })
   )
@@ -70,7 +70,10 @@ export const publishMozbot = authenticatedProcedure
       !existingMozbot?.id ||
       (await isWriteMozbotForbidden(existingMozbot, user))
     )
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Mozbot no encontrado',
+      })
 
     const hasFileUploadBlocks = parseGroups(existingMozbot.groups, {
       mozbotVersion: existingMozbot.version,
@@ -81,7 +84,8 @@ export const publishMozbot = authenticatedProcedure
     if (hasFileUploadBlocks && existingMozbot.workspace.plan === Plan.FREE)
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: "File upload blocks can't be published on the free plan",
+        message:
+          'Los bloques de carga de archivos no se pueden publicar en el plan gratuito',
       })
 
     const mozbotWasVerified =
@@ -95,7 +99,7 @@ export const publishMozbot = authenticatedProcedure
       throw new TRPCError({
         code: 'FORBIDDEN',
         message:
-          'Radar detected a potential malicious mozbot. This bot is being manually reviewed by Fraud Prevention team.',
+          'El radar detectó un posible mozbot malicioso. Este bot está siendo revisado manualmente por el equipo de Prevención de Fraude.',
       })
 
     const riskLevel = mozbotWasVerified
@@ -108,9 +112,9 @@ export const publishMozbot = authenticatedProcedure
       if (env.MESSAGE_WEBHOOK_URL && riskLevel !== 100 && riskLevel > 60)
         await fetch(env.MESSAGE_WEBHOOK_URL, {
           method: 'POST',
-          body: `⚠️ Suspicious mozbot to be reviewed: ${existingMozbot.name} (${env.NEXTAUTH_URL}/mozbots/${existingMozbot.id}/edit) (workspace: ${existingMozbot.workspaceId})`,
+          body: `⚠️ Mozbot sospechoso a revisar: ${existingMozbot.name} (${env.NEXTAUTH_URL}/mozbots/${existingMozbot.id}/edit) (espacio de trabajo: ${existingMozbot.workspaceId})`,
         }).catch((err) => {
-          console.error('Failed to send message', err)
+          console.error('No se pudo enviar el mensaje', err)
         })
 
       await prisma.mozbot.updateMany({
@@ -131,7 +135,7 @@ export const publishMozbot = authenticatedProcedure
         throw new TRPCError({
           code: 'FORBIDDEN',
           message:
-            'Radar detected a potential malicious mozbot. This bot is being manually reviewed by Fraud Prevention team.',
+            'El radar detectó un posible mozbot malicioso. Este bot está siendo revisado manualmente por el equipo de Prevención de Fraude.',
         })
       }
     }

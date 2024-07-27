@@ -10,7 +10,7 @@ export const deleteCredentials = authenticatedProcedure
       method: 'DELETE',
       path: '/v1/credentials/:credentialsId',
       protect: true,
-      summary: 'Delete credentials',
+      summary: 'Eliminar credenciales',
       tags: ['Credentials'],
     },
   })
@@ -36,7 +36,7 @@ export const deleteCredentials = authenticatedProcedure
       if (!workspace || isWriteWorkspaceForbidden(workspace, user))
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Workspace not found',
+          message: 'Espacio de trabajo no encontrado',
         })
 
       await prisma.credentials.delete({

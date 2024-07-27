@@ -37,7 +37,7 @@ export const blockSchemaV6 = z
     ...Object.values(forgedBlockSchemas),
   ])
   .openapi({
-    title: 'Block',
+    title: 'Bloque',
     ref: 'block',
   })
 export type BlockV6 = z.infer<typeof blockSchemaV6>

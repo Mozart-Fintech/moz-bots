@@ -42,7 +42,7 @@ const fileInputBlockV5Schema = blockBaseSchema.merge(
 
 export const fileInputBlockSchemas = {
   v5: fileInputBlockV5Schema.openapi({
-    title: 'File input v5',
+    title: 'Archivo v5',
     ref: 'fileInputV5',
   }),
   v6: fileInputBlockV5Schema
@@ -52,7 +52,7 @@ export const fileInputBlockSchemas = {
       })
     )
     .openapi({
-      title: 'File',
+      title: 'Archivo',
       ref: 'fileInput',
     }),
 }

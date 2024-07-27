@@ -1,21 +1,21 @@
 ---
-title: Embed
+title: Incrustar
 icon: browser
 ---
 
-The Embed bubble block allows you to display a website or an iframe to your user. You can paste a video URL from many sources including YouTube, Vimeo, and mp4.
+El bloque de burbuja de incrustación te permite mostrar un sitio web o un iframe a tu usuario. Puedes pegar una URL de video de muchas fuentes, incluyendo YouTube, Vimeo y mp4.
 
 <Info>
-  Not all websites allow embedding. If you see a blank space, it means the
-  website you're trying to embed doesn't allow it.
+  No todos los sitios web permiten la incrustación. Si ves un espacio en blanco,
+  significa que el sitio web que estás intentando incrustar no lo permite.
 </Info>
 
 <Tabs>
-  <Tab title="Flow">
+  <Tab title="Flujo">
     <Frame>
       <img
         src="/images/blocks/bubbles/embed.png"
-        alt="Embed bubble"
+        alt="Burbuja de incrustación"
         className="rounded-lg"
       />
     </Frame>
@@ -30,29 +30,22 @@ The Embed bubble block allows you to display a website or an iframe to your user
   </Tab>
 </Tabs>
 
-## Embed a PDF hosted on Google Drive
+## Incrustar un PDF alojado en Google Drive
 
-For this, you'll need to select the pdf file you want to embed. Right click > Preview > More actions > Open in a new window. Now click More actions > Embed item.
+Para esto, necesitarás seleccionar el archivo PDF que deseas incrustar. Haz clic derecho > Vista previa > Más acciones > Abrir en una nueva ventana. Ahora haz clic en Más acciones > Incrustar elemento.
 
-Copy the embed code and paste it in the Embed bubble block configuration.
+Copia el código de incrustación y pégalo en la configuración del bloque de burbuja de incrustación.
 
-## Wait for event
+## Esperar evento
 
-Enable this if you are the owner of the website you want to embed and would like to continue the bot flow only when an event from the embed is sent to the bot. This event dispatch needs to be executed in the embed website. Here is an example:
+Habilita esto si eres el propietario del sitio web que deseas incrustar y te gustaría continuar el flujo del bot solo cuando se envíe un evento desde la incrustación al bot. Esta ejecución del evento necesita ser realizada en el sitio web incrustado. Aquí hay un ejemplo:
 
 ```js
 window.parent.postMessage(
-  { name: 'My event', data: 'Custom data passed to the mozbot variable' },
+  {
+    name: 'Mi evento',
+    data: 'Datos personalizados pasados a la variable del mozbot',
+  },
   '*'
 )
 ```
-
-You can choose the name of the event, it needs to match what you've set in the Embed bubble block configuration.
-
-<Frame>
-  <img
-    src="/images/blocks/bubbles/embed-wait.jpg"
-    alt="Embed bubble"
-    className="rounded-lg"
-  />
-</Frame>

@@ -7,9 +7,9 @@ export const updateMozbotInSession = publicProcedure
     openapi: {
       method: 'POST',
       path: '/v1/sessions/{sessionId}/updateMozbot',
-      summary: 'Update mozbot in session',
+      summary: 'Actualizar mozbot en sesión',
       description:
-        'Update chat session with latest mozbot modifications. This is useful when you want to update the mozbot in an ongoing session after making changes to it.',
+        'Actualice la sesión de chat con las últimas modificaciones de mozbot. Esto es útil cuando desea actualizar el mozbot en una sesión en curso después de realizar cambios.',
       protect: true,
     },
   })

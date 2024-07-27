@@ -1,16 +1,16 @@
 ---
-title: HTML & Javascript
+title: HTML y Javascript
 ---
 
-## Standard
+## Estándar
 
-You can get the standard HTML and Javascript code by clicking on the "HTML & Javascript" button in the "Share" tab of your mozbot.
+Puedes obtener el código estándar de HTML y Javascript haciendo clic en el botón "HTML y Javascript" en la pestaña "Compartir" de tu mozbot.
 
-There, you can change the container dimensions. Here is a code example:
+Allí, puedes cambiar las dimensiones del contenedor. Aquí tienes un ejemplo de código:
 
 ```html
 <script type="module">
-  import Mozbot from 'https://cdn.jsdelivr.net/npm/@mozbot.io/js@0.3/dist/web.js'
+  import Mozbot from 'https://cdn.jsdelivr.net/npm/@mozbot/js@0.3/dist/web.js'
 
   Mozbot.initStandard({
     mozbot: 'my-mozbot',
@@ -20,15 +20,15 @@ There, you can change the container dimensions. Here is a code example:
 <mozbot-standard style="width: 100%; height: 600px; "></mozbot-standard>
 ```
 
-This code is creating a container with a 100% width (will match parent width) and 600px height.
+Este código está creando un contenedor con un ancho del 100% (coincidirá con el ancho del padre) y una altura de 600px.
 
-### Multiple bots
+### Múltiples bots
 
-If you have different bots on the same page you will have to make them distinct with an additional `id` prop:
+Si tienes diferentes bots en la misma página, tendrás que diferenciarlos con una propiedad `id` adicional:
 
 ```html
 <script type="module">
-  import Mozbot from 'https://cdn.jsdelivr.net/npm/@mozbot.io/js@0.3/dist/web.js'
+  import Mozbot from 'https://cdn.jsdelivr.net/npm/@mozbot/js@0.3/dist/web.js'
 
   Mozbot.initStandard({
     id: 'bot1'
@@ -54,9 +54,9 @@ If you have different bots on the same page you will have to make them distinct 
 
 ## Popup
 
-You can get the popup HTML and Javascript code by clicking on the "HTML & Javascript" button in the "Share" tab of your mozbot.
+Puedes obtener el código HTML y Javascript para el popup haciendo clic en el botón "HTML y Javascript" en la pestaña "Compartir" de tu mozbot.
 
-Here is an example:
+Aquí tienes un ejemplo:
 
 ```html
 <script type="module">
@@ -85,7 +85,7 @@ Here is an example:
   Mozbot.initBubble({
     mozbot: 'my-mozbot',
     previewMessage: {
-      message: 'I have a question for you!',
+      message: '¡Tengo una pregunta para ti!',
       autoShowDelay: 5000,
       avatarUrl: 'https://avatars.githubusercontent.com/u/16015833?v=4',
     },
@@ -98,11 +98,11 @@ Here is an example:
 </script>
 ```
 
-This code will show the bubble and let a preview message appear after 5 seconds.
+Este código mostrará la burbuja y permitirá que aparezca un mensaje de vista previa después de 5 segundos.
 
-### Custom button position
+### Posición personalizada del botón
 
-You can move the button with some custom CSS on your website. For example, you can place the bubble button higher with the following CSS:
+Puedes mover el botón con algo de CSS personalizado en tu sitio web. Por ejemplo, puedes colocar el botón de la burbuja más arriba con el siguiente CSS:
 
 ```css
 mozbot-bubble::part(button) {
@@ -115,7 +115,7 @@ mozbot-bubble::part(bot) {
 }
 ```
 
-If you have a preview message, you'll also have to manually position it:
+Si tienes un mensaje de vista previa, también tendrás que posicionarlo manualmente:
 
 ```css
 mozbot-bubble::part(preview-message) {
@@ -123,17 +123,17 @@ mozbot-bubble::part(preview-message) {
 }
 ```
 
-## Commands
+## Comandos
 
-Here are the commands you can use to trigger your embedded mozbot:
+Aquí están los comandos que puedes usar para activar tu mozbot incrustado:
 
-- `Mozbot.open()`: Open popup or bubble
-- `Mozbot.close()`: Close popup or bubble
-- `Mozbot.toggle()`: Toggle the bubble or popup open/close state,
-- `Mozbot.showPreviewMessage()`: Show preview message from the bubble,
-- `Mozbot.hidePreviewMessage()`: Hide preview message from the bubble,
-- `Mozbot.setPrefilledVariables(...)`: Set prefilled variables.
-  Example:
+- `Mozbot.open()`: Abrir popup o burbuja
+- `Mozbot.close()`: Cerrar popup o burbuja
+- `Mozbot.toggle()`: Alternar el estado abierto/cerrado de la burbuja o popup
+- `Mozbot.showPreviewMessage()`: Mostrar mensaje de vista previa desde la burbuja
+- `Mozbot.hidePreviewMessage()`: Ocultar mensaje de vista previa desde la burbuja
+- `Mozbot.setPrefilledVariables(...)`: Establecer variables predefinidas.
+  Ejemplo:
 
   ```js
   Mozbot.setPrefilledVariables({
@@ -142,41 +142,41 @@ Here are the commands you can use to trigger your embedded mozbot:
   })
   ```
 
-  For more information, check out [Additional configuration](#additional-configuration).
+  Para más información, consulta [Configuración adicional](#additional-configuration).
 
-- `Mozbot.setInputValue(...)`: Set the value in the currently displayed input.
+- `Mozbot.setInputValue(...)`: Establecer el valor en el campo de entrada actualmente mostrado.
 
-You can bind these commands on a button element, for example:
+Puedes vincular estos comandos a un elemento de botón, por ejemplo:
 
 ```html
-<button onclick="Mozbot.open()">Contact us</button>
+<button onclick="Mozbot.open()">Contactanos</button>
 ```
 
 ## Callbacks
 
-If you need to trigger events on your parent website when the user interact with the bot, you can use the following callbacks:
+Si necesitas activar eventos en tu sitio web principal cuando el usuario interactúe con el bot, puedes usar los siguientes callbacks:
 
 ```js
 Mozbot.initStandard({
   mozbot: 'my-mozbot',
   onNewInputBlock: (inputBlock) => {
-    console.log('New input block displayed', inputBlock.id)
+    console.log('Nuevo bloque de entrada mostrado', inputBlock.id)
   },
   onAnswer: (answer) => {
-    console.log('Answer received', answer.message, answer.blockId)
+    console.log('Respuesta recibida', answer.message, answer.blockId)
   },
   onInit: () => {
-    console.log('Bot initialized')
+    console.log('Bot inicializado')
   },
   onEnd: () => {
-    console.log('Bot ended')
+    console.log('Bot terminado')
   },
 })
 ```
 
-## Additional configuration
+## Configuración adicional
 
-You can prefill the bot variable values in your embed code by adding the `prefilledVariables` option. Here is an example:
+Puedes prellenar los valores de las variables del bot en tu código incrustado añadiendo la opción `prefilledVariables`. Aquí tienes un ejemplo:
 
 ```js
 Mozbot.initStandard({
@@ -188,6 +188,6 @@ Mozbot.initStandard({
 })
 ```
 
-It will prefill the `Current URL` variable with "https://my-site/account" and the `User name` variable with "John Doe". More info about variables: [here](/editor/variables).
+Prefillará la variable `Current URL` con "https://my-site/account" y la variable `User name` con "John Doe". Más información sobre variables: [aquí](/editor/variables).
 
-Note that if your site URL contains query params (i.e. https://mozbot.io?User%20name=John%20Doe), the variables will automatically be injected to the mozbot. So you don't need to manually transfer query params to the bot embed configuration.
+Ten en cuenta que si la URL de tu sitio contiene parámetros de consulta (por ejemplo, https://mozbot.io?User%20name=John%20Doe), las variables se inyectarán automáticamente en el mozbot. Así que no necesitas transferir manualmente los parámetros de consulta a la configuración de incrustación del bot.

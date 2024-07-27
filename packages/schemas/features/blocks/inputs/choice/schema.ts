@@ -56,7 +56,7 @@ export const buttonsInputV5Schema = blockBaseSchema.merge(
 
 export const buttonsInputSchemas = {
   v5: buttonsInputV5Schema.openapi({
-    title: 'Buttons v5',
+    title: 'Botones v5',
     ref: 'buttonsInputV5',
   }),
   v6: buttonsInputV5Schema
@@ -64,7 +64,7 @@ export const buttonsInputSchemas = {
       items: z.array(buttonItemSchemas.v6),
     })
     .openapi({
-      title: 'Buttons',
+      title: 'Botones',
       ref: 'buttonsInput',
     }),
 } as const

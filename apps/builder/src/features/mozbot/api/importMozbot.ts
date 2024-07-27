@@ -96,7 +96,7 @@ export const importMozbot = authenticatedProcedure
       workspaceId: z
         .string()
         .describe(
-          '[Where to find my workspace ID?](../how-to#how-to-find-my-workspaceid)'
+          '[¿Dónde encontrar el ID de mi espacio de trabajo?](../how-to#how-to-find-my-workspaceid)'
         ),
       mozbot: importingMozbotSchema,
     })
@@ -117,7 +117,10 @@ export const importMozbot = authenticatedProcedure
       userRole === WorkspaceRole.GUEST ||
       !workspace
     )
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Workspace not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Espacio de trabajo no encontrado',
+      })
 
     const migratedMozbot = await migrateImportingMozbot(mozbot)
 

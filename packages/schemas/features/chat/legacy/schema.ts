@@ -35,7 +35,7 @@ const startParamsSchema = z
     mozbot: startMozbotSchema
       .or(z.string())
       .describe(
-        'Either a Mozbot ID or a Mozbot object. If you provide a Mozbot object, it will be executed in preview mode. ([How can I find my mozbot ID?](https://docs.mozbot.io/api-reference#how-to-find-my-mozbotId)).'
+        'Either a Mozbot ID or a Mozbot object. If you provide a Mozbot object, it will be executed in preview mode. ([How can I find my mozbot ID?](https://mozdocs.mozartfintech.com/api-reference#how-to-find-my-mozbotId)).'
       ),
     isPreview: z
       .boolean()
@@ -52,7 +52,7 @@ const startParamsSchema = z
       .record(z.unknown())
       .optional()
       .describe(
-        '[More info about prefilled variables.](https://docs.mozbot.io/editor/variables#prefilled-variables)'
+        '[More info about prefilled variables.](https://mozdocs.mozartfintech.com/editor/variables#prefilled-variables)'
       ),
     isStreamEnabled: z
       .boolean()

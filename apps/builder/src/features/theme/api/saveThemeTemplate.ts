@@ -12,7 +12,7 @@ export const saveThemeTemplate = authenticatedProcedure
       method: 'PUT',
       path: '/v1/themeTemplates/{themeTemplateId}',
       protect: true,
-      summary: 'Save theme template',
+      summary: 'Guardar plantilla de tema',
       tags: ['Theme template'],
     },
   })
@@ -44,7 +44,7 @@ export const saveThemeTemplate = authenticatedProcedure
       if (userRole === undefined || userRole === WorkspaceRole.GUEST)
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Workspace not found',
+          message: 'Espacio de trabajo no encontrado',
         })
 
       const themeTemplate = (await prisma.themeTemplate.upsert({

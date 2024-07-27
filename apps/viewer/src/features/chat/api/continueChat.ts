@@ -11,7 +11,7 @@ export const continueChat = publicProcedure
     openapi: {
       method: 'POST',
       path: '/v1/sessions/{sessionId}/continueChat',
-      summary: 'Continue chat',
+      summary: 'Continuar chat',
     },
   })
   .input(
@@ -20,7 +20,7 @@ export const continueChat = publicProcedure
       sessionId: z
         .string()
         .describe(
-          'The session ID you got from the [startChat](./start-chat) response.'
+          'El ID de sesión que obtuvo de la respuesta [startChat](./start-chat).'
         ),
       textBubbleContentFormat: z
         .enum(['richText', 'markdown'])

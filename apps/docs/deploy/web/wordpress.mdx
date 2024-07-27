@@ -2,75 +2,78 @@
 title: WordPress
 ---
 
-Mozbot has a native [WordPress plug-in](https://wordpress.org/plugins/mozbot/) that helps you embed mozbots in your WordPress site.
+Mozbot tiene un [plugin nativo para WordPress](https://wordpress.org/plugins/mozbot/) que te ayuda a incrustar mozbots en tu sitio de WordPress.
 
-Of course, before using it, you need to create and publish your first mozbot.
+Por supuesto, antes de usarlo, necesitas crear y publicar tu primer mozbot.
 
 <Frame>
-  <img src="/images/embeddings/wordpress-preview.png" alt="WP plugin preview" />
+  <img
+    src="/images/embeddings/wordpress-preview.png"
+    alt="Vista previa del plugin de WP"
+  />
 </Frame>
 
-The code snippet to paste is easily configurable in the Share tab of your bot after clicking on the "Wordpress" button.
+El fragmento de código para pegar es fácilmente configurable en la pestaña Compartir de tu bot después de hacer clic en el botón "WordPress".
 
-## Excluded pages
+## Páginas excluidas
 
-The excluded pages input is a comma-separated list of pages where you don't want your mozbot to appear.
+La entrada de páginas excluidas es una lista separada por comas de páginas donde no quieres que aparezca tu mozbot.
 
-Examples:
+Ejemplos:
 
-- `/app/*` will exclude all pages starting with `/app/`
-- `/app` will only exclude the `/app` page
-- `/app?param=1` will only exclude the `/app` page **and** with the `param` query parameter set to `1`
-- `/app?param=*` will exclude the page at `/app` **and** with the `param` query parameter set to anything
-- `/app/*?param=*` will exclude all pages starting with `/app/` **and** with the `param` query parameter set to anything
+- `/app/*` excluirá todas las páginas que comiencen con `/app/`
+- `/app` solo excluirá la página `/app`
+- `/app?param=1` solo excluirá la página `/app` **y** con el parámetro de consulta `param` establecido en `1`
+- `/app?param=*` excluirá la página en `/app` **y** con el parámetro de consulta `param` establecido en cualquier valor
+- `/app/*?param=*` excluirá todas las páginas que comiencen con `/app/` **y** con el parámetro de consulta `param` establecido en cualquier valor
 
-## Personalize user experience
+## Personalizar la experiencia del usuario
 
-You can leverage the [prefilled variables](../../editor/variables#prefilled-variables) and inject your user information directly into your mozbot so that the experience is entirely customized to your user.
+Puedes aprovechar las [variables predefinidas](../../editor/variables#prefilled-variables) e inyectar la información de tu usuario directamente en tu mozbot para que la experiencia esté completamente personalizada para tu usuario.
 
-Here are the available variables from WordPress, make sure to create them in your mozbot's variables dropdown:
+Aquí están las variables disponibles de WordPress, asegúrate de crearlas en el menú desplegable de variables de tu mozbot:
 
 <Frame style={{ maxWidth: '400px' }}>
   <img
     src="/images/embeddings/wp-variables.png"
-    alt="WP predefined variables"
+    alt="Variables predefinidas de WP"
   />
 </Frame>
 
-The only thing you need to do to enable this is:
+Lo único que necesitas hacer para habilitar esto es:
 
-- Use the [Wordpress Mozbot plugin](https://wordpress.com/plugins/mozbot)
-- Have the variables declared in your Mozbot with the exact syntaxes. For the email for example, make sure your variable is spelled `WP Email`. These won't work: `wp Email`, `WP email`.
+- Usar el [plugin de Mozbot para WordPress](https://wordpress.com/plugins/mozbot)
+- Tener las variables declaradas en tu Mozbot con las sintaxis exactas. Por ejemplo, para el correo electrónico, asegúrate de que tu variable esté escrita como `WP Email`. Estas no funcionarán: `wp Email`, `WP email`.
 
-## Your mozbot isn't showing?
+## ¿Tu mozbot no se muestra?
 
-### You have litespeed with "Localise Resources" enabled
+### Tienes litespeed con "Localise Resources" habilitado
 
-There is an a box where there is a list of URLs it localises, one of them was ‘https://cdn.jsdelivr.net’. This URL should be removed from it since it is used to import the embed library.
+Hay una caja donde hay una lista de URLs que localiza, una de ellas era ‘https://cdn.jsdelivr.net’. Esta URL debe ser eliminada de allí ya que se usa para importar la biblioteca de incrustación.
 
-## You have litespeed with cache enabled
+### Tienes litespeed con caché habilitado
 
-Make sure to insert `web.js` and `mozbot` in the JS Excludes textbox and JS Deferred Excludes under Tuning Settings.
+Asegúrate de insertar `web.js` y `mozbot` en el cuadro de texto de JS Excludes y JS Deferred Excludes en la configuración de Tuning.
 
-### You have a cache plugin
+### Tienes un plugin de caché
 
-Plugins like WP Rocket prevent Mozbot to work.
+Plugins como WP Rocket impiden que Mozbot funcione.
 
-For WP Rocket:
+Para WP Rocket:
 
-1. Go to Settings > WP Rocket > Excluded Inline Javascript:
+1. Ve a Configuración > WP Rocket > Javascript en línea excluido:
 
 <Frame>
   <img src="/images/embeddings/wp-rocket.png" alt="WP Rocket" />
 </Frame>
 
-2. Type "mozbot"
-3. Save
+2. Escribe "mozbot"
+3. Guarda
 
-### You have plugin that adds `defer` attribute to external scripts
+### Tienes un plugin que añade el atributo `defer` a los scripts externos
 
-You need to add an exception for Mozbot in the corresponding plugin config.
+Necesitas añadir una excepción para Mozbot en la configuración del plugin correspondiente.
 
-### Still not working
+### ¿Aún no funciona?
 
-Contact me on the application using the mozbot at the bottom right corner
+Contáctame en la aplicación usando el mozbot en la esquina inferior derecha.

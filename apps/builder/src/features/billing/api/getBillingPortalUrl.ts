@@ -8,7 +8,7 @@ export const getBillingPortalUrl = authenticatedProcedure
       method: 'GET',
       path: '/v1/billing/subscription/portal',
       protect: true,
-      summary: 'Get Stripe billing portal URL',
+      summary: 'Obtener la URL del portal de facturación de Stripe',
       tags: ['Billing'],
     },
   })

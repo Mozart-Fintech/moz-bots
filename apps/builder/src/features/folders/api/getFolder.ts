@@ -12,7 +12,7 @@ export const getFolder = authenticatedProcedure
       method: 'GET',
       path: '/v1/folders/{folderId}',
       protect: true,
-      summary: 'Get folder',
+      summary: 'Obtener carpeta',
       tags: ['Folder'],
     },
   })
@@ -40,7 +40,7 @@ export const getFolder = authenticatedProcedure
     )
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Workspace not found',
+        message: 'Espacio de trabajo no encontrado',
       })
 
     const folder = await prisma.dashboardFolder.findUnique({
@@ -53,7 +53,7 @@ export const getFolder = authenticatedProcedure
     if (!folder)
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Folder not found',
+        message: 'Carpeta no encontrada',
       })
 
     return { folder }

@@ -1,36 +1,39 @@
 ---
-sidebarTitle: Overview
-title: Theme
+sidebarTitle: Descripción General
+title: Tema
 icon: brush
 ---
 
 import { LoomVideo } from '/snippets/loom-video.mdx'
 
-The theme tab allows you to customize the look of your mozbot.
+La pestaña de tema te permite personalizar la apariencia de tu mozbot.
 
 ## Global
 
-This section allows you to enable or disable the mozbot branding, change the font and the background of your bot.
+Esta sección te permite habilitar o deshabilitar la marca de mozbot, cambiar la fuente y el fondo de tu bot.
 
 ## Chat
 
-This section allows you to customize all the chats components (avatars, bubbles, inputs etc...).
+Esta sección te permite personalizar todos los componentes del chat (avatares, burbujas, entradas, etc.).
 
-Click on the bot avatar to change the image:
+Haz clic en el avatar del bot para cambiar la imagen:
 
 <Frame>
   <img src="/images/theme/avatar.png" alt="Avatar" />
 </Frame>
 
-## Custom CSS
+## CSS Personalizado
 
-You can also decide to customize even further by adding any custom CSS you want. For this you right-click on the bot in the Theme page and inspect the element you want to customize:
+También puedes decidir personalizar aún más añadiendo cualquier CSS personalizado que desees. Para esto, haz clic derecho en el bot en la página de Tema e inspecciona el elemento que deseas personalizar:
 
 <Frame>
-  <img src="/images/theme/custom-css.png" alt="Custom css inspection" />
+  <img
+    src="/images/theme/custom-css.png"
+    alt="Inspección de CSS personalizado"
+  />
 </Frame>
 
-For example, if I want my buttons to be more rounded, and have a fancy gradient color, I can add this to the custom CSS:
+Por ejemplo, si quiero que mis botones sean más redondeados y tengan un color degradado elegante, puedo agregar esto al CSS personalizado:
 
 ```css
 .mozbot-button {
@@ -41,12 +44,12 @@ For example, if I want my buttons to be more rounded, and have a fancy gradient 
 ```
 
 <Frame>
-  <img src="/images/theme/fancy-button.png" alt="Fancy button" />
+  <img src="/images/theme/fancy-button.png" alt="Botón elegante" />
 </Frame>
 
-### Customize a single button color
+### Personalizar el color de un solo botón
 
-Thanks to custom CSS, you can customize the color of a single button for example by using the `data-itemid` attribute:
+Gracias al CSS personalizado, puedes personalizar el color de un solo botón, por ejemplo, utilizando el atributo `data-itemid`:
 
 ```css
 [data-itemid='cl3iunm4p000f2e6gfr8cznnn'] {
@@ -55,10 +58,10 @@ Thanks to custom CSS, you can customize the color of a single button for example
 }
 ```
 
-To find the item ID of a button, right-click on the button and inspect the element:
+Para encontrar el ID del elemento de un botón, haz clic derecho en el botón e inspecciona el elemento:
 
 <Frame>
-  <img src="/images/theme/button-inspect.png" alt="Button inspect" />
+  <img src="/images/theme/button-inspect.png" alt="Inspección de botón" />
 </Frame>
 
 <LoomVideo id="8bf5e1631879467e94665df2e56fca9a" />

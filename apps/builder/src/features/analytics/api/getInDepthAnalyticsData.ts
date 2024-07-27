@@ -19,7 +19,7 @@ export const getInDepthAnalyticsData = authenticatedProcedure
       path: '/v1/mozbots/{mozbotId}/analytics/inDepthData',
       protect: true,
       summary:
-        'List total answers in blocks and off-default paths visited edges',
+        'Enumere el total de respuestas en bloques y rutas no predeterminadas en los bordes visitados',
       tags: ['Analytics'],
     },
   })
@@ -47,7 +47,7 @@ export const getInDepthAnalyticsData = authenticatedProcedure
       if (!mozbot?.publishedMozbot)
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Published mozbot not found',
+          message: 'Mozbot publicado no encontrado',
         })
 
       const fromDate = parseFromDateFromTimeFilter(timeFilter, timeZone)

@@ -1,21 +1,21 @@
 ---
-title: Breaking changes
+title: Cambios disruptivos
 ---
 
 import { LoomVideo } from '/snippets/loom-video.mdx'
 
 ## Mozbot v6
 
-- List variables now don't automatically display the last item when inserted into a bubble. It was too "magical". Now you can leverage the inline code feature to easily get the last element of a list:
+- Las variables de lista ahora no muestran automáticamente el último elemento cuando se insertan en una burbuja. Era demasiado "mágico". Ahora puedes utilizar la función de código en línea para obtener fácilmente el último elemento de una lista:
 
   ```
   {{={{List var}}.at(-1)=}}
   ```
 
-  Check out the new [Inline variable formatting section](./editor/variables) for more information.
+  Consulta la nueva [sección de formato de variables en línea](./editor/variables) para obtener más información.
 
-- Input prefill is now disabled by default. You can still enable it in the [Settings](./settings/overview) tab of your bot.
+- El prefijo de entrada ahora está deshabilitado por defecto. Aún puedes habilitarlo en la pestaña [Configuración](./settings/overview) de tu bot.
 
-- `Message sequence` option in the OpenAI block was removed because it was also too "magical" and it. Now I've introduced the `Dialogue` option. For more information:
+- La opción `Secuencia de mensajes` en el bloque de OpenAI fue eliminada porque también era demasiado "mágica". Ahora he introducido la opción `Diálogo`. Para más información:
 
   <LoomVideo id="df5d64dd01ca47daa5b7acd18b05a725" />

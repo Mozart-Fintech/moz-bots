@@ -1,41 +1,41 @@
 ---
-title: Payment
+title: Pago
 icon: credit-card
 ---
 
-The Payment input block allows you to collect payment. You first need to add your Stripe:
+El bloque de entrada de Pago te permite recopilar pagos. Primero necesitas agregar tu cuenta de Stripe:
 
-## Connect Stripe account
+## Conectar cuenta de Stripe
 
-After clicking on `Select an account > Connect new`, a configuration popup appears:
+Después de hacer clic en `Seleccionar una cuenta > Conectar nueva`, aparece una ventana de configuración:
 
 <Frame>
   <img
     src="/images/blocks/inputs/configure-stripe.png"
-    alt="Stripe configuration"
+    alt="Configuración de Stripe"
   />
 </Frame>
 
-- Account name could be anything you'd like it's not something that has to come from Stripe.
-- Test keys can be found here: https://dashboard.stripe.com/test/apikeys
-- Live keys can be found here: https://dashboard.stripe.com/apikeys
+- El nombre de la cuenta puede ser cualquier cosa que desees, no es algo que tenga que venir de Stripe.
+- Las claves de prueba se pueden encontrar aquí: https://dashboard.stripe.com/test/apikeys
+- Las claves en vivo se pueden encontrar aquí: https://dashboard.stripe.com/apikeys
 
-Test keys will be used in the preview for testing purposes. Live keys will be used in the published bot.
+Las claves de prueba se usarán en la vista previa para fines de prueba. Las claves en vivo se usarán en el bot publicado.
 
-If you'd still like to still use the test keys in the published bot you just need to also fill in the test keys into the live keys inputs.
+Si aún deseas usar las claves de prueba en el bot publicado, solo necesitas llenar las claves de prueba en los campos de claves en vivo.
 
-_If you would like to simulate a successful payment, use test cards from the following list in Stripe -> https://docs.stripe.com/testing?testing-method=card-numbers#cards_
+_Si deseas simular un pago exitoso, usa tarjetas de prueba de la siguiente lista en Stripe -> https://docs.stripe.com/testing?testing-method=card-numbers#cards_
 
-## Input configuration
+## Configuración de entrada
 
-Once you have a Stripe account, you can select it and configure your input:
+Una vez que tengas una cuenta de Stripe, puedes seleccionarla y configurar tu entrada:
 
 <Tabs>
-  <Tab title="Flow">
+  <Tab title="Flujo">
     <Frame>
       <img
         src="/images/blocks/inputs/payment-flow.png"
-        alt="Payment input in flow"
+        alt="Entrada de pago en el flujo"
         className="rounded-lg"
       />
     </Frame>
@@ -44,13 +44,13 @@ Once you have a Stripe account, you can select it and configure your input:
     <Frame>
       <img
         src="/images/blocks/inputs/payment-bot.png"
-        alt="Payment input in bot"
+        alt="Entrada de pago en el bot"
         className="rounded-lg"
       />
     </Frame>
   </Tab>
 </Tabs>
 
-Make sure to enable any payment method you'd like to appear in your Stripe dashboard at this URL: https://dashboard.stripe.com/settings/payment_methods.
+Asegúrate de habilitar cualquier método de pago que desees que aparezca en tu panel de Stripe en esta URL: https://dashboard.stripe.com/settings/payment_methods.
 
-This is where you can enable Cards, Apple Pay, Google Pay, Alipay, WeChat Pay etc.
+Aquí es donde puedes habilitar Tarjetas, Apple Pay, Google Pay, Alipay, WeChat Pay, etc.

@@ -12,7 +12,7 @@ export const createWorkspace = authenticatedProcedure
       method: 'POST',
       path: '/v1/workspaces',
       protect: true,
-      summary: 'Create workspace',
+      summary: 'Crear espacio de trabajo',
       tags: ['Workspace'],
     },
   })
@@ -48,7 +48,7 @@ export const createWorkspace = authenticatedProcedure
     if (existingWorkspaceNames.some((workspace) => workspace.name === name))
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: 'Workspace with same name already exists',
+        message: 'El espacio de trabajo con el mismo nombre ya existe',
       })
 
     const plan = parseWorkspaceDefaultPlan(user.email ?? '')

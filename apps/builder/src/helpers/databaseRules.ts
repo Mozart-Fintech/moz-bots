@@ -73,11 +73,14 @@ export const canPublishFileInput = async ({
     select: { plan: true },
   })
   if (!workspace) {
-    forbidden(res, 'workspace not found')
+    forbidden(res, 'espacio de trabajo no encontrado')
     return false
   }
   if (workspace?.plan === Plan.FREE) {
-    forbidden(res, 'You need to upgrade your plan to use file input blocks')
+    forbidden(
+      res,
+      'Necesita actualizar su plan para usar bloques de entrada de archivos'
+    )
     return false
   }
   return true

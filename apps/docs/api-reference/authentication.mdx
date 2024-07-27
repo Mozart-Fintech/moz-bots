@@ -1,33 +1,33 @@
 ---
-title: 'Authentication'
+title: 'Autenticación'
 ---
 
-Some API endpoints are protected, and therefore require that you authenticate using an API token.
+Algunos endpoints de la API están protegidos y, por lo tanto, requieren que te autentiques usando un token de API.
 
-## Generate a token
+## Generar un token
 
-1. Navigate to your mozbot dashboard (https://app.mozbot.io/mozbots)
-2. Click on Settings & Members > My account
-3. Under the "API tokens" section, click on "Create"
-4. Give it a name, then click on "Create token"
-5. Copy your token.
+1. Navega a tu panel de mozbot (https://mozbot.mozartfintech.com/mozbots)
+2. Haz clic en Configuración y Miembros > Mi cuenta
+3. En la sección "Tokens de API", haz clic en "Crear"
+4. Dale un nombre y luego haz clic en "Crear token"
+5. Copia tu token.
 
 <Frame>
   <img
     src="/images/api/authentication/generateToken.png"
     width="900"
-    alt="Generate token"
+    alt="Generar token"
   />
 </Frame>
 
-## Use your token
+## Usar tu token
 
-You can authenticate by adding an `Authorization` header to all your HTTP calls. The Authorization header is formatted as such: `Authorization: Bearer <token>` (replace `<token>` with your token previously generated).
+Puedes autenticarte añadiendo un encabezado `Authorization` a todas tus llamadas HTTP. El encabezado Authorization se formatea de la siguiente manera: `Authorization: Bearer <token>` (reemplaza `<token>` con tu token previamente generado).
 
-Example:
+Ejemplo:
 
 ```sh
-curl -L -X GET 'https://app.mozbot.io/api/mozbots/:mozbotId/results' \
+curl -L -X GET 'https://mozbot.mozartfintech.com/api/mozbots/:mozbotId/results' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer myAwesomeToken'
 ```

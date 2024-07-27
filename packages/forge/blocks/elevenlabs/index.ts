@@ -11,5 +11,5 @@ export const elevenlabsBlock = createBlock({
   DarkLogo: ElevenlabsLogoDark,
   auth,
   actions: [convertTextToSpeech],
-  docsUrl: 'https://docs.mozbot.io/forge/blocks/elevenlabs',
+  docsUrl: 'https://mozdocs.mozartfintech.com/forge/blocks/elevenlabs',
 })

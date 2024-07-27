@@ -15,7 +15,9 @@ export function customAdapter(p: PrismaClient): Adapter {
   return {
     createUser: async (data: Omit<AdapterUser, 'id'>) => {
       if (!data.email)
-        throw Error('Provider did not forward email but it is required')
+        throw Error(
+          'El proveedor no reenvió el correo electrónico pero es obligatorio'
+        )
       const user = { id: createId(), email: data.email as string }
       const { invitations, workspaceInvitations } = await getNewUserInvitations(
         p,
@@ -27,10 +29,12 @@ export function customAdapter(p: PrismaClient): Adapter {
         invitations.length === 0 &&
         workspaceInvitations.length === 0
       )
-        throw Error('New users are forbidden')
+        throw Error('Nuevos usuarios estan prohibidos')
 
       const newWorkspaceData = {
-        name: data.name ? `${data.name}'s workspace` : `My workspace`,
+        name: data.name
+          ? `Espacio de trabajo de ${data.name}`
+          : `Mi espacio de trabajo`,
         plan: parseWorkspaceDefaultPlan(data.email),
       }
       const createdUser = await p.user.create({

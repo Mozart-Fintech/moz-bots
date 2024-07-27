@@ -11,7 +11,7 @@ export const getCredentials = authenticatedProcedure
       method: 'GET',
       path: '/v1/credentials/{credentialsId}',
       protect: true,
-      summary: 'Get credentials data',
+      summary: 'Obtener datos de credenciales',
       tags: ['Credentials'],
     },
   })
@@ -38,7 +38,10 @@ export const getCredentials = authenticatedProcedure
       },
     })
     if (!workspace || isWriteWorkspaceForbidden(workspace, user))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Workspace not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Espacio de trabajo no encontrado',
+      })
 
     const credentials = await prisma.credentials.findFirst({
       where: {
@@ -54,7 +57,7 @@ export const getCredentials = authenticatedProcedure
     if (!credentials)
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Credentials not found',
+        message: 'Credenciales no encontradas',
       })
 
     const credentialsData = await decrypt(credentials.data, credentials.iv)

@@ -148,7 +148,10 @@ export const ChangePlanForm = ({
 
       <Text color="gray.500">
         {t('billing.customLimit.preLink')}{' '}
-        <TextLink href={'https://mozbot.io/enterprise-lead-form'} isExternal>
+        <TextLink
+          href={'https://mozbot.mozartfintech.com/enterprise-lead-form'}
+          isExternal
+        >
           {t('billing.customLimit.link')}
         </TextLink>
       </Text>

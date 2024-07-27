@@ -7,7 +7,7 @@ describe('initPopup', () => {
 
   it('should return the popupElement with lazy iframe', () => {
     expect.assertions(2)
-    initPopup({ url: 'https://mozbot.io/mozbot-id' })
+    initPopup({ url: 'https://mozbot.mozartfintech.com/mozbot-id' })
     const popupElement = document.getElementById('mozbot-popup')
     const iframeElement = popupElement?.children[0] as HTMLIFrameElement
     expect(popupElement).toBeTruthy()
@@ -17,25 +17,27 @@ describe('initPopup', () => {
   it('should overwrite if exists', () => {
     expect.assertions(2)
     initPopup({
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
       hiddenVariables: { test1: 'yo' },
     })
-    initPopup({ url: 'https://mozbot.io/mozbot-id2' })
+    initPopup({ url: 'https://mozbot.mozartfintech.com/mozbot-id2' })
     const elements = document.getElementsByTagName('iframe')
     expect(elements).toHaveLength(1)
-    expect(elements[0].dataset.src).toBe('https://mozbot.io/mozbot-id2')
+    expect(elements[0].dataset.src).toBe(
+      'https://mozbot.mozartfintech.com/mozbot-id2'
+    )
   })
 
   it("shouldn't have opened classname if no delay", () => {
     expect.assertions(1)
-    initPopup({ url: 'https://mozbot.io/mozbot-id' })
+    initPopup({ url: 'https://mozbot.mozartfintech.com/mozbot-id' })
     const popupElement = document.getElementById('mozbot-popup')
     expect(popupElement?.classList.contains('opened')).toBe(false)
   })
 
   it('should have the opened classname after the delay', async () => {
     expect.assertions(2)
-    initPopup({ delay: 500, url: 'https://mozbot.io/mozbot-id' })
+    initPopup({ delay: 500, url: 'https://mozbot.mozartfintech.com/mozbot-id' })
     const popupElement = document.getElementById('mozbot-popup')
     expect(popupElement?.classList.contains('opened')).toBe(false)
     await new Promise((r) => setTimeout(r, 1000))
@@ -50,7 +52,9 @@ describe('openPopup', () => {
 
   it('should add opened className and lazy load', () => {
     expect.assertions(5)
-    const { open } = initPopup({ url: 'https://mozbot.io/mozbot-id' })
+    const { open } = initPopup({
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
+    })
     const popupElement = document.getElementById('mozbot-popup')
     expect(popupElement?.children[0].getAttribute('data-src')).toBeTruthy()
     open()
@@ -62,8 +66,10 @@ describe('openPopup', () => {
 
   it('should still work if initializing a second time', () => {
     expect.assertions(2)
-    initPopup({ url: 'https://mozbot.io/mozbot-id' })
-    const { open } = initPopup({ url: 'https://mozbot.io/mozbot-id' })
+    initPopup({ url: 'https://mozbot.mozartfintech.com/mozbot-id' })
+    const { open } = initPopup({
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
+    })
     const popupElement = document.getElementById('mozbot-popup')
     open()
     expect(popupElement?.classList.contains('opened')).toBe(true)
@@ -78,7 +84,9 @@ describe('closePopup', () => {
 
   it('shouldn remove opened className', () => {
     expect.assertions(2)
-    const { close } = initPopup({ url: 'https://mozbot.io/mozbot-id' })
+    const { close } = initPopup({
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
+    })
     const popupElement = document.getElementById('mozbot-popup')
     close()
     expect(popupElement?.classList.contains('opened')).toBe(false)
@@ -87,8 +95,10 @@ describe('closePopup', () => {
 
   it('should still work if initializing a second time', () => {
     expect.assertions(2)
-    initPopup({ url: 'https://mozbot.io/mozbot-id' })
-    const { close } = initPopup({ url: 'https://mozbot.io/mozbot-id' })
+    initPopup({ url: 'https://mozbot.mozartfintech.com/mozbot-id' })
+    const { close } = initPopup({
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
+    })
     const popupElement = document.getElementById('mozbot-popup')
     close()
     expect(popupElement?.classList.contains('opened')).toBe(false)
@@ -99,7 +109,7 @@ describe('closePopup', () => {
 describe('Request commands afterwards', () => {
   it('should return defined commands', () => {
     initPopup({
-      url: 'https://mozbot.io/mozbot-id',
+      url: 'https://mozbot.mozartfintech.com/mozbot-id',
     })
 
     const { close, open } = getPopupActions()

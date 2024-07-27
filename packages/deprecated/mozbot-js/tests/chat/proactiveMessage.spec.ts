@@ -8,7 +8,7 @@ it('should create the message', () => {
   expect.assertions(2)
   Mozbot.initBubble({
     proactiveMessage: { textContent: 'Hi click here!' },
-    url: 'https://mozbot.io/mozbot-id',
+    url: 'https://mozbot.mozartfintech.com/mozbot-id',
   })
   const paragraphElement = document.querySelector(
     '#mozbot-bubble > .proactive-message > p'
@@ -27,7 +27,7 @@ it('should have the corresponding avatar', () => {
       textContent: 'Hi click here!',
       avatarUrl: 'https://website.com/my-avatar.png',
     },
-    url: 'https://mozbot.io/mozbot-id',
+    url: 'https://mozbot.mozartfintech.com/mozbot-id',
   })
   const avatarElement = document.querySelector(
     '#mozbot-bubble > .proactive-message > img'
@@ -41,7 +41,7 @@ it("shouldn't have opened class if delay not defined", () => {
     proactiveMessage: {
       textContent: 'Hi click here!',
     },
-    url: 'https://mozbot.io/mozbot-id',
+    url: 'https://mozbot.mozartfintech.com/mozbot-id',
   })
   const bubble = document.querySelector('#mozbot-bubble') as HTMLDivElement
   expect(bubble.classList.contains('message-opened')).toBe(false)
@@ -54,7 +54,7 @@ it('should show almost immediately if delay is 0', async () => {
       textContent: 'Hi click here!',
       delay: 0,
     },
-    url: 'https://mozbot.io/mozbot-id',
+    url: 'https://mozbot.mozartfintech.com/mozbot-id',
   })
   const bubble = document.querySelector('#mozbot-bubble') as HTMLDivElement
   await new Promise((r) => setTimeout(r, 1))
@@ -68,7 +68,7 @@ it('show after the corresponding delay', async () => {
       textContent: 'Hi click here!',
       delay: 1000,
     },
-    url: 'https://mozbot.io/mozbot-id',
+    url: 'https://mozbot.mozartfintech.com/mozbot-id',
   })
   const bubble = document.querySelector('#mozbot-bubble') as HTMLDivElement
   expect(bubble.classList.contains('message-opened')).toBe(false)
@@ -83,7 +83,7 @@ it('show the chat on click', async () => {
       textContent: 'Hi click here!',
       delay: 1000,
     },
-    url: 'https://mozbot.io/mozbot-id',
+    url: 'https://mozbot.mozartfintech.com/mozbot-id',
   })
   const bubble = document.querySelector('#mozbot-bubble') as HTMLDivElement
   const iframe = document.querySelector('.mozbot-iframe') as HTMLIFrameElement

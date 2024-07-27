@@ -11,7 +11,7 @@ export const listCustomDomains = authenticatedProcedure
       method: 'GET',
       path: '/v1/custom-domains',
       protect: true,
-      summary: 'List custom domains',
+      summary: 'Listar dominios personalizados',
       tags: ['Custom domains'],
     },
   })
@@ -44,7 +44,10 @@ export const listCustomDomains = authenticatedProcedure
     })
 
     if (!workspace || isReadWorkspaceFobidden(workspace, user))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'No workspaces found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontraron espacios de trabajo',
+      })
 
     const descSortedCustomDomains = workspace.customDomains.sort(
       (a, b) => b.createdAt.getTime() - a.createdAt.getTime()

@@ -75,7 +75,7 @@ export const trackClientEvents = authenticatedProcedure
         )
           throw new TRPCError({
             code: 'NOT_FOUND',
-            message: 'Workspace not found',
+            message: 'Espacio de trabajo no encontrado',
           })
       }
 
@@ -84,7 +84,7 @@ export const trackClientEvents = authenticatedProcedure
         if (!mozbot || (await isWriteMozbotForbidden(mozbot, user)))
           throw new TRPCError({
             code: 'NOT_FOUND',
-            message: 'Mozbot not found',
+            message: 'Mozbot no encontrado',
           })
       }
     }

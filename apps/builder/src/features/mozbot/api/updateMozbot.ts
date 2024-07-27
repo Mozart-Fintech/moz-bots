@@ -56,7 +56,7 @@ export const updateMozbot = authenticatedProcedure
       mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
+          '[¿Dónde encontrar el ID de mi bot?](../how-to#how-to-find-my-mozbotId)'
         ),
       mozbot: z.union([
         mozbotV6Schema.pick(mozbotUpdateSchemaPick).partial().openapi({
@@ -116,7 +116,7 @@ export const updateMozbot = authenticatedProcedure
     )
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Mozbot not found',
+        message: 'Mozbot no encontrado',
       })
 
     if (
@@ -125,7 +125,8 @@ export const updateMozbot = authenticatedProcedure
     )
       throw new TRPCError({
         code: 'CONFLICT',
-        message: 'Found newer version of the mozbot in database',
+        message:
+          'Se encontró una versión más nueva del mozbot en la base de datos.',
       })
 
     if (
@@ -138,14 +139,15 @@ export const updateMozbot = authenticatedProcedure
     )
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: 'Custom domain not available',
+        message: 'Dominio personalizado no disponible',
       })
 
     if (mozbot.publicId) {
       if (isCloudProdInstance() && mozbot.publicId.length < 4)
         throw new TRPCError({
           code: 'BAD_REQUEST',
-          message: 'Public id should be at least 4 characters long',
+          message:
+            'La identificación pública debe tener al menos 4 caracteres.',
         })
       if (
         existingMozbot.publicId !== mozbot.publicId &&
@@ -153,7 +155,7 @@ export const updateMozbot = authenticatedProcedure
       )
         throw new TRPCError({
           code: 'BAD_REQUEST',
-          message: 'Public id not available',
+          message: 'Identificación pública no disponible',
         })
     }
 

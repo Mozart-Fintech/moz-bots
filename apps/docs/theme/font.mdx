@@ -1,28 +1,30 @@
 ---
-title: Font
+title: Fuente
+icon: font
 ---
 
-You can change the font of your mozbot in the Theme tab under the Global section.
+Puedes cambiar la fuente de tu mozbot en la pestaña Tema bajo la sección Global.
 
-There, you can choose between choosing a font from Google Fonts or defining your own custom font.
+Allí, puedes elegir entre seleccionar una fuente de Google Fonts o definir tu propia fuente personalizada.
 
-## How to import my own font?
+## ¿Cómo importar mi propia fuente?
 
-You can import your own font by clicking on the "Custom" option. There you need to define the font family and the CSS that defines all the `@font-face` properties.
+Puedes importar tu propia fuente haciendo clic en la opción "Personalizado". Allí necesitas definir la familia de fuentes y el CSS que define todas las propiedades de `@font-face`.
 
-For example, if I want to import my font called "Awesome Font", I would define the following family value: `"Awesome Font", "Helvetica Neue", sans-serif`. This should be a list of font names separated by commas. The first font name in the list is the font that will be used if it is available. If the name is not available, the browser will try to use the next font in the list. A font name that contains white-space should be quoted.
+Por ejemplo, si quiero importar mi fuente llamada "Fuente Asombrosa", definiría el siguiente valor de familia: `"Fuente Asombrosa", "Helvetica Neue", sans-serif`. Esto debe ser una lista de nombres de fuentes separados por comas. El primer nombre de la lista es la fuente que se usará si está disponible. Si el nombre no está disponible, el navegador intentará usar la siguiente fuente en la lista. Un nombre de fuente que contiene espacios debe estar entre comillas.
 
-Then I would define the content like so:
+Luego definiría el contenido de la siguiente manera:
 
 ```css
 @font-face {
-  font-family: 'Awesome Font';
+  font-family: 'Fuente Asombrosa';
   src: url('https://example.com/awesome.woff') format('woff'), url('https://example.com/awesome.ttf')
       format('truetype');
 }
 ```
 
 <Note>
-  The server providing the fonts (`https://example.com/awesome.woff`) needs to
-  support HTTPS and Cross-Origin Resource Sharing (CORS).
+  {' '}
+  El servidor que proporciona las fuentes (https://example.com/awesome.woff) necesita
+  soportar HTTPS y Cross-Origin Resource Sharing (CORS).{' '}
 </Note>

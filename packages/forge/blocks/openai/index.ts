@@ -23,5 +23,5 @@ export const openAIBlock = createBlock({
     createSpeech,
     createTranscription,
   ],
-  docsUrl: 'https://docs.mozbot.io/forge/blocks/openai',
+  docsUrl: 'https://mozdocs.mozartfintech.com/forge/blocks/openai',
 })

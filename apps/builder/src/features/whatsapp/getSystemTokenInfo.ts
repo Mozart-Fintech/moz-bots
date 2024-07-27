@@ -18,13 +18,13 @@ export const getSystemTokenInfo = authenticatedProcedure
     if (!input.token && !input.credentialsId)
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: 'Either token or credentialsId must be provided',
+        message: 'Se debe proporcionar el token o el ID de credenciales',
       })
     const credentials = await getCredentials(user.id, input)
     if (!credentials)
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Credentials not found',
+        message: 'Credenciales no encontradas',
       })
     const {
       data: { expires_at, scopes, app_id, application },

@@ -9,7 +9,7 @@ export const receiveMessage = publicProcedure
     openapi: {
       method: 'POST',
       path: '/v1/workspaces/{workspaceId}/whatsapp/{credentialsId}/webhook',
-      summary: 'Message webhook',
+      summary: 'Webhook de mensajes',
       tags: ['WhatsApp'],
     },
   })
@@ -25,14 +25,16 @@ export const receiveMessage = publicProcedure
   )
   .mutation(async ({ input: { entry, credentialsId, workspaceId } }) => {
     const receivedMessage = entry.at(0)?.changes.at(0)?.value.messages?.at(0)
-    if (isNotDefined(receivedMessage)) return { message: 'No message found' }
+    if (isNotDefined(receivedMessage))
+      return { message: 'No se encontró ningún mensaje' }
     const contactName =
       entry.at(0)?.changes.at(0)?.value?.contacts?.at(0)?.profile?.name ?? ''
     const contactPhoneNumber =
       entry.at(0)?.changes.at(0)?.value?.messages?.at(0)?.from ?? ''
     const phoneNumberId = entry.at(0)?.changes.at(0)?.value
       .metadata.phone_number_id
-    if (!phoneNumberId) return { message: 'No phone number id found' }
+    if (!phoneNumberId)
+      return { message: 'No se encontró ningún número de teléfono' }
     return resumeWhatsAppFlow({
       receivedMessage,
       sessionId: `wa-${phoneNumberId}-${receivedMessage.from}`,

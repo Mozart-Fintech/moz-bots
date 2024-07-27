@@ -11,7 +11,7 @@ export const receiveMessagePreview = publicProcedure
     openapi: {
       method: 'POST',
       path: '/v1/whatsapp/preview/webhook',
-      summary: 'Message webhook',
+      summary: 'Webhook de mensajes',
       tags: ['WhatsApp'],
     },
   })
@@ -25,10 +25,11 @@ export const receiveMessagePreview = publicProcedure
     if (!env.WHATSAPP_PREVIEW_FROM_PHONE_NUMBER_ID)
       throw new TRPCError({
         code: 'INTERNAL_SERVER_ERROR',
-        message: 'WHATSAPP_PREVIEW_FROM_PHONE_NUMBER_ID is not defined',
+        message: 'WHATSAPP_PREVIEW_FROM_PHONE_NUMBER_ID no está definido',
       })
     const receivedMessage = entry.at(0)?.changes.at(0)?.value.messages?.at(0)
-    if (isNotDefined(receivedMessage)) return { message: 'No message found' }
+    if (isNotDefined(receivedMessage))
+      return { message: 'No se encontró ningún mensaje' }
     const contactName =
       entry.at(0)?.changes.at(0)?.value?.contacts?.at(0)?.profile?.name ?? ''
     const contactPhoneNumber =

@@ -2,14 +2,14 @@
 title: Webflow
 ---
 
-Head over to the Share tab of your bot and click on the Webflow button to get the embed instructions of your bot.
+Dirígete a la pestaña Compartir de tu bot y haz clic en el botón de Webflow para obtener las instrucciones de inserción de tu bot.
 
-## Advanced guides
+## Guías avanzadas
 
-### Trigger a mozbot command on a click of a button
+### Activar un comando de mozbot al hacer clic en un botón
 
-1. Head over to the `Settings` tab of your button and add a dedicated `ID`
-2. In your mozbot `Embed` element, insert this code in the existing `<script>` tag:
+1. Dirígete a la pestaña `Configuración` de tu botón y añade un `ID` dedicado.
+2. En el elemento `Embed` de tu mozbot, inserta este código en la etiqueta `<script>` existente:
 
 ```js
 document.getElementById('BUTTON_ID').addEventListener('click', (event) => {
@@ -18,13 +18,13 @@ document.getElementById('BUTTON_ID').addEventListener('click', (event) => {
 })
 ```
 
-You can add as many as you'd like if you need to open the bot on several button clicks
+Puedes añadir tantos como desees si necesitas abrir el bot en varios clics de botón.
 
-It should look like:
+Debería verse así:
 
 ```html
 <script type="module">
-  import Mozbot from 'https://cdn.jsdelivr.net/npm/@mozbot.io/js@0.3/dist/web.js'
+  import Mozbot from 'https://cdn.jsdelivr.net/npm/@mozbot/js@0.3/dist/web.js'
 
   Mozbot.initPopup({
     mozbot: 'my-mozbot',
@@ -42,6 +42,6 @@ It should look like:
 </script>
 ```
 
-Make sure to replace `BUTTON_ID_1` and `BUTTON_ID_2` with the ID you added on your button elements.
+Asegúrate de reemplazar `BUTTON_ID_1` y `BUTTON_ID_2` con el ID que añadiste en tus elementos de botón.
 
-In this example we are opening the popup when the specified buttons are clicked but you could also use any of the [available commands](./libraries/html-javascript#commands).
+En este ejemplo estamos abriendo el popup cuando se hace clic en los botones especificados, pero también podrías usar cualquiera de los [comandos disponibles](./libraries/html-javascript#commands).

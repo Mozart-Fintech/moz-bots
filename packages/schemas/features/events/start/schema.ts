@@ -7,6 +7,6 @@ export const startEventSchema = eventBaseSchema
     type: z.literal(EventType.START),
   })
   .openapi({
-    description: 'Event',
+    description: 'Evento',
     ref: 'event',
   })

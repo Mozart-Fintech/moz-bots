@@ -166,7 +166,7 @@ export const PublishButton = ({
                   params={{
                     link: (
                       <TextLink
-                        href="https://docs.mozbot.io/breaking-changes#mozbot-v6"
+                        href="https://mozdocs.mozartfintech.com/breaking-changes#mozbot-v6"
                         isExternal
                       />
                     ),

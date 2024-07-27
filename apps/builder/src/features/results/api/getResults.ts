@@ -21,7 +21,7 @@ export const getResults = authenticatedProcedure
       method: 'GET',
       path: '/v1/mozbots/{mozbotId}/results',
       protect: true,
-      summary: 'List results ordered by descending creation date',
+      summary: 'Listar resultados ordenados por fecha de creación descendente',
       tags: ['Results'],
     },
   })
@@ -30,7 +30,7 @@ export const getResults = authenticatedProcedure
       mozbotId: z
         .string()
         .describe(
-          "[Where to find my bot's ID?](../how-to#how-to-find-my-mozbotId)"
+          '[¿Dónde encontrar el ID de mi bot?](../how-to#how-to-find-my-mozbotId)'
         ),
       limit: z.coerce.number().min(1).max(maxLimit).default(50),
       cursor: z.string().optional(),
@@ -49,7 +49,7 @@ export const getResults = authenticatedProcedure
     if (limit < 1 || limit > maxLimit)
       throw new TRPCError({
         code: 'BAD_REQUEST',
-        message: `limit must be between 1 and ${maxLimit}`,
+        message: `el límite debe estar entre 1 y ${maxLimit}`,
       })
     const { cursor } = input
     const mozbot = await prisma.mozbot.findUnique({
@@ -79,7 +79,10 @@ export const getResults = authenticatedProcedure
       },
     })
     if (!mozbot || (await isReadMozbotForbidden(mozbot, user)))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Mozbot no encontrado',
+      })
 
     const fromDate = parseFromDateFromTimeFilter(
       input.timeFilter,

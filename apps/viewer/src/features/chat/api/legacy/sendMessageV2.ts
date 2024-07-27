@@ -18,9 +18,9 @@ export const sendMessageV2 = publicProcedure
     openapi: {
       method: 'POST',
       path: '/v2/sendMessage',
-      summary: 'Send a message',
+      summary: 'Enviar un mensaje',
       description:
-        'To initiate a chat, do not provide a `sessionId` nor a `message`.\n\nContinue the conversation by providing the `sessionId` and the `message` that should answer the previous question.\n\nSet the `isPreview` option to `true` to chat with the non-published version of the mozbot.',
+        'Para iniciar un chat, no proporcione un `sessionId` ni un `message`.\n\nContinúe la conversación proporcionando el `sessionId` y el `message` que debe responder a la pregunta anterior.\n\nEstablezca `isPreview` Opción a "true" para chatear con la versión no publicada del mozbot.',
       tags: ['Deprecated'],
       deprecated: true,
     },
@@ -42,14 +42,14 @@ export const sendMessageV2 = publicProcedure
       if (isSessionExpired)
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Session expired. You need to start a new session.',
+          message: 'Sesión expirada. Necesitas iniciar una nueva sesión.',
         })
 
       if (!session) {
         if (!startParams)
           throw new TRPCError({
             code: 'BAD_REQUEST',
-            message: 'Missing startParams',
+            message: 'Falta startParams',
           })
         const {
           mozbot,

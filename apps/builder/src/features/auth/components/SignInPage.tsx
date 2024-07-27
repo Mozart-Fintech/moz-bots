@@ -56,8 +56,16 @@ export const SignInPage = ({ type }: Props) => {
           <T
             keyName="auth.register.aggreeToTerms"
             params={{
-              terms: <TextLink href={'https://mozbot.io/terms-of-service'} />,
-              privacy: <TextLink href={'https://mozbot.io/privacy-policies'} />,
+              terms: (
+                <TextLink
+                  href={'https://mozbot.mozartfintech.com/terms-of-service'}
+                />
+              ),
+              privacy: (
+                <TextLink
+                  href={'https://mozbot.mozartfintech.com/privacy-policies'}
+                />
+              ),
             }}
           />
         </Text>

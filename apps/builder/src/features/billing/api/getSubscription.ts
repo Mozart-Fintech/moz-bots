@@ -9,7 +9,7 @@ export const getSubscription = authenticatedProcedure
       method: 'GET',
       path: '/v1/billing/subscription',
       protect: true,
-      summary: 'List invoices',
+      summary: 'Listar facturas',
       tags: ['Billing'],
     },
   })

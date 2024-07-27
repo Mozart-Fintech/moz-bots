@@ -10,9 +10,9 @@ export const startChatPreview = publicProcedure
     openapi: {
       method: 'POST',
       path: '/v1/mozbots/{mozbotId}/preview/startChat',
-      summary: 'Start preview chat',
+      summary: 'Iniciar chat de prueba',
       description:
-        'Use this endpoint to test your bot. The answers will not be saved. And some blocks like "Send email" will be skipped.',
+        'Utilice este punto final para probar su bot. Las respuestas no se guardarán. Y se omitirán algunos bloques como "Enviar correo electrónico".',
     },
   })
   .input(startPreviewChatInputSchema)

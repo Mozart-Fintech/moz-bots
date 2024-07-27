@@ -71,7 +71,7 @@ const inspectMozbot = async () => {
     return
   }
 
-  console.log(`https://app.mozbot.io/mozbots/${mozbot.id}/edit`)
+  console.log(`https://mozbot.mozartfintech.com/mozbots/${mozbot.id}/edit`)
 
   console.log(JSON.stringify(mozbot, null, 2))
 }

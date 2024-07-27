@@ -12,7 +12,7 @@ export const listFolders = authenticatedProcedure
       method: 'GET',
       path: '/v1/folders',
       protect: true,
-      summary: 'List folders',
+      summary: 'Listar carpetas',
       tags: ['Folder'],
     },
   })
@@ -40,7 +40,7 @@ export const listFolders = authenticatedProcedure
     )
       throw new TRPCError({
         code: 'NOT_FOUND',
-        message: 'Workspace not found',
+        message: 'Espacio de trabajo no encontrado',
       })
 
     const folders = await prisma.dashboardFolder.findMany({

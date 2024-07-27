@@ -1,89 +1,89 @@
 ---
-title: Set variable
+title: Establecer variable
 icon: pen
 ---
 
 import { YoutubeVideo } from '/snippets/youtube-video.mdx'
 
-The "Set variable" block allows you to set a particular value to a variable.
+El bloque "Establecer variable" te permite asignar un valor particular a una variable.
 
 <Frame>
-  <img src="/images/blocks/logic/set-variable.png" alt="Set variable" />
+  <img src="/images/blocks/logic/set-variable.png" alt="Establecer variable" />
 </Frame>
 
-## Custom
+## Personalizado
 
-You can set your variable with any value with `Custom`. It can be any kind of plain text but also **Javascript code**.
+Puedes establecer tu variable con cualquier valor usando `Personalizado`. Puede ser cualquier tipo de texto plano, pero también **código Javascript**.
 
-### Expressions with existing variables
+### Expresiones con variables existentes
 
-It means you can apply operations on existing variables.
+Esto significa que puedes aplicar operaciones sobre variables existentes.
 
-Add a value to your variable:
-
-```
-{{Score}} + 5
-```
-
-Compute a sum of variables:
+Agregar un valor a tu variable:
 
 ```
-{{Score}} + {{Answer}}
+{{Puntaje}} + 5
 ```
 
-Multiply variables together:
+Calcular una suma de variables:
 
 ```
-{{Score}} * {{Multiplier}}
+{{Puntaje}} + {{Respuesta}}
 ```
 
-Compute a percentage:
+Multiplicar dos variables:
 
 ```
-{{Score}} * 100 / {{Max Score}}
+{{Puntaje}} * {{Multiplicador}}
 ```
 
-Extract the first name from a full name:
+Calcular un porcentaje:
 
 ```
-{{Full name}}.split(' ')[0]
+{{Puntaje}} * 100 / {{Maximo Puntaje}}
 ```
 
-Transform existing variable to upper case or lower case:
+Extraer el primer nombre de un nombre completo:
 
 ```
-{{Name}}.toUpperCase()
+{{Nombre completo}}.split(' ')[0]
+```
+
+Transformar una variable existente a mayúsculas o minúsculas:
+
+```
+{{Nombre}}.toUpperCase()
 ```
 
 ```
-{{Name}}.toLowerCase()
+{{Nombre}}.toLowerCase()
 ```
 
-This can also be Javascript code. It will read the returned value of the code and set it to your variable.
+Esto también puede ser código Javascript. Leerá el valor devuelto del código y lo asignará a tu variable.
 
 ```js
-const name = 'John' + 'Smith'
-return name
+const nombre = 'John' + 'Smith'
+return nombre
 ```
 
-If you don't provide the `return` keyword then it will be automatically prepended to the beginning of your code.
+Si no proporcionas la palabra clave `return`, esta se añadirá automáticamente al comienzo de tu código.
 
 ```js
 'John' + 'Smith'
 ```
 
-is the same as
+es lo mismo que
 
 ```js
 return 'John' + 'Smith'
 ```
 
 <Info>
-Variables in script are not parsed, they are evaluated. So it should be treated as if it were real Javascript variables.
+Las variables en el script no se analizan, se evalúan. Por lo tanto, deben tratarse como si fueran variables reales de Javascript.
 
-So, if you write `"{{My variable}}"`, it will parse the variable ID (something like `vclfqgqkdf000008mh3r6xakty`). You need to remove the double quotes to properly get the variable content value.
+Entonces, si escribes `"{{Mi variable}}"`, analizará el ID de la variable (algo como `vclfqgqkdf000008mh3r6xakty`). Necesitas eliminar las comillas dobles para obtener correctamente el valor del contenido de la variable.
 
-For example,
+Por ejemplo,
 
 - ❌ `"{{URL base}}/path"` => `vclfqgqkdf000008mh3r6xakty/path`
 - ✅ `{{URL base}} + '/path'` => `https://domain.com/path`
@@ -92,114 +92,115 @@ For example,
 </Info>
 
 <Info>
-  Variables content can either be a string or a list of strings. Check out
-  [Valid value types](../../variables#valid-value-types) for more information.
+  El contenido de las variables puede ser una cadena o una lista de cadenas.
+  Consulta [Tipos de valores válidos](../../variables#valid-value-types) para
+  más información.
 </Info>
 
-## Empty
+## Vaciar
 
-Resets your variable as if it was never initialized.
+Restablece tu variable como si nunca hubiera sido inicializada.
 
-## Append value(s)
+## Agregar valor(es)
 
-A conveniant value that automatically transform your variable into a list of strings. It will append the value(s) to the list.
+Un valor conveniente que transforma automáticamente tu variable en una lista de cadenas. Agregará el/los valor(es) a la lista.
 
-3 possible cases here:
+3 casos posibles aquí:
 
-- If the variable is empty, it will create a new array with the provided value(s)
-- If the variable is not an array, it will create a new array with the existing value followed by the provided value(s).
-- If the variable is an array, it will concatenate the provided value(s) to the existing array.
+- Si la variable está vacía, creará un nuevo array con el/los valor(es) proporcionado(s).
+- Si la variable no es un array, creará un nuevo array con el valor existente seguido del/los valor(es) proporcionado(s).
+- Si la variable es un array, concatenará el/los valor(es) proporcionado(s) al array existente.
 
-## Environment name
+## Nombre del entorno
 
-This will set your variable with either `web` or `whatsapp` depending on the environment.
+Esto establecerá tu variable con `web` o `whatsapp` dependiendo del entorno.
 
-## Transcript
+## Transcripción
 
-This preset value will save the entire conversation transcript in a variable. It is super useful to provide context to an AI block or to send it as a recap with the [Send email](../integrations/send-email) block.
+Este valor preestablecido guardará toda la transcripción de la conversación en una variable. Es muy útil para proporcionar contexto a un bloque de IA o para enviarlo como un resumen con el bloque [Enviar correo electrónico](../integrations/send-email).
 
 <YoutubeVideo id="OZLfiLp20f8" />
 
-## Result ID
+## ID del resultado
 
-This will set your variable with the current result ID. The result ID is the ID that corresponds to a row of your [Results](../../../results/overview.mdx) table. It can be considered like a User ID for the currently chatting user.
+Esto establecerá tu variable con el ID del resultado actual. El ID del resultado es el ID que corresponde a una fila de tu tabla de [Resultados](../../../results/overview.mdx). Puede considerarse como un ID de usuario para el usuario que está chateando actualmente.
 
-## Yesterday, Now, Tomorrow
+## Ayer, Ahora, Mañana
 
-This will set your variable with the specified date and time in ISO format. You can optionally provide a time zone to convert the date to the specified time zone.
+Esto establecerá tu variable con la fecha y hora especificadas en formato ISO. Opcionalmente, puedes proporcionar una zona horaria para convertir la fecha a la zona horaria especificada.
 
-## Random ID
+## ID aleatorio
 
-This will set your variable with a random ID with the CUID algorithm.
+Esto establecerá tu variable con un ID aleatorio usando el algoritmo CUID.
 
-## Moment of the day
+## Momento del día
 
-It will set your variable with either one of these values based on the user's time of the day: `morning`, `afternoon`, `evening`, `night`.
+Establecerá tu variable con uno de estos valores según la hora del día del usuario: `mañana`, `tarde`, `noche`.
 
-Then you can use this variable to conditionally display content:
+Luego puedes usar esta variable para mostrar contenido condicionalmente:
 
 <Frame style={{ maxWidth: '400px' }}>
   <img
     src="/images/blocks/logic/moment-condition.png"
-    alt="Moment of the day condition"
+    alt="Condición de momento del día"
   />
 </Frame>
 
-## Map item with same index
+## Mapear elemento con el mismo índice
 
-This is a convenient value block that allows you to easily get an item from a list that has the same index as an item from another list.
+Este es un bloque de valor conveniente que te permite obtener fácilmente un elemento de una lista que tiene el mismo índice que un elemento de otra lista.
 
-When you are pulling data from another service, sometimes, you will have 2 lists: `Labels` and `Ids`. Labels are the data displayed to the user and Ids are the data used for other requests to that external service.
+Cuando estás obteniendo datos de otro servicio, a veces tendrás 2 listas: `Etiquetas` e `Ids`. Las etiquetas son los datos mostrados al usuario y los Ids son los datos utilizados para otras solicitudes a ese servicio externo.
 
-This value block allows you to find the `Id` from `Ids` with the same index as `Label` in `Labels`
+Este bloque de valor te permite encontrar el `Id` de `Ids` con el mismo índice que `Etiqueta` en `Etiquetas`.
 
 <Frame>
   <img
     src="/images/blocks/logic/set-variable-map-item.png"
-    alt="Set variable map item with same index"
+    alt="Mapear elemento con el mismo índice"
   />
 </Frame>
 
-## Phone number
+## Número de teléfono
 
-Only available in WhatsApp. This will set your variable with the user's phone number.
+Solo disponible en WhatsApp. Esto establecerá tu variable con el número de teléfono del usuario.
 
-## Contact name
+## Nombre del contacto
 
-Only available in WhatsApp. This will set your variable with the user's name.
+Solo disponible en WhatsApp. Esto establecerá tu variable con el nombre del usuario.
 
-## Save in results
+## Guardar en resultados
 
-By default, new variables are not persisted in the [Results](../../../results) table. They are only stored for the current user chat session. Enabling this option will save the variable in the `Results` table.
+Por defecto, las nuevas variables no se persisten en la tabla de [Resultados](../../../results). Solo se almacenan para la sesión de chat del usuario actual. Habilitar esta opción guardará la variable en la tabla `Resultados`.
 
-## Execute on client
+## Ejecutar en el cliente
 
-This option is useful when you want to execute the custom code on the client side. This is only necessary when you need access the user's browser information. So, if you need access to `window`, `document`, `navigator`, etc., you should enable this option.
+Esta opción es útil cuando deseas ejecutar el código personalizado en el lado del cliente. Esto solo es necesario cuando necesitas acceder a la información del navegador del usuario. Por lo tanto, si necesitas acceso a `window`, `document`, `navigator`, etc., debes habilitar esta opción.
 
-## Get user's geo location
+## Obtener la ubicación geográfica del usuario
 
-For this you can provide the following custom code:
+Para esto puedes proporcionar el siguiente código personalizado:
 
 ```js
-function getLocation() {
-  return new Promise((resolve) => {
+function obtenerUbicacion() {
+  return new Promise((resolver) => {
     navigator.geolocation.getCurrentPosition(
-      (position) =>
-        resolve(`${position.coords.latitude}, ${position.coords.longitude}`),
-      (error) => resolve('error'),
+      (posicion) =>
+        resolver(`${posicion.coords.latitude}, ${posicion.coords.longitude}`),
+      (error) => resolver('error'),
       { enableHighAccuracy: true, timeout: 5000 }
     )
   })
 }
 
-const coords = await getLocation()
+const coordenadas = await obtenerUbicacion()
 
-// Check for error
-if (coords === 'error') {
-  return 'Unable to get location'
+// Verificar si hay error
+if (coordenadas === 'error') {
+  return 'No se pudo obtener la ubicación'
 }
 
-return coords
+return coordenadas
 ```
 
-This custom function can only work when it is executed on the client browser so you need to make sure to enable the "Execute on client" option.
+Esta función personalizada solo puede funcionar cuando se ejecuta en el navegador del cliente, por lo que debes asegurarte de habilitar la opción "Ejecutar en el cliente".

@@ -15,9 +15,9 @@ export const listWebhookBlocks = authenticatedProcedure
       method: 'GET',
       path: '/v1/mozbots/{mozbotId}/webhookBlocks',
       protect: true,
-      summary: 'List webhook blocks',
+      summary: 'Listar bloques de webhooks',
       description:
-        'Returns a list of all the webhook blocks that you can subscribe to.',
+        'Devuelve una lista de todos los bloques de webhooks a los que puede suscribirse.',
       tags: ['Webhook'],
     },
   })
@@ -53,7 +53,10 @@ export const listWebhookBlocks = authenticatedProcedure
       },
     })
     if (!mozbot)
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'Mozbot not found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Mozbot no encontrado',
+      })
 
     const groups = parseGroups(mozbot.groups, {
       mozbotVersion: mozbot.version,

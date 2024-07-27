@@ -34,7 +34,7 @@ export const getLinkedMozbots = authenticatedProcedure
       method: 'GET',
       path: '/v1/mozbots/{mozbotId}/linkedMozbots',
       protect: true,
-      summary: 'Get linked mozbots',
+      summary: 'Obtener mozbots vinculados',
       tags: ['Mozbot'],
     },
   })
@@ -77,7 +77,10 @@ export const getLinkedMozbots = authenticatedProcedure
     })
 
     if (!mozbot || (await isReadMozbotForbidden(mozbot, user)))
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'No mozbot found' })
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'No se encontró ningún mozbot',
+      })
 
     const linkedmozbotIds =
       parseGroups(mozbot.groups, { mozbotVersion: mozbot.version })
