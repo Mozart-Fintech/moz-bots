@@ -2,8 +2,6 @@
 title: HTTP Request
 ---
 
-import { LoomVideo } from '/snippets/loom-video.mdx'
-
 The HTTP Request block allows you to send an HTTP request to a 3rd party service. This is useful to send information from the bot to another service or to fetch information from another service and use it in the bot.
 
 ## Make an API request and fetch data
@@ -28,8 +26,6 @@ You can set a custom body with your collected variables. Here is a working examp
 This video provides a step-by-step guide to successfully configure HTTP request blocks in Mozbot.
 
 I demonstrate how to configure the HTTP request block, including the URL, method, and custom body. I also show you how to test the request and save the newly created employee ID. Finally, I explain how to implement the find employee by ID endpoint and map the employee name to a variable.
-
-<LoomVideo id="d9aef6a37e0c43759b31be7d69c4dd6d" />
 
 ### Example: fetch movie information
 
@@ -100,5 +96,3 @@ The Webhook block request fail or didn't seem to trigger? Make sure to check the
 ### Webhook is not executed in the right order?
 
 That is expected, Mozbot actually computes all the blocks between each input blocks from a server before displaying anything.
-
-<LoomVideo id="9cc00a9a8c8245709d6322f197c9fb45" />

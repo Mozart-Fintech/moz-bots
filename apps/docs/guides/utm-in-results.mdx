@@ -2,8 +2,6 @@
 title: Reenviar parámetros UTM a un mozbot
 ---
 
-import { LoomVideo } from '/snippets/loom-video.mdx'
-
 El nombre del parámetro UTM debe estar listado en el menú desplegable de Variables de tu flujo; puedes crearlo en cualquier menú desplegable de variables. Luego, si tu mozbot se lanza con el parámetro UTM declarado, debería aparecer en la pestaña de Resultados.
 
 Una vez que hayas guardado los valores UTM en variables como `utm_source` y `utm_value`, puedes construir una URL de redirección en un [bloque de Redirección](../editor/blocks/logic/redirect) con los mismos UTMs de esta manera:
@@ -11,5 +9,3 @@ Una vez que hayas guardado los valores UTM en variables como `utm_source` y `utm
 ```
 https://redirect-site.com?utm_source={{utm_source}}&utm_value={{utm_value}}
 ```
-
-<LoomVideo id="d298d5f4e1d04190b9768ffb6665bef8" />
