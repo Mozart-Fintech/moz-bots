@@ -9,9 +9,8 @@
   "dependencies": {
     "@ai-sdk/openai": "0.0.36",
     "@mozbot.io/ai": "workspace:*",
-    "ai": "3.2.22",
-    "audio-decode": "^2.2.0",
-    "openai": "4.52.7"
+    "openai": "4.52.7",
+    "ai": "3.2.22"
   },
   "devDependencies": {
     "@mozbot.io/forge": "workspace:*",

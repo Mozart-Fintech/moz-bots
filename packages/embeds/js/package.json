@@ -1,6 +1,6 @@
 {
   "name": "@mozbot.io/js",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Javascript library to display mozbots on your website",
   "type": "module",
   "main": "dist/index.js",

@@ -83,10 +83,15 @@ export const SmtpCreateModalContent = ({
     if (testSmtpError) {
       console.error(testSmtpError)
       setIsCreating(false)
-      return showToast({
+      showToast({
         title: 'Invalid configuration',
         description: "We couldn't send the test email with your configuration",
+        details: {
+          content: testSmtpError.message,
+          lang: 'json',
+        },
       })
+      return
     }
     mutate({
       credentials: {
