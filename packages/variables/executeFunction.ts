@@ -1,7 +1,7 @@
 import { parseVariables } from './parseVariables'
 import { extractVariablesFromText } from './extractVariablesFromText'
 import { parseGuessedValueType } from './parseGuessedValueType'
-import { isDefined } from '@mozbot.io/lib'
+import { isDefined, Base64Encode, Base64Decode } from '@mozbot.io/lib'
 import { safeStringify } from '@mozbot.io/lib/safeStringify'
 import { Variable } from './types'
 import ivm from 'isolated-vm'
@@ -46,14 +46,14 @@ export const executeFunction = async ({
   const context = isolate.createContextSync()
   const jail = context.global
   jail.setSync('global', jail.derefInto())
-  context.evalSync(`
-    global.btoa = function (str) {
-      return Buffer.from(str, 'binary').toString('base64');
-    };
-    global.atob = function (b64Encoded) {
-      return Buffer.from(b64Encoded, 'base64').toString('binary');
-    };
-  `)
+  context.evalClosure(
+    'globalThis.btoa = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
+    [new ivm.Reference(Base64Encode)]
+  )
+  context.evalClosure(
+    'globalThis.atob = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
+    [new ivm.Reference(Base64Decode)]
+  )
   context.evalClosure(
     'globalThis.setVariable = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
     [new ivm.Reference(setVariable)]

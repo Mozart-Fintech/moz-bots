@@ -37,6 +37,12 @@ export const isDefined = <T>(
   value: T | undefined | null
 ): value is NonNullable<T> => value !== undefined && value !== null
 
+export const Base64Encode = (str: string): string =>
+  Buffer.from(str).toString('base64')
+
+export const Base64Decode = (str: string): string =>
+  Buffer.from(str, 'base64').toString('binary')
+
 export const isNotDefined = <T>(
   value: T | undefined | null
 ): value is undefined | null => value === undefined || value === null
