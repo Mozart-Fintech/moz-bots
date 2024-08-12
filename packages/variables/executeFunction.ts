@@ -46,6 +46,14 @@ export const executeFunction = async ({
   const context = isolate.createContextSync()
   const jail = context.global
   jail.setSync('global', jail.derefInto())
+  context.evalSync(`
+    global.btoa = function (str) {
+      return Buffer.from(str, 'binary').toString('base64');
+    };
+    global.atob = function (b64Encoded) {
+      return Buffer.from(b64Encoded, 'base64').toString('binary');
+    };
+  `)
   context.evalClosure(
     'globalThis.setVariable = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
     [new ivm.Reference(setVariable)]
