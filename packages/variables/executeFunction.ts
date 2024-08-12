@@ -38,27 +38,14 @@ export const executeFunction = async ({
 
   let updatedVariables: Record<string, any> = {}
 
-  const Base64Encode = (str: string): string =>
-    Buffer.from(str, 'binary').toString('base64')
-  const Base64Decode = (str: string): string =>
-    Buffer.from(str, 'base64').toString('binary')
-
-  const wrapFunction = (fn: Function) => {
-    return (...args: any[]) => {
-      try {
-        const result = fn(...args)
-        if (result instanceof Promise) {
-          throw new Error('Function returned a promise')
-        }
-        return result
-      } catch (error) {
-        console.error('Error in wrapped function:', error)
-        throw error
-      }
-    }
+  const Base64Encode = (str: string): string => {
+    return Buffer.from(str).toString('base64')
+  }
+  const Base64Decode = (str: string): string => {
+    return Buffer.from(str, 'base64').toString('binary')
   }
 
-  const setVariable = (key: string, value: any) => {
+  const setVariable = (key: string, value: any): void => {
     updatedVariables[key] = value
   }
 
@@ -66,8 +53,8 @@ export const executeFunction = async ({
   const context = isolate.createContextSync()
   const jail = context.global
   jail.setSync('global', jail.derefInto())
-  jail.setSync('btoa', new ivm.Reference(wrapFunction(Base64Encode)))
-  jail.setSync('atob', new ivm.Reference(wrapFunction(Base64Decode)))
+  jail.setSync('btoa', new ivm.Reference(Base64Encode))
+  jail.setSync('atob', new ivm.Reference(Base64Decode))
   context.evalClosure(
     'globalThis.setVariable = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
     [new ivm.Reference(setVariable)]
