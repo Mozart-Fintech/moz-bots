@@ -1,7 +1,7 @@
 import { parseVariables } from './parseVariables'
 import { extractVariablesFromText } from './extractVariablesFromText'
 import { parseGuessedValueType } from './parseGuessedValueType'
-import { isDefined, Base64Encode, Base64Decode } from '@mozbot.io/lib'
+import { isDefined } from '@mozbot.io/lib'
 import { safeStringify } from '@mozbot.io/lib/safeStringify'
 import { Variable } from './types'
 import ivm from 'isolated-vm'
@@ -37,6 +37,11 @@ export const executeFunction = async ({
   )
 
   let updatedVariables: Record<string, any> = {}
+
+  const Base64Encode = (str: string): string =>
+    Buffer.from(str, 'binary').toString('base64')
+  const Base64Decode = (str: string): string =>
+    Buffer.from(str, 'base64').toString('binary')
 
   const wrapFunction = (fn: Function) => {
     return (...args: any[]) => {
