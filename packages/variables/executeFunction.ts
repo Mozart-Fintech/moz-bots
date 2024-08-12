@@ -38,6 +38,21 @@ export const executeFunction = async ({
 
   let updatedVariables: Record<string, any> = {}
 
+  const wrapFunction = (fn: Function) => {
+    return (...args: any[]) => {
+      try {
+        const result = fn(...args)
+        if (result instanceof Promise) {
+          throw new Error('Function returned a promise')
+        }
+        return result
+      } catch (error) {
+        console.error('Error in wrapped function:', error)
+        throw error
+      }
+    }
+  }
+
   const setVariable = (key: string, value: any) => {
     updatedVariables[key] = value
   }
@@ -48,11 +63,11 @@ export const executeFunction = async ({
   jail.setSync('global', jail.derefInto())
   context.evalClosure(
     'globalThis.btoa = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
-    [new ivm.Reference(Base64Encode)]
+    [new ivm.Reference(wrapFunction(Base64Encode))]
   )
   context.evalClosure(
     'globalThis.atob = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
-    [new ivm.Reference(Base64Decode)]
+    [new ivm.Reference(wrapFunction(Base64Decode))]
   )
   context.evalClosure(
     'globalThis.setVariable = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
