@@ -38,13 +38,6 @@ export const executeFunction = async ({
 
   let updatedVariables: Record<string, any> = {}
 
-  const Base64Encode = (str: string): string => {
-    return Buffer.from(str).toString('base64')
-  }
-  const Base64Decode = (str: string): string => {
-    return Buffer.from(str, 'base64').toString('binary')
-  }
-
   const setVariable = (key: string, value: any): void => {
     updatedVariables[key] = value
   }
@@ -53,8 +46,6 @@ export const executeFunction = async ({
   const context = isolate.createContextSync()
   const jail = context.global
   jail.setSync('global', jail.derefInto())
-  jail.setSync('btoa', new ivm.Reference(Base64Encode))
-  jail.setSync('atob', new ivm.Reference(Base64Decode))
   context.evalClosure(
     'globalThis.setVariable = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
     [new ivm.Reference(setVariable)]
@@ -62,10 +53,26 @@ export const executeFunction = async ({
   context.evalClosure(
     'globalThis.fetch = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
     [
-      new ivm.Reference(async (...args: any[]) => {
+      new ivm.Reference(async (...args: any[]): Promise<string> => {
         // @ts-ignore
         const response = await fetch(...args)
         return response.text()
+      }),
+    ]
+  )
+  context.evalClosure(
+    'globalThis.btoa = (...args) => $0.applySync(undefined, args, { arguments: { copy: true }, result: { copy: true } })',
+    [
+      new ivm.Reference((text: string): string => {
+        return Buffer.from(text).toString('base64')
+      }),
+    ]
+  )
+  context.evalClosure(
+    'globalThis.atob = (...args) => $0.applySync(undefined, args, { arguments: { copy: true }, result: { copy: true } })',
+    [
+      new ivm.Reference((text: string): string => {
+        return Buffer.from(text, 'base64').toString('binary')
       }),
     ]
   )
