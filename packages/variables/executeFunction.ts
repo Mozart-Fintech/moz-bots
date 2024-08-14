@@ -76,6 +76,16 @@ export const executeFunction = async ({
       }),
     ]
   )
+  context.evalClosure(
+    'globalThis.getTypeUrl = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
+    [
+      new ivm.Reference(async (...args: any[]): Promise<string> => {
+        // @ts-ignore
+        const response = await fetch(...args)
+        return response.headers.get('content-type') || 'failed'
+      }),
+    ]
+  )
   args.forEach(({ id, value }) => {
     jail.setSync(id, parseTransferrableValue(value))
   })
