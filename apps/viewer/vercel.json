@@ -1,12 +1,12 @@
 {
   "functions": {
     "src/pages/api/[...trpc].ts": {
-      "maxDuration": 150,
-      "memory": 500
+      "maxDuration": 300,
+      "memory": 3009
     },
     "src/pages/api/mozbots/[mozbotId]/blocks/[blockId]/executeWebhook.ts": {
-      "maxDuration": 150,
-      "memory": 500
+      "maxDuration": 300,
+      "memory": 3009
     }
   },
   "github": {

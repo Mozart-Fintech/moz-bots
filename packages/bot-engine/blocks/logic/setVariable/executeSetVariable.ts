@@ -27,16 +27,19 @@ import { stringifyError } from '@mozbot.io/lib/stringifyError'
 
 export const executeSetVariable = async (
   state: SessionState,
-  block: SetVariableBlock
+  block: SetVariableBlock,
+  setVariableHistory: SetVariableHistoryItem[]
 ): Promise<ExecuteLogicResponse> => {
   const { variables } = state.mozbotsQueue[0].mozbot
   if (!block.options?.variableId)
     return {
       outgoingEdgeId: block.outgoingEdgeId,
     }
+
   const expressionToEvaluate = await getExpressionToEvaluate(state)(
     block.options,
-    block.id
+    block.id,
+    setVariableHistory
   )
   const isCustomValue = !block.options.type || block.options.type === 'Custom'
   const isCode =
@@ -139,7 +142,8 @@ const getExpressionToEvaluate =
   (state: SessionState) =>
   async (
     options: SetVariableBlock['options'],
-    blockId: string
+    blockId: string,
+    setVariableHistory: SetVariableHistoryItem[]
   ): Promise<string | null> => {
     switch (options?.type) {
       case 'Contact name':
@@ -227,6 +231,8 @@ const getExpressionToEvaluate =
           mozbot: mozbotWithEmptyVariables,
           stopAtBlockId: blockId,
           ...props,
+          setVariableHistory:
+            props.setVariableHistory.concat(setVariableHistory),
         })
         return (
           'return `' +

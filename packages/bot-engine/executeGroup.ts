@@ -6,7 +6,7 @@ import {
   SessionState,
   SetVariableHistoryItem,
 } from '@mozbot.io/schemas'
-import { isEmpty, isNotEmpty } from '@mozbot.io/lib'
+import { isNotEmpty } from '@mozbot.io/lib'
 import {
   isBubbleBlock,
   isInputBlock,
@@ -139,7 +139,7 @@ export const executeGroup = async (
       }
     const executionResponse = (
       isLogicBlock(block)
-        ? await executeLogic(newSessionState)(block)
+        ? await executeLogic(newSessionState)(block, setVariableHistory)
         : isIntegrationBlock(block)
         ? await executeIntegration(newSessionState)(block)
         : null
