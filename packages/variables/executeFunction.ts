@@ -100,6 +100,7 @@ export const executeFunction = async ({
     )
 
   try {
+    console.log(parsedBody)
     const output = await run(parsedBody)
     return {
       output: safeStringify(output) ?? '',
@@ -116,10 +117,10 @@ export const executeFunction = async ({
         .filter(isDefined),
     }
   } catch (e) {
-    console.log('Error while executing script')
-    console.error(e)
+    console.error('Error while executing script')
 
     const error = stringifyError(e)
+    console.error(error)
 
     return {
       error,
