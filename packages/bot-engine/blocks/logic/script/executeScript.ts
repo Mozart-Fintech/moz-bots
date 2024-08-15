@@ -18,7 +18,7 @@ export const executeScript = async (
   const isExecutedOnClient =
     block.options.isExecutedOnClient ?? defaultScriptOptions.isExecutedOnClient
 
-  if (!isExecutedOnClient) {
+  if (!isExecutedOnClient || state.whatsApp) {
     const { newVariables, error } = await executeFunction({
       variables,
       body: block.options.content,
