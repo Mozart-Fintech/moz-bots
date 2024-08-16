@@ -132,7 +132,7 @@ const executeGroup = ({
     nextGroup.blockIndex ?? 0
   )) {
     if (stopAtBlockId && block.id === stopAtBlockId) return currentTranscript
-    while (setVariableHistory.at(0)?.blockId === block.id)
+    if (setVariableHistory.at(0)?.blockId === block.id)
       mozbotsQueue[0].mozbot.variables = applySetVariable(
         setVariableHistory.shift(),
         mozbotsQueue[0].mozbot

@@ -64,7 +64,7 @@ const mozbotContext = createContext<
     is404: boolean
     isPublished: boolean
     isSavingLoading: boolean
-    save: () => Promise<void>
+    save: (updates?: Partial<MozbotV6>, overwrite?: boolean) => Promise<void>
     undo: () => void
     redo: () => void
     canRedo: boolean
@@ -72,16 +72,17 @@ const mozbotContext = createContext<
     updateMozbot: (props: {
       updates: UpdateMozbotPayload
       save?: boolean
+      overwrite?: boolean
     }) => Promise<MozbotV6 | undefined>
     restorePublishedMozbot: () => void
   } & GroupsActions &
-    BlocksActions &
-    ItemsActions &
-    VariablesActions &
-    EdgesActions &
-    EventsActions
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //@ts-ignore
+  BlocksActions &
+  ItemsActions &
+  VariablesActions &
+  EdgesActions &
+  EventsActions
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
 >({})
 
 export const MozbotProvider = ({
@@ -127,25 +128,30 @@ export const MozbotProvider = ({
     }
   )
 
-  const { data: publishedMozbotData } = trpc.mozbot.getPublishedMozbot.useQuery(
-    { mozbotId: mozbotId as string, migrateToLatestVersion: true },
-    {
-      enabled:
-        isDefined(mozbotId) &&
-        (mozbotData?.currentUserMode === 'read' ||
-          mozbotData?.currentUserMode === 'write'),
-      onError: (error) => {
-        showToast({
-          title: 'Could not fetch published mozbot',
-          description: error.message,
-          details: {
-            content: JSON.stringify(error.data?.zodError?.fieldErrors, null, 2),
-            lang: 'json',
-          },
-        })
-      },
-    }
-  )
+  const { data: publishedMozbotData } =
+    trpc.mozbot.getPublishedMozbot.useQuery(
+      { mozbotId: mozbotId as string, migrateToLatestVersion: true },
+      {
+        enabled:
+          isDefined(mozbotId) &&
+          (mozbotData?.currentUserMode === 'read' ||
+            mozbotData?.currentUserMode === 'write'),
+        onError: (error) => {
+          showToast({
+            title: 'Could not fetch published mozbot',
+            description: error.message,
+            details: {
+              content: JSON.stringify(
+                error.data?.zodError?.fieldErrors,
+                null,
+                2
+              ),
+              lang: 'json',
+            },
+          })
+        },
+      }
+    )
 
   const { mutateAsync: updateMozbot, isLoading: isSaving } =
     trpc.mozbot.updateMozbot.useMutation({
@@ -169,7 +175,15 @@ export const MozbotProvider = ({
 
   const [
     localMozbot,
-    { redo, undo, flush, canRedo, canUndo, set: setLocalMozbot, setUpdateDate },
+    {
+      redo,
+      undo,
+      flush,
+      canRedo,
+      canUndo,
+      set: setLocalMozbot,
+      setUpdateDate,
+    },
   ] = useUndo<MozbotV6>(undefined, {
     isReadOnly,
     onUndo: (t) => {
@@ -189,7 +203,7 @@ export const MozbotProvider = ({
     if (
       mozbot.id !== localMozbot?.id ||
       new Date(mozbot.updatedAt).getTime() >
-        new Date(localMozbot.updatedAt).getTime()
+      new Date(localMozbot.updatedAt).getTime()
     ) {
       setLocalMozbot({ ...mozbot })
       setGroupsCoordinates(mozbot.groups)
@@ -206,7 +220,7 @@ export const MozbotProvider = ({
   ])
 
   const saveMozbot = useCallback(
-    async (updates?: Partial<MozbotV6>) => {
+    async (updates?: Partial<MozbotV6>, overwrite?: boolean) => {
       if (!localMozbot || !mozbot || isReadOnly) return
       const mozbotToSave = {
         ...localMozbot,
@@ -222,13 +236,14 @@ export const MozbotProvider = ({
       const newParsedMozbot = mozbotV6Schema.parse({ ...mozbotToSave })
       setLocalMozbot(newParsedMozbot)
       try {
-        const {
-          mozbot: { updatedAt },
-        } = await updateMozbot({
+        const { mozbot } = await updateMozbot({
           mozbotId: newParsedMozbot.id,
           mozbot: newParsedMozbot,
         })
-        setUpdateDate(updatedAt)
+        setUpdateDate(mozbot.updatedAt)
+        if (overwrite) {
+          setLocalMozbot(mozbot)
+        }
       } catch {
         setLocalMozbot({
           ...localMozbot,
@@ -287,20 +302,24 @@ export const MozbotProvider = ({
   const updateLocalMozbot = async ({
     updates,
     save,
+    overwrite,
   }: {
     updates: UpdateMozbotPayload
     save?: boolean
+    overwrite?: boolean
   }) => {
     if (!localMozbot || isReadOnly) return
     const newMozbot = { ...localMozbot, ...updates }
     setLocalMozbot(newMozbot)
-    if (save) await saveMozbot(newMozbot)
+    if (save) await saveMozbot(newMozbot, overwrite)
     return newMozbot
   }
 
   const restorePublishedMozbot = () => {
     if (!publishedMozbot || !localMozbot) return
-    setLocalMozbot(convertPublicMozbotToMozbot(publishedMozbot, localMozbot))
+    setLocalMozbot(
+      convertPublicMozbotToMozbot(publishedMozbot, localMozbot)
+    )
   }
 
   return (

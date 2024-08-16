@@ -9,6 +9,7 @@ import { useMemo } from 'react'
 
 export type MozbotV3PageProps = {
   url: string
+  isMatchingViewerUrl?: boolean
   name: string
   publicId: string | null
   font: Font | null
@@ -19,6 +20,7 @@ export type MozbotV3PageProps = {
 
 export const MozbotPageV3 = ({
   font,
+  isMatchingViewerUrl,
   publicId,
   name,
   url,
@@ -41,7 +43,10 @@ export const MozbotPageV3 = ({
     push(asPath.split('?')[0], undefined, { shallow: true })
   }
 
-  const apiOrigin = useMemo(() => new URL(url).origin, [url])
+  const apiOrigin = useMemo(() => {
+    if (isMatchingViewerUrl) return
+    return new URL(url).origin
+  }, [isMatchingViewerUrl, url])
 
   return (
     <div
@@ -52,8 +57,8 @@ export const MozbotPageV3 = ({
           background?.type === BackgroundType.COLOR
             ? background?.content
             : background?.type === BackgroundType.NONE
-            ? undefined
-            : '#fff',
+              ? undefined
+              : '#fff',
       }}
     >
       <SEO url={url} mozbotName={name} metadata={metadata} />

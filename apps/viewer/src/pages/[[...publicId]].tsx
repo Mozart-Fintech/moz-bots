@@ -47,7 +47,7 @@ export const getServerSideProps: GetServerSideProps = async (
   log(`forwardedHost: ${forwardedHost}`)
   const protocol =
     context.req.headers['x-forwarded-proto'] === 'https' ||
-    (context.req.socket as unknown as { encrypted: boolean }).encrypted
+      (context.req.socket as unknown as { encrypted: boolean }).encrypted
       ? 'https'
       : 'http'
 
@@ -59,17 +59,16 @@ export const getServerSideProps: GetServerSideProps = async (
     const isMatchingViewerUrl = env.NEXT_PUBLIC_E2E_TEST
       ? true
       : viewerUrls.some(
-          (url) =>
-            host.split(':')[0].includes(url.split('//')[1].split(':')[0]) ||
-            (forwardedHost &&
-              forwardedHost
-                .split(':')[0]
-                .includes(url.split('//')[1].split(':')[0]))
-        )
+        (url) =>
+          host.split(':')[0].includes(url.split('//')[1].split(':')[0]) ||
+          (forwardedHost &&
+            forwardedHost
+              .split(':')[0]
+              .includes(url.split('//')[1].split(':')[0]))
+      )
     log(`isMatchingViewerUrl: ${isMatchingViewerUrl}`)
-    const customDomain = `${forwardedHost ?? host}${
-      pathname === '/' ? '' : pathname
-    }`
+    const customDomain = `${forwardedHost ?? host}${pathname === '/' ? '' : pathname
+      }`
     const publishedMozbot = isMatchingViewerUrl
       ? await getMozbotFromPublicId(context.query.publicId?.toString())
       : await getMozbotFromCustomDomain(customDomain)
@@ -78,6 +77,7 @@ export const getServerSideProps: GetServerSideProps = async (
       props: {
         publishedMozbot,
         incompatibleBrowser,
+        isMatchingViewerUrl,
         url: `${protocol}://${forwardedHost ?? host}${pathname}`,
       },
     }
@@ -117,26 +117,26 @@ const getMozbotFromPublicId = async (publicId?: string) => {
   if (isNotDefined(publishedMozbot)) return null
   return publishedMozbot.version
     ? ({
-        name: publishedMozbot.mozbot.name,
-        publicId: publishedMozbot.mozbot.publicId ?? null,
-        background: publishedMozbot.theme.general?.background ?? {
-          type: defaultBackgroundType,
-          content: defaultBackgroundColor,
-        },
-        isHideQueryParamsEnabled:
-          publishedMozbot.settings.general?.isHideQueryParamsEnabled ??
-          defaultSettings.general.isHideQueryParamsEnabled,
-        metadata: publishedMozbot.settings.metadata ?? {},
-        font: publishedMozbot.theme.general?.font ?? null,
-      } satisfies Pick<
-        MozbotV3PageProps,
-        | 'name'
-        | 'publicId'
-        | 'background'
-        | 'isHideQueryParamsEnabled'
-        | 'metadata'
-        | 'font'
-      >)
+      name: publishedMozbot.mozbot.name,
+      publicId: publishedMozbot.mozbot.publicId ?? null,
+      background: publishedMozbot.theme.general?.background ?? {
+        type: defaultBackgroundType,
+        content: defaultBackgroundColor,
+      },
+      isHideQueryParamsEnabled:
+        publishedMozbot.settings.general?.isHideQueryParamsEnabled ??
+        defaultSettings.general.isHideQueryParamsEnabled,
+      metadata: publishedMozbot.settings.metadata ?? {},
+      font: publishedMozbot.theme.general?.font ?? null,
+    } satisfies Pick<
+      MozbotV3PageProps,
+      | 'name'
+      | 'publicId'
+      | 'background'
+      | 'isHideQueryParamsEnabled'
+      | 'metadata'
+      | 'font'
+    >)
     : publishedMozbot
 }
 
@@ -165,26 +165,26 @@ const getMozbotFromCustomDomain = async (customDomain: string) => {
   if (isNotDefined(publishedMozbot)) return null
   return publishedMozbot.version
     ? ({
-        name: publishedMozbot.mozbot.name,
-        publicId: publishedMozbot.mozbot.publicId ?? null,
-        background: publishedMozbot.theme.general?.background ?? {
-          type: defaultBackgroundType,
-          content: defaultBackgroundColor,
-        },
-        isHideQueryParamsEnabled:
-          publishedMozbot.settings.general?.isHideQueryParamsEnabled ??
-          defaultSettings.general.isHideQueryParamsEnabled,
-        metadata: publishedMozbot.settings.metadata ?? {},
-        font: publishedMozbot.theme.general?.font ?? null,
-      } satisfies Pick<
-        MozbotV3PageProps,
-        | 'name'
-        | 'publicId'
-        | 'background'
-        | 'isHideQueryParamsEnabled'
-        | 'metadata'
-        | 'font'
-      >)
+      name: publishedMozbot.mozbot.name,
+      publicId: publishedMozbot.mozbot.publicId ?? null,
+      background: publishedMozbot.theme.general?.background ?? {
+        type: defaultBackgroundType,
+        content: defaultBackgroundColor,
+      },
+      isHideQueryParamsEnabled:
+        publishedMozbot.settings.general?.isHideQueryParamsEnabled ??
+        defaultSettings.general.isHideQueryParamsEnabled,
+      metadata: publishedMozbot.settings.metadata ?? {},
+      font: publishedMozbot.theme.general?.font ?? null,
+    } satisfies Pick<
+      MozbotV3PageProps,
+      | 'name'
+      | 'publicId'
+      | 'background'
+      | 'isHideQueryParamsEnabled'
+      | 'metadata'
+      | 'font'
+    >)
     : publishedMozbot
 }
 
@@ -203,17 +203,18 @@ const App = ({
   isIE: boolean
   customHeadCode: string | null
   url: string
+  isMatchingViewerUrl?: boolean
   publishedMozbot:
-    | MozbotPageProps['publishedMozbot']
-    | Pick<
-        MozbotV3PageProps,
-        | 'name'
-        | 'publicId'
-        | 'background'
-        | 'isHideQueryParamsEnabled'
-        | 'metadata'
-        | 'font'
-      >
+  | MozbotPageProps['publishedMozbot']
+  | Pick<
+    MozbotV3PageProps,
+    | 'name'
+    | 'publicId'
+    | 'background'
+    | 'isHideQueryParamsEnabled'
+    | 'metadata'
+    | 'font'
+  >
   incompatibleBrowser: string | null
 }) => {
   if (incompatibleBrowser)
@@ -238,6 +239,7 @@ const App = ({
   ) : (
     <MozbotPageV3
       url={props.url}
+      isMatchingViewerUrl={props.isMatchingViewerUrl}
       name={publishedMozbot.name}
       publicId={publishedMozbot.publicId}
       isHideQueryParamsEnabled={

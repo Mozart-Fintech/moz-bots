@@ -111,14 +111,12 @@ export const PublishButton = ({
   const handlePublishClick = async () => {
     if (!mozbot?.id) return
     if (isFreePlan(workspace) && hasInputFile) return onOpen()
-    if (!mozbot.publicId) {
-      await updateMozbot({
-        updates: {
-          publicId: parseDefaultPublicId(mozbot.name, mozbot.id),
-        },
-        save: true,
-      })
-    } else await save()
+    await save(
+      !mozbot.publicId
+        ? { publicId: parseDefaultPublicId(mozbot.name, mozbot.id) }
+        : undefined,
+      true
+    )
     publishMozbotMutate({
       mozbotId: mozbot.id,
     })
@@ -166,7 +164,7 @@ export const PublishButton = ({
                   params={{
                     link: (
                       <TextLink
-                        href="https://mozdocs.mozartfintech.com/breaking-changes#mozbot-v6"
+                        href="https://docs.mozbot.io/breaking-changes#mozbot-v6"
                         isExternal
                       />
                     ),
