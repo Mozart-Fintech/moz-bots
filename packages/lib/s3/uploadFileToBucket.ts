@@ -26,14 +26,14 @@ export const uploadFileToBucket = async ({
     region: env.S3_REGION,
   })
 
-  await minioClient.putObject(env.S3_BUCKET, 'public/' + key, file, {
+  await minioClient.putObject(env.S3_BUCKET, key, file, {
     'Content-Type': mimeType,
     'Cache-Control': 'public, max-age=86400',
   })
 
   return env.S3_PUBLIC_CUSTOM_DOMAIN
-    ? `${env.S3_PUBLIC_CUSTOM_DOMAIN}/public/${key}`
+    ? `${env.S3_PUBLIC_CUSTOM_DOMAIN}/${key}`
     : `http${env.S3_SSL ? 's' : ''}://${env.S3_ENDPOINT}${
         env.S3_PORT ? `:${env.S3_PORT}` : ''
-      }/${env.S3_BUCKET}/public/${key}`
+      }/${env.S3_BUCKET}/${key}`
 }
