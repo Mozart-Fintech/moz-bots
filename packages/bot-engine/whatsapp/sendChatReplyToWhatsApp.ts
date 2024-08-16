@@ -117,6 +117,9 @@ export const sendChatReplyToWhatsApp = async ({
     if ((typingDuration ?? 0) > 0)
       await new Promise((resolve) => setTimeout(resolve, typingDuration))
     try {
+      if (whatsAppMessage.type === 'text' && !whatsAppMessage.text.body) {
+        throw new Error("The parameter text['body'] is required.")
+      }
       await sendWhatsAppMessage({
         to,
         message: whatsAppMessage,
