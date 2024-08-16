@@ -82,6 +82,8 @@ export const executeFunction = async ({
       new ivm.Reference(async (...args: any[]): Promise<string> => {
         // @ts-ignore
         const response = await fetch(...args)
+        console.log(args)
+        console.log(response.headers.get('content-type') || 'failed')
         return response.headers.get('content-type') || 'failed'
       }),
     ]
