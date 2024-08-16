@@ -57,8 +57,8 @@ export const MozbotPageV3 = ({
           background?.type === BackgroundType.COLOR
             ? background?.content
             : background?.type === BackgroundType.NONE
-              ? undefined
-              : '#fff',
+            ? undefined
+            : '#fff',
       }}
     >
       <SEO url={url} mozbotName={name} metadata={metadata} />
