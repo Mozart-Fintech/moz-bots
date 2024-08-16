@@ -61,6 +61,16 @@ export const executeFunction = async ({
     ]
   )
   context.evalClosure(
+    'globalThis.getTypeUrl = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
+    [
+      new ivm.Reference(async (...args: any[]): Promise<string> => {
+        // @ts-ignore
+        const response = await fetch(...args)
+        return response.headers.get('content-type') || 'failed'
+      }),
+    ]
+  )
+  context.evalClosure(
     'globalThis.btoa = (...args) => $0.applySync(undefined, args, { arguments: { copy: true }, result: { copy: true } })',
     [
       new ivm.Reference((text: string): string => {
@@ -73,18 +83,6 @@ export const executeFunction = async ({
     [
       new ivm.Reference((text: string): string => {
         return Buffer.from(text, 'base64').toString('binary')
-      }),
-    ]
-  )
-  context.evalClosure(
-    'globalThis.getTypeUrl = (...args) => $0.apply(undefined, args, { arguments: { copy: true }, promise: true, result: { copy: true, promise: true } })',
-    [
-      new ivm.Reference(async (...args: any[]): Promise<string> => {
-        // @ts-ignore
-        const response = await fetch(...args)
-        console.log(args)
-        console.log(response.headers.get('content-type') || 'failed')
-        return response.headers.get('content-type') || 'failed'
       }),
     ]
   )
