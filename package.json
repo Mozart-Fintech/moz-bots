@@ -22,7 +22,7 @@
     "build": "turbo run build",
     "build:apps": "turbo run build --filter=builder... --filter=viewer...",
     "build:docs": "turbo run build --filter=docs-mint...",
-    "db:migrate": "cd packages/prisma && pnpm run db:migrate",
+    "db:migrate": "cd packages/prisma && pnpm run db:migrate && cd .. && cd ..",
     "generate-change-log": "git fetch --all && pnpx gitmoji-changelog",
     "locales:sync": "tolgee sync --continue-on-warning --remove-unused --patterns './apps/builder/src/**/*.ts?(x)' --backup './.tolgee/backup'",
     "locales:pull": "tolgee pull && prettier --write ./apps/builder/src/i18n",
