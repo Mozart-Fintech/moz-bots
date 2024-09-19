@@ -66,7 +66,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "frame-ancestors https://*.mozartfintech.com https://mozartfintech.com",
+            value: "frame-ancestors https://*.mozartfintech.com https://mozartfintech.com https://*.dev.mozarth.com https://dev.mozarth.com https://*.mozarth.com https://mozarth.com https://app.dev.mozarth.com",
           },
         ],
       },
